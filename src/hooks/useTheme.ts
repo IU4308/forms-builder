@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
 export function useTheme() {
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem('theme') || 'light';
-    });
+    const [theme, setTheme] = useState(
+        localStorage.getItem('theme') || 'light'
+    );
 
     useEffect(() => {
         const root = window.document.documentElement;
@@ -17,8 +17,8 @@ export function useTheme() {
     }, [theme]);
 
     const toggleTheme = () => {
-        setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+        setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
     };
 
-    return { theme, toggleTheme };
+    return { toggleTheme };
 }
