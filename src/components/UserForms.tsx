@@ -8,11 +8,10 @@ import {
 } from '@/components/ui/table';
 import { templates } from '@/lib/constants';
 import { Link } from 'react-router';
-import { Checkbox } from '@/components/ui/checkbox';
-import Toolbar from './Toolbar';
 
 type TemplateProps = {
     title: string;
+    author: string;
 };
 
 type CellProps = {
@@ -23,43 +22,32 @@ type CellProps = {
 const Cell = ({ content, className }: CellProps) => {
     return (
         <TableCell className={className + ' p-0'}>
-            <Link to={`/templates/1`} className=" block p-2">
+            <Link to={`/forms/1`} className=" block p-2">
                 {content}
             </Link>
         </TableCell>
     );
 };
 
-const Template = ({ title }: TemplateProps) => {
+const Template = ({ title, author }: TemplateProps) => {
     return (
         <TableRow>
-            <TableCell>
-                <Checkbox />
-            </TableCell>
             <Cell content={title} />
+            <Cell content={author} />
             <Cell content={new Date().toUTCString()} />
-            <Cell content={new Date().toUTCString()} />
-            <Cell content="14" className="text-right" />
         </TableRow>
     );
 };
 
-export default function UserTemplates() {
+export default function UserForms() {
     return (
         <section className="">
-            <Toolbar />
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>
-                            <Checkbox />
-                        </TableHead>
                         <TableHead>Title</TableHead>
-                        <TableHead>Created</TableHead>
-                        <TableHead>Updated</TableHead>
-                        <TableHead className="text-right">
-                            Submissions
-                        </TableHead>
+                        <TableHead>User</TableHead>
+                        <TableHead>Filled out</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>

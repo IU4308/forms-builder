@@ -1,5 +1,16 @@
 import { tags } from '@/lib/constants';
 import { TagCloud } from 'react-tagcloud';
+import { Button } from './ui/button';
+
+type Tag = {
+    value: string;
+};
+
+const customRenderer = (tag: Tag) => (
+    <Button key={tag.value} variant={'ghost'}>
+        {tag.value}
+    </Button>
+);
 
 export default function Cloud() {
     return (
@@ -10,7 +21,7 @@ export default function Cloud() {
                 maxSize={35}
                 tags={tags}
                 disableRandomColor={true}
-                // colorOptions={options}
+                renderer={customRenderer}
                 onClick={(tag) => alert(`'${tag.value}' was selected!`)}
             />
         </div>
