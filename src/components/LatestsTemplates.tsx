@@ -8,7 +8,7 @@ type TemplateProps = {
 };
 const Template = ({ title, author, description, image }: TemplateProps) => {
     return (
-        <div className="bg-secondary border hover:opacity-75 cursor-pointer flex flex-col justify-between gap-2 p-2">
+        <div className="bg-secondary border hover:opacity-75 cursor-pointer flex flex-col justify-between gap-2 px-4 py-2">
             <div className="font-bold">{title}</div>
             <div className="">
                 {image && (
@@ -32,10 +32,13 @@ const Template = ({ title, author, description, image }: TemplateProps) => {
 
 export default function LatestsTemplates() {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 py-2">
-            {templates.map((template) => (
-                <Template key={template.title} {...template} />
-            ))}
-        </div>
+        <section className="mb-2">
+            <h1>Latests Templates</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 py-2">
+                {templates.map((template) => (
+                    <Template key={template.title} {...template} />
+                ))}
+            </div>
+        </section>
     );
 }

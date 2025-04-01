@@ -39,8 +39,14 @@ const menu = [
 
 const NavItem = ({ title, url }: NavItemProps) => {
     return (
-        <NavLink to={url}>
-            <Button className="cursor-pointer" variant={'ghost'}>
+        <NavLink
+            to={url}
+            className="max-lg:w-full max-lg:flex max-lg:justify-center"
+        >
+            <Button
+                className="cursor-pointer max-lg:w-full max-lg:py-6"
+                variant={'ghost'}
+            >
                 {title}
             </Button>
         </NavLink>
@@ -66,13 +72,9 @@ const DesktopView = () => {
 
 const MobileView = () => {
     return (
-        <nav className="px-2 lg:hidden flex justify-between">
+        <nav className="p-2 lg:hidden flex justify-between">
             <div className="flex gap-2 w-[75%]">
                 <DropDown />
-                {/* <NavItem title="Login" url="/login" /> */}
-                {/* {menu.map((item) => (
-                    <NavItem {...item} />
-                ))} */}
                 <div className="relative w-[90%]">
                     <IoIosSearch className="absolute right-4 top-1/4" />
                     <Input type="text" className="" />
@@ -86,7 +88,7 @@ const MobileView = () => {
 const DropDown = () => {
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger className="cursor-pointer">
                 <IoMenuOutline className="text-2xl" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-screen">
@@ -94,7 +96,7 @@ const DropDown = () => {
                 {menu.map((item) => (
                     <DropdownMenuItem
                         key={item.title}
-                        className="flex justify-center"
+                        className="flex justify-center cursor-pointer py-0"
                     >
                         <NavItem {...item} />
                     </DropdownMenuItem>
