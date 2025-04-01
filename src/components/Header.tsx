@@ -25,7 +25,7 @@ const menu = [
     },
     {
         title: 'My Workspace',
-        url: '/workspace/1',
+        url: '/workspaces/1',
     },
     {
         title: 'Login',

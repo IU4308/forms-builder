@@ -8,10 +8,10 @@ import {
 } from '@/components/ui/table';
 import { templates } from '@/lib/constants';
 import { Link } from 'react-router';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type TemplateProps = {
     title: string;
-    author: string;
 };
 
 type CellProps = {
@@ -29,26 +29,34 @@ const Cell = ({ content, className }: CellProps) => {
     );
 };
 
-const Template = ({ title, author }: TemplateProps) => {
+const Template = ({ title }: TemplateProps) => {
     return (
         <TableRow>
+            <TableCell>
+                <Checkbox />
+            </TableCell>
             <Cell content={title} />
-            <Cell content={author} />
-            <Cell content={'14'} className="text-right" />
+            <Cell content={new Date().toUTCString()} />
+            <Cell content={new Date().toUTCString()} />
+            <Cell content="14" className="text-right" />
         </TableRow>
     );
 };
 
-export default function PopularTemplates() {
+export default function UserTemplates() {
     return (
-        <section className="mb-4">
-            <h1>Popular Templates</h1>
+        <section className="">
+            <h1 className="mb-4">Popular Templates</h1>
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="">Title</TableHead>
-                        <TableHead>Author</TableHead>
-                        <TableHead className="text-right">Submission</TableHead>
+                        <TableHead></TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Created</TableHead>
+                        <TableHead>Updated</TableHead>
+                        <TableHead className="text-right">
+                            Submissions
+                        </TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
