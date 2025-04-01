@@ -1,10 +1,12 @@
-import Header from '@/components/Header';
+import { Navbar1 } from '@/components/navbar1';
 
 export default function Home() {
     return (
-        <div>
-            <Header />
-            <h1>Hello World</h1>
-        </div>
+        <>
+            <Navbar1 />
+            <div>
+                <h1>Hello World</h1>
+            </div>
+        </>
     );
 }
