@@ -7,25 +7,41 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { templates } from '@/lib/constants';
+import { Link } from 'react-router';
 
 type TemplateProps = {
     title: string;
     author: string;
 };
 
+type CellProps = {
+    content: string;
+    className?: string;
+};
+
+const Cell = ({ content, className }: CellProps) => {
+    return (
+        <TableCell className={className + ' p-0'}>
+            <Link to={`/templates/1`} className=" block p-2">
+                {content}
+            </Link>
+        </TableCell>
+    );
+};
+
 const Template = ({ title, author }: TemplateProps) => {
     return (
         <TableRow>
-            <TableCell className="font-medium">{title}</TableCell>
-            <TableCell>{author}</TableCell>
-            <TableCell className="text-right">14</TableCell>
+            <Cell content={title} />
+            <Cell content={author} />
+            <Cell content={'14'} className="text-right" />
         </TableRow>
     );
 };
 
 export default function PopularTemplates() {
     return (
-        <section>
+        <section className="mb-4">
             <h1>Popular Templates</h1>
             <Table>
                 <TableHeader>
@@ -33,7 +49,7 @@ export default function PopularTemplates() {
                         <TableHead className="">Title</TableHead>
                         <TableHead>Author</TableHead>
                         <TableHead className="text-right">
-                            Number of Submissions
+                            Filled out forms
                         </TableHead>
                     </TableRow>
                 </TableHeader>
