@@ -1,10 +1,14 @@
 import Header from '@/components/Header';
+import LatestsTemplates from '@/components/LatestsTemplates';
 
 export default function Home() {
     return (
-        <div>
+        <main>
             <Header />
-            <h1>Hello World</h1>
-        </div>
+            <section className="mx-auto p-4 max-w-[1400px] border">
+                <h1 className="text-2xl">Latests Templates</h1>
+                <LatestsTemplates />
+            </section>
+        </main>
     );
 }

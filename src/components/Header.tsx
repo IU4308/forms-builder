@@ -49,12 +49,12 @@ const NavItem = ({ title, url }: NavItemProps) => {
 
 const DesktopView = () => {
     return (
-        <nav className="hidden md:flex max-w-[1280px] mx-auto w-full relative  py-2 px-4 gap-2 items-center justify-between">
+        <nav className="hidden lg:flex max-w-[1400px] mx-auto w-full relative  py-2 gap-2 items-center justify-between">
             <div className="flex shrink-0">
                 {menu.map((item) => (
                     <NavItem key={item.title} {...item} />
                 ))}
-                <div className="px-2 relative w-full min-w-[400px] ">
+                <div className=" relative w-full min-w-[400px] ">
                     <IoIosSearch className="absolute right-4 top-1/4" />
                     <Input type="text" className="" />
                 </div>
@@ -66,7 +66,7 @@ const DesktopView = () => {
 
 const MobileView = () => {
     return (
-        <nav className="px-2 md:hidden flex justify-between">
+        <nav className="px-2 lg:hidden flex justify-between">
             <div className="flex gap-2 w-[75%]">
                 <DropDown />
                 {/* <NavItem title="Login" url="/login" /> */}
