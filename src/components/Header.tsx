@@ -3,13 +3,12 @@ import { NavLink } from 'react-router';
 import { Input } from './ui/input';
 import { IoIosSearch } from 'react-icons/io';
 import ThemeSwitcher from './ThemeSwitcher';
-import { IoMenuOutline } from 'react-icons/io5';
+import { IoLanguage, IoMenuOutline } from 'react-icons/io5';
 
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
@@ -27,6 +26,10 @@ const menu = [
     {
         title: 'My Workspace',
         url: '/workspace/1',
+    },
+    {
+        title: 'Login',
+        url: '/login',
     },
     {
         title: 'Admin',
@@ -49,17 +52,14 @@ const DesktopView = () => {
         <nav className="hidden md:flex max-w-[1280px] mx-auto w-full relative  py-2 px-4 gap-2 items-center justify-between">
             <div className="flex shrink-0">
                 {menu.map((item) => (
-                    <NavItem {...item} />
+                    <NavItem key={item.title} {...item} />
                 ))}
                 <div className="px-2 relative w-full min-w-[400px] ">
                     <IoIosSearch className="absolute right-4 top-1/4" />
                     <Input type="text" className="" />
                 </div>
             </div>
-            <div className=" flex gap-2">
-                <ThemeSwitcher />
-                <NavItem title="Login" url="/login" />
-            </div>
+            <SideButtons />
         </nav>
     );
 };
@@ -67,20 +67,18 @@ const DesktopView = () => {
 const MobileView = () => {
     return (
         <nav className="px-2 md:hidden flex justify-between">
-            <div className="flex gap-2 shrink-0 w-[85%] border">
+            <div className="flex gap-2 w-[75%]">
                 <DropDown />
                 {/* <NavItem title="Login" url="/login" /> */}
                 {/* {menu.map((item) => (
                     <NavItem {...item} />
                 ))} */}
-                <div className="relative w-full">
+                <div className="relative w-[90%]">
                     <IoIosSearch className="absolute right-4 top-1/4" />
                     <Input type="text" className="" />
                 </div>
             </div>
-            <div className=" flex gap-2">
-                <ThemeSwitcher />
-            </div>
+            <SideButtons />
         </nav>
     );
 };
@@ -91,22 +89,29 @@ const DropDown = () => {
             <DropdownMenuTrigger>
                 <IoMenuOutline className="text-2xl" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuSeparator />
+            <DropdownMenuContent className="w-screen">
+                {/* <DropdownMenuSeparator /> */}
                 {menu.map((item) => (
-                    <DropdownMenuItem>
+                    <DropdownMenuItem
+                        key={item.title}
+                        className="flex justify-center"
+                    >
                         <NavItem {...item} />
                     </DropdownMenuItem>
                 ))}
-                <DropdownMenuItem>
-                    <NavItem title="Login" url="/login" />
-                </DropdownMenuItem>
-                {/* <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem> */}
             </DropdownMenuContent>
         </DropdownMenu>
+    );
+};
+
+const SideButtons = () => {
+    return (
+        <div className="flex items-center">
+            <ThemeSwitcher />
+            <Button variant={'ghost'}>
+                <IoLanguage />
+            </Button>
+        </div>
     );
 };
 
