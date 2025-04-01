@@ -9,7 +9,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
@@ -93,7 +92,6 @@ const DropDown = () => {
                 <IoMenuOutline className="text-2xl" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
                 <DropdownMenuSeparator />
                 {menu.map((item) => (
                     <DropdownMenuItem>
