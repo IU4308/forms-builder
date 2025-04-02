@@ -57,7 +57,7 @@ const DesktopView = () => {
     return (
         <nav className="hidden lg:flex max-w-[1400px] mx-auto w-full relative  py-2 gap-2 items-center justify-between">
             <div className="flex shrink-0">
-                {menu.map((item) => (
+                {menu.slice(0, 2).map((item) => (
                     <NavItem key={item.title} {...item} />
                 ))}
                 <div className=" relative w-full min-w-[400px] ">
@@ -65,7 +65,15 @@ const DesktopView = () => {
                     <Input type="text" className="" />
                 </div>
             </div>
-            <SideButtons />
+            <div className="flex items-center">
+                {menu
+                    .slice(2)
+                    .reverse()
+                    .map((item) => (
+                        <NavItem key={item.title} {...item} />
+                    ))}
+                <SideButtons />
+            </div>
         </nav>
     );
 };
@@ -80,7 +88,9 @@ const MobileView = () => {
                     <Input type="text" className="" />
                 </div>
             </div>
-            <SideButtons />
+            <div className="flex items-center">
+                <SideButtons />
+            </div>
         </nav>
     );
 };
@@ -108,18 +118,18 @@ const DropDown = () => {
 
 const SideButtons = () => {
     return (
-        <div className="flex items-center">
+        <>
             <ThemeSwitcher />
             <Button variant={'ghost'}>
                 <IoLanguage />
             </Button>
-        </div>
+        </>
     );
 };
 
 export default function Header() {
     return (
-        <div className=" border-b">
+        <div className="sticky z-10 bg-background top-0 border-b">
             <DesktopView />
             <MobileView />
         </div>
