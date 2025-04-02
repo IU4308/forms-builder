@@ -6,6 +6,9 @@ export const templates = [
         author: 'John Doe',
         image: '/test.png',
         topic: 'Customer Experience',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['feedback', 'reviews', 'customer satisfaction', 'business'],
     },
     {
@@ -13,8 +16,11 @@ export const templates = [
         description:
             'Register attendees for events and collect essential details for seamless event management.',
         author: 'Jane Smith',
-        // // image: 'https://example.com/images/event-registration.jpg',
+        image: null,
         topic: 'Event Management',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['event', 'registration', 'attendees', 'planning'],
     },
     {
@@ -22,8 +28,11 @@ export const templates = [
         description:
             'Streamline your hiring process by gathering resumes and candidate details efficiently.',
         author: 'HR Team',
-        // // image: 'https://example.com/images/job-application.jpg',
+        image: null,
         topic: 'Recruitment',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['job', 'application', 'resume', 'hiring'],
     },
     {
@@ -31,8 +40,11 @@ export const templates = [
         description:
             'Engage your audience with structured surveys and analyze collected responses.',
         author: 'Marketing Team',
-        // // image: 'https://example.com/images/survey-form.jpg',
+        image: null,
         topic: 'Market Research',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['survey', 'data collection', 'analysis', 'research'],
     },
     {
@@ -40,8 +52,11 @@ export const templates = [
         description:
             'Enable users to send inquiries or support requests with ease.',
         author: 'Support Team',
-        // // image: 'https://example.com/images/contact-us.jpg',
+        image: null,
         topic: 'Customer Support',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['contact', 'support', 'inquiries', 'help'],
     },
     {
@@ -49,8 +64,11 @@ export const templates = [
         description:
             'Allow users to subscribe to your newsletter and stay updated with the latest news.',
         author: 'Marketing Team',
-        // image: 'https://example.com/images/newsletter-signup.jpg',
+        image: null,
         topic: 'Email Marketing',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['newsletter', 'subscription', 'email', 'marketing'],
     },
     {
@@ -58,8 +76,11 @@ export const templates = [
         description:
             'Simplify the purchasing process by letting customers place product orders online.',
         author: 'Sales Team',
-        // // image: 'https://example.com/images/product-order.jpg',
+        image: null,
         topic: 'E-commerce',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['order', 'product', 'purchase', 'checkout'],
     },
     {
@@ -67,28 +88,13 @@ export const templates = [
         description:
             'Help users report issues or bugs in your application for faster resolution.',
         author: 'Development Team',
-        // // image: 'https://example.com/images/bug-report.jpg',
+        image: null,
         topic: 'Software Development',
+        createad_at: new Date('2025-04-02').toDateString(),
+        updated_at: new Date('2025-04-02').toDateString(),
+        submissions: 14,
         tags: ['bug', 'issue', 'report', 'debugging'],
     },
-    // {
-    //     title: 'Course Enrollment Form',
-    //     description:
-    //         'Allow students to enroll in courses and collect essential registration details.',
-    //     author: 'Education Team',
-    //     // // image: 'https://example.com/images/course-enrollment.jpg',
-    //     topic: 'Education',
-    //     tags: ['enrollment', 'course', 'student', 'learning'],
-    // },
-    // {
-    //     title: 'Donation Form',
-    //     description:
-    //         'Make it easy for users to contribute to your cause with a simple donation form.',
-    //     author: 'Non-Profit Organization',
-    //     // // image: 'https://example.com/images/donation-form.jpg',
-    //     topic: 'Fundraising',
-    //     tags: ['donation', 'charity', 'fundraising', 'non-profit'],
-    // },
 ];
 
 export const tags = [
