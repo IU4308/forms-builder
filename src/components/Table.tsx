@@ -6,7 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { format } from '@/lib/utils';
+import { cn, format } from '@/lib/utils';
 import { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -23,7 +23,7 @@ export default function Table({
     slot,
     renderCheckbox = false,
 }: {
-    url: string;
+    url?: string;
     head: Row;
     body: Row[];
     slot?: ReactNode;
@@ -58,11 +58,21 @@ export default function Table({
                             {row.map((cell, index) => (
                                 <TableCell
                                     key={index}
-                                    className={cell.className + ' p-0'}
+                                    className={cn(
+                                        cell.className,
+                                        url ? 'p-0' : 'py-4'
+                                    )}
                                 >
-                                    <Link to={url} className=" block p-2">
-                                        {cell.content}
-                                    </Link>
+                                    {url ? (
+                                        <Link
+                                            to={url}
+                                            className=" block px-2 py-4"
+                                        >
+                                            {cell.content}
+                                        </Link>
+                                    ) : (
+                                        cell.content
+                                    )}
                                 </TableCell>
                             ))}
                         </TableRow>
