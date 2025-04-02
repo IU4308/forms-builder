@@ -4,24 +4,21 @@ import Table from '@/components/Table';
 import { templates } from '@/lib/constants';
 import { getTableBody, getTableHead } from '@/lib/utils';
 
-const rowProps = [
+const attributes = [
     ['title', ''],
     ['author', ''],
     ['submissions', 'text-right'],
 ];
-
-const head = getTableHead(rowProps);
-console.log(head);
-console.log(getTableBody(rowProps, templates));
 
 export default function Home() {
     return (
         <div>
             <LatestsTemplates />
             <Table
+                slot={<h1 className="mb-2">Popular Templates</h1>}
+                head={getTableHead(attributes)}
+                body={getTableBody(attributes, templates)}
                 url="/templates/1"
-                head={getTableHead(rowProps)}
-                body={getTableBody(rowProps, templates)}
             />
             <Cloud />
         </div>

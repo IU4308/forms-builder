@@ -6,12 +6,14 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { format } from '@/lib/utils';
 import { ReactNode } from 'react';
 import { Link } from 'react-router';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type Row = {
-    content: string | ReactNode;
-    className?: string;
+    content: string;
+    className: string;
 }[];
 
 export default function Table({
@@ -19,11 +21,13 @@ export default function Table({
     head,
     body,
     slot,
+    renderCheckbox = false,
 }: {
     url: string;
     head: Row;
     body: Row[];
     slot?: ReactNode;
+    renderCheckbox?: boolean;
 }) {
     return (
         <section>
@@ -31,9 +35,14 @@ export default function Table({
             <T>
                 <TableHeader>
                     <TableRow>
-                        {head.map((item, index) => (
-                            <TableHead key={index} className={item.className}>
-                                {item.content}
+                        {renderCheckbox && (
+                            <TableHead>
+                                <Checkbox />
+                            </TableHead>
+                        )}
+                        {head.map((cell, index) => (
+                            <TableHead key={index} className={cell.className}>
+                                {format(cell.content)}
                             </TableHead>
                         ))}
                     </TableRow>
@@ -41,13 +50,18 @@ export default function Table({
                 <TableBody>
                     {body.map((row, index) => (
                         <TableRow key={index}>
-                            {row.map((item, index) => (
+                            {renderCheckbox && (
+                                <TableCell>
+                                    <Checkbox />
+                                </TableCell>
+                            )}
+                            {row.map((cell, index) => (
                                 <TableCell
                                     key={index}
-                                    className={item.className + ' p-0'}
+                                    className={cell.className + ' p-0'}
                                 >
                                     <Link to={url} className=" block p-2">
-                                        {item.content}
+                                        {cell.content}
                                     </Link>
                                 </TableCell>
                             ))}
