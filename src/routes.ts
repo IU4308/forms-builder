@@ -10,7 +10,14 @@ import Admin from './pages/Admin';
 export const router = createBrowserRouter([
     {
         Component: MainLayout,
-        children: [{ index: true, Component: Home }],
+        children: [
+            { index: true, Component: Home },
+            { path: '/admin', Component: Admin },
+            {
+                path: '/workspaces',
+                children: [{ path: ':userId', Component: Workspace }],
+            },
+        ],
     },
     {
         Component: AuthLayout,
@@ -18,10 +25,5 @@ export const router = createBrowserRouter([
             { path: 'login', Component: Login },
             { path: 'register', Component: Register },
         ],
-    },
-    { path: '/admin', Component: Admin },
-    {
-        path: '/workspaces',
-        children: [{ path: ':userId', Component: Workspace }],
     },
 ]);
