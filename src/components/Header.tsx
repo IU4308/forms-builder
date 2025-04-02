@@ -11,6 +11,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useState } from 'react';
 
 type NavItemProps = {
     title: string;
@@ -96,8 +97,10 @@ const MobileView = () => {
 };
 
 const DropDown = () => {
+    const [open, setOpen] = useState(false);
+
     return (
-        <DropdownMenu>
+        <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger className="cursor-pointer">
                 <IoMenuOutline className="text-2xl" />
             </DropdownMenuTrigger>
@@ -107,6 +110,7 @@ const DropDown = () => {
                     <DropdownMenuItem
                         key={item.title}
                         className="flex justify-center cursor-pointer py-0"
+                        onClick={() => setOpen(false)}
                     >
                         <NavItem {...item} />
                     </DropdownMenuItem>
