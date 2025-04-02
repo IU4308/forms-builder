@@ -1,9 +1,9 @@
-import { AdminToolbar } from '@/components/toolbars';
+import AdminTable from '@/components/AdminTable';
 
 export default function Admin() {
     return (
         <div>
-            <AdminToolbar />
+            <AdminTable />
         </div>
     );
 }
