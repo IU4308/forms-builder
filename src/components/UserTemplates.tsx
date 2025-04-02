@@ -9,7 +9,7 @@ import {
 import { templates } from '@/lib/constants';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
-import Toolbar from './Toolbar';
+import { WorkspaceToolbar } from './toolbars';
 
 type TemplateProps = {
     title: string;
@@ -47,7 +47,7 @@ const Template = ({ title }: TemplateProps) => {
 export default function UserTemplates() {
     return (
         <section className="">
-            <Toolbar />
+            <WorkspaceToolbar />
             <Table>
                 <TableHeader>
                     <TableRow>
