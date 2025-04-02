@@ -5,9 +5,9 @@ import { templates } from '@/lib/constants';
 import { getTableBody, getTableHead } from '@/lib/utils';
 
 const attributes = [
-    ['title', ''],
-    ['author', ''],
-    ['submissions', 'text-right'],
+    ['title', 'text-lg'],
+    ['author', 'text-lg'],
+    ['submissions', 'text-lg text-right'],
 ];
 
 export default function Home() {

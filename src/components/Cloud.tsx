@@ -15,7 +15,7 @@ const customRenderer = (tag: Tag) => (
 export default function Cloud() {
     return (
         <div className="py-4">
-            <h1>Search by tag</h1>
+            <h1 className="mb-2">Search by tag</h1>
             <TagCloud
                 minSize={12}
                 maxSize={35}
