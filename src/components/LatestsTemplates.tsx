@@ -5,7 +5,7 @@ type TemplateProps = {
     title: string;
     author: string;
     description: string;
-    image?: string;
+    image: string | null;
 };
 const Template = ({ title, author, description, image }: TemplateProps) => {
     return (
