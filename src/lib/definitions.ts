@@ -1,1 +1,9 @@
-export type TableRow = [React.ReactNode | string, string];
+import { z } from 'zod';
+
+export const registerSchema = z.object({
+    name: z.string().min(1, 'Name is required'),
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(1, 'Password must be at least 6 characters'),
+});
+
+export type RegisterData = z.infer<typeof registerSchema>;

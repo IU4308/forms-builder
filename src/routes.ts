@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Workspace from './pages/Workspace';
 import Admin from './pages/Admin';
+import { api } from './api/api';
 
 export const router = createBrowserRouter([
     {
@@ -23,7 +24,27 @@ export const router = createBrowserRouter([
         Component: AuthLayout,
         children: [
             { path: 'login', Component: Login },
-            { path: 'register', Component: Register },
+            {
+                path: 'register',
+                Component: Register,
+                action: async ({ request }) => {
+                    try {
+                        const formData = await request.formData();
+                        const userData = {
+                            name: formData.get('name'),
+                            email: formData.get('email'),
+                            password: formData.get('password'),
+                        };
+                        const response = await api.post(
+                            '/auth/users',
+                            userData
+                        );
+                        return response.data;
+                    } catch (error: any) {
+                        return { error: error.respone?.data?.message };
+                    }
+                },
+            },
         ],
     },
 ]);
