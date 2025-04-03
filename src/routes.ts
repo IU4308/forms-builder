@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
                             userData
                         );
                         console.log(response.data);
-                        return response.data;
+                        // return response.data;
                     } catch (error: any) {
                         console.log(error.response?.data);
                         return { error: error.response?.data };

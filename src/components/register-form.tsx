@@ -30,7 +30,7 @@ export function RegisterForm({
         fetcher.submit(formData, { method: 'post', action: '/register' });
     };
 
-    // console.log(fetcher.data.error.);
+    // console.log(fetcher.data.error.message);
 
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -66,10 +66,10 @@ export function RegisterForm({
                                 placeholder="John Doe"
                                 required
                             />
-                            {(errors.name || fetcher.data?.error.name) && (
+                            {(errors.name || fetcher.data?.error?.name) && (
                                 <p className="text-red-500">
                                     {errors?.name?.message ||
-                                        fetcher.data.error.name}
+                                        fetcher.data.error?.name}
                                 </p>
                             )}
                         </div>
@@ -82,10 +82,10 @@ export function RegisterForm({
                                 placeholder="m@example.com"
                                 required
                             />
-                            {(errors.email || fetcher.data?.error.email) && (
+                            {(errors.email || fetcher.data?.error?.email) && (
                                 <p className="text-red-500">
                                     {errors?.email?.message ||
-                                        fetcher.data.error.email}
+                                        fetcher.data.error?.email}
                                 </p>
                             )}
                         </div>
@@ -98,13 +98,18 @@ export function RegisterForm({
                                 required
                             />
                             {(errors.password ||
-                                fetcher.data?.error.password) && (
+                                fetcher.data?.error?.password) && (
                                 <p className="text-red-500">
                                     {errors?.password?.message ||
-                                        fetcher.data.error.password}
+                                        fetcher.data.error?.password}
                                 </p>
                             )}
                         </div>
+                        {fetcher.data?.error?.message && (
+                            <p className="text-red-500">
+                                {fetcher.data?.error.message}
+                            </p>
+                        )}
                         <Button
                             type="submit"
                             className="w-full"
