@@ -39,9 +39,11 @@ export const router = createBrowserRouter([
                             '/auth/users',
                             userData
                         );
+                        console.log(response.data);
                         return response.data;
                     } catch (error: any) {
-                        return { error: error.respone?.data?.message };
+                        console.log(error.response?.data);
+                        return { error: error.response?.data };
                     }
                 },
             },
