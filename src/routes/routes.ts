@@ -30,13 +30,10 @@ export const router = createBrowserRouter([
                 action: async ({ request }) => {
                     try {
                         const formData = await request.formData();
-                        const userData = {
-                            name: formData.get('name'),
-                            email: formData.get('email'),
-                            password: formData.get('password'),
-                        };
-                        await api.post('/auth/users', userData);
-
+                        await api.post(
+                            '/auth/users',
+                            Object.fromEntries(formData)
+                        );
                         return redirect('/login');
                     } catch (error: any) {
                         console.log(error.response?.data);

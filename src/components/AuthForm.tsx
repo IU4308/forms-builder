@@ -4,73 +4,101 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Link, useFetcher } from 'react-router';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegisterData, registerSchema } from '@/lib/definitions';
+import {
+    RegisterData,
+    registerSchema,
+    LoginData,
+    loginSchema,
+} from '@/lib/definitions';
 
-export function RegisterForm({
-    className,
-    ...props
-}: React.ComponentProps<'div'>) {
+interface AuthFormProps {
+    type: 'login' | 'register';
+    className?: string;
+}
+
+export function AuthForm({ type, className }: AuthFormProps) {
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === 'submitting';
+    const isRegister = type === 'register';
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<RegisterData>({
-        resolver: zodResolver(registerSchema),
+    } = useForm<RegisterData | LoginData>({
+        resolver: zodResolver(isRegister ? registerSchema : loginSchema),
     });
-    const onSubmit = (data: RegisterData) => {
-        // const formData = new FormData();
-        // formData.append('name', data.name);
-        // formData.append('email', data.email);
-        // formData.append('password', data.password);
+    const registerErrors = errors as FieldErrors<RegisterData>;
 
-        fetcher.submit(data, { method: 'post', action: '/register' });
+    const onSubmit = (data: RegisterData | LoginData) => {
+        fetcher.submit(data, {
+            method: 'post',
+            action: isRegister ? '/register' : '/login',
+        });
     };
 
     return (
-        <div className={cn('flex flex-col gap-6', className)} {...props}>
+        <div className={cn('flex flex-col gap-6', className)}>
             <fetcher.Form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col items-center gap-2">
                         <Link
-                            to={'/'}
+                            to="/"
                             className="flex flex-col items-center gap-2 font-medium"
                         >
                             <div className="flex size-8 items-center justify-center rounded-md">
                                 <GalleryVerticalEnd className="size-6" />
                             </div>
                         </Link>
-                        <h1 className="text-xl font-bold">Register</h1>
+                        <h1 className="text-xl font-bold">
+                            {isRegister ? 'Register' : 'Login'}
+                        </h1>
                         <div className="text-center text-sm">
-                            Already have an account?{' '}
-                            <Link
-                                to={'/login'}
-                                className="underline underline-offset-4"
-                            >
-                                Sign in
-                            </Link>
+                            {isRegister ? (
+                                <>
+                                    Already have an account?{' '}
+                                    <Link
+                                        to="/login"
+                                        className="underline underline-offset-4"
+                                    >
+                                        Sign in
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    Don't have an account?{' '}
+                                    <Link
+                                        to="/register"
+                                        className="underline underline-offset-4"
+                                    >
+                                        Sign up
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className="flex flex-col gap-6">
-                        <div className="grid gap-3">
-                            <Label htmlFor="name">Name</Label>
-                            <Input
-                                id="name"
-                                type="text"
-                                {...register('name')}
-                                placeholder="John Doe"
-                                required
-                            />
-                            {(errors.name || fetcher.data?.error?.name) && (
-                                <p className="text-red-500">
-                                    {errors?.name?.message ||
-                                        fetcher.data.error?.name}
-                                </p>
-                            )}
-                        </div>
+                        {isRegister && (
+                            <div className="grid gap-3">
+                                <Label htmlFor="name">Name</Label>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    {...register('name')}
+                                    placeholder="John Doe"
+                                    required
+                                />
+                                {(registerErrors.name ||
+                                    fetcher.data?.error?.name) && (
+                                    <p className="text-red-500">
+                                        {registerErrors?.name?.message ||
+                                            fetcher.data.error?.name}
+                                    </p>
+                                )}
+                            </div>
+                        )}
                         <div className="grid gap-3">
                             <Label htmlFor="email">Email</Label>
                             <Input
@@ -113,7 +141,11 @@ export function RegisterForm({
                             className="w-full"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? 'Loading...' : 'Register'}
+                            {isSubmitting
+                                ? 'Loading...'
+                                : isRegister
+                                  ? 'Register'
+                                  : 'Login'}
                         </Button>
                     </div>
                 </div>
