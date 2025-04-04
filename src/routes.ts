@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, redirect } from 'react-router';
 import Home from './pages/Home';
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
@@ -35,12 +35,9 @@ export const router = createBrowserRouter([
                             email: formData.get('email'),
                             password: formData.get('password'),
                         };
-                        const response = await api.post(
-                            '/auth/users',
-                            userData
-                        );
-                        console.log(response.data);
-                        // return response.data;
+                        await api.post('/auth/users', userData);
+
+                        return redirect('/login');
                     } catch (error: any) {
                         console.log(error.response?.data);
                         return { error: error.response?.data };
