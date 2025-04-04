@@ -3,9 +3,8 @@ import { redirect } from 'react-router';
 
 export const adminLoader = async () => {
     try {
-        console.log('Admin loader');
         const currentUser = (await api.get('/auth/user'))?.data;
-        if (currentUser === undefined || currentUser.isAdmin === false) {
+        if (!currentUser || currentUser.isAdmin === false) {
             return redirect('/');
         }
         const users = (await api.get('/users'))?.data;
