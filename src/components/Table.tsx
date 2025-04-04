@@ -29,7 +29,6 @@ export default function Table({
     slot?: ReactNode;
     renderCheckbox?: boolean;
 }) {
-    console.log(body[0][4].content.toString());
     return (
         <section>
             {slot}
@@ -69,7 +68,7 @@ export default function Table({
                                             to={url}
                                             className=" block px-2 py-4"
                                         >
-                                            {cell.content}
+                                            {formatContent(cell.content)}
                                         </Link>
                                     ) : (
                                         formatContent(cell.content)
