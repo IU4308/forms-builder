@@ -6,7 +6,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Workspace from '../pages/Workspace';
 import Admin from '../pages/Admin';
-import { register } from '@/actions/auth.actions';
+import { login, register } from '@/actions/auth.actions';
 
 export const router = createBrowserRouter([
     {
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
     {
         Component: AuthLayout,
         children: [
-            { path: 'login', Component: Login },
+            { path: 'login', Component: Login, action: login },
             {
                 path: 'register',
                 Component: Register,
