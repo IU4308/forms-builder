@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
+import * as changeCase from 'change-case';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -47,8 +48,8 @@ export const prependElement = (row: Row, element: Element, className = '') => {
     return row;
 };
 
-export const formatHead = (string: string) => {
-    return (string[0].toUpperCase() + string.slice(1)).replace('_at', '');
+export const formatHead = (head: string) => {
+    return changeCase.capitalCase(head);
 };
 
 export const formatContent = (content: any) => {
