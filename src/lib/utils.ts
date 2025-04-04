@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { format } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -46,6 +47,15 @@ export const prependElement = (row: Row, element: Element, className = '') => {
     return row;
 };
 
-export const format = (string: string) => {
+export const formatHead = (string: string) => {
     return (string[0].toUpperCase() + string.slice(1)).replace('_at', '');
+};
+
+export const formatContent = (content: any) => {
+    if (content === null) return 'NULL';
+    if (typeof content === 'boolean') return content ? 'TRUE' : 'FALSE';
+    if (content.match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/)) {
+        return format(new Date(content), 'MMM dd, yyyy HH:mm:ss');
+    }
+    return content;
 };

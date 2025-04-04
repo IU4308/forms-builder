@@ -1,20 +1,19 @@
 import Table from '@/components/Table';
 import { AdminToolbar } from '@/components/toolbars';
-import { users } from '@/lib/constants';
 import { getTableBody, getTableHead } from '@/lib/utils';
 import { useLoaderData } from 'react-router';
 
 const attributes = [
     ['name', ''],
     ['email', ''],
-    ['registered_at', ''],
-    ['is_blocked', 'text-right'],
-    ['is_admin', 'text-right'],
+    ['createdAt', ''],
+    ['lastLogin', ''],
+    ['isBlocked', 'text-right'],
+    ['isAdmin', 'text-right'],
 ];
 
 export default function Admin() {
-    const { user } = useLoaderData();
-    console.log(user);
+    const { users } = useLoaderData();
     return (
         <div>
             <h1>Users</h1>

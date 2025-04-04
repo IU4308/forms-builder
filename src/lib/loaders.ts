@@ -4,14 +4,13 @@ import { redirect } from 'react-router';
 export const adminLoader = async () => {
     try {
         console.log('Admin loader');
-        const response = await api.get('/auth/users');
-        const user = response.data.user;
-        if (user.isAdmin === false) {
+        const currentUser = (await api.get('/auth/user'))?.data;
+        if (currentUser === undefined || currentUser.isAdmin === false) {
             return redirect('/');
         }
-        return { user };
+        const users = (await api.get('/users'))?.data;
+        return { currentUser, users };
     } catch (error: any) {
-        // console.log(error);
         return { error: error.response?.data };
     }
 };

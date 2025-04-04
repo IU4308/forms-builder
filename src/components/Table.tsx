@@ -6,7 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { cn, format } from '@/lib/utils';
+import { cn, formatHead, formatContent } from '@/lib/utils';
 import { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -29,6 +29,7 @@ export default function Table({
     slot?: ReactNode;
     renderCheckbox?: boolean;
 }) {
+    console.log(body[0][4].content.toString());
     return (
         <section>
             {slot}
@@ -42,7 +43,7 @@ export default function Table({
                         )}
                         {head.map((cell, index) => (
                             <TableHead key={index} className={cell.className}>
-                                {format(cell.content)}
+                                {formatHead(cell.content)}
                             </TableHead>
                         ))}
                     </TableRow>
@@ -71,7 +72,7 @@ export default function Table({
                                             {cell.content}
                                         </Link>
                                     ) : (
-                                        cell.content
+                                        formatContent(cell.content)
                                     )}
                                 </TableCell>
                             ))}
