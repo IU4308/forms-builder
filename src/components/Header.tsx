@@ -1,5 +1,5 @@
 import { Button } from './ui/button';
-import { NavLink } from 'react-router';
+import { NavLink, useLoaderData } from 'react-router';
 import { Input } from './ui/input';
 import { IoIosSearch } from 'react-icons/io';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -132,6 +132,8 @@ const SideButtons = () => {
 };
 
 export default function Header() {
+    const { currentUser } = useLoaderData();
+    console.log(currentUser.isAdmin);
     return (
         <div className="sticky z-10 bg-background top-0 border-b">
             <DesktopView />

@@ -8,13 +8,19 @@ import Workspace from '../pages/Workspace';
 import Admin from '../pages/Admin';
 import { login, register } from '@/actions/auth.actions';
 import Fallback from '@/components/Fallback';
-import { adminLoader } from '@/lib/loaders';
+import { adminLoader, homeLoader } from '@/lib/loaders';
 
 export const router = createBrowserRouter([
     {
         Component: MainLayout,
+        HydrateFallback: Fallback,
+        loader: homeLoader,
         children: [
-            { index: true, Component: Home },
+            {
+                index: true,
+                Component: Home,
+                loader: homeLoader,
+            },
             {
                 path: '/admin',
                 Component: Admin,
@@ -30,7 +36,11 @@ export const router = createBrowserRouter([
     {
         Component: AuthLayout,
         children: [
-            { path: 'login', Component: Login, action: login },
+            {
+                path: 'login',
+                Component: Login,
+                action: login,
+            },
             {
                 path: 'register',
                 Component: Register,

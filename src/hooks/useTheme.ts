@@ -20,5 +20,5 @@ export function useTheme() {
         setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
     };
 
-    return { toggleTheme };
+    return { theme, toggleTheme };
 }

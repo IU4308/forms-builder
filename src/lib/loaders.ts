@@ -13,3 +13,12 @@ export const adminLoader = async () => {
         return { error: error.response?.data };
     }
 };
+
+export const homeLoader = async () => {
+    try {
+        const currentUser = (await api.get('/auth/user'))?.data;
+        return { currentUser };
+    } catch (error: any) {
+        return { error: error.response?.data };
+    }
+};
