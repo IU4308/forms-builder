@@ -1,12 +1,12 @@
 import { createBrowserRouter, redirect } from 'react-router';
-import Home from './pages/Home';
-import MainLayout from './layouts/MainLayout';
-import AuthLayout from './layouts/AuthLayout';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Workspace from './pages/Workspace';
-import Admin from './pages/Admin';
-import { api } from './api/api';
+import Home from '../pages/Home';
+import MainLayout from '../layouts/MainLayout';
+import AuthLayout from '../layouts/AuthLayout';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import Workspace from '../pages/Workspace';
+import Admin from '../pages/Admin';
+import { api } from '../api/api';
 
 export const router = createBrowserRouter([
     {
