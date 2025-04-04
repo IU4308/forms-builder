@@ -15,7 +15,12 @@ export const register = async ({ request }: { request: Request }) => {
 export const login = async ({ request }: { request: Request }) => {
     try {
         const formData = await request.formData();
-        await api.post('/auth/login', Object.fromEntries(formData));
+        const response = await api.post(
+            '/auth/login',
+            Object.fromEntries(formData)
+        );
+        console.log(response.data);
+        localStorage.setItem('token', response.data.token);
         return redirect('/');
     } catch (error: any) {
         console.log(error);

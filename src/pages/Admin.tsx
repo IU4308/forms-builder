@@ -2,6 +2,7 @@ import Table from '@/components/Table';
 import { AdminToolbar } from '@/components/toolbars';
 import { users } from '@/lib/constants';
 import { getTableBody, getTableHead } from '@/lib/utils';
+import { useLoaderData } from 'react-router';
 
 const attributes = [
     ['name', ''],
@@ -12,6 +13,8 @@ const attributes = [
 ];
 
 export default function Admin() {
+    const { user } = useLoaderData();
+    console.log(user);
     return (
         <div>
             <h1>Users</h1>

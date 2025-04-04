@@ -7,13 +7,20 @@ import Register from '../pages/Register';
 import Workspace from '../pages/Workspace';
 import Admin from '../pages/Admin';
 import { login, register } from '@/actions/auth.actions';
+import Fallback from '@/components/Fallback';
+import { adminLoader } from '@/lib/loaders';
 
 export const router = createBrowserRouter([
     {
         Component: MainLayout,
         children: [
             { index: true, Component: Home },
-            { path: '/admin', Component: Admin },
+            {
+                path: '/admin',
+                Component: Admin,
+                loader: adminLoader,
+                HydrateFallback: Fallback,
+            },
             {
                 path: '/workspaces',
                 children: [{ path: ':userId', Component: Workspace }],
