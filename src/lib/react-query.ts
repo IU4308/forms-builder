@@ -6,7 +6,10 @@ export const queryClient = new QueryClient();
 export const getCurrentUser = async () => {
     const currentUser = await queryClient.fetchQuery({
         queryKey: ['currentUser'],
-        queryFn: () => api.get('/auth/user').then((res) => res.data),
+        queryFn: () =>
+            api
+                .get('/auth/user', { withCredentials: true })
+                .then((res) => res.data),
     });
     return currentUser;
 };
@@ -14,7 +17,8 @@ export const getCurrentUser = async () => {
 export const getAllUsers = async () => {
     const currentUser = await queryClient.fetchQuery({
         queryKey: ['users'],
-        queryFn: () => api.get('users').then((res) => res.data),
+        queryFn: () =>
+            api.get('users', { withCredentials: true }).then((res) => res.data),
     });
     return currentUser;
 };
