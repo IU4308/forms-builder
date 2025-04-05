@@ -14,9 +14,7 @@ export const register = async ({ request }: { request: Request }) => {
 export const login = async ({ request }: { request: Request }) => {
     try {
         const formData = await request.formData();
-        await api.post('/auth/login', Object.fromEntries(formData), {
-            withCredentials: true,
-        });
+        await api.post('/auth/login', Object.fromEntries(formData));
         return redirect('/');
     } catch (error: any) {
         console.log(error);
