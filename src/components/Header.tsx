@@ -4,7 +4,6 @@ import { Input } from './ui/input';
 import { IoIosSearch } from 'react-icons/io';
 import ThemeSwitcher from './ThemeSwitcher';
 import { IoLanguage, IoMenuOutline } from 'react-icons/io5';
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,35 +11,14 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useState } from 'react';
+import { CurrentUser } from '@/lib/definitions';
+import { getMenu } from '@/lib/utils';
 
 type NavItemProps = {
     title: string;
     url: string;
     variant?: string;
 };
-
-const menu = [
-    {
-        title: 'Home',
-        url: '/',
-    },
-    {
-        title: 'My Workspace',
-        url: '/workspaces/1',
-    },
-    {
-        title: 'Login',
-        url: '/login',
-    },
-    {
-        title: 'Logout',
-        url: '/logout',
-    },
-    {
-        title: 'Admin',
-        url: '/admin',
-    },
-];
 
 const NavItem = ({ title, url }: NavItemProps) => {
     return (
@@ -59,6 +37,8 @@ const NavItem = ({ title, url }: NavItemProps) => {
 };
 
 const DesktopView = () => {
+    const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
+    const menu = getMenu(currentUser);
     return (
         <nav className="hidden lg:flex max-w-[1400px] mx-auto w-full relative  py-2 gap-2 items-center justify-between">
             <div className="flex shrink-0">
@@ -102,15 +82,14 @@ const MobileView = () => {
 
 const DropDown = () => {
     const [open, setOpen] = useState(false);
-
+    const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger className="cursor-pointer">
                 <IoMenuOutline className="text-2xl" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-screen">
-                {/* <DropdownMenuSeparator /> */}
-                {menu.map((item) => (
+                {getMenu(currentUser).map((item) => (
                     <DropdownMenuItem
                         key={item.title}
                         className="flex justify-center cursor-pointer py-0"
@@ -136,8 +115,6 @@ const SideButtons = () => {
 };
 
 export default function Header() {
-    const { currentUser } = useLoaderData();
-    console.log(currentUser);
     return (
         <div className="sticky z-10 bg-background top-0 border-b">
             <DesktopView />

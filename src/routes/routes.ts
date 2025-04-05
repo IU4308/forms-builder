@@ -6,9 +6,9 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Workspace from '../pages/Workspace';
 import Admin from '../pages/Admin';
-import { login, logout, register } from '@/actions/auth.actions';
+import { login, register } from '@/actions/auth.actions';
 import Fallback from '@/components/Fallback';
-import { adminLoader, homeLoader } from '@/lib/loaders';
+import { adminLoader, homeLoader, logoutLoader } from '@/lib/loaders';
 
 export const router = createBrowserRouter([
     {
@@ -41,9 +41,8 @@ export const router = createBrowserRouter([
                 action: login,
             },
             {
-                Component: AuthLayout,
                 path: 'logout',
-                loader: logout,
+                loader: logoutLoader,
             },
             {
                 path: 'register',

@@ -2,6 +2,8 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
+import { navMenu } from './constants';
+import { CurrentUser } from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -62,4 +64,14 @@ export const formatContent = (content: any) => {
         return format(new Date(content), 'MMM dd, yyyy HH:mm:ss');
     }
     return content;
+};
+
+export const getMenu = (currentUser: CurrentUser) => {
+    return navMenu.filter((item) => {
+        if (!currentUser)
+            return item.title !== 'Logout' && item.title !== 'Admin';
+        return currentUser.isAdmin
+            ? item.title !== 'Login'
+            : item.title !== 'Admin' && item.title !== 'Login';
+    });
 };

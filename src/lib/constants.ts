@@ -1,3 +1,26 @@
+export const navMenu = [
+    {
+        title: 'Home',
+        url: '/',
+    },
+    {
+        title: 'My Workspace',
+        url: '/workspaces/1',
+    },
+    {
+        title: 'Login',
+        url: '/login',
+    },
+    {
+        title: 'Logout',
+        url: '/logout',
+    },
+    {
+        title: 'Admin',
+        url: '/admin',
+    },
+];
+
 export const templates = [
     {
         title: 'Customer Feedback Form',
