@@ -33,6 +33,10 @@ const menu = [
         url: '/login',
     },
     {
+        title: 'Logout',
+        url: '/logout',
+    },
+    {
         title: 'Admin',
         url: '/admin',
     },
