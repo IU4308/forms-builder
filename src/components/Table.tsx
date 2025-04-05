@@ -12,6 +12,7 @@ import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
 
 type Row = {
+    label: string;
     content: string;
     className: string;
     shouldRender: boolean;
@@ -19,18 +20,15 @@ type Row = {
 
 export default function Table({
     url,
-    head,
     body,
     slot,
     renderCheckbox = false,
 }: {
     url?: string;
-    head: Row;
     body: Row[];
     slot?: ReactNode;
     renderCheckbox?: boolean;
 }) {
-    console.log(body);
     return (
         <section>
             {slot}
@@ -42,14 +40,14 @@ export default function Table({
                                 <Checkbox />
                             </TableHead>
                         )}
-                        {head.map(
+                        {body[0].map(
                             (cell, index) =>
                                 cell.shouldRender && (
                                     <TableHead
                                         key={index}
                                         className={cell.className}
                                     >
-                                        {formatHead(cell.content)}
+                                        {formatHead(cell.label)}
                                     </TableHead>
                                 )
                         )}

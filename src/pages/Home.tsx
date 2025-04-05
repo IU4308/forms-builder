@@ -1,14 +1,8 @@
 import Cloud from '@/components/Cloud';
 import LatestsTemplates from '@/components/LatestsTemplates';
 import Table from '@/components/Table';
-import { templates } from '@/lib/constants';
-import { getTableBody, getTableHead } from '@/lib/utils';
-
-const attributes = [
-    ['title', 'text-lg'],
-    ['author', 'text-lg'],
-    ['submissions', 'text-lg text-right'],
-];
+import { homeTableAttributes, templates } from '@/lib/constants';
+import { getTableBody } from '@/lib/utils';
 
 export default function Home() {
     return (
@@ -16,8 +10,7 @@ export default function Home() {
             <LatestsTemplates />
             <Table
                 slot={<h1 className="mb-2">Popular Templates</h1>}
-                head={getTableHead(attributes)}
-                body={getTableBody(attributes, templates)}
+                body={getTableBody(homeTableAttributes, templates)}
                 url="/templates/1"
             />
             <Cloud />

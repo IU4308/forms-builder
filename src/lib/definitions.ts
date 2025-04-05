@@ -31,3 +31,10 @@ export interface User {
     isBlocked: boolean;
     isAdmin: boolean;
 }
+
+export interface TableAttributes {
+    label: string;
+    className: string;
+    shouldRender?: boolean;
+}
+[];

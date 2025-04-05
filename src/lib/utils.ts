@@ -3,28 +3,19 @@ import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants';
-import { CurrentUser } from './definitions';
+import { CurrentUser, TableAttributes } from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-export const getTableHead = (attributes: (string | boolean)[][]) => {
-    return attributes.map((item) => {
-        return {
-            content: item[0],
-            className: item[1],
-            shouldRender: item[2],
-        };
-    });
-};
-
 export const getTableBody = (
-    attributes: (string | boolean)[][],
+    attributes: TableAttributes[],
     data: { [key: string]: any }[]
 ) => {
     let body: {
         content: any;
+        label: string;
         className: string;
         shouldRender: boolean;
     }[][] = [];
@@ -32,38 +23,16 @@ export const getTableBody = (
         body.push(
             attributes.map((item) => {
                 return {
-                    content: element[item[0]],
-                    className: item[1],
-                    shouldRender: item[2],
+                    content: element[item.label],
+                    label: item.label,
+                    className: item.className,
+                    shouldRender: item.shouldRender ?? true,
                 };
             })
         );
     });
     return body;
 };
-
-// export const getTableBody1 = (
-//     attributes: any,
-//     data: { [key: string]: any }[]
-// ) => {
-//     let body: {
-//         content: any;
-//         className: string;
-//         shouldRender: boolean;
-//     }[][] = [];
-//     data.forEach((element) => {
-//         body.push(
-//             attributes.map((item) => {
-//                 return {
-//                     content: element[item.label],
-//                     className: item.className,
-//                     shouldRender: item.shouldRender,
-//                 };
-//             })
-//         );
-//     });
-//     return body;
-// };
 
 type Row = {
     content: string | Element;

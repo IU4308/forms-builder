@@ -21,6 +21,72 @@ export const navMenu = [
     },
 ];
 
+export const adminTableAttributes = [
+    {
+        label: 'id',
+        className: '',
+        shouldRender: false,
+    },
+    {
+        label: 'name',
+        className: '',
+    },
+    {
+        label: 'email',
+        className: '',
+    },
+    {
+        label: 'createdAt',
+        className: '',
+    },
+    {
+        label: 'lastLogin',
+        className: '',
+    },
+    {
+        label: 'isBlocked',
+        className: 'text-right',
+    },
+    {
+        label: 'isAdmin',
+        className: 'text-right',
+    },
+];
+
+export const templatesTableAttributes = [
+    {
+        label: 'title',
+        className: '',
+    },
+    {
+        label: 'created_at',
+        className: '',
+    },
+    {
+        label: 'updated_at',
+        className: '',
+    },
+    {
+        label: 'submissions',
+        className: 'text-right',
+    },
+];
+
+export const homeTableAttributes = [
+    {
+        label: 'title',
+        className: '',
+    },
+    {
+        label: 'author',
+        className: '',
+    },
+    {
+        label: 'submissions',
+        className: 'text-right',
+    },
+];
+
 export const templates = [
     {
         title: 'Customer Feedback Form',

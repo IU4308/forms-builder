@@ -2,16 +2,9 @@ import Table from '@/components/Table';
 import { WorkspaceToolbar } from '@/components/toolbars';
 import { Button } from '@/components/ui/button';
 import UserForms from '@/components/UserForms';
-import { templates } from '@/lib/constants';
-import { getTableBody, getTableHead } from '@/lib/utils';
+import { templates, templatesTableAttributes } from '@/lib/constants';
+import { getTableBody } from '@/lib/utils';
 import { useState } from 'react';
-
-const templatesAttributes = [
-    ['title', ''],
-    ['created_at', ''],
-    ['updated_at', ''],
-    ['submissions', 'text-right'],
-];
 
 export default function Workspace() {
     const [tabId, setTabId] = useState(0);
@@ -34,8 +27,7 @@ export default function Workspace() {
             {!tabId && (
                 <Table
                     slot={<WorkspaceToolbar />}
-                    head={getTableHead(templatesAttributes)}
-                    body={getTableBody(templatesAttributes, templates)}
+                    body={getTableBody(templatesTableAttributes, templates)}
                     renderCheckbox={true}
                     url="/templates/1"
                 />
