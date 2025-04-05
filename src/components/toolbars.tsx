@@ -17,11 +17,26 @@ export function WorkspaceToolbar() {
 export function AdminToolbar() {
     return (
         <Layout>
-            <Button variant={'outline'}>Block</Button>
-            <Button variant={'outline'}>Unblock</Button>
-            <Button variant={'outline'}>Add to admins</Button>
-            <Button variant={'outline'}>Remove from admins</Button>
-            <Button variant={'destructive'}>Delete</Button>
+            <Button
+                name="action"
+                value={'block'}
+                type="submit"
+                variant={'outline'}
+            >
+                Block
+            </Button>
+            <Button type="button" variant={'outline'}>
+                Unblock
+            </Button>
+            <Button type="button" variant={'outline'}>
+                Add to admins
+            </Button>
+            <Button type="button" variant={'outline'}>
+                Remove from admins
+            </Button>
+            <Button type="button" variant={'destructive'}>
+                Delete
+            </Button>
         </Layout>
     );
 }

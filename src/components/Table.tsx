@@ -58,7 +58,10 @@ export default function Table({
                         <TableRow key={index}>
                             {renderCheckbox && (
                                 <TableCell>
-                                    <Checkbox />
+                                    <Checkbox
+                                        name="userId"
+                                        value={row[0].content}
+                                    />
                                 </TableCell>
                             )}
                             {row.map(
