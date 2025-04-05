@@ -4,13 +4,52 @@ import { getTableBody, getTableHead } from '@/lib/utils';
 import { useLoaderData } from 'react-router';
 
 const attributes = [
-    ['name', ''],
-    ['email', ''],
-    ['createdAt', ''],
-    ['lastLogin', ''],
-    ['isBlocked', 'text-right'],
-    ['isAdmin', 'text-right'],
+    ['id', '', false],
+    ['name', '', true],
+    ['email', '', true],
+    ['createdAt', '', true],
+    ['lastLogin', '', true],
+    ['isBlocked', 'text-right', true],
+    ['isAdmin', 'text-right', true],
 ];
+
+// const attr = [
+//     {
+//         label: 'id',
+//         classname: '',
+//         shouldRender: false,
+//     },
+//     {
+//         label: 'name',
+//         classname: '',
+//         shouldRender: true,
+//     },
+//     {
+//         label: 'email',
+//         classname: '',
+//         shouldRender: true,
+//     },
+//     {
+//         label: 'createdAt',
+//         classname: '',
+//         shouldRender: true,
+//     },
+//     {
+//         label: 'lastLogin',
+//         classname: '',
+//         shouldRender: true,
+//     },
+//     {
+//         label: 'isBlocked',
+//         classname: 'text-right',
+//         shouldRender: true,
+//     },
+//     {
+//         label: 'isAdmin',
+//         classname: 'text-right',
+//         shouldRender: true,
+//     }
+// ]
 
 export default function Admin() {
     const { users } = useLoaderData();

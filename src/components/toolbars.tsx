@@ -17,9 +17,10 @@ export function WorkspaceToolbar() {
 export function AdminToolbar() {
     return (
         <Layout>
-            <Button variant={'outline'}>Assign admin</Button>
             <Button variant={'outline'}>Block</Button>
             <Button variant={'outline'}>Unblock</Button>
+            <Button variant={'outline'}>Add to admins</Button>
+            <Button variant={'outline'}>Remove from admins</Button>
             <Button variant={'destructive'}>Delete</Button>
         </Layout>
     );

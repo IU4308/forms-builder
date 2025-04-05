@@ -14,6 +14,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 type Row = {
     content: string;
     className: string;
+    shouldRender: boolean;
 }[];
 
 export default function Table({
@@ -29,6 +30,7 @@ export default function Table({
     slot?: ReactNode;
     renderCheckbox?: boolean;
 }) {
+    console.log(body);
     return (
         <section>
             {slot}
@@ -40,11 +42,17 @@ export default function Table({
                                 <Checkbox />
                             </TableHead>
                         )}
-                        {head.map((cell, index) => (
-                            <TableHead key={index} className={cell.className}>
-                                {formatHead(cell.content)}
-                            </TableHead>
-                        ))}
+                        {head.map(
+                            (cell, index) =>
+                                cell.shouldRender && (
+                                    <TableHead
+                                        key={index}
+                                        className={cell.className}
+                                    >
+                                        {formatHead(cell.content)}
+                                    </TableHead>
+                                )
+                        )}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -55,26 +63,31 @@ export default function Table({
                                     <Checkbox />
                                 </TableCell>
                             )}
-                            {row.map((cell, index) => (
-                                <TableCell
-                                    key={index}
-                                    className={cn(
-                                        cell.className,
-                                        url ? 'p-0' : 'py-4'
-                                    )}
-                                >
-                                    {url ? (
-                                        <Link
-                                            to={url}
-                                            className=" block px-2 py-4"
+                            {row.map(
+                                (cell, index) =>
+                                    cell.shouldRender && (
+                                        <TableCell
+                                            key={index}
+                                            className={cn(
+                                                cell.className,
+                                                url ? 'p-0' : 'py-4'
+                                            )}
                                         >
-                                            {formatContent(cell.content)}
-                                        </Link>
-                                    ) : (
-                                        formatContent(cell.content)
-                                    )}
-                                </TableCell>
-                            ))}
+                                            {url ? (
+                                                <Link
+                                                    to={url}
+                                                    className=" block px-2 py-4"
+                                                >
+                                                    {formatContent(
+                                                        cell.content
+                                                    )}
+                                                </Link>
+                                            ) : (
+                                                formatContent(cell.content)
+                                            )}
+                                        </TableCell>
+                                    )
+                            )}
                         </TableRow>
                     ))}
                 </TableBody>

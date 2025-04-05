@@ -9,32 +9,61 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-export const getTableHead = (attributes: string[][]) => {
+export const getTableHead = (attributes: (string | boolean)[][]) => {
     return attributes.map((item) => {
         return {
             content: item[0],
             className: item[1],
+            shouldRender: item[2],
         };
     });
 };
 
 export const getTableBody = (
-    attributes: string[][],
+    attributes: (string | boolean)[][],
     data: { [key: string]: any }[]
 ) => {
-    let body: { content: any; className: string }[][] = [];
+    let body: {
+        content: any;
+        className: string;
+        shouldRender: boolean;
+    }[][] = [];
     data.forEach((element) => {
         body.push(
             attributes.map((item) => {
                 return {
                     content: element[item[0]],
                     className: item[1],
+                    shouldRender: item[2],
                 };
             })
         );
     });
     return body;
 };
+
+// export const getTableBody1 = (
+//     attributes: any,
+//     data: { [key: string]: any }[]
+// ) => {
+//     let body: {
+//         content: any;
+//         className: string;
+//         shouldRender: boolean;
+//     }[][] = [];
+//     data.forEach((element) => {
+//         body.push(
+//             attributes.map((item) => {
+//                 return {
+//                     content: element[item.label],
+//                     className: item.className,
+//                     shouldRender: item.shouldRender,
+//                 };
+//             })
+//         );
+//     });
+//     return body;
+// };
 
 type Row = {
     content: string | Element;
