@@ -133,7 +133,7 @@ const SideButtons = () => {
 
 export default function Header() {
     const { currentUser } = useLoaderData();
-    console.log(currentUser.isAdmin);
+    console.log(currentUser);
     return (
         <div className="sticky z-10 bg-background top-0 border-b">
             <DesktopView />

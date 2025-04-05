@@ -19,7 +19,6 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home,
-                loader: homeLoader,
             },
             {
                 path: '/admin',
