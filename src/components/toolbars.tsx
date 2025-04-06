@@ -2,7 +2,11 @@ import { ReactNode } from 'react';
 import { Button } from './ui/button';
 
 function Layout({ children }: { children: ReactNode }) {
-    return <div className="flex gap-2 mb-2">{children}</div>;
+    return (
+        <div className="sticky top-[53px] bg-background z-20 flex gap-2 py-2">
+            {children}
+        </div>
+    );
 }
 
 export function WorkspaceToolbar() {
@@ -14,10 +18,18 @@ export function WorkspaceToolbar() {
     );
 }
 
-export function AdminToolbar() {
+export function AdminToolbar({
+    selectedRows,
+    // setSelectedRows,
+}: {
+    selectedRows: number[];
+    // setSelectedRows: React.Dispatch<React.SetStateAction<number[]>>;
+}) {
+    const isDisabled = selectedRows.length === 0;
     return (
         <Layout>
             <Button
+                disabled={isDisabled}
                 name="action"
                 value={'block'}
                 type="submit"
@@ -25,16 +37,16 @@ export function AdminToolbar() {
             >
                 Block
             </Button>
-            <Button type="button" variant={'outline'}>
+            <Button disabled={isDisabled} type="button" variant={'outline'}>
                 Unblock
             </Button>
-            <Button type="button" variant={'outline'}>
+            <Button disabled={isDisabled} type="button" variant={'outline'}>
                 Add to admins
             </Button>
-            <Button type="button" variant={'outline'}>
+            <Button disabled={isDisabled} type="button" variant={'outline'}>
                 Remove from admins
             </Button>
-            <Button type="button" variant={'destructive'}>
+            <Button disabled={isDisabled} type="button" variant={'destructive'}>
                 Delete
             </Button>
         </Layout>
