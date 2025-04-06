@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Button } from './ui/button';
-import * as changeCase from 'change-case';
 import { adminButtons } from '@/lib/constants';
+import { setSentenceCase } from '@/lib/utils';
 
 function Layout({ children }: { children: ReactNode }) {
     return (
@@ -33,7 +33,7 @@ export function AdminToolbar({ selectedRows }: { selectedRows: number[] }) {
                     variant={button.variant ?? 'outline'}
                     disabled={isDisabled}
                 >
-                    {changeCase.sentenceCase(button.label)}
+                    {setSentenceCase(button.label)}
                 </Button>
             ))}
         </Layout>

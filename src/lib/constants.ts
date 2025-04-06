@@ -110,8 +110,8 @@ export const templates = [
         topic: 'Customer Experience',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['feedback', 'reviews', 'customer satisfaction', 'business'],
+        submissions: '14',
+        // tags: ['feedback', 'reviews', 'customer satisfaction', 'business'],
     },
     {
         title: 'Event Registration Form',
@@ -122,8 +122,8 @@ export const templates = [
         topic: 'Event Management',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['event', 'registration', 'attendees', 'planning'],
+        submissions: '14',
+        // tags: ['event', 'registration', 'attendees', 'planning'],
     },
     {
         title: 'Job Application Form',
@@ -134,8 +134,8 @@ export const templates = [
         topic: 'Recruitment',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['job', 'application', 'resume', 'hiring'],
+        submissions: '14',
+        // tags: ['job', 'application', 'resume', 'hiring'],
     },
     {
         title: 'Survey Form',
@@ -146,8 +146,8 @@ export const templates = [
         topic: 'Market Research',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['survey', 'data collection', 'analysis', 'research'],
+        submissions: '14',
+        // tags: ['survey', 'data collection', 'analysis', 'research'],
     },
     {
         title: 'Contact Us Form',
@@ -158,8 +158,8 @@ export const templates = [
         topic: 'Customer Support',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['contact', 'support', 'inquiries', 'help'],
+        submissions: '14',
+        // tags: ['contact', 'support', 'inquiries', 'help'],
     },
     {
         title: 'Newsletter Signup Form',
@@ -170,8 +170,8 @@ export const templates = [
         topic: 'Email Marketing',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['newsletter', 'subscription', 'email', 'marketing'],
+        submissions: '14',
+        // tags: ['newsletter', 'subscription', 'email', 'marketing'],
     },
     {
         title: 'Product Order Form',
@@ -182,8 +182,8 @@ export const templates = [
         topic: 'E-commerce',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['order', 'product', 'purchase', 'checkout'],
+        submissions: '14',
+        // tags: ['order', 'product', 'purchase', 'checkout'],
     },
     {
         title: 'Bug Report Form',
@@ -194,8 +194,8 @@ export const templates = [
         topic: 'Software Development',
         created_at: new Date('2025-04-02').toDateString(),
         updated_at: new Date('2025-04-02').toDateString(),
-        submissions: 14,
-        tags: ['bug', 'issue', 'report', 'debugging'],
+        submissions: '14',
+        // tags: ['bug', 'issue', 'report', 'debugging'],
     },
 ];
 

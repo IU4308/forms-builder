@@ -6,7 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { cn, formatHead, formatContent } from '@/lib/utils';
+import { cn, formatContent, setSentenceCase } from '@/lib/utils';
 import { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -23,7 +23,6 @@ const Header = ({
     allSelected?: boolean;
     onClick?: () => void;
 }) => {
-    console.log(body);
     return (
         <TableHeader>
             <TableRow>
@@ -43,7 +42,7 @@ const Header = ({
                     (cell, index) =>
                         cell.shouldRender && (
                             <TableHead key={index} className={cell.className}>
-                                {formatHead(cell.label)}
+                                {setSentenceCase(cell.label)}
                             </TableHead>
                         )
                 )}
