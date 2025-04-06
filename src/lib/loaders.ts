@@ -5,8 +5,22 @@ import { api } from '@/api/api';
 export const homeLoader = async () => {
     try {
         const currentUser = await getCurrentUser();
-        if (currentUser.isBlocked) return redirect('/login');
+        if (currentUser.isBlocked) {
+            sessionStorage.setItem('flash', 'Your account has been blocked');
+            return redirect('/login');
+        }
         return { currentUser };
+    } catch (error: any) {
+        console.log(error);
+        return { error: error.response?.data };
+    }
+};
+
+export const loginLoader = async () => {
+    try {
+        const message = sessionStorage.getItem('flash');
+        sessionStorage.removeItem('flash');
+        return { message };
     } catch (error: any) {
         console.log(error);
         return { error: error.response?.data };
