@@ -67,3 +67,18 @@ export const getMenu = (currentUser: CurrentUser) => {
             : item.title !== 'Admin' && item.title !== 'Login';
     });
 };
+
+export const setFlash = (
+    message: string,
+    type: 'success' | 'error' = 'success'
+) => {
+    sessionStorage.setItem('flash', `${type.toUpperCase() + '|' + message}`);
+};
+
+export const getFlash = () => {
+    const [type, message] = (sessionStorage
+        .getItem('flash')
+        ?.split('|', 2) as string[]) ?? ['', ''];
+    sessionStorage.removeItem('flash');
+    return { message, type };
+};

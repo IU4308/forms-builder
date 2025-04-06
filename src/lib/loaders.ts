@@ -1,18 +1,16 @@
 import { redirect } from 'react-router';
 import { getAllUsers, getCurrentUser } from './react-query';
 import { api } from '@/api/api';
+import { getFlash, setFlash } from './utils';
 
 export const homeLoader = async () => {
     try {
         const currentUser = await getCurrentUser();
         if (currentUser.isBlocked) {
-            sessionStorage.setItem(
-                'flash',
-                'ERROR|Your account has been blocked'
-            );
+            setFlash('Your account has been blocked', 'error');
             return redirect('/login');
         }
-        return { currentUser };
+        return { currentUser, flash: getFlash() };
     } catch (error: any) {
         console.log(error);
         return { error: error.response?.data };
@@ -20,15 +18,7 @@ export const homeLoader = async () => {
 };
 
 export const loginLoader = async () => {
-    try {
-        const flash = sessionStorage.getItem('flash');
-        const [messageType, message] = flash?.split('|', 2);
-        sessionStorage.removeItem('flash');
-        return { message, messageType };
-    } catch (error: any) {
-        console.log(error);
-        return { error: error.response?.data };
-    }
+    return { flash: getFlash() };
 };
 
 export const adminLoader = async () => {

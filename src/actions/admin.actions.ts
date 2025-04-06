@@ -1,4 +1,5 @@
 import { api } from '@/api/api';
+import { setFlash } from '@/lib/utils';
 import { redirect } from 'react-router';
 
 export const adminAction = async ({ request }: { request: Request }) => {
@@ -7,12 +8,12 @@ export const adminAction = async ({ request }: { request: Request }) => {
         const selectedIds =
             (formData.get('allUserIds') as string)?.split(',') ??
             formData.getAll('userId');
-        console.log(formData.get('action'));
         const response = await api.post(
             `/admin/${formData.get('action')}`,
             selectedIds
         );
-        console.log(response.data);
+        setFlash(response.data.message);
+        // console.log(response.data);
         redirect('/admin');
     } catch (error: any) {
         console.log(error);

@@ -28,6 +28,7 @@ export function AdminToolbar({ selectedRows }: { selectedRows: number[] }) {
                 <Button
                     type="submit"
                     name="action"
+                    className="cursor-pointer"
                     key={button.label}
                     value={button.label}
                     variant={button.variant ?? 'outline'}
