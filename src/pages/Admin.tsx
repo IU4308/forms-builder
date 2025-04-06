@@ -5,15 +5,24 @@ import { getTableBody, sortUsers } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { Form, useLoaderData } from 'react-router';
 import _ from 'lodash';
-import { User } from '@/lib/definitions';
+import { AdminTableLabel, User } from '@/lib/definitions';
+
+// const sorters = adminTableAttributes.map((item) => item.label);
 
 export default function Admin() {
     const { users } = useLoaderData() as { users: User[] };
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
+    const [sorter, setSorter] = useState<AdminTableLabel>('name');
+    const [isDescending, setIsDescending] = useState(true);
+
+    const handleChangeSorter = (label: AdminTableLabel) => {
+        setSorter(label);
+        setIsDescending(!isDescending);
+    };
 
     const body = getTableBody(
         adminTableAttributes,
-        sortUsers(users, 'isBlocked', false)
+        sortUsers(users, sorter, isDescending)
     );
     const allSelected = body.length === selectedRows.length;
 
@@ -44,6 +53,9 @@ export default function Admin() {
                 handleAllSelected={handleAllSelected}
                 selectedRows={selectedRows}
                 handleSelect={handleSelect}
+                sorter={sorter}
+                handleChangeSorter={handleChangeSorter}
+                isDescending={isDescending}
             />
         </Form>
     );

@@ -10,22 +10,34 @@ import { cn, formatContent, setSentenceCase } from '@/lib/utils';
 import { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Cell } from '@/lib/definitions';
+import { Cell, AdminTableLabel } from '@/lib/definitions';
+import { Button } from './ui/button';
+import {
+    ChevronDownIcon,
+    ChevronsUpDownIcon,
+    ChevronUpIcon,
+} from 'lucide-react';
 
 const Header = ({
     body,
     renderCheckbox,
     allSelected,
     onClick,
+    sorter,
+    handleChangeSorter,
+    isDescending,
 }: {
     body: Cell[][];
     renderCheckbox?: boolean;
     allSelected?: boolean;
     onClick?: () => void;
+    sorter: AdminTableLabel;
+    handleChangeSorter: (label: AdminTableLabel) => void;
+    isDescending: boolean;
 }) => {
     return (
         <TableHeader>
-            <TableRow>
+            <TableRow className="hover:bg-background">
                 {renderCheckbox && (
                     <TableHead>
                         <Checkbox
@@ -42,7 +54,27 @@ const Header = ({
                     (cell, index) =>
                         cell.shouldRender && (
                             <TableHead key={index} className={cell.className}>
-                                {setSentenceCase(cell.label)}
+                                <Button
+                                    type="button"
+                                    className="cursor-pointer"
+                                    variant={'ghost'}
+                                    onClick={() =>
+                                        handleChangeSorter(
+                                            cell.label as AdminTableLabel
+                                        )
+                                    }
+                                >
+                                    <span>{setSentenceCase(cell.label)}</span>
+                                    {sorter === cell.label ? (
+                                        isDescending ? (
+                                            <ChevronDownIcon className="icon-2" />
+                                        ) : (
+                                            <ChevronUpIcon className="icon-2" />
+                                        )
+                                    ) : (
+                                        <ChevronsUpDownIcon className="icon-2" />
+                                    )}
+                                </Button>
                             </TableHead>
                         )
                 )}
@@ -116,6 +148,9 @@ export default function Table({
     selectedRows,
     handleAllSelected,
     handleSelect,
+    sorter,
+    handleChangeSorter,
+    isDescending,
 }: {
     url?: string;
     body: Cell[][];
@@ -125,6 +160,9 @@ export default function Table({
     handleAllSelected?: () => void;
     handleSelect?: (index: number) => void;
     selectedRows?: number[];
+    sorter: AdminTableLabel;
+    handleChangeSorter: (label: AdminTableLabel) => void;
+    isDescending: boolean;
 }) {
     return (
         <section>
@@ -135,6 +173,9 @@ export default function Table({
                     renderCheckbox={renderCheckbox}
                     allSelected={allSelected}
                     onClick={handleAllSelected}
+                    sorter={sorter}
+                    handleChangeSorter={handleChangeSorter}
+                    isDescending={isDescending}
                 />
                 <Body
                     body={body}

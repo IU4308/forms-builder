@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { adminTableAttributes } from './constants';
 
 export const registerSchema = z.object({
     name: z.string().min(1, 'Name is required'),
@@ -32,12 +33,9 @@ export interface User {
     isAdmin: boolean;
 }
 
-export interface TableAttributes {
-    label: string;
-    className: string;
-    shouldRender?: boolean;
-}
-[];
+export type TableAttributes = typeof adminTableAttributes;
+
+export type AdminTableLabel = (typeof adminTableAttributes)[number]['label'];
 
 export type ButtonVariant =
     | 'destructive'
