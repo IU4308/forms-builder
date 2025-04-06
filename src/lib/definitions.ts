@@ -46,3 +46,10 @@ export type ButtonVariant =
     | 'outline'
     | 'secondary'
     | 'ghost';
+
+export interface Cell {
+    content: string | boolean | null;
+    label: string;
+    className: string;
+    shouldRender: boolean;
+}

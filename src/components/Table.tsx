@@ -10,13 +10,7 @@ import { cn, formatHead, formatContent } from '@/lib/utils';
 import { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
-
-type Row = {
-    label: string;
-    content: string;
-    className: string;
-    shouldRender: boolean;
-}[];
+import { Cell } from '@/lib/definitions';
 
 const Header = ({
     body,
@@ -24,11 +18,12 @@ const Header = ({
     allSelected,
     onClick,
 }: {
-    body: Row[];
+    body: Cell[][];
     renderCheckbox?: boolean;
     allSelected?: boolean;
     onClick?: () => void;
 }) => {
+    console.log(body);
     return (
         <TableHeader>
             <TableRow>
@@ -36,7 +31,9 @@ const Header = ({
                     <TableHead>
                         <Checkbox
                             name="allUserIds"
-                            value={body.map((item) => item[0].content)}
+                            value={body.map(
+                                (item) => item[0].content as string
+                            )}
                             checked={allSelected}
                             onClick={onClick}
                         />
@@ -63,7 +60,7 @@ const Body = ({
     handleSelect,
 }: {
     url?: string;
-    body: Row[];
+    body: Cell[][];
     renderCheckbox?: boolean;
     selectedRows?: number[];
     handleSelect?: (index: number) => void;
@@ -71,22 +68,22 @@ const Body = ({
     return (
         <TableBody>
             {body.map((row, index) => (
-                <TableRow key={index}>
+                <TableRow key={row[0].content as string}>
                     {renderCheckbox && (
                         <TableCell>
                             <Checkbox
                                 name="userId"
-                                value={row[0].content}
+                                value={row[0].content as string}
                                 checked={selectedRows?.includes(index)}
                                 onClick={() => handleSelect!(index)}
                             />
                         </TableCell>
                     )}
                     {row.map(
-                        (cell, index) =>
+                        (cell) =>
                             cell.shouldRender && (
                                 <TableCell
-                                    key={index}
+                                    key={cell.label}
                                     className={cn(
                                         cell.className,
                                         url ? 'p-0' : 'py-4'
@@ -122,7 +119,7 @@ export default function Table({
     handleSelect,
 }: {
     url?: string;
-    body: Row[];
+    body: Cell[][];
     slot?: ReactNode;
     renderCheckbox?: boolean;
     allSelected?: boolean;

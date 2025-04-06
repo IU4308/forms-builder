@@ -26,12 +26,12 @@ export function AdminToolbar({ selectedRows }: { selectedRows: number[] }) {
         <Layout>
             {adminButtons.map((button) => (
                 <Button
-                    key={button.label}
-                    disabled={isDisabled}
-                    name="action"
-                    value={button.label}
                     type="submit"
+                    name="action"
+                    key={button.label}
+                    value={button.label}
                     variant={button.variant ?? 'outline'}
+                    disabled={isDisabled}
                 >
                     {changeCase.sentenceCase(button.label)}
                 </Button>

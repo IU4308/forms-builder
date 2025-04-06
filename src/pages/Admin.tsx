@@ -9,11 +9,10 @@ import _ from 'lodash';
 export default function Admin() {
     const { users } = useLoaderData();
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
-    useEffect(() => {
-        setSelectedRows([]);
-    }, [users]);
+
     const body = getTableBody(adminTableAttributes, users);
     const allSelected = body.length === selectedRows?.length;
+
     const handleAllSelected = () => {
         setSelectedRows(allSelected ? [] : _.range(body.length));
     };
@@ -25,6 +24,10 @@ export default function Admin() {
                 : [...selectedRows, index]
         );
     };
+
+    useEffect(() => {
+        setSelectedRows([]);
+    }, [users]);
     return (
         <Form action={'/admin'} method="post">
             <h1>Users</h1>

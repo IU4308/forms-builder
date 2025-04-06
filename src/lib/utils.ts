@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants';
-import { CurrentUser, TableAttributes } from './definitions';
+import { Cell, CurrentUser, TableAttributes } from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -11,14 +11,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export const getTableBody = (
     attributes: TableAttributes[],
-    data: { [key: string]: any }[]
+    data: { [key: string]: string | boolean | null }[]
 ) => {
-    let body: {
-        content: any;
-        label: string;
-        className: string;
-        shouldRender: boolean;
-    }[][] = [];
+    let body: Cell[][] = [];
     data.forEach((element) => {
         body.push(
             attributes.map((item) => {
@@ -32,20 +27,6 @@ export const getTableBody = (
         );
     });
     return body;
-};
-
-type Row = {
-    content: string | Element;
-    className: string;
-}[];
-
-export const prependElement = (row: Row, element: Element, className = '') => {
-    row.unshift({
-        content: element,
-        className: className,
-    });
-
-    return row;
 };
 
 export const formatHead = (head: string) => {
