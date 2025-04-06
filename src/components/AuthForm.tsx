@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Link, useFetcher, useLoaderData } from 'react-router';
+import { Link, useFetcher } from 'react-router';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -23,8 +23,6 @@ export function AuthForm({ type, className }: AuthFormProps) {
     const isSubmitting = fetcher.state === 'submitting';
     const isRegister = type === 'register';
 
-    const { message } = useLoaderData();
-    console.log(message);
     const {
         register,
         handleSubmit,
@@ -42,8 +40,7 @@ export function AuthForm({ type, className }: AuthFormProps) {
     };
 
     return (
-        <div className={cn('relative flex flex-col gap-6', className)}>
-            <div className={cn('absolute top-[-50px] z-20')}>{message}</div>
+        <div className={cn('flex flex-col gap-6', className)}>
             <fetcher.Form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col items-center gap-2">

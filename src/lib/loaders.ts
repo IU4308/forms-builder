@@ -6,7 +6,10 @@ export const homeLoader = async () => {
     try {
         const currentUser = await getCurrentUser();
         if (currentUser.isBlocked) {
-            sessionStorage.setItem('flash', 'Your account has been blocked');
+            sessionStorage.setItem(
+                'flash',
+                'ERROR|Your account has been blocked'
+            );
             return redirect('/login');
         }
         return { currentUser };
@@ -18,9 +21,10 @@ export const homeLoader = async () => {
 
 export const loginLoader = async () => {
     try {
-        const message = sessionStorage.getItem('flash');
+        const flash = sessionStorage.getItem('flash');
+        const [messageType, message] = flash?.split('|', 2);
         sessionStorage.removeItem('flash');
-        return { message };
+        return { message, messageType };
     } catch (error: any) {
         console.log(error);
         return { error: error.response?.data };

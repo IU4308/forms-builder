@@ -41,12 +41,12 @@ export const router = createBrowserRouter([
     },
     {
         Component: AuthLayout,
+        loader: loginLoader,
         children: [
             {
                 path: 'login',
                 Component: Login,
                 action: login,
-                loader: loginLoader,
             },
             {
                 path: 'logout',
