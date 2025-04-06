@@ -73,6 +73,7 @@ export const setFlash = (
     type: 'success' | 'error' = 'success'
 ) => {
     sessionStorage.setItem('flash', `${type.toUpperCase() + '|' + message}`);
+    window.dispatchEvent(new Event('flashMessageChange'));
 };
 
 export const getFlash = () => {

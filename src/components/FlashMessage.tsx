@@ -7,12 +7,17 @@ export default function FlashMessage({ className }: { className?: string }) {
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setVisible(false);
-        }, 5000);
-
-        return () => clearTimeout(timer);
-    }, [sessionStorage.getItem('flash')]);
+        const handleFlash = () => {
+            setVisible(true);
+            setTimeout(() => {
+                setVisible(false);
+            }, 1000);
+        };
+        window.addEventListener('flashMessageChange', handleFlash);
+        handleFlash();
+        return () =>
+            window.removeEventListener('flashMessageChange', handleFlash);
+    }, []);
 
     if (!flash || !visible) return null;
     return (
