@@ -49,7 +49,7 @@ export const prependElement = (row: Row, element: Element, className = '') => {
 };
 
 export const formatHead = (head: string) => {
-    return changeCase.capitalCase(head);
+    return changeCase.sentenceCase(head);
 };
 
 export const formatContent = (content: any) => {

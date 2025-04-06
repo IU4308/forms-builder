@@ -38,3 +38,11 @@ export interface TableAttributes {
     shouldRender?: boolean;
 }
 [];
+
+export type ButtonVariant =
+    | 'destructive'
+    | 'default'
+    | 'link'
+    | 'outline'
+    | 'secondary'
+    | 'ghost';

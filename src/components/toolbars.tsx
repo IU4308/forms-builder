@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 import { Button } from './ui/button';
+import * as changeCase from 'change-case';
+import { adminButtons } from '@/lib/constants';
 
 function Layout({ children }: { children: ReactNode }) {
     return (
@@ -18,37 +20,22 @@ export function WorkspaceToolbar() {
     );
 }
 
-export function AdminToolbar({
-    selectedRows,
-    // setSelectedRows,
-}: {
-    selectedRows: number[];
-    // setSelectedRows: React.Dispatch<React.SetStateAction<number[]>>;
-}) {
+export function AdminToolbar({ selectedRows }: { selectedRows: number[] }) {
     const isDisabled = selectedRows.length === 0;
     return (
         <Layout>
-            <Button
-                disabled={isDisabled}
-                name="action"
-                value={'block'}
-                type="submit"
-                variant={'outline'}
-            >
-                Block
-            </Button>
-            <Button disabled={isDisabled} type="button" variant={'outline'}>
-                Unblock
-            </Button>
-            <Button disabled={isDisabled} type="button" variant={'outline'}>
-                Add to admins
-            </Button>
-            <Button disabled={isDisabled} type="button" variant={'outline'}>
-                Remove from admins
-            </Button>
-            <Button disabled={isDisabled} type="button" variant={'destructive'}>
-                Delete
-            </Button>
+            {adminButtons.map((button) => (
+                <Button
+                    key={button.label}
+                    disabled={isDisabled}
+                    name="action"
+                    value={button.label}
+                    type="submit"
+                    variant={button.variant ?? 'outline'}
+                >
+                    {changeCase.sentenceCase(button.label)}
+                </Button>
+            ))}
         </Layout>
     );
 }

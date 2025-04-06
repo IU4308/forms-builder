@@ -1,3 +1,5 @@
+import { ButtonVariant } from './definitions';
+
 export const navMenu = [
     {
         title: 'Home',
@@ -85,6 +87,17 @@ export const homeTableAttributes = [
         label: 'submissions',
         className: 'text-right',
     },
+];
+
+export const adminButtons: {
+    label: string;
+    variant?: ButtonVariant;
+}[] = [
+    { label: 'block' },
+    { label: 'unblock' },
+    { label: 'add-to-admins' },
+    { label: 'remove-from-admins' },
+    { label: 'delete', variant: 'destructive' },
 ];
 
 export const templates = [

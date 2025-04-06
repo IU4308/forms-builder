@@ -7,8 +7,11 @@ export const adminAction = async ({ request }: { request: Request }) => {
         const selectedIds =
             (formData.get('allUserIds') as string)?.split(',') ??
             formData.getAll('userId');
-        console.log(selectedIds);
-        const response = await api.post(`/admin/block`, selectedIds);
+        console.log(formData.get('action'));
+        const response = await api.post(
+            `/admin/${formData.get('action')}`,
+            selectedIds
+        );
         console.log(response.data);
         redirect('/admin');
     } catch (error: any) {
