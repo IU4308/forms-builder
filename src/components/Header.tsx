@@ -18,9 +18,10 @@ type NavItemProps = {
     title: string;
     url: string;
     variant?: string;
+    name?: string;
 };
 
-const NavItem = ({ title, url }: NavItemProps) => {
+const NavItem = ({ title, url, name }: NavItemProps) => {
     return (
         <NavLink
             to={url}
@@ -30,13 +31,19 @@ const NavItem = ({ title, url }: NavItemProps) => {
                 className="cursor-pointer max-lg:w-full max-lg:py-6"
                 variant={'ghost'}
             >
-                {title}
+                {title === 'Logout' ? (
+                    <span>
+                        {name} ({title})
+                    </span>
+                ) : (
+                    <span>{title}</span>
+                )}
             </Button>
         </NavLink>
     );
 };
 
-const DesktopView = () => {
+const DesktopView = ({ name }: { name: string }) => {
     const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
     const menu = getMenu(currentUser);
     return (
@@ -55,7 +62,7 @@ const DesktopView = () => {
                     .slice(2)
                     .reverse()
                     .map((item) => (
-                        <NavItem key={item.title} {...item} />
+                        <NavItem key={item.title} name={name} {...item} />
                     ))}
                 <SideButtons />
             </div>
@@ -63,11 +70,11 @@ const DesktopView = () => {
     );
 };
 
-const MobileView = () => {
+const MobileView = ({ name }: { name: string }) => {
     return (
         <nav className="p-2 lg:hidden flex justify-between">
             <div className="flex gap-2 w-[75%]">
-                <DropDown />
+                <DropDown name={name} />
                 <div className="relative w-[90%]">
                     <IoIosSearch className="absolute right-4 top-1/4" />
                     <Input type="text" className="" />
@@ -80,7 +87,7 @@ const MobileView = () => {
     );
 };
 
-const DropDown = () => {
+const DropDown = ({ name }: { name: string }) => {
     const [open, setOpen] = useState(false);
     const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
     return (
@@ -95,7 +102,7 @@ const DropDown = () => {
                         className="flex justify-center cursor-pointer py-0"
                         onClick={() => setOpen(false)}
                     >
-                        <NavItem {...item} />
+                        <NavItem name={name} {...item} />
                     </DropdownMenuItem>
                 ))}
             </DropdownMenuContent>
@@ -115,10 +122,11 @@ const SideButtons = () => {
 };
 
 export default function Header() {
+    const { currentUser } = useLoaderData();
     return (
         <div className="sticky z-10 bg-background top-0 border-b">
-            <DesktopView />
-            <MobileView />
+            <DesktopView name={currentUser?.name} />
+            <MobileView name={currentUser?.name} />
         </div>
     );
 }
