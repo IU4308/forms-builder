@@ -31,9 +31,9 @@ const Header = ({
     renderCheckbox?: boolean;
     allSelected?: boolean;
     onClick?: () => void;
-    sorter: AdminTableLabel;
-    handleChangeSorter: (label: AdminTableLabel) => void;
-    isDescending: boolean;
+    sorter?: string;
+    handleChangeSorter?: (label: string) => void;
+    isDescending?: boolean;
 }) => {
     return (
         <TableHeader>
@@ -54,27 +54,33 @@ const Header = ({
                     (cell, index) =>
                         cell.shouldRender && (
                             <TableHead key={index} className={cell.className}>
-                                <Button
-                                    type="button"
-                                    className="cursor-pointer"
-                                    variant={'ghost'}
-                                    onClick={() =>
-                                        handleChangeSorter(
-                                            cell.label as AdminTableLabel
-                                        )
-                                    }
-                                >
-                                    <span>{setSentenceCase(cell.label)}</span>
-                                    {sorter === cell.label ? (
-                                        isDescending ? (
-                                            <ChevronDownIcon className="icon-2" />
+                                {sorter ? (
+                                    <Button
+                                        type="button"
+                                        className="cursor-pointer"
+                                        variant={'ghost'}
+                                        onClick={() =>
+                                            handleChangeSorter!(
+                                                cell.label as AdminTableLabel
+                                            )
+                                        }
+                                    >
+                                        <span>
+                                            {setSentenceCase(cell.label)}
+                                        </span>
+                                        {sorter === cell.label ? (
+                                            isDescending ? (
+                                                <ChevronDownIcon className="icon-2" />
+                                            ) : (
+                                                <ChevronUpIcon className="icon-2" />
+                                            )
                                         ) : (
-                                            <ChevronUpIcon className="icon-2" />
-                                        )
-                                    ) : (
-                                        <ChevronsUpDownIcon className="icon-2" />
-                                    )}
-                                </Button>
+                                            <ChevronsUpDownIcon className="icon-2" />
+                                        )}
+                                    </Button>
+                                ) : (
+                                    <span>{setSentenceCase(cell.label)}</span>
+                                )}
                             </TableHead>
                         )
                 )}
@@ -160,9 +166,9 @@ export default function Table({
     handleAllSelected?: () => void;
     handleSelect?: (index: number) => void;
     selectedRows?: number[];
-    sorter: AdminTableLabel;
-    handleChangeSorter: (label: AdminTableLabel) => void;
-    isDescending: boolean;
+    sorter?: string;
+    handleChangeSorter?: (label: string) => void;
+    isDescending?: boolean;
 }) {
     return (
         <section>

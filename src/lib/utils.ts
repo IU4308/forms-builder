@@ -14,7 +14,7 @@ export const setSentenceCase = (head: string) => {
 };
 
 export const getTableBody = (
-    attributes: TableAttributes,
+    attributes: TableAttributes[],
     data: { [key: string]: any }[]
 ) => {
     let body: Cell[][] = [];

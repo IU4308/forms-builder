@@ -7,22 +7,20 @@ import { Form, useLoaderData } from 'react-router';
 import _ from 'lodash';
 import { AdminTableLabel, User } from '@/lib/definitions';
 
-// const sorters = adminTableAttributes.map((item) => item.label);
-
 export default function Admin() {
     const { users } = useLoaderData() as { users: User[] };
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
-    const [sorter, setSorter] = useState<AdminTableLabel>('name');
+    const [sorter, setSorter] = useState('name');
     const [isDescending, setIsDescending] = useState(true);
 
-    const handleChangeSorter = (label: AdminTableLabel) => {
+    const handleChangeSorter = (label: string) => {
         setSorter(label);
         setIsDescending(!isDescending);
     };
 
     const body = getTableBody(
         adminTableAttributes,
-        sortUsers(users, sorter, isDescending)
+        sortUsers(users, sorter as AdminTableLabel, isDescending)
     );
     const allSelected = body.length === selectedRows.length;
 

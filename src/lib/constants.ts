@@ -59,9 +59,9 @@ export const adminTableAttributes = [
         className: 'text-right',
         shouldRender: true,
     },
-] as const;
+];
 
-export type TableAttributes = typeof adminTableAttributes;
+// export type TableAttributes = typeof adminTableAttributes;
 
 export const templatesTableAttributes = [
     {

@@ -33,9 +33,24 @@ export interface User {
     isAdmin: boolean;
 }
 
-export type TableAttributes = typeof adminTableAttributes;
+export interface TableAttributes {
+    label: string;
+    className: string;
+    shouldRender?: boolean;
+}
+[];
 
-export type AdminTableLabel = (typeof adminTableAttributes)[number]['label'];
+// export type TableAttributes = typeof adminTableAttributes;
+
+// export type AdminTableLabel = (typeof adminTableAttributes)[number]['label'];
+export type AdminTableLabel =
+    | 'id'
+    | 'name'
+    | 'email'
+    | 'createdAt'
+    | 'lastLogin'
+    | 'isBlocked'
+    | 'isAdmin';
 
 export type ButtonVariant =
     | 'destructive'
