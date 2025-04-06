@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { adminTableAttributes } from './constants';
 
 export const registerSchema = z.object({
     name: z.string().min(1, 'Name is required'),
