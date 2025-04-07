@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants.tsx';
-import { Cell, CurrentUser, TableAttributes, User } from './definitions';
+import { Cell, CurrentUser, TableAttributes } from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -14,11 +14,15 @@ export const setSentenceCase = (head: string) => {
 };
 
 export const getTableBody = (
-    attributes: TableAttributes[],
-    data: { [key: string]: any }[]
+    attributes: TableAttributes,
+    data: { [key: string]: any }[],
+    sorter?: string,
+    isDescending?: boolean
 ) => {
+    const tableData =
+        sorter !== undefined ? sortData(data, sorter!, isDescending!) : data;
     let body: Cell[][] = [];
-    data.forEach((element) => {
+    tableData.forEach((element) => {
         body.push(
             attributes.map((item) => {
                 return {
@@ -45,17 +49,17 @@ export const formatContent = (content: any) => {
     return content;
 };
 
-export const sortUsers = (
-    users: User[],
-    field: keyof User,
+export const sortData = (
+    data: { [key: string]: any }[],
+    field: string,
     isDescending: boolean
 ) => {
-    const sortedUsers = users.sort((a, b) => {
+    const sortedData = data.sort((a, b) => {
         return field === 'createdAt' || field === 'lastLogin'
             ? Date.parse(a[field] as string) - Date.parse(b[field] as string)
             : formatContent(a[field]).localeCompare(formatContent(b[field]));
     });
-    return isDescending ? sortedUsers : sortedUsers.reverse();
+    return isDescending ? sortedData : sortedData.reverse();
 };
 
 export const getMenu = (currentUser: CurrentUser) => {

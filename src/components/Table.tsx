@@ -6,17 +6,20 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { cn, formatContent, setSentenceCase } from '@/lib/utils';
-import { ReactNode } from 'react';
+import { cn, formatContent, getTableBody, setSentenceCase } from '@/lib/utils';
+import { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Cell, AdminTableLabel } from '@/lib/definitions';
+import { Cell, AdminTableLabel, TableAttributes } from '@/lib/definitions';
 import { Button } from './ui/button';
 import {
     ChevronDownIcon,
     ChevronsUpDownIcon,
     ChevronUpIcon,
 } from 'lucide-react';
+import _ from 'lodash';
+import Toolbar from './Toolbar';
+import { adminButtons } from '@/lib/constants';
 
 const Header = ({
     body,
@@ -147,32 +150,58 @@ const Body = ({
 
 export default function Table({
     url,
-    body,
+    // body,
+    data,
+    attributes,
     slot,
     renderCheckbox = false,
-    allSelected,
-    selectedRows,
-    handleAllSelected,
-    handleSelect,
-    sorter,
-    handleChangeSorter,
-    isDescending,
+    renderToolbar = false,
+    shouldSort = false,
 }: {
     url?: string;
-    body: Cell[][];
+    data: { [key: string]: any }[];
+    attributes: TableAttributes;
     slot?: ReactNode;
     renderCheckbox?: boolean;
-    allSelected?: boolean;
-    handleAllSelected?: () => void;
-    handleSelect?: (index: number) => void;
-    selectedRows?: number[];
-    sorter?: string;
-    handleChangeSorter?: (label: string) => void;
-    isDescending?: boolean;
+    renderToolbar?: boolean;
+    shouldSort?: boolean;
 }) {
+    const [selectedRows, setSelectedRows] = useState<number[]>([]);
+    const [sorter, setSorter] = useState(
+        shouldSort ? attributes[1].label : undefined
+    );
+    const [isDescending, setIsDescending] = useState(true);
+    const handleChangeSorter = (label: string) => {
+        setSorter(label);
+        setIsDescending(!isDescending);
+    };
+
+    const body = getTableBody(attributes, data, sorter, isDescending);
+    const allSelected = body.length === selectedRows.length;
+
+    const handleAllSelected = () => {
+        setSelectedRows(allSelected ? [] : _.range(body.length));
+    };
+
+    const handleSelect = (index: number) => {
+        setSelectedRows(
+            selectedRows.includes(index)
+                ? selectedRows.filter((rowIndex) => rowIndex !== index)
+                : [...selectedRows, index]
+        );
+    };
+    useEffect(() => {
+        setSelectedRows([]);
+    }, [data]);
     return (
         <section>
             {slot}
+            {renderToolbar && (
+                <Toolbar
+                    isDisabled={selectedRows.length === 0}
+                    buttons={adminButtons}
+                />
+            )}
             <T>
                 <Header
                     body={body}

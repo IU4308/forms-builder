@@ -3,7 +3,6 @@ import { WorkspaceToolbar } from '@/components/toolbars';
 import { Button } from '@/components/ui/button';
 import UserForms from '@/components/UserForms';
 import { templates, templatesTableAttributes } from '@/lib/constants.tsx';
-import { getTableBody } from '@/lib/utils';
 import { useState } from 'react';
 
 export default function Workspace() {
@@ -27,7 +26,8 @@ export default function Workspace() {
             {!tabId && (
                 <Table
                     slot={<WorkspaceToolbar />}
-                    body={getTableBody(templatesTableAttributes, templates)}
+                    data={templates}
+                    attributes={templatesTableAttributes}
                     renderCheckbox={true}
                     url="/templates/1"
                 />

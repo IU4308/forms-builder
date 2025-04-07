@@ -32,12 +32,18 @@ export interface User {
     isAdmin: boolean;
 }
 
-export interface TableAttributes {
+export type TableAttributes = {
     label: string;
     className: string;
     shouldRender?: boolean;
-}
-[];
+}[];
+
+export type ToolbarButtons = {
+    description: string;
+    label: string;
+    icon: React.JSX.Element;
+    variant?: ButtonVariant;
+}[];
 
 // export type TableAttributes = typeof adminTableAttributes;
 
