@@ -16,12 +16,15 @@ import {
 } from '@/lib/loaders';
 import { adminAction } from '@/actions/admin.actions';
 import AppLayout from '@/layouts/AppLayout';
+import ErrorPage from '@/components/ErrorPage';
+import { createElement } from 'react';
 
 export const router = createBrowserRouter([
     {
         Component: AppLayout,
         HydrateFallback: Fallback,
         loader: appLoader,
+        errorElement: createElement(ErrorPage),
         children: [
             {
                 Component: MainLayout,
