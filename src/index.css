@@ -123,5 +123,8 @@
     font-weight: var(--font-weight-bold);
   }
 
+  h2 {
+    font-size: var(--text-xl);
+  }
 }
 
