@@ -1,6 +1,6 @@
 import Table from '@/components/Table';
 import { AdminToolbar } from '@/components/toolbars';
-import { adminTableAttributes } from '@/lib/constants';
+import { adminTableAttributes } from '@/lib/constants.tsx';
 import { getTableBody, sortUsers } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { Form, useLoaderData } from 'react-router';

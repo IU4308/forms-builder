@@ -2,7 +2,7 @@ import Table from '@/components/Table';
 import { WorkspaceToolbar } from '@/components/toolbars';
 import { Button } from '@/components/ui/button';
 import UserForms from '@/components/UserForms';
-import { templates, templatesTableAttributes } from '@/lib/constants';
+import { templates, templatesTableAttributes } from '@/lib/constants.tsx';
 import { getTableBody } from '@/lib/utils';
 import { useState } from 'react';
 

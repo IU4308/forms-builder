@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
-import { navMenu } from './constants';
+import { navMenu } from './constants.tsx';
 import { Cell, CurrentUser, TableAttributes, User } from './definitions';
 
 export function cn(...inputs: ClassValue[]) {

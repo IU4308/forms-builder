@@ -1,7 +1,7 @@
 import Cloud from '@/components/Cloud';
 import LatestsTemplates from '@/components/LatestsTemplates';
 import Table from '@/components/Table';
-import { homeTableAttributes, templates } from '@/lib/constants';
+import { homeTableAttributes, templates } from '@/lib/constants.tsx';
 import { getTableBody } from '@/lib/utils';
 
 export default function Home() {

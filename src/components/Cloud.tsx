@@ -1,4 +1,4 @@
-import { tags } from '@/lib/constants';
+import { tags } from '@/lib/constants.tsx';
 import { TagCloud } from 'react-tagcloud';
 import { Button } from './ui/button';
 

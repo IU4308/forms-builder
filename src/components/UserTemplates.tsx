@@ -6,7 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { templates } from '@/lib/constants';
+import { templates } from '@/lib/constants.tsx';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
 import { WorkspaceToolbar } from './toolbars';

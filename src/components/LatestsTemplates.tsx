@@ -1,4 +1,4 @@
-import { templates } from '@/lib/constants';
+import { templates } from '@/lib/constants.tsx';
 import { Link } from 'react-router';
 
 type TemplateProps = {

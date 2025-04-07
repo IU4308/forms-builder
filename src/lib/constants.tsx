@@ -1,4 +1,7 @@
+import { JSX } from 'react';
 import { ButtonVariant } from './definitions';
+import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
+import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
 
 export const navMenu = [
     {
@@ -98,14 +101,37 @@ export const homeTableAttributes = [
 ];
 
 export const adminButtons: {
+    description: string;
     label: string;
+    icon: JSX.Element;
     variant?: ButtonVariant;
 }[] = [
-    { label: 'block' },
-    { label: 'unblock' },
-    { label: 'add-to-admins' },
-    { label: 'remove-from-admins' },
-    { label: 'delete', variant: 'destructive' },
+    {
+        label: 'block',
+        description: 'Block user',
+        icon: <IoLockClosedOutline />,
+    },
+    {
+        label: 'unblock',
+        description: 'Unblock user',
+        icon: <IoLockOpenOutline />,
+    },
+    {
+        label: 'add-to-admins',
+        description: 'Add user to admins',
+        icon: <FiShield />,
+    },
+    {
+        label: 'remove-from-admins',
+        description: 'Remove user from admins',
+        icon: <FiShieldOff />,
+    },
+    {
+        label: 'delete',
+        description: 'Delete user',
+        icon: <FiTrash />,
+        variant: 'destructive',
+    },
 ];
 
 export const templates = [
