@@ -10,52 +10,60 @@ import { login, register } from '@/actions/auth.actions';
 import Fallback from '@/components/Fallback';
 import {
     adminLoader,
+    appLoader,
     homeLoader,
-    loginLoader,
     logoutLoader,
 } from '@/lib/loaders';
 import { adminAction } from '@/actions/admin.actions';
+import AppLayout from '@/layouts/AppLayout';
 
 export const router = createBrowserRouter([
     {
-        Component: MainLayout,
+        Component: AppLayout,
         HydrateFallback: Fallback,
-        loader: homeLoader,
+        loader: appLoader,
         children: [
             {
-                index: true,
-                Component: Home,
-            },
-            {
-                path: '/admin',
-                Component: Admin,
-                loader: adminLoader,
-                action: adminAction,
+                Component: MainLayout,
                 HydrateFallback: Fallback,
+                loader: homeLoader,
+                children: [
+                    {
+                        index: true,
+                        Component: Home,
+                    },
+                    {
+                        path: '/admin',
+                        Component: Admin,
+                        loader: adminLoader,
+                        action: adminAction,
+                        HydrateFallback: Fallback,
+                    },
+                    {
+                        path: '/workspaces',
+                        children: [{ path: ':userId', Component: Workspace }],
+                    },
+                ],
             },
             {
-                path: '/workspaces',
-                children: [{ path: ':userId', Component: Workspace }],
-            },
-        ],
-    },
-    {
-        Component: AuthLayout,
-        loader: loginLoader,
-        children: [
-            {
-                path: 'login',
-                Component: Login,
-                action: login,
-            },
-            {
-                path: 'logout',
-                loader: logoutLoader,
-            },
-            {
-                path: 'register',
-                Component: Register,
-                action: register,
+                Component: AuthLayout,
+                // loader: loginLoader,
+                children: [
+                    {
+                        path: 'login',
+                        Component: Login,
+                        action: login,
+                    },
+                    {
+                        path: 'logout',
+                        loader: logoutLoader,
+                    },
+                    {
+                        path: 'register',
+                        Component: Register,
+                        action: register,
+                    },
+                ],
             },
         ],
     },

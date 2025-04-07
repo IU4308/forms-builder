@@ -3,6 +3,10 @@ import { getAllUsers, getCurrentUser } from './react-query';
 import { api } from '@/api/api';
 import { getFlash, setFlash } from './utils';
 
+export const appLoader = async () => {
+    return { flashData: getFlash() };
+};
+
 export const homeLoader = async () => {
     try {
         const currentUser = await getCurrentUser();
@@ -10,16 +14,16 @@ export const homeLoader = async () => {
             setFlash('Your account has been blocked', 'error');
             return redirect('/login');
         }
-        return { currentUser, flash: getFlash() };
+        return { currentUser };
     } catch (error: any) {
         console.log(error);
         return { error: error.response?.data };
     }
 };
 
-export const loginLoader = async () => {
-    return { flash: getFlash() };
-};
+// export const loginLoader = async () => {
+//     return { flash: getFlash() };
+// };
 
 export const adminLoader = async () => {
     try {
