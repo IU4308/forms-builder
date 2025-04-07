@@ -4,7 +4,7 @@ import { api } from '@/api/api';
 import { getFlash, setFlash } from './utils';
 
 export const appLoader = async () => {
-    return { flashData: getFlash() };
+    return { flash: getFlash() };
 };
 
 export const homeLoader = async () => {
@@ -20,10 +20,6 @@ export const homeLoader = async () => {
         return { error: error.response?.data };
     }
 };
-
-// export const loginLoader = async () => {
-//     return { flash: getFlash() };
-// };
 
 export const adminLoader = async () => {
     try {

@@ -1,6 +1,5 @@
 import { api } from '@/api/api';
 import { setFlash } from '@/lib/utils';
-import { redirect } from 'react-router';
 
 export const adminAction = async ({ request }: { request: Request }) => {
     try {
@@ -13,8 +12,6 @@ export const adminAction = async ({ request }: { request: Request }) => {
             selectedIds
         );
         setFlash(response.data.message);
-        // console.log(response.data);
-        redirect('/admin');
     } catch (error: any) {
         console.log(error);
     }

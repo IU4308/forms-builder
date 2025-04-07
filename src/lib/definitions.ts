@@ -65,3 +65,8 @@ export interface Cell {
     className: string;
     shouldRender: boolean;
 }
+
+export type Flash = {
+    message: string;
+    type: 'SUCCESS' | 'ERROR';
+} | null;
