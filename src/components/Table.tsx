@@ -44,6 +44,7 @@ const Header = ({
                 {renderCheckbox && (
                     <TableHead>
                         <Checkbox
+                            className="w-5 h-5"
                             name="allUserIds"
                             value={body.map(
                                 (item) => item[0].content as string
@@ -113,6 +114,7 @@ const Body = ({
                         <TableCell>
                             <Checkbox
                                 name="userId"
+                                className="w-5 h-5"
                                 value={row[0].content as string}
                                 checked={selectedRows?.includes(index)}
                                 onClick={() => handleSelect!(index)}
@@ -126,7 +128,7 @@ const Body = ({
                                     key={cell.label}
                                     className={cn(
                                         cell.className,
-                                        url ? 'p-0' : 'py-4'
+                                        url ? 'p-0' : 'py-4 px-5'
                                     )}
                                 >
                                     {url ? (

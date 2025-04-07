@@ -34,7 +34,7 @@ export interface User {
 
 export type TableAttributes = {
     label: string;
-    className: string;
+    className?: string;
     shouldRender?: boolean;
 }[];
 

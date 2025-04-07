@@ -29,38 +29,25 @@ export const navMenu = [
 export const adminTableAttributes = [
     {
         label: 'id',
-        className: '',
         shouldRender: false,
     },
     {
         label: 'name',
-        className: '',
-        shouldRender: true,
     },
     {
         label: 'email',
-        className: '',
-        shouldRender: true,
     },
     {
         label: 'createdAt',
-        className: '',
-        shouldRender: true,
     },
     {
         label: 'lastLogin',
-        className: '',
-        shouldRender: true,
     },
     {
         label: 'isBlocked',
-        className: 'text-right',
-        shouldRender: true,
     },
     {
         label: 'isAdmin',
-        className: 'text-right',
-        shouldRender: true,
     },
 ];
 

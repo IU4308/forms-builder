@@ -18,6 +18,7 @@ import { adminAction } from '@/actions/admin.actions';
 import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
+import Template from '@/pages/Template';
 
 export const router = createBrowserRouter([
     {
@@ -46,11 +47,16 @@ export const router = createBrowserRouter([
                         path: '/workspaces',
                         children: [{ path: ':userId', Component: Workspace }],
                     },
+                    {
+                        path: '/templates',
+                        children: [
+                            { path: ':templateId', Component: Template },
+                        ],
+                    },
                 ],
             },
             {
                 Component: AuthLayout,
-                // loader: loginLoader,
                 children: [
                     {
                         path: 'login',

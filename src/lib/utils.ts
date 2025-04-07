@@ -28,7 +28,7 @@ export const getTableBody = (
                 return {
                     content: element[item.label],
                     label: item.label,
-                    className: item.className,
+                    className: item.className ?? '',
                     shouldRender: item.shouldRender ?? true,
                 };
             })
@@ -65,10 +65,10 @@ export const sortData = (
 export const getMenu = (currentUser: CurrentUser) => {
     return navMenu.filter((item) => {
         if (!currentUser)
-            return item.title !== 'Logout' && item.title !== 'Admin';
+            return !['Logout', 'Admin', 'My Workspace'].includes(item.title);
         return currentUser.isAdmin
             ? item.title !== 'Login'
-            : item.title !== 'Admin' && item.title !== 'Login';
+            : !['Login', 'Admin'].includes(item.title);
     });
 };
 
