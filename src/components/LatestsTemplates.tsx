@@ -11,7 +11,7 @@ const Template = ({ title, author, description, image }: TemplateProps) => {
     return (
         <Link
             to={'/templates/1'}
-            className="bg-secondary border hover:opacity-75 cursor-pointer flex flex-col justify-between gap-2 px-4 py-2"
+            className="bg-accent border hover:opacity-75 cursor-pointer flex flex-col justify-between gap-2 px-4 py-2"
         >
             <div className="font-bold">{title}</div>
             <div className="">
