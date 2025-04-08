@@ -77,10 +77,10 @@ export type Flash = {
     type: 'SUCCESS' | 'ERROR';
 } | null;
 
-export type Answer =
-    | 'single-line'
-    | 'multiple-line'
-    | 'integer-value'
+export type QuestionType =
+    | 'single_line'
+    | 'multiple_line'
+    | 'integer_value'
     | 'checkbox';
 
 export type Question = {
@@ -88,5 +88,5 @@ export type Question = {
     isPresent: boolean;
     title: string;
     description: string;
-    type: Answer;
+    type: QuestionType;
 };

@@ -3,7 +3,12 @@ import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants.tsx';
-import { Cell, CurrentUser, TableAttributes } from './definitions';
+import {
+    QuestionType,
+    Cell,
+    CurrentUser,
+    TableAttributes,
+} from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -86,4 +91,8 @@ export const getFlash = () => {
         ?.split('|', 2) as string[]) ?? ['', ''];
     sessionStorage.removeItem('flash');
     return { message, type };
+};
+
+export const prefixName = (name: string, type: QuestionType, id: number) => {
+    return `${type}${id % 4 === 0 ? 4 : id % 4}_${name}`;
 };

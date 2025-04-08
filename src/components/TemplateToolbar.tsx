@@ -6,15 +6,15 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Answer } from '@/lib/definitions';
+import { QuestionType } from '@/lib/definitions';
 import { Button } from './ui/button';
 
 const Type = ({
     value,
     onAddQuestion,
 }: {
-    value: Answer;
-    onAddQuestion: (type: Answer) => void;
+    value: QuestionType;
+    onAddQuestion: (type: QuestionType) => void;
 }) => {
     return (
         <DropdownMenuItem onClick={() => onAddQuestion(value)}>
@@ -23,12 +23,12 @@ const Type = ({
     );
 };
 
-const types = ['single-line', 'multiple-line', 'integer-value', 'checkbox'];
+const types = ['single_line', 'multiple_line', 'integer_value', 'checkbox'];
 
 export default function TemplateToolbar({
     onAddQuestion,
 }: {
-    onAddQuestion: (type: Answer) => void;
+    onAddQuestion: (type: QuestionType) => void;
 }) {
     return (
         <div className="sticky top-[53px] bg-background z-20 flex justify-between">
@@ -42,7 +42,7 @@ export default function TemplateToolbar({
                     {types.map((type) => (
                         <Type
                             key={type}
-                            value={type as Answer}
+                            value={type as QuestionType}
                             onAddQuestion={onAddQuestion}
                         />
                     ))}

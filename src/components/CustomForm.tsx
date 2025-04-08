@@ -2,14 +2,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import CustomField from './CustomField';
 import { useState } from 'react';
-import { Answer, Question } from '@/lib/definitions';
+import { QuestionType, Question } from '@/lib/definitions';
 import { initialQuestions } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
 
 export default function CustomForm() {
     const [questions, setQuestions] = useState<Question[]>(initialQuestions);
 
-    const handleAddQuestion = (type: Answer) => {
+    const handleAddQuestion = (type: QuestionType) => {
         const newQuestion = questions.find(
             (question) => question.type === type && !question.isPresent
         );
