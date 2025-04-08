@@ -13,6 +13,7 @@ import {
     appLoader,
     homeLoader,
     logoutLoader,
+    templateLoader,
 } from '@/lib/loaders';
 import { adminAction } from '@/actions/admin.actions';
 import AppLayout from '@/layouts/AppLayout';
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
                         path: '/templates',
                         Component: Template,
                         action: templateAction,
+                        loader: templateLoader,
                         // children: [
                         //     {
                         //         path: ':templateId',

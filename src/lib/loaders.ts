@@ -32,6 +32,16 @@ export const adminLoader = async () => {
     }
 };
 
+export const templateLoader = async () => {
+    try {
+        const currentUser = await getCurrentUser();
+        if (!currentUser) return redirect('/');
+        return { currentUser };
+    } catch (error: any) {
+        throw new Error('Server error');
+    }
+};
+
 export const logoutLoader = async () => {
     try {
         await api.post('/auth/logout');

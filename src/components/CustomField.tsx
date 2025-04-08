@@ -14,12 +14,12 @@ export default function CustomField({
             <div className="bg-accent py-4 px-6 flex flex-col gap-4 rounded-sm">
                 <Input hidden name="state" value={Number(isPresent)} readOnly />
                 <Input
-                    name={`${id}-${title}`}
+                    name={`${type}${id % 4 === 0 ? 4 : id % 4}_question`}
                     defaultValue={title}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 />
                 <Input
-                    name={`${id}-${description}`}
+                    name={`${type}${id % 4 === 0 ? 4 : id % 4}_description`}
                     defaultValue={description}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 />

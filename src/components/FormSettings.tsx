@@ -16,7 +16,7 @@ export default function FormSettings() {
                 <Input
                     id="title"
                     defaultValue={'New Form'}
-                    name="template-title"
+                    name="title"
                     className="!bg-background"
                 />
             </div>
@@ -25,7 +25,7 @@ export default function FormSettings() {
                 <Input
                     id="description"
                     defaultValue={'No description'}
-                    name="template-description"
+                    name="description"
                     className="!bg-background"
                 />
             </div>
