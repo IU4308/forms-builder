@@ -2,6 +2,7 @@ import { Question } from '@/lib/definitions';
 import { Checkbox } from './ui/checkbox';
 import { Input } from './ui/input';
 import { prefixName } from '@/lib/utils';
+import * as changeCase from 'change-case';
 
 export default function CustomField({
     id,
@@ -20,7 +21,7 @@ export default function CustomField({
                     readOnly
                 />
                 <Input
-                    name={prefixName('title', type, id)}
+                    name={prefixName('question', type, id)}
                     defaultValue={title}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 />
@@ -36,7 +37,7 @@ export default function CustomField({
                         type="text"
                         id="sl-1"
                         className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
-                        placeholder={`${type} answer`}
+                        placeholder={`${changeCase.sentenceCase(type)} answer`}
                         disabled
                     />
                 )}

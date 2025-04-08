@@ -17,7 +17,7 @@ export default function Template() {
         >
             <Input
                 hidden
-                name="creator_id"
+                name="creatorId"
                 value={currentUser.userId}
                 readOnly
             />

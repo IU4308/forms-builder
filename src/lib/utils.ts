@@ -94,5 +94,5 @@ export const getFlash = () => {
 };
 
 export const prefixName = (name: string, type: QuestionType, id: number) => {
-    return `${type}${id % 4 === 0 ? 4 : id % 4}_${name}`;
+    return changeCase.camelCase(`${type}${id % 4 === 0 ? 4 : id % 4}_${name}`);
 };
