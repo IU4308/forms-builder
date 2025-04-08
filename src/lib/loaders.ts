@@ -17,7 +17,7 @@ export const homeLoader = async () => {
         return { currentUser };
     } catch (error: any) {
         console.log(error);
-        return { error: error.response?.data };
+        throw new Error('Server error');
     }
 };
 
@@ -28,7 +28,7 @@ export const adminLoader = async () => {
         const users = await getAllUsers();
         return { currentUser, users };
     } catch (error: any) {
-        return { error: error.response?.data };
+        throw new Error('Server error');
     }
 };
 
@@ -37,6 +37,6 @@ export const logoutLoader = async () => {
         await api.post('/auth/logout');
         return redirect('/login');
     } catch (error: any) {
-        return { error: error.response?.data };
+        throw new Error('Server error');
     }
 };

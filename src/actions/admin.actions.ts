@@ -14,5 +14,6 @@ export const adminAction = async ({ request }: { request: Request }) => {
         setFlash(response.data.message);
     } catch (error: any) {
         console.log(error);
+        throw new Error('Server error');
     }
 };

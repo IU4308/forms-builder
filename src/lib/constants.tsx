@@ -1,5 +1,4 @@
-import { JSX } from 'react';
-import { ButtonVariant, Question } from './definitions';
+import { Question, ToolbarButtons } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
 
@@ -87,12 +86,19 @@ export const homeTableAttributes = [
     },
 ];
 
-export const adminButtons: {
-    description: string;
-    label: string;
-    icon: JSX.Element;
-    variant?: ButtonVariant;
-}[] = [
+export const workspaceButtons: ToolbarButtons = [
+    {
+        label: 'create',
+        description: 'Create a template',
+    },
+    {
+        label: 'delete',
+        description: 'Delete a template',
+        variant: 'destructive',
+    },
+];
+
+export const adminButtons: ToolbarButtons = [
     {
         label: 'block',
         description: 'Block user',
@@ -266,113 +272,113 @@ export const tags = [
 export const initialQuestions: Question[] = [
     {
         id: 1,
-        isPresent: false,
-        title: 'No title',
+        isPresent: true,
+        title: 'Question',
         description: 'No description',
         type: 'single-line',
     },
     {
         id: 2,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'single-line',
     },
     {
         id: 3,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'single-line',
     },
     {
         id: 4,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'single-line',
     },
     {
         id: 5,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'multiple-line',
     },
     {
         id: 6,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'multiple-line',
     },
     {
         id: 7,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'multiple-line',
     },
     {
         id: 8,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'multiple-line',
     },
     {
         id: 9,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'integer-value',
     },
     {
         id: 10,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'integer-value',
     },
     {
         id: 11,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'integer-value',
     },
     {
         id: 12,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'integer-value',
     },
     {
         id: 13,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'checkbox',
     },
     {
         id: 14,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'checkbox',
     },
     {
         id: 15,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'checkbox',
     },
     {
         id: 16,
         isPresent: false,
-        title: 'No title',
+        title: 'Question',
         description: 'No description',
         type: 'checkbox',
     },

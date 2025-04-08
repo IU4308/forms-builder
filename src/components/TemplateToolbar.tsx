@@ -7,6 +7,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Answer } from '@/lib/definitions';
+import { Button } from './ui/button';
 
 const Type = ({
     value,
@@ -30,13 +31,13 @@ export default function TemplateToolbar({
     onAddQuestion: (type: Answer) => void;
 }) {
     return (
-        <div>
+        <div className="sticky top-[53px] bg-background z-20 flex justify-between">
             <DropdownMenu>
-                <DropdownMenuTrigger className="border px-4 py-2 bg-accent rounded-sm cursor-pointer">
+                <DropdownMenuTrigger className="border px-4 py-1 bg-accent rounded-sm cursor-pointer">
                     Add question
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuLabel>Answer type</DropdownMenuLabel>
+                    <DropdownMenuLabel>Select type</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     {types.map((type) => (
                         <Type
@@ -47,6 +48,9 @@ export default function TemplateToolbar({
                     ))}
                 </DropdownMenuContent>
             </DropdownMenu>
+            <Button type="submit" variant={'outline'}>
+                Publish
+            </Button>
         </div>
     );
 }

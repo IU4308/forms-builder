@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { Answer, Question } from '@/lib/definitions';
 import { initialQuestions } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
-import { Form } from 'react-router';
 
 export default function CustomForm() {
     const [questions, setQuestions] = useState<Question[]>(initialQuestions);
@@ -25,12 +24,11 @@ export default function CustomForm() {
         );
     };
     return (
-        <Form action="/templates/1" className="flex flex-col gap-4 ">
+        <div className="flex flex-col gap-4 ">
             <TemplateToolbar onAddQuestion={handleAddQuestion} />
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                 <h1 className="">New Form</h1>
                 <h2>Description</h2>
-                {/* <img src="/test.png" className="object-contain" /> */}
             </div>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                 <h2>Credentials</h2>
@@ -68,6 +66,6 @@ export default function CustomForm() {
             {questions.map((field) => (
                 <CustomField key={field.id} {...field} />
             ))}
-        </Form>
+        </div>
     );
 }

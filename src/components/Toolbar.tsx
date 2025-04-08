@@ -13,11 +13,11 @@ export default function Toolbar({
     buttons,
 }: {
     isDisabled: boolean;
-    buttons: ToolbarButtons;
+    buttons?: ToolbarButtons;
 }) {
     return (
         <div className="sticky top-[53px] bg-background z-20 flex gap-2 py-2">
-            {buttons.map((button) => (
+            {buttons!.map((button) => (
                 <TooltipProvider key={button.label}>
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -29,10 +29,10 @@ export default function Toolbar({
                                 variant={button.variant ?? 'outline'}
                                 disabled={isDisabled}
                             >
+                                <span>{button?.icon}</span>
                                 <span className="hidden md:inline">
                                     {setSentenceCase(button.label)}
                                 </span>
-                                <span>{button.icon}</span>
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent>

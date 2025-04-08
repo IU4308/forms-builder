@@ -7,18 +7,27 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Button } from './ui/button';
 
 export default function FormSettings() {
     return (
-        <form className="flex flex-col gap-4  py-6 px-4 md:px-16">
+        <div className="flex flex-col gap-4  py-6 px-4 md:px-16">
             <div className="flex flex-col gap-2">
                 <Label htmlFor="title">Title</Label>
-                <Input id="title" className="!bg-background" />
+                <Input
+                    id="title"
+                    defaultValue={'New Form'}
+                    name="template-title"
+                    className="!bg-background"
+                />
             </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="description">Description</Label>
-                <Input id="description" className="!bg-background" />
+                <Input
+                    id="description"
+                    defaultValue={'No description'}
+                    name="template-description"
+                    className="!bg-background"
+                />
             </div>
             <div className="flex flex-col gap-4">
                 <Label>Topic</Label>
@@ -41,7 +50,6 @@ export default function FormSettings() {
                 <Label htmlFor="tags">Tags</Label>
                 <Input id="tags" className="!bg-background" />
             </div>
-            <Button className="my-4 ">Save</Button>
-        </form>
+        </div>
     );
 }

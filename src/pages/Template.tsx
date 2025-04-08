@@ -3,31 +3,38 @@ import FormSettings from '@/components/FormSettings';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import { Form } from 'react-router';
 
 export default function Template() {
     const [tabId, setTabId] = useState(0);
     return (
-        <div className="max-w-[768px] mx-auto">
+        <Form
+            action="/templates/1"
+            method="post"
+            className="max-w-[768px] mx-auto"
+        >
             <div className="mb-4 flex gap-2 justify-center">
                 <Button
+                    type="button"
                     variant={!tabId ? 'default' : 'ghost'}
                     onClick={() => setTabId(0)}
                 >
-                    Questions
+                    Settings
                 </Button>
                 <Button
+                    type="button"
                     variant={tabId ? 'default' : 'ghost'}
                     onClick={() => setTabId(1)}
                 >
-                    Settings
+                    Questions
                 </Button>
             </div>
             <div className={cn('visible', tabId !== 0 && 'hidden')}>
-                <CustomForm />
-            </div>
-            <div className={cn('visible', tabId !== 1 && 'hidden')}>
                 <FormSettings />
             </div>
-        </div>
+            <div className={cn('visible', tabId !== 1 && 'hidden')}>
+                <CustomForm />
+            </div>
+        </Form>
     );
 }

@@ -19,6 +19,7 @@ import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import Template from '@/pages/Template';
+import { templateAction } from '@/actions/template.actions';
 
 export const router = createBrowserRouter([
     {
@@ -49,9 +50,15 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/templates',
-                        children: [
-                            { path: ':templateId', Component: Template },
-                        ],
+                        Component: Template,
+                        action: templateAction,
+                        // children: [
+                        //     {
+                        //         path: ':templateId',
+                        //         Component: Template,
+                        //         action: templateAction,
+                        //     },
+                        // ],
                     },
                 ],
             },

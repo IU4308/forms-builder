@@ -1,5 +1,5 @@
 import Table from '@/components/Table';
-import { adminTableAttributes } from '@/lib/constants.tsx';
+import { adminButtons, adminTableAttributes } from '@/lib/constants.tsx';
 import { Form, useLoaderData } from 'react-router';
 import _ from 'lodash';
 import { User } from '@/lib/definitions';
@@ -13,8 +13,8 @@ export default function Admin() {
             <Table
                 data={users}
                 attributes={adminTableAttributes}
+                buttons={adminButtons}
                 renderCheckbox={true}
-                renderToolbar={true}
                 shouldSort={true}
             />
         </Form>

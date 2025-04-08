@@ -41,7 +41,7 @@ export type TableAttributes = {
 export type ToolbarButtons = {
     description: string;
     label: string;
-    icon: React.JSX.Element;
+    icon?: React.JSX.Element;
     variant?: ButtonVariant;
 }[];
 

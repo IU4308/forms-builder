@@ -10,7 +10,12 @@ import { cn, formatContent, getTableBody, setSentenceCase } from '@/lib/utils';
 import { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Cell, AdminTableLabel, TableAttributes } from '@/lib/definitions';
+import {
+    Cell,
+    AdminTableLabel,
+    TableAttributes,
+    ToolbarButtons,
+} from '@/lib/definitions';
 import { Button } from './ui/button';
 import {
     ChevronDownIcon,
@@ -19,7 +24,6 @@ import {
 } from 'lucide-react';
 import _ from 'lodash';
 import Toolbar from './Toolbar';
-import { adminButtons } from '@/lib/constants';
 
 const Header = ({
     body,
@@ -152,20 +156,21 @@ const Body = ({
 
 export default function Table({
     url,
-    // body,
     data,
     attributes,
+    buttons,
     slot,
     renderCheckbox = false,
-    renderToolbar = false,
+    // renderToolbar = false,
     shouldSort = false,
 }: {
     url?: string;
     data: { [key: string]: any }[];
     attributes: TableAttributes;
+    buttons?: ToolbarButtons;
     slot?: ReactNode;
     renderCheckbox?: boolean;
-    renderToolbar?: boolean;
+    // renderToolbar?: boolean;
     shouldSort?: boolean;
 }) {
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
@@ -198,10 +203,10 @@ export default function Table({
     return (
         <section>
             {slot}
-            {renderToolbar && (
+            {buttons && (
                 <Toolbar
                     isDisabled={selectedRows.length === 0}
-                    buttons={adminButtons}
+                    buttons={buttons}
                 />
             )}
             <T>

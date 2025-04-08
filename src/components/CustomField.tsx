@@ -13,12 +13,13 @@ export default function CustomField({
         isPresent && (
             <div className="bg-accent py-4 px-6 flex flex-col gap-4 rounded-sm">
                 <Input hidden name="state" value={Number(isPresent)} readOnly />
-                <Input hidden name="id" value={id} readOnly />
                 <Input
+                    name={`${id}-${title}`}
                     defaultValue={title}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 />
                 <Input
+                    name={`${id}-${description}`}
                     defaultValue={description}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 />
