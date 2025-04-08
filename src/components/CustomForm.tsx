@@ -1,15 +1,38 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import CustomField from './CustomField';
+import { useState } from 'react';
+import { Answer, Question } from '@/lib/definitions';
+import { initialQuestions } from '@/lib/constants';
+import TemplateToolbar from './TemplateToolbar';
+import { Form } from 'react-router';
 
 export default function CustomForm() {
+    const [questions, setQuestions] = useState<Question[]>(initialQuestions);
+
+    const handleAddQuestion = (type: Answer) => {
+        const newQuestion = questions.find(
+            (question) => question.type === type && !question.isPresent
+        );
+        setQuestions((prevQuestions) =>
+            prevQuestions.map((question) => {
+                if (question.id === newQuestion?.id) {
+                    return { ...question, isPresent: true };
+                } else {
+                    return question;
+                }
+            })
+        );
+    };
     return (
-        <div className="flex flex-col gap-4 ">
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
+        <Form action="/templates/1" className="flex flex-col gap-4 ">
+            <TemplateToolbar onAddQuestion={handleAddQuestion} />
+            <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                 <h1 className="">New Form</h1>
                 <h2>Description</h2>
                 {/* <img src="/test.png" className="object-contain" /> */}
             </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
+            <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                 <h2>Credentials</h2>
                 <div className="grid grid-cols sm:grid-cols-3 gap-6 py-2">
                     <div>
@@ -41,203 +64,10 @@ export default function CustomForm() {
                     </div>
                 </div>
             </div>
-            {/* Single-Line Questions */}
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    id="sl-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="single-line answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    id="sl-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="single-line answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    id="sl-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="single-line answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    id="sl-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="single-line answer"
-                />
-            </div>
 
-            {/* Multiple-Line Questions */}
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="ml-1">Question</Label>
-                <textarea
-                    id="ml-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="multiple-line answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="ml-1">Question</Label>
-                <textarea
-                    id="ml-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="multiple-line answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="ml-1">Question</Label>
-                <textarea
-                    id="ml-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="multiple-line answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="ml-1">Question</Label>
-                <textarea
-                    id="ml-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="multiple-line answer"
-                />
-            </div>
-            {/* Integer-value questions */}
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    type="number"
-                    id="int-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="integer-value answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    type="number"
-                    id="int-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="integer-value answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    type="number"
-                    id="int-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="integer-value answer"
-                />
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <Label htmlFor="sl-1">Question</Label>
-                <Input
-                    type="number"
-                    id="int-1"
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                    placeholder="integer-value answer"
-                />
-            </div>
-            {/* Checkbox question */}
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <div>Question</div>
-                <div className="flex gap-6">
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            name="bool-1"
-                            className="w-4"
-                            id="bool-1-true"
-                        />
-                        <Label htmlFor="bool-1-true">True</Label>
-                    </div>
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            name="bool-1"
-                            className="w-4"
-                            id="bool-1-false"
-                        />
-                        <Label htmlFor="bool-1-false">False</Label>
-                    </div>
-                </div>
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <div>Question</div>
-                <div className="flex gap-6">
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            name="bool-2"
-                            id="true"
-                            className="w-4"
-                        />
-                        <Label htmlFor="true">True</Label>
-                    </div>
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            className="w-4"
-                            name="bool-2"
-                            id="bool-2-false"
-                        />
-                        <Label htmlFor="bool-2-false">False</Label>
-                    </div>
-                </div>
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <div>Question</div>
-                <div className="flex gap-6">
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            name="bool-3"
-                            id="bool-3-true"
-                            className="w-4"
-                        />
-                        <Label htmlFor="bool-3-true">True</Label>
-                    </div>
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            className="w-4"
-                            name="bool-3"
-                            id="bool-3-false"
-                        />
-                        <Label htmlFor="bool-3-false">False</Label>
-                    </div>
-                </div>
-            </div>
-            <div className="bg-accent py-4 px-6 flex flex-col gap-2">
-                <div>Question</div>
-                <div className="flex gap-6">
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            name="bool-4"
-                            id="bool-4-true"
-                            className="w-4"
-                        />
-                        <Label htmlFor="bool-4-true">True</Label>
-                    </div>
-                    <div className="flex gap-2">
-                        <Input
-                            type="radio"
-                            className="w-4"
-                            name="bool-4"
-                            id="bool-4-false"
-                        />
-                        <Label htmlFor="bool-4-false">False</Label>
-                    </div>
-                </div>
-            </div>
-        </div>
+            {questions.map((field) => (
+                <CustomField key={field.id} {...field} />
+            ))}
+        </Form>
     );
 }

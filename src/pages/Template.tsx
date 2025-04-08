@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 export default function Template() {
-    const [tabId, setTabId] = useState(1);
+    const [tabId, setTabId] = useState(0);
     return (
         <div className="max-w-[768px] mx-auto">
             <div className="mb-4 flex gap-2 justify-center">

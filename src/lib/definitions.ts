@@ -76,3 +76,17 @@ export type Flash = {
     message: string;
     type: 'SUCCESS' | 'ERROR';
 } | null;
+
+export type Answer =
+    | 'single-line'
+    | 'multiple-line'
+    | 'integer-value'
+    | 'checkbox';
+
+export type Question = {
+    id: number;
+    isPresent: boolean;
+    title: string;
+    description: string;
+    type: Answer;
+};

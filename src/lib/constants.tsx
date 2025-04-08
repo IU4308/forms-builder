@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import { ButtonVariant } from './definitions';
+import { ButtonVariant, Question } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
 
@@ -261,4 +261,119 @@ export const tags = [
     { value: 'charity', count: 1 },
     { value: 'fundraising', count: 1 },
     { value: 'non-profit', count: 1 },
+];
+
+export const initialQuestions: Question[] = [
+    {
+        id: 1,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'single-line',
+    },
+    {
+        id: 2,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'single-line',
+    },
+    {
+        id: 3,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'single-line',
+    },
+    {
+        id: 4,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'single-line',
+    },
+    {
+        id: 5,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'multiple-line',
+    },
+    {
+        id: 6,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'multiple-line',
+    },
+    {
+        id: 7,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'multiple-line',
+    },
+    {
+        id: 8,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'multiple-line',
+    },
+    {
+        id: 9,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'integer-value',
+    },
+    {
+        id: 10,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'integer-value',
+    },
+    {
+        id: 11,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'integer-value',
+    },
+    {
+        id: 12,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'integer-value',
+    },
+    {
+        id: 13,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'checkbox',
+    },
+    {
+        id: 14,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'checkbox',
+    },
+    {
+        id: 15,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'checkbox',
+    },
+    {
+        id: 16,
+        isPresent: false,
+        title: 'No title',
+        description: 'No description',
+        type: 'checkbox',
+    },
 ];
