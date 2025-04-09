@@ -14,7 +14,7 @@ import {
     Cell,
     AdminTableLabel,
     TableAttributes,
-    ToolbarButtons,
+    ToolbarButton,
 } from '@/lib/definitions';
 import { Button } from './ui/button';
 import {
@@ -161,16 +161,14 @@ export default function Table({
     buttons,
     slot,
     renderCheckbox = false,
-    // renderToolbar = false,
     shouldSort = false,
 }: {
     url?: string;
     data: { [key: string]: any }[];
     attributes: TableAttributes;
-    buttons?: ToolbarButtons;
+    buttons?: ToolbarButton[];
     slot?: ReactNode;
     renderCheckbox?: boolean;
-    // renderToolbar?: boolean;
     shouldSort?: boolean;
 }) {
     const [selectedRows, setSelectedRows] = useState<number[]>([]);

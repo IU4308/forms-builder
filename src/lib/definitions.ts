@@ -38,12 +38,15 @@ export type TableAttributes = {
     shouldRender?: boolean;
 }[];
 
-export type ToolbarButtons = {
+export type ToolbarButton = {
+    type?: 'button' | 'submit' | 'reset';
     description: string;
     label: string;
     icon?: React.JSX.Element;
     variant?: ButtonVariant;
-}[];
+    canBeDisabled?: boolean;
+    url?: string;
+};
 
 // export type TableAttributes = typeof adminTableAttributes;
 

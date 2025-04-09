@@ -1,4 +1,4 @@
-import { Question, ToolbarButtons } from './definitions';
+import { Question, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
 
@@ -86,10 +86,13 @@ export const homeTableAttributes = [
     },
 ];
 
-export const workspaceButtons: ToolbarButtons = [
+export const workspaceButtons: ToolbarButton[] = [
     {
         label: 'create',
         description: 'Create a template',
+        canBeDisabled: false,
+        type: 'button',
+        url: '/templates',
     },
     {
         label: 'delete',
@@ -98,7 +101,7 @@ export const workspaceButtons: ToolbarButtons = [
     },
 ];
 
-export const adminButtons: ToolbarButtons = [
+export const adminButtons: ToolbarButton[] = [
     {
         label: 'block',
         description: 'Block user',
