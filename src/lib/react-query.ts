@@ -19,3 +19,13 @@ export const getAllUsers = async (): Promise<User[]> => {
     });
     return users;
 };
+
+export const getTemplate = async (templateId: string | undefined) => {
+    if (templateId === undefined) return null;
+    const template = await queryClient.fetchQuery({
+        queryKey: ['template'],
+        queryFn: () =>
+            api.get(`/templates/${templateId}`).then((res) => res.data),
+    });
+    return template;
+};

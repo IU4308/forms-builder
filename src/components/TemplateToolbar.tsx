@@ -22,7 +22,7 @@ const Type = ({
     );
 };
 
-const types = ['single_line', 'multiple_line', 'integer_value', 'checkbox'];
+const types = ['singleLine', 'multipleLine', 'integerValue', 'checkbox'];
 
 export default function TemplateToolbar({
     onAddQuestion,

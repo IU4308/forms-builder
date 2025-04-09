@@ -1,7 +1,8 @@
-import { redirect } from 'react-router';
-import { getAllUsers, getCurrentUser } from './react-query';
+import { LoaderFunctionArgs, redirect } from 'react-router';
+import { getAllUsers, getCurrentUser, getTemplate } from './react-query';
 import { api } from '@/api/api';
 import { getFlash, setFlash } from './utils';
+import * as changeCase from 'change-case';
 
 export const appLoader = async () => {
     return { flash: getFlash() };
@@ -33,13 +34,33 @@ export const adminLoader = async () => {
     }
 };
 
-export const templateLoader = async () => {
+export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
     try {
         const currentUser = await getCurrentUser();
         if (!currentUser) return redirect('/');
-        return { currentUser, mode: 'template' };
+
+        const { templateId } = params;
+        const template = await getTemplate(templateId);
+        let mode = 'template';
+        if (template !== undefined && templateId !== undefined) {
+            mode =
+                template?.creatorId === currentUser.userId ||
+                currentUser.isAdmin
+                    ? 'template'
+                    : 'form';
+        }
+        console.log(template);
+        console.log(Object.keys(template));
+        console.log(changeCase.kebabCase('singleLine1Question').split('-'));
+
+        return {
+            currentUser,
+            mode,
+            template,
+        };
     } catch (error: any) {
         console.log(error);
+        if (error.status === 404) throw new Error('Page Not Found');
         throw new Error('Server error');
     }
 };

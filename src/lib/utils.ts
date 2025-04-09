@@ -3,12 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants.tsx';
-import {
-    QuestionType,
-    Cell,
-    CurrentUser,
-    TableAttributes,
-} from './definitions';
+import { Cell, CurrentUser, TableAttributes } from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -93,6 +88,6 @@ export const getFlash = () => {
     return { message, type };
 };
 
-export const prefixName = (name: string, type: QuestionType, id: number) => {
-    return changeCase.camelCase(`${type}${id % 4 === 0 ? 4 : id % 4}_${name}`);
+export const getQuestionType = (id: string) => {
+    return id.slice(0, id.length - 1);
 };

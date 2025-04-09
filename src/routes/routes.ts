@@ -54,13 +54,14 @@ export const router = createBrowserRouter([
                         Component: Template,
                         action: templateAction,
                         loader: templateLoader,
-                        // children: [
-                        //     {
-                        //         path: ':templateId',
-                        //         Component: Template,
-                        //         action: templateAction,
-                        //     },
-                        // ],
+                        children: [
+                            {
+                                path: ':templateId',
+                                Component: Template,
+                                action: templateAction,
+                                loader: templateLoader,
+                            },
+                        ],
                     },
                 ],
             },

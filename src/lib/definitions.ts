@@ -81,17 +81,17 @@ export type Flash = {
 } | null;
 
 export type QuestionType =
-    | 'single_line'
-    | 'multiple_line'
-    | 'integer_value'
+    | 'singleLine'
+    | 'multipleLine'
+    | 'integerValue'
     | 'checkbox';
 
 export type Question = {
-    id: number;
+    id: string;
     isPresent: boolean;
-    title: string;
+    question: string;
     description: string;
-    type: QuestionType;
+    // type: QuestionType;
 };
 
 export type InterfaceMode = 'template' | 'form';

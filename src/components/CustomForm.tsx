@@ -5,13 +5,15 @@ import { useState } from 'react';
 import { QuestionType, Question, InterfaceMode } from '@/lib/definitions';
 import { initialQuestions } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
+import { getQuestionType } from '@/lib/utils';
 
 export default function CustomForm({ mode }: { mode: InterfaceMode }) {
     const [questions, setQuestions] = useState<Question[]>(initialQuestions);
 
     const handleAddQuestion = (type: QuestionType) => {
         const newQuestion = questions.find(
-            (question) => question.type === type && !question.isPresent
+            (question) =>
+                getQuestionType(question.id) === type && !question.isPresent
         );
         setQuestions((prevQuestions) =>
             prevQuestions.map((question) => {
