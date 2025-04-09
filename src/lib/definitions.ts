@@ -93,3 +93,5 @@ export type Question = {
     description: string;
     type: QuestionType;
 };
+
+export type InterfaceMode = 'template' | 'form';

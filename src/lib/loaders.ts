@@ -28,6 +28,7 @@ export const adminLoader = async () => {
         const users = await getAllUsers();
         return { currentUser, users };
     } catch (error: any) {
+        console.log(error);
         throw new Error('Server error');
     }
 };
@@ -36,8 +37,9 @@ export const templateLoader = async () => {
     try {
         const currentUser = await getCurrentUser();
         if (!currentUser) return redirect('/');
-        return { currentUser };
+        return { currentUser, mode: 'template' };
     } catch (error: any) {
+        console.log(error);
         throw new Error('Server error');
     }
 };
@@ -47,6 +49,7 @@ export const logoutLoader = async () => {
         await api.post('/auth/logout');
         return redirect('/login');
     } catch (error: any) {
+        console.log(error);
         throw new Error('Server error');
     }
 };
