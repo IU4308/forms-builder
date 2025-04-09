@@ -46,8 +46,8 @@ export const router = createBrowserRouter([
                         HydrateFallback: Fallback,
                     },
                     {
-                        path: '/workspaces',
-                        children: [{ path: ':userId', Component: Workspace }],
+                        path: '/workspace',
+                        Component: Workspace,
                     },
                     {
                         path: '/templates',

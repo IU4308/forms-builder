@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { Form, useLoaderData } from 'react-router';
+import { Form, useLoaderData, useParams } from 'react-router';
 
 const TabButtons = ({
     tabId,
@@ -34,6 +34,7 @@ const TabButtons = ({
 };
 
 export default function Template() {
+    const { templateId } = useParams();
     const [tabId, setTabId] = useState(1);
     const { currentUser, mode } = useLoaderData();
     return (
@@ -52,7 +53,11 @@ export default function Template() {
                 <>
                     <div className="flex justify-center">
                         <Button type="submit" variant={'outline'}>
-                            Publish Template
+                            <span>
+                                {templateId === undefined
+                                    ? 'Publish Template'
+                                    : 'Save changes'}
+                            </span>
                         </Button>
                     </div>
                     <TabButtons tabId={tabId} setTabId={setTabId} />

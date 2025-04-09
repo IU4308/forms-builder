@@ -9,7 +9,7 @@ export const navMenu = [
     },
     {
         title: 'My Workspace',
-        url: '/workspaces/1',
+        url: '/workspace',
     },
     {
         title: 'Login',
