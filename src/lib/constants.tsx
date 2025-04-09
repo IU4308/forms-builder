@@ -1,6 +1,6 @@
 import { Question, QuestionType, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
-import { IoIosAdd, IoIosAddCircleOutline } from 'react-icons/io';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
 
 export const navMenu = [
