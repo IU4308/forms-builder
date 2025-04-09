@@ -29,3 +29,12 @@ export const getTemplate = async (templateId: string | undefined) => {
     });
     return template;
 };
+
+export const getUserTemplates = async (userId: string) => {
+    const templates = await queryClient.fetchQuery({
+        queryKey: ['templates'],
+        queryFn: () =>
+            api.get(`/templates/users/${userId}`).then((res) => res.data),
+    });
+    return templates;
+};

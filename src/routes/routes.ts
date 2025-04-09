@@ -14,6 +14,7 @@ import {
     homeLoader,
     logoutLoader,
     templateLoader,
+    workspaceLoader,
 } from '@/lib/loaders';
 import { adminAction } from '@/actions/admin.actions';
 import AppLayout from '@/layouts/AppLayout';
@@ -48,6 +49,7 @@ export const router = createBrowserRouter([
                     {
                         path: '/workspace',
                         Component: Workspace,
+                        loader: workspaceLoader,
                     },
                     {
                         path: '/templates',

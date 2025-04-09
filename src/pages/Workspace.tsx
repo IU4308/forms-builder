@@ -2,13 +2,14 @@ import Table from '@/components/Table';
 import { Button } from '@/components/ui/button';
 import UserForms from '@/components/UserForms';
 import {
-    templates,
     templatesTableAttributes,
     workspaceButtons,
 } from '@/lib/constants.tsx';
 import { useState } from 'react';
+import { useLoaderData } from 'react-router';
 
 export default function Workspace() {
+    const { templates } = useLoaderData();
     const [tabId, setTabId] = useState(0);
     return (
         <div>
@@ -32,7 +33,8 @@ export default function Workspace() {
                     attributes={templatesTableAttributes}
                     buttons={workspaceButtons}
                     renderCheckbox={true}
-                    url="/templates/1"
+                    shouldSort={true}
+                    url="/templates"
                 />
             )}
             {tabId === 1 && <UserForms />}

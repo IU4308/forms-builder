@@ -1,5 +1,10 @@
 import { LoaderFunctionArgs, redirect } from 'react-router';
-import { getAllUsers, getCurrentUser, getTemplate } from './react-query';
+import {
+    getAllUsers,
+    getCurrentUser,
+    getTemplate,
+    getUserTemplates,
+} from './react-query';
 import { api } from '@/api/api';
 import { getFlash, getQuestions, setFlash } from './utils';
 
@@ -16,6 +21,20 @@ export const homeLoader = async () => {
         }
         return { currentUser };
     } catch (error: any) {
+        console.log(error);
+        throw new Error('Server error');
+    }
+};
+
+export const workspaceLoader = async () => {
+    console.log('Workspace loader');
+    try {
+        const currentUser = await getCurrentUser();
+        if (!currentUser) return redirect('/');
+        const templates = await getUserTemplates(currentUser.userId);
+        console.log(templates);
+        return { templates };
+    } catch (error) {
         console.log(error);
         throw new Error('Server error');
     }

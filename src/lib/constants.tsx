@@ -1,5 +1,6 @@
 import { Question, QuestionType, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
+import { IoIosAdd, IoIosAddCircleOutline } from 'react-icons/io';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
 
 export const navMenu = [
@@ -50,24 +51,19 @@ export const adminTableAttributes = [
     },
 ];
 
-// export type TableAttributes = typeof adminTableAttributes;
-
 export const templatesTableAttributes = [
     {
+        label: 'id',
+        shouldRender: false,
+    },
+    {
         label: 'title',
-        className: '',
     },
     {
-        label: 'created_at',
-        className: '',
+        label: 'description',
     },
     {
-        label: 'updated_at',
-        className: '',
-    },
-    {
-        label: 'submissions',
-        className: 'text-right',
+        label: 'createdAt',
     },
 ];
 
@@ -93,11 +89,13 @@ export const workspaceButtons: ToolbarButton[] = [
         canBeDisabled: false,
         type: 'button',
         url: '/templates',
+        icon: <IoIosAddCircleOutline />,
     },
     {
         label: 'delete',
         description: 'Delete a template',
         variant: 'destructive',
+        icon: <FiTrash />,
     },
 ];
 

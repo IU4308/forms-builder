@@ -26,6 +26,7 @@ import _ from 'lodash';
 import Toolbar from './Toolbar';
 
 const Header = ({
+    attributes,
     body,
     renderCheckbox,
     allSelected,
@@ -34,6 +35,7 @@ const Header = ({
     handleChangeSorter,
     isDescending,
 }: {
+    attributes: TableAttributes;
     body: Cell[][];
     renderCheckbox?: boolean;
     allSelected?: boolean;
@@ -45,7 +47,7 @@ const Header = ({
     return (
         <TableHeader>
             <TableRow className="hover:bg-background">
-                {renderCheckbox && (
+                {renderCheckbox && body.length !== 0 && (
                     <TableHead>
                         <Checkbox
                             className="w-5 h-5"
@@ -58,9 +60,9 @@ const Header = ({
                         />
                     </TableHead>
                 )}
-                {body[0].map(
+                {attributes.map(
                     (cell, index) =>
-                        cell.shouldRender && (
+                        (cell.shouldRender ?? true) && (
                             <TableHead key={index} className={cell.className}>
                                 {sorter ? (
                                     <Button
@@ -132,12 +134,12 @@ const Body = ({
                                     key={cell.label}
                                     className={cn(
                                         cell.className,
-                                        url ? 'p-0' : 'py-4 px-5'
+                                        url ? 'p-0 px-3' : 'py-4 px-5'
                                     )}
                                 >
                                     {url ? (
                                         <Link
-                                            to={url}
+                                            to={url + '/' + row[0].content}
                                             className=" block px-2 py-4"
                                         >
                                             {formatContent(cell.content)}
@@ -207,8 +209,10 @@ export default function Table({
                     buttons={buttons}
                 />
             )}
+
             <T>
                 <Header
+                    attributes={attributes}
                     body={body}
                     renderCheckbox={renderCheckbox}
                     allSelected={allSelected}
@@ -217,13 +221,15 @@ export default function Table({
                     handleChangeSorter={handleChangeSorter}
                     isDescending={isDescending}
                 />
-                <Body
-                    body={body}
-                    url={url}
-                    renderCheckbox={renderCheckbox}
-                    handleSelect={handleSelect}
-                    selectedRows={selectedRows}
-                />
+                {data.length !== 0 && (
+                    <Body
+                        body={body}
+                        url={url}
+                        renderCheckbox={renderCheckbox}
+                        handleSelect={handleSelect}
+                        selectedRows={selectedRows}
+                    />
+                )}
             </T>
         </section>
     );
