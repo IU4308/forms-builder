@@ -7,15 +7,17 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { useLoaderData } from 'react-router';
 
 export default function FormSettings() {
+    const { template } = useLoaderData();
     return (
         <div className="flex flex-col gap-4  py-6 px-4 md:px-16">
             <div className="flex flex-col gap-2">
                 <Label htmlFor="title">Title</Label>
                 <Input
                     id="title"
-                    defaultValue={'New Form'}
+                    defaultValue={template?.title ?? 'New Form'}
                     name="title"
                     className="!bg-background"
                 />
@@ -24,7 +26,7 @@ export default function FormSettings() {
                 <Label htmlFor="description">Description</Label>
                 <Input
                     id="description"
-                    defaultValue={'No description'}
+                    defaultValue={template?.description ?? 'No description'}
                     name="description"
                     className="!bg-background"
                 />

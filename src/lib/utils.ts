@@ -2,8 +2,14 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
-import { navMenu } from './constants.tsx';
-import { Cell, CurrentUser, TableAttributes } from './definitions';
+import { navMenu, questionTypes } from './constants.tsx';
+import {
+    Cell,
+    CurrentUser,
+    Question,
+    TableAttributes,
+    TemplateType,
+} from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -90,4 +96,23 @@ export const getFlash = () => {
 
 export const getQuestionType = (id: string) => {
     return id.slice(0, id.length - 1);
+};
+
+export const getQuestions = (template: TemplateType | null) => {
+    if (template === null) return null;
+    let body: Question[] = [];
+    questionTypes.forEach((type) => {
+        for (let i = 1; i <= 4; i++) {
+            const key = (suffix: string) =>
+                (type + i + suffix) as keyof TemplateType;
+            body.push({
+                id: type + i,
+                isPresent: template[key('State')] as boolean,
+                question: template[key('Question')] as string | null,
+                description: template[key('Description')] as string | null,
+            });
+        }
+    });
+
+    return body;
 };

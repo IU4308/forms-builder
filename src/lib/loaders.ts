@@ -1,8 +1,7 @@
 import { LoaderFunctionArgs, redirect } from 'react-router';
 import { getAllUsers, getCurrentUser, getTemplate } from './react-query';
 import { api } from '@/api/api';
-import { getFlash, setFlash } from './utils';
-import * as changeCase from 'change-case';
+import { getFlash, getQuestions, setFlash } from './utils';
 
 export const appLoader = async () => {
     return { flash: getFlash() };
@@ -42,21 +41,18 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         const { templateId } = params;
         const template = await getTemplate(templateId);
         let mode = 'template';
-        if (template !== undefined && templateId !== undefined) {
+        if (templateId !== undefined) {
             mode =
-                template?.creatorId === currentUser.userId ||
-                currentUser.isAdmin
+                template.creatorId === currentUser.userId || currentUser.isAdmin
                     ? 'template'
                     : 'form';
         }
-        console.log(template);
-        console.log(Object.keys(template));
-        console.log(changeCase.kebabCase('singleLine1Question').split('-'));
-
+        const templateQuestions = getQuestions(template);
         return {
             currentUser,
             mode,
             template,
+            templateQuestions,
         };
     } catch (error: any) {
         console.log(error);

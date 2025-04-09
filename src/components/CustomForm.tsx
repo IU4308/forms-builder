@@ -6,9 +6,13 @@ import { QuestionType, Question, InterfaceMode } from '@/lib/definitions';
 import { initialQuestions } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
 import { getQuestionType } from '@/lib/utils';
+import { useLoaderData } from 'react-router';
 
 export default function CustomForm({ mode }: { mode: InterfaceMode }) {
-    const [questions, setQuestions] = useState<Question[]>(initialQuestions);
+    const { templateQuestions } = useLoaderData();
+    const [questions, setQuestions] = useState<Question[]>(
+        templateQuestions ?? initialQuestions
+    );
 
     const handleAddQuestion = (type: QuestionType) => {
         const newQuestion = questions.find(

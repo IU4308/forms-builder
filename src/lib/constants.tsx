@@ -1,4 +1,4 @@
-import { Question, ToolbarButton } from './definitions';
+import { Question, QuestionType, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
 
@@ -270,6 +270,13 @@ export const tags = [
     { value: 'charity', count: 1 },
     { value: 'fundraising', count: 1 },
     { value: 'non-profit', count: 1 },
+];
+
+export const questionTypes: QuestionType[] = [
+    'singleLine',
+    'multipleLine',
+    'integerValue',
+    'checkbox',
 ];
 
 export const initialQuestions: Question[] = [

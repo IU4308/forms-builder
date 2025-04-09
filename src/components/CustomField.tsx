@@ -29,13 +29,13 @@ export default function CustomField({
                 />
                 <Input
                     name={`${id}Question`}
-                    defaultValue={question}
+                    defaultValue={question ?? 'No title'}
                     className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                     disabled={mode === 'form'}
                 />
                 <Input
                     name={`${id}Description`}
-                    defaultValue={description}
+                    defaultValue={description ?? 'No description'}
                     className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                     disabled={mode === 'form'}
                 />

@@ -89,9 +89,88 @@ export type QuestionType =
 export type Question = {
     id: string;
     isPresent: boolean;
-    question: string;
-    description: string;
+    question: string | null;
+    description: string | null;
     // type: QuestionType;
 };
 
 export type InterfaceMode = 'template' | 'form';
+
+export type TemplateType = {
+    id: string;
+    creatorId: string;
+
+    title: string;
+    description: string;
+    imageUrl: string | null;
+
+    createdAt: Date;
+
+    // Single Line Fields
+    singleLine1State: boolean;
+    singleLine1Question: string | null;
+    singleLine1Description: string | null;
+
+    singleLine2State: boolean;
+    singleLine2Question: string | null;
+    singleLine2Description: string | null;
+
+    singleLine3State: boolean;
+    singleLine3Question: string | null;
+    singleLine3Description: string | null;
+
+    singleLine4State: boolean;
+    singleLine4Question: string | null;
+    singleLine4Description: string | null;
+
+    // Multiple Line Fields
+    multipleLine1State: boolean;
+    multipleLine1Question: string | null;
+    multipleLine1Description: string | null;
+
+    multipleLine2State: boolean;
+    multipleLine2Question: string | null;
+    multipleLine2Description: string | null;
+
+    multipleLine3State: boolean;
+    multipleLine3Question: string | null;
+    multipleLine3Description: string | null;
+
+    multipleLine4State: boolean;
+    multipleLine4Question: string | null;
+    multipleLine4Description: string | null;
+
+    // Integer Value Fields
+    integerValue1State: boolean;
+    integerValue1Question: string | null;
+    integerValue1Description: string | null;
+
+    integerValue2State: boolean;
+    integerValue2Question: string | null;
+    integerValue2Description: string | null;
+
+    integerValue3State: boolean;
+    integerValue3Question: string | null;
+    integerValue3Description: string | null;
+
+    integerValue4State: boolean;
+    integerValue4Question: string | null;
+    integerValue4Description: string | null;
+
+    // Checkbox Fields
+    checkbox1State: boolean;
+    checkbox1Question: string | null;
+    checkbox1Description: string | null;
+
+    checkbox2State: boolean;
+    checkbox2Question: string | null;
+    checkbox2Description: string | null;
+
+    checkbox3State: boolean;
+    checkbox3Question: string | null;
+    checkbox3Description: string | null;
+
+    checkbox4State: boolean;
+    checkbox4Question: string | null;
+    checkbox4Description: string | null;
+};
