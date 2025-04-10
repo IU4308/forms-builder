@@ -52,14 +52,27 @@ export default function Template() {
             <div className="max-w-[768px] mx-auto flex flex-col gap-4">
                 <Input
                     hidden
+                    readOnly
                     name="creatorId"
                     value={currentUser.userId}
-                    readOnly
                 />
+                {mode === 'form' && (
+                    <Input
+                        hidden
+                        readOnly
+                        name="templateId"
+                        value={templateId}
+                    />
+                )}
                 {mode === 'template' && (
                     <>
                         <div className="flex justify-center">
-                            <Button type="submit" variant={'outline'}>
+                            <Button
+                                type="submit"
+                                variant={'outline'}
+                                name="action"
+                                value={'submitTemplate'}
+                            >
                                 <span>
                                     {templateId === undefined
                                         ? 'Publish Template'
@@ -73,12 +86,26 @@ export default function Template() {
                         </div>
                     </>
                 )}
-                <div className={cn('visible', tabId !== 1 && 'hidden')}>
+                <div
+                    className={cn(
+                        'visible flex flex-col gap-4',
+                        tabId !== 1 && 'hidden'
+                    )}
+                >
                     <CustomForm
                         mode={mode}
                         activeId={activeId}
                         setActiveId={setActiveId}
                     />
+                    <div>
+                        <Button
+                            type="submit"
+                            name="action"
+                            value={'submitForm'}
+                        >
+                            Submit
+                        </Button>
+                    </div>
                 </div>
             </div>
         </Form>

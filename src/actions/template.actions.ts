@@ -24,11 +24,19 @@ export const updateTemplate = async ({
     try {
         const formData = await request.formData();
         const { templateId } = params;
-        const response = await api.put(
-            `/templates/${templateId}`,
-            Object.fromEntries(formData)
-        );
+        let response;
+        // const data = Object.fromEntries(formData);
+        // console.log(data);
+        if (formData.get('action') === 'submitTemplate') {
+            response = await api.put(
+                `/templates/${templateId}`,
+                Object.fromEntries(formData)
+            );
+        } else {
+            response = await api.post(`/forms`, Object.fromEntries(formData));
+        }
         setFlash(response.data.message);
+        // return redirect(`/forms/${response.data.formId}`);
     } catch (error) {
         console.log(error);
         throw new Error('Server error');

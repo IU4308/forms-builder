@@ -17,7 +17,7 @@ export default function CustomForm({
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { templateQuestions } = useLoaderData();
+    const { currentUser, template, templateQuestions } = useLoaderData();
     const [questions, setQuestions] = useState<Question[]>(
         templateQuestions ?? initialQuestions
     );
@@ -61,8 +61,8 @@ export default function CustomForm({
             {mode === 'form' && (
                 <>
                     <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
-                        <h1 className="">New Form</h1>
-                        <h2>Description</h2>
+                        <h1 className="">{template.title}</h1>
+                        <h2>{template.description}</h2>
                     </div>
                     <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                         <h2>Credentials</h2>
@@ -72,7 +72,7 @@ export default function CustomForm({
                                 <Input
                                     id="name"
                                     className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                                    placeholder={'John Doe'}
+                                    value={currentUser.name}
                                     disabled={true}
                                 />
                             </div>
@@ -81,7 +81,7 @@ export default function CustomForm({
                                 <Input
                                     id="email"
                                     className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                                    placeholder={'john@email.com'}
+                                    value={currentUser.email}
                                     disabled
                                 />
                             </div>
