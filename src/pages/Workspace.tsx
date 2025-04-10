@@ -6,13 +6,13 @@ import {
     workspaceButtons,
 } from '@/lib/constants.tsx';
 import { useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { Form, useLoaderData } from 'react-router';
 
 export default function Workspace() {
     const { templates } = useLoaderData();
     const [tabId, setTabId] = useState(0);
     return (
-        <div>
+        <Form action="/workspace" method="post">
             <div className="mb-4 flex gap-2 justify-center">
                 <Button
                     variant={!tabId ? 'default' : 'ghost'}
@@ -38,6 +38,6 @@ export default function Workspace() {
                 />
             )}
             {tabId === 1 && <UserForms />}
-        </div>
+        </Form>
     );
 }

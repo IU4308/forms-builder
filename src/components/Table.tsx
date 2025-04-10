@@ -51,7 +51,7 @@ const Header = ({
                     <TableHead>
                         <Checkbox
                             className="w-5 h-5"
-                            name="allUserIds"
+                            name="allIds"
                             value={body.map(
                                 (item) => item[0].content as string
                             )}
@@ -119,7 +119,7 @@ const Body = ({
                     {renderCheckbox && (
                         <TableCell>
                             <Checkbox
-                                name="userId"
+                                name="id"
                                 className="w-5 h-5"
                                 value={row[0].content as string}
                                 checked={selectedRows?.includes(index)}

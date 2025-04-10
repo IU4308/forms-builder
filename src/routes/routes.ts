@@ -22,6 +22,7 @@ import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import Template from '@/pages/Template';
 import { publishTemplate, updateTemplate } from '@/actions/template.actions';
+import { deleteTemplates } from '@/actions/workspace.actions';
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
                     {
                         path: '/workspace',
                         Component: Workspace,
+                        action: deleteTemplates,
                         loader: workspaceLoader,
                     },
                     {
