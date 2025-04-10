@@ -27,12 +27,10 @@ export const homeLoader = async () => {
 };
 
 export const workspaceLoader = async () => {
-    console.log('Workspace loader');
     try {
         const currentUser = await getCurrentUser();
         if (!currentUser) return redirect('/');
         const templates = await getUserTemplates(currentUser.userId);
-        console.log(templates);
         return { templates };
     } catch (error) {
         console.log(error);

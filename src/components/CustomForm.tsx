@@ -21,7 +21,6 @@ export default function CustomForm({
     const [questions, setQuestions] = useState<Question[]>(
         templateQuestions ?? initialQuestions
     );
-    // const [activeId, setActiveId] = useState('');
 
     const handleAddQuestion = (type: QuestionType) => {
         const newQuestion = questions.find(
@@ -46,8 +45,6 @@ export default function CustomForm({
                     return {
                         ...question,
                         isPresent: false,
-                        question: 'No title',
-                        description: 'No description',
                     };
                 } else {
                     return question;
@@ -55,8 +52,6 @@ export default function CustomForm({
             })
         );
     };
-
-    console.log(questions);
 
     return (
         <div className="flex flex-col gap-4 ">

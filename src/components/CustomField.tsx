@@ -35,7 +35,7 @@ export default function CustomField({
                 !isPresent && 'hidden'
             )}
         >
-            {activeId === id && (
+            {mode === 'template' && activeId === id && (
                 <div>
                     <Button
                         type="button"
