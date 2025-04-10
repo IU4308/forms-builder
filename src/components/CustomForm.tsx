@@ -8,11 +8,20 @@ import TemplateToolbar from './TemplateToolbar';
 import { getQuestionType } from '@/lib/utils';
 import { useLoaderData } from 'react-router';
 
-export default function CustomForm({ mode }: { mode: InterfaceMode }) {
+export default function CustomForm({
+    mode,
+    activeId,
+    setActiveId,
+}: {
+    mode: InterfaceMode;
+    activeId: string;
+    setActiveId: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const { templateQuestions } = useLoaderData();
     const [questions, setQuestions] = useState<Question[]>(
         templateQuestions ?? initialQuestions
     );
+    // const [activeId, setActiveId] = useState('');
 
     const handleAddQuestion = (type: QuestionType) => {
         const newQuestion = questions.find(
@@ -29,6 +38,26 @@ export default function CustomForm({ mode }: { mode: InterfaceMode }) {
             })
         );
     };
+
+    const handleDeleteQuestion = (id: string) => {
+        setQuestions((prevQuestions) =>
+            prevQuestions.map((question) => {
+                if (question.id === id) {
+                    return {
+                        ...question,
+                        isPresent: false,
+                        question: 'No title',
+                        description: 'No description',
+                    };
+                } else {
+                    return question;
+                }
+            })
+        );
+    };
+
+    console.log(questions);
+
     return (
         <div className="flex flex-col gap-4 ">
             {mode === 'template' && (
@@ -76,7 +105,14 @@ export default function CustomForm({ mode }: { mode: InterfaceMode }) {
             )}
 
             {questions.map((field) => (
-                <CustomField mode={mode} key={field.id} {...field} />
+                <CustomField
+                    key={field.id}
+                    mode={mode}
+                    {...field}
+                    activeId={activeId}
+                    setActiveId={setActiveId}
+                    onDeleteQuestion={handleDeleteQuestion}
+                />
             ))}
         </div>
     );

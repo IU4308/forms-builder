@@ -21,8 +21,11 @@ import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import Template from '@/pages/Template';
-import { publishTemplate, updateTemplate } from '@/actions/template.actions';
-import { deleteTemplates } from '@/actions/workspace.actions';
+import {
+    publishTemplate,
+    updateTemplate,
+    deleteTemplates,
+} from '@/actions/template.actions';
 
 export const router = createBrowserRouter([
     {

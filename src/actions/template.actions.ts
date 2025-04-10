@@ -23,15 +23,27 @@ export const updateTemplate = async ({
 }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
-        console.log(Object.fromEntries(formData));
         const { templateId } = params;
-        console.log(params.templateId);
         const response = await api.put(
             `/templates/${templateId}`,
             Object.fromEntries(formData)
         );
         setFlash(response.data.message);
     } catch (error) {
+        console.log(error);
+        throw new Error('Server error');
+    }
+};
+
+export const deleteTemplates = async ({ request }: { request: Request }) => {
+    try {
+        const formData = await request.formData();
+        const selectedIds =
+            (formData.get('allIds') as string)?.split(',') ??
+            formData.getAll('id');
+        const response = await api.post(`/templates/delete`, selectedIds);
+        setFlash(response.data.message);
+    } catch (error: any) {
         console.log(error);
         throw new Error('Server error');
     }

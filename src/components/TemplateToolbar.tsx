@@ -30,7 +30,7 @@ export default function TemplateToolbar({
     onAddQuestion: (type: QuestionType) => void;
 }) {
     return (
-        <div className="sticky top-[53px] bg-background z-20">
+        <div className="sticky top-[53px] bg-background z-20 flex gap-2">
             <DropdownMenu>
                 <DropdownMenuTrigger className="border px-4 py-1 bg-accent rounded-sm cursor-pointer">
                     Add question

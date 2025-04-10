@@ -37,6 +37,8 @@ export default function Template() {
     const { templateId } = useParams();
     const [tabId, setTabId] = useState(1);
     const { currentUser, mode } = useLoaderData();
+    const [activeId, setActiveId] = useState('');
+
     return (
         <Form
             action={
@@ -45,33 +47,39 @@ export default function Template() {
                     : `/templates/${templateId}`
             }
             method="post"
-            className="max-w-[768px] mx-auto flex flex-col gap-4"
+            onClick={() => setActiveId('')}
         >
-            <Input
-                hidden
-                name="creatorId"
-                value={currentUser.userId}
-                readOnly
-            />
-            {mode === 'template' && (
-                <>
-                    <div className="flex justify-center">
-                        <Button type="submit" variant={'outline'}>
-                            <span>
-                                {templateId === undefined
-                                    ? 'Publish Template'
-                                    : 'Save changes'}
-                            </span>
-                        </Button>
-                    </div>
-                    <TabButtons tabId={tabId} setTabId={setTabId} />
-                    <div className={cn('visible', tabId !== 0 && 'hidden')}>
-                        <FormSettings />
-                    </div>
-                </>
-            )}
-            <div className={cn('visible', tabId !== 1 && 'hidden')}>
-                <CustomForm mode={mode} />
+            <div className="max-w-[768px] mx-auto flex flex-col gap-4">
+                <Input
+                    hidden
+                    name="creatorId"
+                    value={currentUser.userId}
+                    readOnly
+                />
+                {mode === 'template' && (
+                    <>
+                        <div className="flex justify-center">
+                            <Button type="submit" variant={'outline'}>
+                                <span>
+                                    {templateId === undefined
+                                        ? 'Publish Template'
+                                        : 'Save changes'}
+                                </span>
+                            </Button>
+                        </div>
+                        <TabButtons tabId={tabId} setTabId={setTabId} />
+                        <div className={cn('visible', tabId !== 0 && 'hidden')}>
+                            <FormSettings />
+                        </div>
+                    </>
+                )}
+                <div className={cn('visible', tabId !== 1 && 'hidden')}>
+                    <CustomForm
+                        mode={mode}
+                        activeId={activeId}
+                        setActiveId={setActiveId}
+                    />
+                </div>
             </div>
         </Form>
     );
