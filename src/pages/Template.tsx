@@ -39,7 +39,11 @@ export default function Template() {
     const { currentUser, mode } = useLoaderData();
     return (
         <Form
-            action="/templates"
+            action={
+                templateId === undefined
+                    ? '/templates'
+                    : `/templates/${templateId}`
+            }
             method="post"
             className="max-w-[768px] mx-auto flex flex-col gap-4"
         >

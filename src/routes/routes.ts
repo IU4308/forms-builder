@@ -21,7 +21,7 @@ import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import Template from '@/pages/Template';
-import { templateAction } from '@/actions/template.actions';
+import { publishTemplate, updateTemplate } from '@/actions/template.actions';
 
 export const router = createBrowserRouter([
     {
@@ -54,13 +54,13 @@ export const router = createBrowserRouter([
                     {
                         path: '/templates',
                         Component: Template,
-                        action: templateAction,
+                        action: publishTemplate,
                         loader: templateLoader,
                         children: [
                             {
                                 path: ':templateId',
                                 Component: Template,
-                                action: templateAction,
+                                action: updateTemplate,
                                 loader: templateLoader,
                             },
                         ],
