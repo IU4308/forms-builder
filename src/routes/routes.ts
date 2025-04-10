@@ -67,6 +67,13 @@ export const router = createBrowserRouter([
                                 Component: Template,
                                 action: updateTemplate,
                                 loader: templateLoader,
+                                children: [
+                                    {
+                                        path: ':formId',
+                                        Component: Template,
+                                        loader: templateLoader,
+                                    },
+                                ],
                             },
                         ],
                     },

@@ -25,8 +25,6 @@ export const updateTemplate = async ({
         const formData = await request.formData();
         const { templateId } = params;
         let response;
-        // const data = Object.fromEntries(formData);
-        // console.log(data);
         if (formData.get('action') === 'submitTemplate') {
             response = await api.put(
                 `/templates/${templateId}`,
@@ -34,9 +32,9 @@ export const updateTemplate = async ({
             );
         } else {
             response = await api.post(`/forms`, Object.fromEntries(formData));
+            return redirect(`/templates/${templateId}/${response.data.formId}`);
         }
         setFlash(response.data.message);
-        // return redirect(`/forms/${response.data.formId}`);
     } catch (error) {
         console.log(error);
         throw new Error('Server error');

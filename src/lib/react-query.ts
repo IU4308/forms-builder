@@ -30,6 +30,15 @@ export const getTemplate = async (templateId: string | undefined) => {
     return template;
 };
 
+export const getForm = async (formId: string | undefined) => {
+    if (formId === undefined) return null;
+    const form = await queryClient.fetchQuery({
+        queryKey: ['form'],
+        queryFn: () => api.get(`/forms/${formId}`).then((res) => res.data),
+    });
+    return form;
+};
+
 export const getUserTemplates = async (userId: string) => {
     const templates = await queryClient.fetchQuery({
         queryKey: ['templates'],

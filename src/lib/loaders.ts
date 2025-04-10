@@ -57,6 +57,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
 
         const { templateId } = params;
         const template = await getTemplate(templateId);
+        // const form = await getForm(formId);
         let mode = 'template';
         if (templateId !== undefined) {
             mode =
