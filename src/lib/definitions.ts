@@ -91,7 +91,7 @@ export type Field = {
     isPresent: boolean;
     question: string | null;
     description: string | null;
-    answer?: string;
+    answer?: string | null;
 };
 
 export type InterfaceMode = 'template' | 'form';
