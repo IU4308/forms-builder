@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router';
 import { Label } from './ui/label';
 import { Input } from './ui/input';
+import { format } from 'date-fns';
 
 export default function FormHeader() {
     const { template, currentUser } = useLoaderData();
@@ -42,8 +43,12 @@ export default function FormHeader() {
                             id="date"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
                             placeholder={
-                                new Date(template?.createdAt).toDateString() ??
-                                new Date().toDateString()
+                                template?.createdAt
+                                    ? format(
+                                          new Date(template.createdAt),
+                                          '2025-MM-dd'
+                                      )
+                                    : format(new Date(), '2025-MM-dd')
                             }
                             disabled={true}
                         />

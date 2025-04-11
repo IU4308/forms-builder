@@ -21,22 +21,11 @@ export const update = async ({ request, params }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
         const { templateId } = params;
-        let response;
-        if (formData.get('action') === 'submitTemplate') {
-            response = await api.put(
-                `/templates/${templateId}`,
-                Object.fromEntries(formData)
-            );
-            setFlash(response.data.message);
-        } else {
-            response = await api.post(`/forms`, Object.fromEntries(formData));
-            setFlash(response.data.message);
-            const formResponse = {
-                formId: response.data.formId,
-                templateId,
-            };
-            return { formResponse };
-        }
+        const response = await api.put(
+            `/templates/${templateId}`,
+            Object.fromEntries(formData)
+        );
+        setFlash(response.data.message);
     } catch (error) {
         console.log(error);
         throw new Error('Server error');

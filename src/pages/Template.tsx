@@ -38,7 +38,7 @@ export default function Template() {
     const fetcher = useFetcher();
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(1);
-    const { currentUser, mode } = useLoaderData();
+    const { currentUser, mode, canEdit } = useLoaderData();
     const [activeId, setActiveId] = useState('');
 
     let action = '/templates';
@@ -50,11 +50,7 @@ export default function Template() {
 
     return (
         <fetcher.Form
-            action={
-                templateId === undefined
-                    ? '/templates'
-                    : `/templates/${templateId}`
-            }
+            action={action}
             method="post"
             onClick={() => setActiveId('')}
         >
@@ -76,12 +72,7 @@ export default function Template() {
                 {mode === 'template' && (
                     <>
                         <div className="flex justify-center">
-                            <Button
-                                type="submit"
-                                variant={'outline'}
-                                name="action"
-                                value={'submitTemplate'}
-                            >
+                            <Button type="submit" variant={'outline'}>
                                 <span>
                                     {templateId === undefined
                                         ? 'Publish Template'
@@ -109,15 +100,9 @@ export default function Template() {
                             activeId={activeId}
                             setActiveId={setActiveId}
                         />
-                        {mode === 'form' && formId === undefined && (
+                        {mode === 'form' && canEdit && (
                             <div>
-                                <Button
-                                    type="submit"
-                                    name="action"
-                                    value={'submitForm'}
-                                >
-                                    Submit
-                                </Button>
+                                <Button type="submit">Submit</Button>
                             </div>
                         )}
                     </div>

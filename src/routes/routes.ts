@@ -22,7 +22,7 @@ import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import Template from '@/pages/Template';
 import { publish, update, deleteTemplates } from '@/actions/template.actions';
-import { submit } from '@/actions/forms.actions';
+import { submit, updateForm } from '@/actions/forms.actions';
 
 export const router = createBrowserRouter([
     {
@@ -73,6 +73,7 @@ export const router = createBrowserRouter([
                                                 path: ':formId',
                                                 Component: Template,
                                                 loader: templateLoader,
+                                                action: updateForm,
                                             },
                                         ],
                                     },

@@ -19,3 +19,18 @@ export const submit = async ({ request, params }: ActionFunctionArgs) => {
         throw new Error('Server error');
     }
 };
+
+export const updateForm = async ({ request, params }: ActionFunctionArgs) => {
+    try {
+        const formData = await request.formData();
+        const { formId } = params;
+        const response = await api.put(
+            `/forms/${formId}`,
+            Object.fromEntries(formData)
+        );
+        setFlash(response.data.message);
+    } catch (error) {
+        console.log(error);
+        throw new Error('Server error');
+    }
+};
