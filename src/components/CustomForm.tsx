@@ -16,9 +16,9 @@ export default function CustomForm({
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { templateFields } = useLoaderData();
+    const { template } = useLoaderData();
     const [fields, setFields] = useState<Field[]>(
-        templateFields ?? initialFields
+        template?.fields ?? initialFields
     );
 
     const handleAddField = (type: QuestionType) => {

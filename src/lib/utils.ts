@@ -2,15 +2,8 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
-import { navMenu, questionTypes } from './constants.tsx';
-import {
-    Cell,
-    CurrentUser,
-    Field,
-    FormType,
-    TableAttributes,
-    TemplateType,
-} from './definitions';
+import { navMenu } from './constants.tsx';
+import { Cell, CurrentUser, TableAttributes } from './definitions';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -99,35 +92,35 @@ export const getQuestionType = (id: string) => {
     return id.slice(0, id.length - 1);
 };
 
-type FildKey = 'State' | 'Question' | 'Description';
+// type FildKey = 'State' | 'Question' | 'Description';
 
-export const getFields = (
-    template: TemplateType | null,
-    form: FormType | null
-) => {
-    if (template === null) return null;
-    let body: Field[] = [];
+// export const getFields = (
+//     template: TemplateType | null,
+//     form: FormType | null
+// ) => {
+//     if (template === null) return null;
+//     let body: Field[] = [];
 
-    const getTemplateValue = (id: string, key: FildKey) =>
-        template[`${id}${key}` as keyof TemplateType];
+//     const getTemplateValue = (id: string, key: FildKey) =>
+//         template[`${id}${key}` as keyof TemplateType];
 
-    const getFormValue = (id: string) =>
-        form?.[`${id}Answer` as keyof FormType] ?? '';
+//     const getFormValue = (id: string) =>
+//         form?.[`${id}Answer` as keyof FormType] ?? '';
 
-    questionTypes.forEach((type) => {
-        for (let i = 1; i <= 4; i++) {
-            let id = type + i;
-            body.push({
-                id,
-                isPresent: getTemplateValue(id, 'State') as boolean,
-                question: getTemplateValue(id, 'Question') as string | null,
-                description: getTemplateValue(id, 'Description') as
-                    | string
-                    | null,
-                answer: getFormValue(id) as string | null,
-            });
-        }
-    });
+//     questionTypes.forEach((type) => {
+//         for (let i = 1; i <= 4; i++) {
+//             let id = type + i;
+//             body.push({
+//                 id,
+//                 isPresent: getTemplateValue(id, 'State') as boolean,
+//                 question: getTemplateValue(id, 'Question') as string | null,
+//                 description: getTemplateValue(id, 'Description') as
+//                     | string
+//                     | null,
+//                 answer: getFormValue(id) as string | null,
+//             });
+//         }
+//     });
 
-    return body;
-};
+//     return body;
+// };

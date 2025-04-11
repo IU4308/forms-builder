@@ -18,7 +18,9 @@ export default function FormHeader() {
                         <Input
                             id="name"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                            value={currentUser.name}
+                            value={
+                                template?.credentials?.name ?? currentUser.name
+                            }
                             disabled={true}
                         />
                     </div>
@@ -27,7 +29,10 @@ export default function FormHeader() {
                         <Input
                             id="email"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                            value={currentUser.email}
+                            value={
+                                template?.credentials?.email ??
+                                currentUser.email
+                            }
                             disabled
                         />
                     </div>
@@ -36,7 +41,10 @@ export default function FormHeader() {
                         <Input
                             id="date"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
-                            placeholder={new Date().toDateString()}
+                            placeholder={
+                                new Date(template?.createdAt).toDateString() ??
+                                new Date().toDateString()
+                            }
                             disabled={true}
                         />
                     </div>
