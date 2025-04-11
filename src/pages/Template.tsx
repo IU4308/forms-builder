@@ -34,7 +34,7 @@ const TabButtons = ({
 };
 
 export default function Template() {
-    const { templateId } = useParams();
+    const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(1);
     const { currentUser, mode } = useLoaderData();
     const [activeId, setActiveId] = useState('');
@@ -97,7 +97,7 @@ export default function Template() {
                         activeId={activeId}
                         setActiveId={setActiveId}
                     />
-                    {mode === 'form' && (
+                    {mode === 'form' && formId === undefined && (
                         <div>
                             <Button
                                 type="submit"

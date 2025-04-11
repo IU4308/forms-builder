@@ -11,6 +11,7 @@ type CustomFieldProps = Field & {
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
     onDeleteField: (id: string) => void;
+    canEdit: boolean;
 };
 
 export default function CustomField({
@@ -23,6 +24,7 @@ export default function CustomField({
     activeId,
     setActiveId,
     onDeleteField,
+    canEdit,
 }: CustomFieldProps) {
     const type = getQuestionType(id);
     return (
@@ -68,7 +70,10 @@ export default function CustomField({
                 disabled={mode === 'form'}
             />
             {type === 'checkbox' ? (
-                <Checkbox name={`${id}Answer`} disabled />
+                <Checkbox
+                    name={`${id}Answer`}
+                    disabled={mode === 'template' || !canEdit}
+                />
             ) : (
                 <Input
                     name={`${id}Answer`}
@@ -76,7 +81,7 @@ export default function CustomField({
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
                     placeholder={`${changeCase.sentenceCase(type)} answer`}
                     defaultValue={answer ?? ''}
-                    disabled={mode === 'template'}
+                    disabled={mode === 'template' || !canEdit}
                 />
             )}
         </div>

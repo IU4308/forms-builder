@@ -16,10 +16,12 @@ export default function CustomForm({
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { template } = useLoaderData();
+    const { template, canEdit } = useLoaderData();
     const [fields, setFields] = useState<Field[]>(
         template?.fields ?? initialFields
     );
+
+    console.log(fields);
 
     const handleAddField = (type: QuestionType) => {
         const newQuestion = fields.find(
@@ -66,6 +68,7 @@ export default function CustomForm({
                     activeId={activeId}
                     setActiveId={setActiveId}
                     onDeleteField={handleDeleteField}
+                    canEdit={canEdit}
                 />
             ))}
         </div>

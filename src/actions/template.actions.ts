@@ -30,11 +30,12 @@ export const updateTemplate = async ({
                 `/templates/${templateId}`,
                 Object.fromEntries(formData)
             );
+            setFlash(response.data.message);
         } else {
             response = await api.post(`/forms`, Object.fromEntries(formData));
+            setFlash(response.data.message);
             return redirect(`/templates/${templateId}/${response.data.formId}`);
         }
-        setFlash(response.data.message);
     } catch (error) {
         console.log(error);
         throw new Error('Server error');
