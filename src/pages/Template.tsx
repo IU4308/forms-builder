@@ -1,10 +1,11 @@
 import CustomForm from '@/components/CustomForm';
+import FormResponse from '@/components/FormResponse';
 import FormSettings from '@/components/FormSettings';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { Form, useLoaderData, useParams } from 'react-router';
+import { useFetcher, useLoaderData, useParams } from 'react-router';
 
 const TabButtons = ({
     tabId,
@@ -34,13 +35,14 @@ const TabButtons = ({
 };
 
 export default function Template() {
+    const fetcher = useFetcher();
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(1);
     const { currentUser, mode } = useLoaderData();
     const [activeId, setActiveId] = useState('');
 
     return (
-        <Form
+        <fetcher.Form
             action={
                 templateId === undefined
                     ? '/templates'
@@ -86,30 +88,34 @@ export default function Template() {
                         </div>
                     </>
                 )}
-                <div
-                    className={cn(
-                        'visible flex flex-col gap-4',
-                        tabId !== 1 && 'hidden'
-                    )}
-                >
-                    <CustomForm
-                        mode={mode}
-                        activeId={activeId}
-                        setActiveId={setActiveId}
-                    />
-                    {mode === 'form' && formId === undefined && (
-                        <div>
-                            <Button
-                                type="submit"
-                                name="action"
-                                value={'submitForm'}
-                            >
-                                Submit
-                            </Button>
-                        </div>
-                    )}
-                </div>
+                {fetcher?.data?.formResponse ? (
+                    <FormResponse {...fetcher.data.formResponse} />
+                ) : (
+                    <div
+                        className={cn(
+                            'visible flex flex-col gap-4',
+                            tabId !== 1 && 'hidden'
+                        )}
+                    >
+                        <CustomForm
+                            mode={mode}
+                            activeId={activeId}
+                            setActiveId={setActiveId}
+                        />
+                        {mode === 'form' && formId === undefined && (
+                            <div>
+                                <Button
+                                    type="submit"
+                                    name="action"
+                                    value={'submitForm'}
+                                >
+                                    Submit
+                                </Button>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
-        </Form>
+        </fetcher.Form>
     );
 }

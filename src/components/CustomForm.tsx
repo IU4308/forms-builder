@@ -21,8 +21,6 @@ export default function CustomForm({
         template?.fields ?? initialFields
     );
 
-    console.log(fields);
-
     const handleAddField = (type: QuestionType) => {
         const newQuestion = fields.find(
             (fields) => getQuestionType(fields.id) === type && !fields.isPresent

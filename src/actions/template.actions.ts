@@ -17,10 +17,7 @@ export const publishTemplate = async ({ request }: { request: Request }) => {
     }
 };
 
-export const updateTemplate = async ({
-    request,
-    params,
-}: ActionFunctionArgs) => {
+export const submit = async ({ request, params }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
         const { templateId } = params;
@@ -34,7 +31,11 @@ export const updateTemplate = async ({
         } else {
             response = await api.post(`/forms`, Object.fromEntries(formData));
             setFlash(response.data.message);
-            return redirect(`/templates/${templateId}/${response.data.formId}`);
+            const formResponse = {
+                formId: response.data.formId,
+                templateId,
+            };
+            return { formResponse };
         }
     } catch (error) {
         console.log(error);

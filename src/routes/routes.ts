@@ -23,7 +23,7 @@ import { createElement } from 'react';
 import Template from '@/pages/Template';
 import {
     publishTemplate,
-    updateTemplate,
+    submit,
     deleteTemplates,
 } from '@/actions/template.actions';
 
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
                             {
                                 path: ':templateId',
                                 Component: Template,
-                                action: updateTemplate,
+                                action: submit,
                                 loader: templateLoader,
                                 children: [
                                     {
