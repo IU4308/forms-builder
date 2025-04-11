@@ -2,7 +2,7 @@ import { api } from '@/api/api';
 import { setFlash } from '@/lib/utils';
 import { ActionFunctionArgs, redirect } from 'react-router';
 
-export const publishTemplate = async ({ request }: { request: Request }) => {
+export const publish = async ({ request }: { request: Request }) => {
     try {
         const formData = await request.formData();
         const response = await api.post(
@@ -17,7 +17,7 @@ export const publishTemplate = async ({ request }: { request: Request }) => {
     }
 };
 
-export const submit = async ({ request, params }: ActionFunctionArgs) => {
+export const update = async ({ request, params }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
         const { templateId } = params;

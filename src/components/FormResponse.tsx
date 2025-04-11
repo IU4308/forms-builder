@@ -15,7 +15,7 @@ export default function FormResponse({
                 Submit again
             </a>
             <a
-                href={`/templates/${templateId}/${formId}`}
+                href={`/templates/${templateId}/forms/${formId}`}
                 className="underline underline-offset-2"
             >
                 Edit answers

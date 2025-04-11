@@ -41,6 +41,13 @@ export default function Template() {
     const { currentUser, mode } = useLoaderData();
     const [activeId, setActiveId] = useState('');
 
+    let action = '/templates';
+    if (templateId !== undefined) {
+        action += `/${templateId}` + (mode === 'form' ? '/forms' : '');
+    }
+
+    if (formId !== undefined) action += `/${formId}`;
+
     return (
         <fetcher.Form
             action={
