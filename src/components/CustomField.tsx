@@ -1,4 +1,4 @@
-import { InterfaceMode, Question } from '@/lib/definitions';
+import { InterfaceMode, Field } from '@/lib/definitions';
 import { Checkbox } from './ui/checkbox';
 import { Input } from './ui/input';
 import * as changeCase from 'change-case';
@@ -6,11 +6,11 @@ import { cn, getQuestionType } from '@/lib/utils';
 import { Button } from './ui/button';
 import { IoTrash } from 'react-icons/io5';
 
-type CustomFieldProps = Question & {
+type CustomFieldProps = Field & {
     mode: InterfaceMode;
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
-    onDeleteQuestion: (id: string) => void;
+    onDeleteField: (id: string) => void;
 };
 
 export default function CustomField({
@@ -18,10 +18,11 @@ export default function CustomField({
     id,
     isPresent,
     question,
+    answer,
     description,
     activeId,
     setActiveId,
-    onDeleteQuestion,
+    onDeleteField,
 }: CustomFieldProps) {
     const type = getQuestionType(id);
     return (
@@ -41,7 +42,7 @@ export default function CustomField({
                         type="button"
                         className="absolute top-2 right-2"
                         variant={'destructive'}
-                        onClick={() => onDeleteQuestion(activeId)}
+                        onClick={() => onDeleteField(activeId)}
                         disabled={activeId === ''}
                     >
                         <IoTrash />
@@ -74,6 +75,7 @@ export default function CustomField({
                     type={type === 'integerValue' ? 'number' : 'text'}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
                     placeholder={`${changeCase.sentenceCase(type)} answer`}
+                    defaultValue={answer ?? ''}
                     disabled={mode === 'template'}
                 />
             )}

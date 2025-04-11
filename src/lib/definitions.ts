@@ -86,12 +86,12 @@ export type QuestionType =
     | 'integerValue'
     | 'checkbox';
 
-export type Question = {
+export type Field = {
     id: string;
     isPresent: boolean;
     question: string | null;
     description: string | null;
-    // type: QuestionType;
+    answer?: string;
 };
 
 export type InterfaceMode = 'template' | 'form';
@@ -173,4 +173,30 @@ export type TemplateType = {
     checkbox4State: boolean;
     checkbox4Question: string | null;
     checkbox4Description: string | null;
+};
+export type FormType = {
+    id: string;
+    creatorId: string;
+    templateId: string;
+    createdAt: Date;
+
+    singleLine1Answer: string | null;
+    singleLine2Answer: string | null;
+    singleLine3Answer: string | null;
+    singleLine4Answer: string | null;
+
+    multipleLine1Answer: string | null;
+    multipleLine2Answer: string | null;
+    multipleLine3Answer: string | null;
+    multipleLine4Answer: string | null;
+
+    integerValue1Answer: string | null;
+    integerValue2Answer: string | null;
+    integerValue3Answer: string | null;
+    integerValue4Answer: string | null;
+
+    checkbox1Answer: string | null;
+    checkbox2Answer: string | null;
+    checkbox3Answer: string | null;
+    checkbox4Answer: string | null;
 };

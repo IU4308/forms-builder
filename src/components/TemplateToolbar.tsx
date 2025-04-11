@@ -10,13 +10,13 @@ import { QuestionType } from '@/lib/definitions';
 
 const Type = ({
     value,
-    onAddQuestion,
+    onAddField,
 }: {
     value: QuestionType;
-    onAddQuestion: (type: QuestionType) => void;
+    onAddField: (type: QuestionType) => void;
 }) => {
     return (
-        <DropdownMenuItem onClick={() => onAddQuestion(value)}>
+        <DropdownMenuItem onClick={() => onAddField(value)}>
             {value}
         </DropdownMenuItem>
     );
@@ -25,9 +25,9 @@ const Type = ({
 const types = ['singleLine', 'multipleLine', 'integerValue', 'checkbox'];
 
 export default function TemplateToolbar({
-    onAddQuestion,
+    onAddField,
 }: {
-    onAddQuestion: (type: QuestionType) => void;
+    onAddField: (type: QuestionType) => void;
 }) {
     return (
         <div className="sticky top-[53px] bg-background z-20 flex gap-2">
@@ -42,7 +42,7 @@ export default function TemplateToolbar({
                         <Type
                             key={type}
                             value={type as QuestionType}
-                            onAddQuestion={onAddQuestion}
+                            onAddField={onAddField}
                         />
                     ))}
                 </DropdownMenuContent>

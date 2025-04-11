@@ -97,15 +97,17 @@ export default function Template() {
                         activeId={activeId}
                         setActiveId={setActiveId}
                     />
-                    <div>
-                        <Button
-                            type="submit"
-                            name="action"
-                            value={'submitForm'}
-                        >
-                            Submit
-                        </Button>
-                    </div>
+                    {mode === 'form' && (
+                        <div>
+                            <Button
+                                type="submit"
+                                name="action"
+                                value={'submitForm'}
+                            >
+                                Submit
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
         </Form>

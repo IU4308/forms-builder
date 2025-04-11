@@ -2,11 +2,12 @@ import { LoaderFunctionArgs, redirect } from 'react-router';
 import {
     getAllUsers,
     getCurrentUser,
+    getForm,
     getTemplate,
     getUserTemplates,
 } from './react-query';
 import { api } from '@/api/api';
-import { getFlash, getQuestions, setFlash } from './utils';
+import { getFlash, getFields, setFlash } from './utils';
 
 export const appLoader = async () => {
     return { flash: getFlash() };
@@ -55,9 +56,9 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         const currentUser = await getCurrentUser();
         if (!currentUser) return redirect('/');
 
-        const { templateId } = params;
+        const { templateId, formId } = params;
         const template = await getTemplate(templateId);
-        // const form = await getForm(formId);
+        const form = await getForm(formId);
         let mode = 'template';
         if (templateId !== undefined) {
             mode =
@@ -65,12 +66,12 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                     ? 'template'
                     : 'form';
         }
-        const templateQuestions = getQuestions(template);
+        const templateFields = getFields(template, form);
         return {
             currentUser,
             mode,
             template,
-            templateQuestions,
+            templateFields,
         };
     } catch (error: any) {
         console.log(error);

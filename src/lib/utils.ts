@@ -6,6 +6,7 @@ import { navMenu, questionTypes } from './constants.tsx';
 import {
     Cell,
     CurrentUser,
+    FormType,
     Question,
     TableAttributes,
     TemplateType,
@@ -98,18 +99,27 @@ export const getQuestionType = (id: string) => {
     return id.slice(0, id.length - 1);
 };
 
-export const getQuestions = (template: TemplateType | null) => {
+export const getFields = (
+    template: TemplateType | null,
+    form: FormType | null
+) => {
     if (template === null) return null;
     let body: Question[] = [];
     questionTypes.forEach((type) => {
         for (let i = 1; i <= 4; i++) {
             const key = (suffix: string) =>
                 (type + i + suffix) as keyof TemplateType;
+            const key1 = (suffix: string) =>
+                (type + i + suffix) as keyof FormType;
             body.push({
                 id: type + i,
                 isPresent: template[key('State')] as boolean,
                 question: template[key('Question')] as string | null,
                 description: template[key('Description')] as string | null,
+                answer:
+                    form !== null
+                        ? (form[key1('Answer')] as string | null)
+                        : '',
             });
         }
     });

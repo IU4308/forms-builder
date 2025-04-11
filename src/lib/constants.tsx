@@ -1,4 +1,4 @@
-import { Question, QuestionType, ToolbarButton } from './definitions';
+import { Field, QuestionType, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
@@ -277,7 +277,7 @@ export const questionTypes: QuestionType[] = [
     'checkbox',
 ];
 
-export const initialQuestions: Question[] = [
+export const initialFields: Field[] = [
     {
         id: 'singleLine1',
         isPresent: true,

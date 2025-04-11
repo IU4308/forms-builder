@@ -2,8 +2,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import CustomField from './CustomField';
 import { useState } from 'react';
-import { QuestionType, Question, InterfaceMode } from '@/lib/definitions';
-import { initialQuestions } from '@/lib/constants';
+import { QuestionType, Field, InterfaceMode } from '@/lib/definitions';
+import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
 import { getQuestionType } from '@/lib/utils';
 import { useLoaderData } from 'react-router';
@@ -17,18 +17,17 @@ export default function CustomForm({
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { currentUser, template, templateQuestions } = useLoaderData();
-    const [questions, setQuestions] = useState<Question[]>(
-        templateQuestions ?? initialQuestions
+    const { currentUser, template, templateFields } = useLoaderData();
+    const [fields, setFields] = useState<Field[]>(
+        templateFields ?? initialFields
     );
 
-    const handleAddQuestion = (type: QuestionType) => {
-        const newQuestion = questions.find(
-            (question) =>
-                getQuestionType(question.id) === type && !question.isPresent
+    const handleAddField = (type: QuestionType) => {
+        const newQuestion = fields.find(
+            (fields) => getQuestionType(fields.id) === type && !fields.isPresent
         );
-        setQuestions((prevQuestions) =>
-            prevQuestions.map((question) => {
+        setFields((prevFields) =>
+            prevFields.map((question) => {
                 if (question.id === newQuestion?.id) {
                     return { ...question, isPresent: true };
                 } else {
@@ -38,9 +37,9 @@ export default function CustomForm({
         );
     };
 
-    const handleDeleteQuestion = (id: string) => {
-        setQuestions((prevQuestions) =>
-            prevQuestions.map((question) => {
+    const handleDeleteField = (id: string) => {
+        setFields((prevFields) =>
+            prevFields.map((question) => {
                 if (question.id === id) {
                     return {
                         ...question,
@@ -56,7 +55,7 @@ export default function CustomForm({
     return (
         <div className="flex flex-col gap-4 ">
             {mode === 'template' && (
-                <TemplateToolbar onAddQuestion={handleAddQuestion} />
+                <TemplateToolbar onAddField={handleAddField} />
             )}
             {mode === 'form' && (
                 <>
@@ -99,14 +98,14 @@ export default function CustomForm({
                 </>
             )}
 
-            {questions.map((field) => (
+            {fields.map((field) => (
                 <CustomField
                     key={field.id}
                     mode={mode}
                     {...field}
                     activeId={activeId}
                     setActiveId={setActiveId}
-                    onDeleteQuestion={handleDeleteQuestion}
+                    onDeleteField={handleDeleteField}
                 />
             ))}
         </div>
