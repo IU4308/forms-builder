@@ -37,12 +37,16 @@ export default function Template() {
                 <FormResponse {...fetcher.data.formResponse} />
             ) : (
                 <div className="max-w-[768px] mx-auto flex flex-col gap-4">
-                    <Input
-                        hidden
-                        readOnly
-                        name={mode === 'template' ? 'creatorId' : 'authorId'}
-                        value={currentUser.userId}
-                    />
+                    {formId === undefined && (
+                        <Input
+                            hidden
+                            readOnly
+                            name={
+                                mode === 'template' ? 'creatorId' : 'authorId'
+                            }
+                            value={currentUser.userId}
+                        />
+                    )}
                     {mode === 'form' && (
                         <Input
                             hidden
@@ -87,7 +91,6 @@ export default function Template() {
                                         attributes={
                                             templateFormsTableAttributes
                                         }
-                                        renderCheckbox={true}
                                         shouldSort={true}
                                         url={`templates/${templateId}/forms`}
                                     />
