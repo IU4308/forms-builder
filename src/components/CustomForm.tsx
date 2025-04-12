@@ -21,16 +21,23 @@ export default function CustomForm({
         template?.fields ?? initialFields
     );
 
+    console.log(fields);
+
     const handleAddField = (type: QuestionType) => {
-        const newQuestion = fields.find(
+        const newField = fields.find(
             (fields) => getQuestionType(fields.id) === type && !fields.isPresent
         );
         setFields((prevFields) =>
-            prevFields.map((question) => {
-                if (question.id === newQuestion?.id) {
-                    return { ...question, isPresent: true };
+            prevFields.map((field) => {
+                if (field.id === newField?.id) {
+                    return {
+                        ...field,
+                        isPresent: true,
+                        question: 'No Title',
+                        description: 'No description',
+                    };
                 } else {
-                    return question;
+                    return field;
                 }
             })
         );
@@ -43,6 +50,8 @@ export default function CustomForm({
                     return {
                         ...question,
                         isPresent: false,
+                        question: '',
+                        description: '',
                     };
                 } else {
                     return question;

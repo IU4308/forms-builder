@@ -26,7 +26,7 @@ export default function CustomField({
     onDeleteField,
     canEdit,
 }: CustomFieldProps) {
-    const type = getQuestionType(id);
+    const questionType = getQuestionType(id);
     return (
         <div
             onClick={(e) => {
@@ -58,23 +58,25 @@ export default function CustomField({
                 readOnly
             />
             <Input
+                key={`${id}-question-${question}`}
                 name={mode === 'template' ? `${id}Question` : ''}
                 defaultValue={question ?? 'No title'}
                 className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 disabled={mode === 'form'}
             />
             <Input
+                key={`${id}-description-${description}`}
                 name={mode === 'template' ? `${id}Description` : ''}
                 defaultValue={description ?? 'No description'}
                 className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 disabled={mode === 'form'}
             />
-            {type !== 'checkbox' ? (
+            {questionType !== 'checkbox' ? (
                 <Input
                     name={`${id}Answer`}
-                    type={type === 'integerValue' ? 'number' : 'text'}
+                    type={questionType === 'integerValue' ? 'number' : 'text'}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
-                    placeholder={`${changeCase.sentenceCase(type)} answer`}
+                    placeholder={`${changeCase.sentenceCase(questionType)} answer`}
                     defaultValue={answer ?? ''}
                     disabled={mode === 'template' || !canEdit}
                 />
