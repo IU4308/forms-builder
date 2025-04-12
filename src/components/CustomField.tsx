@@ -69,12 +69,7 @@ export default function CustomField({
                 className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 disabled={mode === 'form'}
             />
-            {type === 'checkbox' ? (
-                <Checkbox
-                    name={`${id}Answer`}
-                    disabled={mode === 'template' || !canEdit}
-                />
-            ) : (
+            {type !== 'checkbox' ? (
                 <Input
                     name={`${id}Answer`}
                     type={type === 'integerValue' ? 'number' : 'text'}
@@ -83,6 +78,16 @@ export default function CustomField({
                     defaultValue={answer ?? ''}
                     disabled={mode === 'template' || !canEdit}
                 />
+            ) : (
+                <>
+                    <input type="hidden" name={`${id}Answer`} value="" />
+                    <Checkbox
+                        name={`${id}Answer`}
+                        disabled={mode === 'template' || !canEdit}
+                        value={'on'}
+                        defaultChecked={answer === 'on'}
+                    />
+                </>
             )}
         </div>
     );

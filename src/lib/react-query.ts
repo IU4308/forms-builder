@@ -41,9 +41,18 @@ export const getForm = async (formId: string | undefined) => {
 
 export const getUserTemplates = async (userId: string) => {
     const templates = await queryClient.fetchQuery({
-        queryKey: ['templates'],
+        queryKey: ['userTemplates'],
         queryFn: () =>
             api.get(`/templates/users/${userId}`).then((res) => res.data),
     });
     return templates;
+};
+
+export const getUserForms = async (userId: string) => {
+    const forms = await queryClient.fetchQuery({
+        queryKey: ['userForms'],
+        queryFn: () =>
+            api.get(`/forms/users/${userId}`).then((res) => res.data),
+    });
+    return forms;
 };

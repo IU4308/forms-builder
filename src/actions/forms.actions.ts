@@ -2,10 +2,12 @@ import { api } from '@/api/api';
 import { setFlash } from '@/lib/utils';
 import { ActionFunctionArgs } from 'react-router';
 
-export const submit = async ({ request, params }: ActionFunctionArgs) => {
+export const submitForm = async ({ request, params }: ActionFunctionArgs) => {
+    console.log('submti form action');
     try {
         const formData = await request.formData();
         const { templateId } = params;
+        console.log(Object.fromEntries(formData));
         const response = await api.post(`/forms`, Object.fromEntries(formData));
         setFlash(response.data.message);
         return {
@@ -24,6 +26,7 @@ export const updateForm = async ({ request, params }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
         const { formId } = params;
+        console.log(Object.fromEntries(formData));
         const response = await api.put(
             `/forms/${formId}`,
             Object.fromEntries(formData)

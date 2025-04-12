@@ -106,7 +106,7 @@ const Body = ({
     selectedRows,
     handleSelect,
 }: {
-    url?: string;
+    url?: string | string[];
     body: Cell[][];
     renderCheckbox?: boolean;
     selectedRows?: number[];
@@ -139,7 +139,11 @@ const Body = ({
                                 >
                                     {url ? (
                                         <Link
-                                            to={url + '/' + row[0].content}
+                                            to={
+                                                Array.isArray(url)
+                                                    ? `/${url[1]}/${row[1].content}/${url[0]}/${row[0].content}`
+                                                    : `/${url}/${row[0].content}`
+                                            }
                                             className=" block px-2 py-4"
                                         >
                                             {formatContent(cell.content)}
@@ -165,7 +169,7 @@ export default function Table({
     renderCheckbox = false,
     shouldSort = false,
 }: {
-    url?: string;
+    url?: string | string[];
     data: { [key: string]: any }[];
     attributes: TableAttributes;
     buttons?: ToolbarButton[];

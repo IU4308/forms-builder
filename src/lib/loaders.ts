@@ -4,6 +4,7 @@ import {
     getCurrentUser,
     getForm,
     getTemplate,
+    getUserForms,
     getUserTemplates,
 } from './react-query';
 import { api } from '@/api/api';
@@ -32,7 +33,8 @@ export const workspaceLoader = async () => {
         const currentUser = await getCurrentUser();
         if (!currentUser) return redirect('/');
         const templates = await getUserTemplates(currentUser.userId);
-        return { templates };
+        const forms = await getUserForms(currentUser.userId);
+        return { templates, forms };
     } catch (error) {
         console.log(error);
         throw new Error('Server error');

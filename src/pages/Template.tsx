@@ -58,7 +58,7 @@ export default function Template() {
                 <Input
                     hidden
                     readOnly
-                    name="creatorId"
+                    name={mode === 'template' ? 'creatorId' : 'authorId'}
                     value={currentUser.userId}
                 />
                 {mode === 'form' && (

@@ -67,6 +67,26 @@ export const templatesTableAttributes = [
     },
 ];
 
+export const formsTableAttributes = [
+    {
+        label: 'id',
+        shouldRender: false,
+    },
+    {
+        label: 'templateId',
+        shouldRender: false,
+    },
+    {
+        label: 'title',
+    },
+    {
+        label: 'description',
+    },
+    {
+        label: 'submittedAt',
+    },
+];
+
 export const homeTableAttributes = [
     {
         label: 'title',
@@ -93,7 +113,7 @@ export const workspaceButtons: ToolbarButton[] = [
     },
     {
         label: 'delete',
-        description: 'Delete a template',
+        description: 'Delete template/form',
         variant: 'destructive',
         icon: <FiTrash />,
     },

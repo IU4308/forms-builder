@@ -21,8 +21,12 @@ import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import Template from '@/pages/Template';
-import { publish, update, deleteTemplates } from '@/actions/template.actions';
-import { submit, updateForm } from '@/actions/forms.actions';
+import {
+    publish,
+    deleteTemplates,
+    updateTemplate,
+} from '@/actions/template.actions';
+import { submitForm, updateForm } from '@/actions/forms.actions';
 
 export const router = createBrowserRouter([
     {
@@ -62,12 +66,12 @@ export const router = createBrowserRouter([
                             {
                                 path: ':templateId',
                                 Component: Template,
-                                action: update,
+                                action: updateTemplate,
                                 loader: templateLoader,
                                 children: [
                                     {
                                         path: 'forms',
-                                        action: submit,
+                                        action: submitForm,
                                         children: [
                                             {
                                                 path: ':formId',
