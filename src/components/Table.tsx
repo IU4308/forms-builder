@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/table';
 import { cn, formatContent, getTableBody, setSentenceCase } from '@/lib/utils';
 import { ReactNode, useEffect, useState } from 'react';
-import { Link } from 'react-router';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
     Cell,
@@ -138,8 +137,8 @@ const Body = ({
                                     )}
                                 >
                                     {url ? (
-                                        <Link
-                                            to={
+                                        <a
+                                            href={
                                                 Array.isArray(url)
                                                     ? `/${url[1]}/${row[1].content}/${url[0]}/${row[0].content}`
                                                     : `/${url}/${row[0].content}`
@@ -147,7 +146,7 @@ const Body = ({
                                             className=" block px-2 py-4"
                                         >
                                             {formatContent(cell.content)}
-                                        </Link>
+                                        </a>
                                     ) : (
                                         formatContent(cell.content)
                                     )}

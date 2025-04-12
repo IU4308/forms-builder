@@ -87,6 +87,22 @@ export const formsTableAttributes = [
     },
 ];
 
+export const templateFormsTableAttributes = [
+    {
+        label: 'id',
+        shouldRender: false,
+    },
+    {
+        label: 'name',
+    },
+    {
+        label: 'email',
+    },
+    {
+        label: 'submittedAt',
+    },
+];
+
 export const homeTableAttributes = [
     {
         label: 'title',
@@ -156,6 +172,10 @@ export const templateTabButtons = [
     {
         id: 2,
         label: 'Questions',
+    },
+    {
+        id: 3,
+        label: 'Submitted Forms',
     },
 ];
 

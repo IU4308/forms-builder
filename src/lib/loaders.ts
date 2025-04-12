@@ -4,6 +4,7 @@ import {
     getCurrentUser,
     getForm,
     getTemplate,
+    getTemplateForms,
     getUserForms,
     getUserTemplates,
 } from './react-query';
@@ -60,6 +61,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         const { templateId, formId } = params;
         let mode = 'template',
             template,
+            templateForms,
             canEdit = true;
         if (formId !== undefined) {
             mode = 'form';
@@ -75,10 +77,15 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                     ? 'template'
                     : 'form';
         }
+        if (mode === 'template') {
+            templateForms = await getTemplateForms(templateId);
+        }
+        console.log(templateForms);
         return {
             currentUser,
             mode,
             template,
+            templateForms,
             canEdit,
         };
     } catch (error: any) {

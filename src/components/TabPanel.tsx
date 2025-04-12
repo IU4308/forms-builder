@@ -13,6 +13,7 @@ export default function TabPanel({
         <div className="mb-4 flex gap-2 justify-center">
             {buttons.map((button) => (
                 <Button
+                    key={button.label}
                     type="button"
                     variant={tabId === button.id ? 'default' : 'ghost'}
                     onClick={() => setTabId(button.id)}

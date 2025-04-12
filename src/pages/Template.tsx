@@ -1,10 +1,14 @@
 import CustomForm from '@/components/CustomForm';
 import FormResponse from '@/components/FormResponse';
 import FormSettings from '@/components/FormSettings';
+import Table from '@/components/Table';
 import TabPanel from '@/components/TabPanel';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { templateTabButtons } from '@/lib/constants';
+import {
+    templateFormsTableAttributes,
+    templateTabButtons,
+} from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
@@ -13,7 +17,7 @@ export default function Template() {
     const fetcher = useFetcher();
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
-    const { currentUser, mode, canEdit } = useLoaderData();
+    const { currentUser, mode, canEdit, templateForms } = useLoaderData();
     const [activeId, setActiveId] = useState('');
 
     let action = '/templates';
@@ -71,6 +75,24 @@ export default function Template() {
                             >
                                 <FormSettings />
                             </div>
+                            {templateId !== undefined && (
+                                <div
+                                    className={cn(
+                                        'visible',
+                                        tabId !== 3 && 'hidden'
+                                    )}
+                                >
+                                    <Table
+                                        data={templateForms}
+                                        attributes={
+                                            templateFormsTableAttributes
+                                        }
+                                        renderCheckbox={true}
+                                        shouldSort={true}
+                                        url={`templates/${templateId}/forms`}
+                                    />
+                                </div>
+                            )}
                         </>
                     )}
 
