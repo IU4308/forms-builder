@@ -148,6 +148,17 @@ export const adminButtons: ToolbarButton[] = [
     },
 ];
 
+export const templateTabButtons = [
+    {
+        id: 1,
+        label: 'Settings',
+    },
+    {
+        id: 2,
+        label: 'Questions',
+    },
+];
+
 export const templates = [
     {
         title: 'Customer Feedback Form',

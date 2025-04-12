@@ -6,7 +6,7 @@ export default function FormResponse({
     formId: string;
 }) {
     return (
-        <div className="bg-accent flex flex-col gap-4 p-8">
+        <div className="max-w-[768px] mx-auto bg-accent flex flex-col gap-4 p-8">
             <h1>Answer is saved</h1>
             <a
                 href={`/templates/${templateId}`}
