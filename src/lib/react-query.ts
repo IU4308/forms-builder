@@ -30,12 +30,21 @@ export const getTemplate = async (templateId: string | undefined) => {
     return template;
 };
 
-export const getTemplateData = async (templateId: string | undefined) => {
+export const getTopics = async () => {
+    console.log('test');
+    const template = await queryClient.fetchQuery({
+        queryKey: ['topics'],
+        queryFn: () => api.get(`/templates/topics`).then((res) => res.data),
+    });
+    return template;
+};
+
+export const getTemplateForms = async (templateId: string | undefined) => {
     if (templateId === undefined) return null;
     const templateForms = await queryClient.fetchQuery({
-        queryKey: ['templateData'],
+        queryKey: ['templateForms'],
         queryFn: () =>
-            api.get(`/templates/${templateId}/data`).then((res) => res.data),
+            api.get(`/templates/${templateId}/forms`).then((res) => res.data),
     });
     return templateForms;
 };

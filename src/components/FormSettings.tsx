@@ -37,9 +37,12 @@ export default function FormSettings() {
                     className="!bg-background"
                 />
             </div>
-            {/* <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
                 <Label>Topic</Label>
-                <Select name="topicId" defaultValue={`${template.topicId}`}>
+                <Select
+                    name="topicId"
+                    defaultValue={`${template?.topicId ?? topics[0].id}`}
+                >
                     <SelectTrigger className="w-[180px] !bg-background">
                         <SelectValue placeholder="Select topic" />
                     </SelectTrigger>
@@ -51,7 +54,7 @@ export default function FormSettings() {
                         ))}
                     </SelectContent>
                 </Select>
-            </div> */}
+            </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="image">Image</Label>
                 <Input
