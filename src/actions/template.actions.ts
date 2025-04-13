@@ -25,7 +25,11 @@ export const updateTemplate = async ({
     try {
         const formData = await request.formData();
         const { templateId } = params;
-        const response = await api.put(`/templates/${templateId}`, formData);
+        const response = await api.put(`/templates/${templateId}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
         setFlash(response.data.message);
     } catch (error) {
         console.log(error);
