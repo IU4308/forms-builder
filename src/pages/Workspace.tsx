@@ -5,6 +5,7 @@ import {
     formsTableAttributes,
     templatesTableAttributes,
     workspaceButtons,
+    workspaceFormsButtons,
 } from '@/lib/constants.tsx';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
@@ -55,8 +56,8 @@ export default function Workspace() {
                 <Table
                     data={forms}
                     attributes={formsTableAttributes}
-                    // buttons={workspaceButtons}
-                    // renderCheckbox={true}
+                    buttons={workspaceFormsButtons}
+                    renderCheckbox={true}
                     shouldSort={true}
                     url={['forms', 'templates']}
                 />

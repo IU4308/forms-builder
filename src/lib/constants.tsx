@@ -134,7 +134,15 @@ export const workspaceButtons: ToolbarButton[] = [
         label: 'delete',
         description: 'Delete template',
         variant: 'destructive',
-        // url: '/templates',
+        icon: <FiTrash />,
+    },
+];
+
+export const workspaceFormsButtons: ToolbarButton[] = [
+    {
+        label: 'delete',
+        description: 'Delete form',
+        variant: 'destructive',
         icon: <FiTrash />,
     },
 ];
