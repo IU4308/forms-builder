@@ -17,6 +17,7 @@ type LoaderData = {
 
 export default function FormSettings() {
     const { template, topics } = useLoaderData<LoaderData>();
+    console.log(topics);
     return (
         <div className="flex flex-col gap-4  py-6 px-4 md:px-16">
             <div className="flex flex-col gap-2">
@@ -64,6 +65,9 @@ export default function FormSettings() {
                     name="image"
                     accept="image/*"
                 />
+                {template?.imageUrl && (
+                    <img src={template.imageUrl} alt="template image" />
+                )}
             </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="tags">Tags</Label>

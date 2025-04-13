@@ -60,9 +60,9 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         const currentUser = await getCurrentUser();
         const { templateId, formId } = params;
         if ((!templateId || formId) && !currentUser) return redirect('/');
-        const topics = await getTopics();
         let mode: 'template' | 'form' = 'template',
             template,
+            topics,
             templateForms,
             canEdit = !!currentUser;
         if (formId) {
@@ -77,6 +77,9 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                 template.creatorId === currentUser.userId || currentUser.isAdmin
                     ? 'template'
                     : 'form';
+        }
+        if (mode === 'template') {
+            topics = await getTopics();
         }
         if (
             mode === 'template' &&

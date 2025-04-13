@@ -10,6 +10,9 @@ export default function FormHeader() {
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                 <h1 className="">{template.title}</h1>
                 <h2>{template.description}</h2>
+                {template.imageUrl && (
+                    <img src={template.imageUrl} alt="template image" />
+                )}
             </div>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                 <h2>Credentials</h2>

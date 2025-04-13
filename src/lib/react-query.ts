@@ -31,7 +31,6 @@ export const getTemplate = async (templateId: string | undefined) => {
 };
 
 export const getTopics = async () => {
-    console.log('test');
     const template = await queryClient.fetchQuery({
         queryKey: ['topics'],
         queryFn: () => api.get(`/templates/topics`).then((res) => res.data),
