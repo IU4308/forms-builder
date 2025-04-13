@@ -5,10 +5,11 @@ import { ActionFunctionArgs, redirect } from 'react-router';
 export const publish = async ({ request }: { request: Request }) => {
     try {
         const formData = await request.formData();
-        const response = await api.post(
-            '/templates',
-            Object.fromEntries(formData)
-        );
+        const response = await api.post('/templates', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
         setFlash(response.data.message);
         return redirect(`/templates/${response.data.templateId}`);
     } catch (error) {
@@ -24,11 +25,7 @@ export const updateTemplate = async ({
     try {
         const formData = await request.formData();
         const { templateId } = params;
-        console.log(Object.fromEntries(formData));
-        const response = await api.put(
-            `/templates/${templateId}`,
-            Object.fromEntries(formData)
-        );
+        const response = await api.put(`/templates/${templateId}`, formData);
         setFlash(response.data.message);
     } catch (error) {
         console.log(error);

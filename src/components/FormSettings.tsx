@@ -17,7 +17,6 @@ type LoaderData = {
 
 export default function FormSettings() {
     const { template, topics } = useLoaderData<LoaderData>();
-    console.log(topics);
     return (
         <div className="flex flex-col gap-4  py-6 px-4 md:px-16">
             <div className="flex flex-col gap-2">
@@ -38,7 +37,7 @@ export default function FormSettings() {
                     className="!bg-background"
                 />
             </div>
-            <div className="flex flex-col gap-4">
+            {/* <div className="flex flex-col gap-4">
                 <Label>Topic</Label>
                 <Select name="topicId" defaultValue={`${template.topicId}`}>
                     <SelectTrigger className="w-[180px] !bg-background">
@@ -52,10 +51,16 @@ export default function FormSettings() {
                         ))}
                     </SelectContent>
                 </Select>
-            </div>
+            </div> */}
             <div className="flex flex-col gap-2">
                 <Label htmlFor="image">Image</Label>
-                <Input type="file" id="image" className="!bg-background" />
+                <Input
+                    type="file"
+                    id="image"
+                    className="!bg-background"
+                    name="image"
+                    accept="image/*"
+                />
             </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="tags">Tags</Label>

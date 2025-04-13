@@ -31,6 +31,7 @@ export default function Template() {
         <fetcher.Form
             action={action}
             method="post"
+            encType="multipart/form-data"
             onClick={() => setActiveId('')}
         >
             {fetcher?.data?.formResponse ? (

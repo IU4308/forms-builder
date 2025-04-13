@@ -45,7 +45,7 @@ export const workspaceLoader = async () => {
 export const adminLoader = async () => {
     try {
         const currentUser = await getCurrentUser();
-        if (!currentUser || currentUser.isAdmin === false) return redirect('/');
+        if (!currentUser.isAdmin) return redirect('/');
         const users = await getAllUsers();
         return { currentUser, users };
     } catch (error: any) {
@@ -58,19 +58,19 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
     try {
         const currentUser = await getCurrentUser();
         const { templateId, formId } = params;
-        let mode = 'template',
+        if ((!templateId || formId) && !currentUser) return redirect('/');
+        let mode: 'template' | 'form' = 'template',
             template,
             templateForms,
             topics,
             canEdit = !!currentUser;
-        if (formId !== undefined) {
+        if (formId) {
             mode = 'form';
             template = await getForm(formId);
             canEdit =
-                template.creatorId === currentUser.userId || currentUser.isAdmin
-                    ? true
-                    : false;
-        } else if (templateId !== undefined) {
+                template.creatorId === currentUser.userId ||
+                currentUser.isAdmin;
+        } else if (templateId) {
             template = await getTemplate(templateId);
             mode =
                 template.creatorId === currentUser.userId || currentUser.isAdmin
@@ -79,7 +79,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         }
         if (
             mode === 'template' &&
-            (template.creatorId === currentUser.userId || currentUser.isAdmin)
+            (template?.creatorId === currentUser.userId || currentUser.isAdmin)
         ) {
             const templateData = await getTemplateData(templateId);
             templateForms = templateData.forms;
