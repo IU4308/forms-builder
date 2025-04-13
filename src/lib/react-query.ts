@@ -30,12 +30,12 @@ export const getTemplate = async (templateId: string | undefined) => {
     return template;
 };
 
-export const getTemplateForms = async (templateId: string | undefined) => {
+export const getTemplateData = async (templateId: string | undefined) => {
     if (templateId === undefined) return null;
     const templateForms = await queryClient.fetchQuery({
-        queryKey: ['templateForms'],
+        queryKey: ['templateData'],
         queryFn: () =>
-            api.get(`/templates/${templateId}/forms`).then((res) => res.data),
+            api.get(`/templates/${templateId}/data`).then((res) => res.data),
     });
     return templateForms;
 };

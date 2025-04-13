@@ -175,7 +175,7 @@ export const templateTabButtons = [
     },
     {
         id: 3,
-        label: 'Submitted Forms',
+        label: 'Answers',
     },
 ];
 

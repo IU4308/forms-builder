@@ -103,7 +103,7 @@ export type TemplateType = {
     title: string;
     description: string;
     imageUrl: string | null;
-
+    topicId: number;
     createdAt: Date;
 
     // Single Line Fields
@@ -199,4 +199,9 @@ export type FormType = {
     checkbox2Answer: string | null;
     checkbox3Answer: string | null;
     checkbox4Answer: string | null;
+};
+
+export type Topic = {
+    id: string;
+    name: string;
 };

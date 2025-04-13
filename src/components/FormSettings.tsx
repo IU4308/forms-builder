@@ -8,9 +8,16 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { useLoaderData } from 'react-router';
+import { TemplateType, Topic } from '@/lib/definitions';
+
+type LoaderData = {
+    template: TemplateType;
+    topics: Topic[];
+};
 
 export default function FormSettings() {
-    const { template } = useLoaderData();
+    const { template, topics } = useLoaderData<LoaderData>();
+    console.log(topics);
     return (
         <div className="flex flex-col gap-4  py-6 px-4 md:px-16">
             <div className="flex flex-col gap-2">
@@ -33,14 +40,16 @@ export default function FormSettings() {
             </div>
             <div className="flex flex-col gap-4">
                 <Label>Topic</Label>
-                <Select>
+                <Select name="topicId" defaultValue={`${template.topicId}`}>
                     <SelectTrigger className="w-[180px] !bg-background">
-                        <SelectValue placeholder="Select" />
+                        <SelectValue placeholder="Select topic" />
                     </SelectTrigger>
-                    <SelectContent className="!bg-background">
-                        <SelectItem value="light">Light</SelectItem>
-                        <SelectItem value="dark">Dark</SelectItem>
-                        <SelectItem value="system">System</SelectItem>
+                    <SelectContent className="!bg-background" side="right">
+                        {topics.map((topic) => (
+                            <SelectItem key={topic.id} value={`${topic.id}`}>
+                                {topic.name}
+                            </SelectItem>
+                        ))}
                     </SelectContent>
                 </Select>
             </div>
