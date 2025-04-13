@@ -14,7 +14,11 @@ export default function Workspace() {
     const { templates, forms } = useLoaderData();
     const [tabId, setTabId] = useState(0);
     return (
-        <Form action="/workspace" method="post">
+        <Form
+            action="/workspace"
+            method="post"
+            className="max-w-[768px] mx-auto"
+        >
             <Input
                 hidden
                 readOnly
@@ -51,8 +55,8 @@ export default function Workspace() {
                 <Table
                     data={forms}
                     attributes={formsTableAttributes}
-                    buttons={workspaceButtons}
-                    renderCheckbox={true}
+                    // buttons={workspaceButtons}
+                    // renderCheckbox={true}
                     shouldSort={true}
                     url={['forms', 'templates']}
                 />

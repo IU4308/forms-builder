@@ -63,6 +63,9 @@ export const templatesTableAttributes = [
         label: 'description',
     },
     {
+        label: 'topic',
+    },
+    {
         label: 'createdAt',
     },
 ];
@@ -129,8 +132,9 @@ export const workspaceButtons: ToolbarButton[] = [
     },
     {
         label: 'delete',
-        description: 'Delete template/form',
+        description: 'Delete template',
         variant: 'destructive',
+        // url: '/templates',
         icon: <FiTrash />,
     },
 ];
