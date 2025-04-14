@@ -80,15 +80,8 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         }
         if (mode === 'template') {
             topics = await getTopics();
-        }
-        if (
-            mode === 'template' &&
-            (template?.creatorId === currentUser.userId || currentUser.isAdmin)
-        ) {
             templateForms = await getTemplateForms(templateId);
         }
-
-        console.log(templateForms);
         return {
             currentUser,
             mode,

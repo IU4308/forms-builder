@@ -86,8 +86,8 @@ export default function CustomField({
                     <Checkbox
                         name={`${id}Answer`}
                         disabled={mode === 'template' || !canEdit}
-                        value={'on'}
-                        defaultChecked={answer === 'on'}
+                        value={'1'}
+                        defaultChecked={`${answer}` === 'true'}
                     />
                 </>
             )}
