@@ -69,10 +69,6 @@ export const templatesTableAttributes = [
         key: 'title',
     },
     {
-        label: 'description',
-        key: 'description',
-    },
-    {
         label: 'topic',
         key: 'topic',
     },

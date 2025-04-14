@@ -2,6 +2,8 @@ import { useLoaderData } from 'react-router';
 import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { format } from 'date-fns';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export default function FormHeader() {
     const { template, currentUser } = useLoaderData();
@@ -9,7 +11,9 @@ export default function FormHeader() {
         <>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
                 <h1 className="">{template.title}</h1>
-                <h2>{template.description}</h2>
+                <Markdown remarkPlugins={[remarkGfm]}>
+                    {template.description}
+                </Markdown>
                 {template.imageUrl && (
                     <img src={template.imageUrl} alt="template image" />
                 )}
