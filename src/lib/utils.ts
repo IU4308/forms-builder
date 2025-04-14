@@ -110,7 +110,6 @@ export const getAnswersAttributes = (form: any) => {
             });
         }
     }
-    console.log(attributes);
     return attributes;
 };
 

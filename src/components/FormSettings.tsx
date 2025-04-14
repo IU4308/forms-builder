@@ -9,6 +9,9 @@ import {
 } from '@/components/ui/select';
 import { useLoaderData } from 'react-router';
 import { TemplateType, Topic } from '@/lib/definitions';
+import { useState } from 'react';
+import MDEditor from '@uiw/react-md-editor';
+import rehypeSanitize from 'rehype-sanitize';
 
 type LoaderData = {
     template: TemplateType;
@@ -17,6 +20,10 @@ type LoaderData = {
 
 export default function FormSettings() {
     const { template, topics } = useLoaderData<LoaderData>();
+    const [description, setDescription] = useState(
+        template?.description ?? 'No description'
+    );
+    console.log(description);
     return (
         <div className="max-w-[768px] mx-auto flex flex-col gap-4  py-6 px-4 md:px-16">
             <div className="flex flex-col gap-2">
@@ -30,12 +37,17 @@ export default function FormSettings() {
             </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="description">Description</Label>
-                <Input
-                    id="description"
-                    defaultValue={template?.description ?? 'No description'}
-                    name="description"
-                    className="!bg-background"
-                />
+                <div className="container">
+                    <MDEditor
+                        id="description"
+                        value={description}
+                        onChange={(value) => setDescription(value ?? '')}
+                        previewOptions={{
+                            rehypePlugins: [[rehypeSanitize]],
+                        }}
+                    />
+                </div>
+                <input type="hidden" name="description" value={description} />
             </div>
             <div className="flex flex-col gap-4">
                 <Label>Topic</Label>
