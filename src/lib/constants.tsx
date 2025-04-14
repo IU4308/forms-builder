@@ -94,8 +94,8 @@ export const formsTableAttributes = [
         key: 'title',
     },
     {
-        label: 'description',
-        key: 'description',
+        label: 'topic',
+        key: 'topic',
     },
     {
         label: 'submittedAt',

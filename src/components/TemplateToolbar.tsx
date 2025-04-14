@@ -8,20 +8,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { QuestionType } from '@/lib/definitions';
 
-const Type = ({
-    value,
-    onAddField,
-}: {
-    value: QuestionType;
-    onAddField: (type: QuestionType) => void;
-}) => {
-    return (
-        <DropdownMenuItem onClick={() => onAddField(value)}>
-            {value}
-        </DropdownMenuItem>
-    );
-};
-
 const types = ['singleLine', 'multipleLine', 'integerValue', 'checkbox'];
 
 export default function TemplateToolbar({
@@ -39,11 +25,11 @@ export default function TemplateToolbar({
                     <DropdownMenuLabel>Select type</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     {types.map((type) => (
-                        <Type
-                            key={type}
-                            value={type as QuestionType}
-                            onAddField={onAddField}
-                        />
+                        <DropdownMenuItem
+                            onClick={() => onAddField(type as QuestionType)}
+                        >
+                            {type}
+                        </DropdownMenuItem>
                     ))}
                 </DropdownMenuContent>
             </DropdownMenu>

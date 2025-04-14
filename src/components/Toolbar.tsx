@@ -40,7 +40,6 @@ export default function Toolbar({
     isDisabled: boolean;
     buttons?: ToolbarButton[];
 }) {
-    console.log(buttons);
     return (
         <div className="sticky top-[53px] bg-background z-20 flex gap-2 py-2">
             {buttons!.map((button) => (

@@ -64,6 +64,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
             template,
             topics,
             templateForms,
+            users,
             canEdit = !!currentUser;
         if (formId) {
             mode = 'form';
@@ -81,6 +82,13 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         if (mode === 'template') {
             topics = await getTopics();
             templateForms = await getTemplateForms(templateId);
+            users = (await getAllUsers()).map((user) => {
+                return {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                };
+            });
         }
         return {
             currentUser,
@@ -88,6 +96,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
             template,
             templateForms,
             topics,
+            users,
             canEdit,
         };
     } catch (error: any) {

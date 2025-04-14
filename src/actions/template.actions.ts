@@ -5,7 +5,6 @@ import { ActionFunctionArgs, redirect } from 'react-router';
 export const publish = async ({ request }: { request: Request }) => {
     try {
         const formData = await request.formData();
-        console.log(formData);
         const response = await api.post('/templates', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -25,7 +24,6 @@ export const updateTemplate = async ({
 }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
-        console.log(formData);
         const { templateId } = params;
         const response = await api.put(`/templates/${templateId}`, formData, {
             headers: {
