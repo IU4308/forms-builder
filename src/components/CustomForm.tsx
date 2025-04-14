@@ -6,6 +6,7 @@ import TemplateToolbar from './TemplateToolbar';
 import { getQuestionType } from '@/lib/utils';
 import { useLoaderData } from 'react-router';
 import FormHeader from './FormHeader';
+import { Button } from './ui/button';
 
 export default function CustomForm({
     mode,
@@ -59,7 +60,7 @@ export default function CustomForm({
     };
 
     return (
-        <div className="flex flex-col gap-4 ">
+        <div className="max-w-[768px] mx-auto flex flex-col gap-4 ">
             {mode === 'template' && (
                 <TemplateToolbar onAddField={handleAddField} />
             )}
@@ -76,6 +77,12 @@ export default function CustomForm({
                     canEdit={canEdit}
                 />
             ))}
+
+            {mode === 'form' && canEdit && (
+                <div>
+                    <Button type="submit">Submit</Button>
+                </div>
+            )}
         </div>
     );
 }

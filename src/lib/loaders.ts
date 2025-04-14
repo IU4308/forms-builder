@@ -87,6 +87,8 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
         ) {
             templateForms = await getTemplateForms(templateId);
         }
+
+        console.log(templateForms);
         return {
             currentUser,
             mode,

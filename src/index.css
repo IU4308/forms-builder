@@ -131,5 +131,19 @@
     cursor: pointer;
   }
 
+  *::-webkit-scrollbar-track {
+    background-color: var(--color-secondary);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-foreground); 
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-color: var(--color-foreground) var(--color-secondary);
+    scrollbar-width: thin;
+  }
+
 }
 

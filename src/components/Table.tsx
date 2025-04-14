@@ -70,14 +70,14 @@ const Header = ({
                                         variant={'ghost'}
                                         onClick={() =>
                                             handleChangeSorter!(
-                                                cell.label as AdminTableLabel
+                                                cell.key as AdminTableLabel
                                             )
                                         }
                                     >
                                         <span>
                                             {setSentenceCase(cell.label)}
                                         </span>
-                                        {sorter === cell.label ? (
+                                        {sorter === cell.key ? (
                                             isDescending ? (
                                                 <ChevronDownIcon className="icon-2" />
                                             ) : (
@@ -145,7 +145,10 @@ const Body = ({
                                             }
                                             className=" block px-2 py-4"
                                         >
-                                            {formatContent(cell.content)}
+                                            {formatContent(cell.content).slice(
+                                                0,
+                                                25
+                                            )}
                                         </a>
                                     ) : (
                                         formatContent(cell.content)
@@ -178,7 +181,7 @@ export default function Table({
 }) {
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
     const [sorter, setSorter] = useState(
-        shouldSort ? attributes[1].label : undefined
+        shouldSort ? attributes[1].key : undefined
     );
     const [isDescending, setIsDescending] = useState(true);
     const handleChangeSorter = (label: string) => {
@@ -187,6 +190,7 @@ export default function Table({
     };
 
     const body = getTableBody(attributes, data, sorter, isDescending);
+    console.log(body);
     const allSelected = body.length === selectedRows.length;
 
     const handleAllSelected = () => {

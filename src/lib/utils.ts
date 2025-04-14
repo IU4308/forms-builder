@@ -26,7 +26,7 @@ export const getTableBody = (
         body.push(
             attributes.map((item) => {
                 return {
-                    content: element[item.label],
+                    content: element[item.key],
                     label: item.label,
                     className: item.className ?? '',
                     shouldRender: item.shouldRender ?? true,
@@ -91,6 +91,50 @@ export const getFlash = () => {
 export const getQuestionType = (id: string) => {
     return id.slice(0, id.length - 1);
 };
+
+export const getAnswersAttributes = (form: any) => {
+    let attributes = [];
+    for (const key of Object.keys(form)) {
+        if (!key.includes('Answer') && !key.includes('State')) {
+            attributes.push({
+                label: key,
+                key: key,
+                shouldRender: key !== 'id',
+            });
+        }
+        if (key.includes('Answer')) {
+            attributes.push({
+                label: key.replace('Answer', ''),
+                key: key,
+                shouldRender: form[key.replace('Answer', 'State')],
+            });
+        }
+    }
+    console.log(attributes);
+    return attributes;
+};
+
+const test = [
+    {
+        label: 'id',
+        key: 'id',
+        shouldRender: false,
+    },
+    {
+        label: 'name',
+        key: 'name',
+    },
+    {
+        label: 'email',
+        key: 'email',
+    },
+    {
+        label: 'submittedAt',
+        key: 'submittedAt',
+    },
+];
+
+// export const get
 
 // type FildKey = 'State' | 'Question' | 'Description';
 

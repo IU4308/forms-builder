@@ -10,7 +10,7 @@ export default function TabPanel({
     setTabId: React.Dispatch<React.SetStateAction<number>>;
 }) {
     return (
-        <div className="mb-4 flex gap-2 justify-center">
+        <div className="flex gap-2 justify-center">
             {buttons.map((button) => (
                 <Button
                     key={button.label}

@@ -29,94 +29,98 @@ export const navMenu = [
 export const adminTableAttributes = [
     {
         label: 'id',
+        key: 'id',
         shouldRender: false,
     },
     {
         label: 'name',
+        key: 'name',
     },
     {
         label: 'email',
+        key: 'email',
     },
     {
         label: 'createdAt',
+        key: 'createdAt',
     },
     {
         label: 'lastLogin',
+        key: 'lastLogin',
     },
     {
         label: 'isBlocked',
+        key: 'isBlocked',
     },
     {
         label: 'isAdmin',
+        key: 'isAdmin',
     },
 ];
 
 export const templatesTableAttributes = [
     {
         label: 'id',
+        key: 'id',
         shouldRender: false,
     },
     {
         label: 'title',
+        key: 'title',
     },
     {
         label: 'description',
+        key: 'description',
     },
     {
         label: 'topic',
+        key: 'topic',
     },
     {
         label: 'createdAt',
+        key: 'createdAt',
     },
 ];
 
 export const formsTableAttributes = [
     {
         label: 'id',
+        key: 'id',
         shouldRender: false,
     },
     {
         label: 'templateId',
+        key: 'templateId',
         shouldRender: false,
     },
     {
         label: 'title',
+        key: 'title',
     },
     {
         label: 'description',
+        key: 'description',
     },
     {
         label: 'submittedAt',
-    },
-];
-
-export const templateFormsTableAttributes = [
-    {
-        label: 'id',
-        shouldRender: false,
-    },
-    {
-        label: 'name',
-    },
-    {
-        label: 'email',
-    },
-    {
-        label: 'submittedAt',
+        key: 'submittedAt',
     },
 ];
 
 export const homeTableAttributes = [
     {
         label: 'title',
+        key: 'title',
         className: '',
     },
     {
         label: 'author',
+        key: 'author',
         className: '',
     },
     {
         label: 'submissions',
+        key: 'submissions',
         className: 'text-right',
     },
 ];

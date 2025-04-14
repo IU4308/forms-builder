@@ -18,7 +18,7 @@ type LoaderData = {
 export default function FormSettings() {
     const { template, topics } = useLoaderData<LoaderData>();
     return (
-        <div className="flex flex-col gap-4  py-6 px-4 md:px-16">
+        <div className="max-w-[768px] mx-auto flex flex-col gap-4  py-6 px-4 md:px-16">
             <div className="flex flex-col gap-2">
                 <Label htmlFor="title">Title</Label>
                 <Input

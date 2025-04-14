@@ -34,6 +34,7 @@ export interface User {
 
 export type TableAttributes = {
     label: string;
+    key: string;
     className?: string;
     shouldRender?: boolean;
 }[];
@@ -48,9 +49,6 @@ export type ToolbarButton = {
     url?: string;
 };
 
-// export type TableAttributes = typeof adminTableAttributes;
-
-// export type AdminTableLabel = (typeof adminTableAttributes)[number]['label'];
 export type AdminTableLabel =
     | 'id'
     | 'name'
