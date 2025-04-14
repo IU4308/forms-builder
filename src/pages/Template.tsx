@@ -84,14 +84,20 @@ export default function Template() {
                                         tabId !== 3 && 'hidden'
                                     )}
                                 >
-                                    <Table
-                                        data={templateForms}
-                                        attributes={getAnswersAttributes(
-                                            templateForms[0]
-                                        )}
-                                        shouldSort={true}
-                                        url={`templates/${templateId}/forms`}
-                                    />
+                                    {templateForms.length > 0 ? (
+                                        <Table
+                                            data={templateForms}
+                                            attributes={getAnswersAttributes(
+                                                templateForms[0]
+                                            )}
+                                            shouldSort={true}
+                                            url={`templates/${templateId}/forms`}
+                                        />
+                                    ) : (
+                                        <h1 className="flex justify-center">
+                                            No answers
+                                        </h1>
+                                    )}
                                 </div>
                             )}
                         </>

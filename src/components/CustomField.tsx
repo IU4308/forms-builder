@@ -82,7 +82,7 @@ export default function CustomField({
                 />
             ) : (
                 <>
-                    <input type="hidden" name={`${id}Answer`} value="" />
+                    <input type="hidden" name={`${id}Answer`} value="0" />
                     <Checkbox
                         name={`${id}Answer`}
                         disabled={mode === 'template' || !canEdit}

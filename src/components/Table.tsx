@@ -145,10 +145,7 @@ const Body = ({
                                             }
                                             className=" block px-2 py-4"
                                         >
-                                            {formatContent(cell.content).slice(
-                                                0,
-                                                25
-                                            )}
+                                            {formatContent(cell.content)}
                                         </a>
                                     ) : (
                                         formatContent(cell.content)

@@ -46,7 +46,7 @@ export const formatContent = (content: any) => {
     ) {
         return format(new Date(content), 'MMM dd, yyyy HH:mm:ss');
     }
-    return content;
+    return content.length > 16 ? content.slice(0, 15) + '...' : content;
 };
 
 export const sortData = (
@@ -113,26 +113,6 @@ export const getAnswersAttributes = (form: any) => {
     console.log(attributes);
     return attributes;
 };
-
-const test = [
-    {
-        label: 'id',
-        key: 'id',
-        shouldRender: false,
-    },
-    {
-        label: 'name',
-        key: 'name',
-    },
-    {
-        label: 'email',
-        key: 'email',
-    },
-    {
-        label: 'submittedAt',
-        key: 'submittedAt',
-    },
-];
 
 // export const get
 
