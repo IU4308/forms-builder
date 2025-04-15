@@ -5,6 +5,7 @@ import * as changeCase from 'change-case';
 import { cn, getQuestionType } from '@/lib/utils';
 import { Button } from './ui/button';
 import { IoTrash } from 'react-icons/io5';
+import { Textarea } from './ui/textarea';
 
 type CustomFieldProps = Field & {
     mode: InterfaceMode;
@@ -71,16 +72,29 @@ export default function CustomField({
                 className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 disabled={mode === 'form'}
             />
-            {questionType !== 'checkbox' ? (
-                <Input
+            {questionType === 'singleLine' ||
+                (questionType === 'integerValue' && (
+                    <Input
+                        name={`${id}Answer`}
+                        type={
+                            questionType === 'integerValue' ? 'number' : 'text'
+                        }
+                        className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
+                        placeholder={`${changeCase.sentenceCase(questionType)} answer`}
+                        defaultValue={answer ?? ''}
+                        disabled={mode === 'template' || !canEdit}
+                    />
+                ))}
+            {questionType === 'multipleLine' && (
+                <Textarea
                     name={`${id}Answer`}
-                    type={questionType === 'integerValue' ? 'number' : 'text'}
-                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
+                    className="!bg-accent"
                     placeholder={`${changeCase.sentenceCase(questionType)} answer`}
                     defaultValue={answer ?? ''}
                     disabled={mode === 'template' || !canEdit}
                 />
-            ) : (
+            )}
+            {questionType === 'checkbox' && (
                 <>
                     <input type="hidden" name={`${id}Answer`} value="0" />
                     <Checkbox
