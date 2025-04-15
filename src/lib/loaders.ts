@@ -74,6 +74,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                 currentUser.isAdmin;
         } else if (templateId) {
             template = await getTemplate(templateId);
+
             mode =
                 template.creatorId === currentUser.userId || currentUser.isAdmin
                     ? 'template'
@@ -89,11 +90,19 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                     email: user.email,
                 };
             });
+        } else {
+            if (
+                formId === undefined &&
+                !template.isPublic &&
+                !template.allowedIds.includes(currentUser.userId)
+            )
+                return redirect('/');
         }
         return {
             currentUser,
             mode,
             template,
+            allowedIds: template?.allowedIds,
             templateForms,
             topics,
             users,

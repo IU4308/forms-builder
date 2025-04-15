@@ -24,6 +24,7 @@ export const updateTemplate = async ({
 }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
+        console.log(Object.fromEntries(formData));
         const { templateId } = params;
         const response = await api.put(`/templates/${templateId}`, formData, {
             headers: {

@@ -102,6 +102,7 @@ export type TemplateType = {
     description: string;
     imageUrl: string | null;
     topicId: number;
+    isPublic: boolean;
     createdAt: Date;
 
     // Single Line Fields

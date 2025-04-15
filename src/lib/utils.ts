@@ -46,7 +46,7 @@ export const formatContent = (content: any) => {
     ) {
         return format(new Date(content), 'MMM dd, yyyy HH:mm:ss');
     }
-    return content.length > 16 ? content.slice(0, 15) + '...' : content;
+    return content.length > 26 ? content.slice(0, 25) + '...' : content;
 };
 
 export const sortData = (

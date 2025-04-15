@@ -16,14 +16,15 @@ export default function GeneralSettings({
     template,
     topics,
 }: {
-    template: TemplateType;
+    template: TemplateType | undefined;
     topics: Topic[];
 }) {
     const [description, setDescription] = useState(
         template?.description ?? 'No description'
     );
     return (
-        <>
+        <div className="flex flex-col gap-4 py-4">
+            <h1>General settings</h1>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="title">Title</Label>
                 <Input
@@ -82,6 +83,6 @@ export default function GeneralSettings({
                 <Label htmlFor="tags">Tags</Label>
                 <Input id="tags" className="!bg-background" />
             </div>
-        </>
+        </div>
     );
 }
