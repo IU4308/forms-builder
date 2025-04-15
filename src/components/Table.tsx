@@ -33,6 +33,7 @@ const Header = ({
     sorter,
     handleChangeSorter,
     isDescending,
+    shouldSubmit,
 }: {
     attributes: TableAttributes;
     body: Cell[][];
@@ -42,6 +43,7 @@ const Header = ({
     sorter?: string;
     handleChangeSorter?: (label: string) => void;
     isDescending?: boolean;
+    shouldSubmit?: boolean;
 }) => {
     return (
         <TableHeader>
@@ -50,7 +52,7 @@ const Header = ({
                     <TableHead>
                         <Checkbox
                             className="w-5 h-5"
-                            name="allIds"
+                            name={shouldSubmit ? 'allIds' : ''}
                             value={body.map(
                                 (item) => item[0].content as string
                             )}
@@ -60,9 +62,12 @@ const Header = ({
                     </TableHead>
                 )}
                 {attributes.map(
-                    (cell, index) =>
+                    (cell) =>
                         (cell.shouldRender ?? true) && (
-                            <TableHead key={index} className={cell.className}>
+                            <TableHead
+                                key={cell.label}
+                                className={cell.className}
+                            >
                                 {sorter ? (
                                     <Button
                                         type="button"
@@ -104,25 +109,31 @@ const Body = ({
     url,
     selectedRows,
     handleSelect,
+    shouldSubmit,
 }: {
     url?: string | string[];
     body: Cell[][];
     renderCheckbox?: boolean;
-    selectedRows?: number[];
-    handleSelect?: (index: number) => void;
+    selectedRows?: string[];
+    handleSelect?: (id: string) => void;
+    shouldSubmit?: boolean;
 }) => {
     return (
         <TableBody>
-            {body.map((row, index) => (
+            {body.map((row) => (
                 <TableRow key={row[0].content as string}>
                     {renderCheckbox && (
                         <TableCell>
                             <Checkbox
-                                name="id"
+                                name={shouldSubmit ? 'id' : ''}
                                 className="w-5 h-5"
                                 value={row[0].content as string}
-                                checked={selectedRows?.includes(index)}
-                                onClick={() => handleSelect!(index)}
+                                checked={selectedRows?.includes(
+                                    row[0].content as string
+                                )}
+                                onClick={() =>
+                                    handleSelect!(row[0].content as string)
+                                }
                             />
                         </TableCell>
                     )}
@@ -167,6 +178,8 @@ export default function Table({
     slot,
     renderCheckbox = false,
     shouldSort = false,
+    shouldSubmit = true,
+    handleMarkToRemove,
 }: {
     url?: string | string[];
     data: { [key: string]: any }[];
@@ -175,8 +188,10 @@ export default function Table({
     slot?: ReactNode;
     renderCheckbox?: boolean;
     shouldSort?: boolean;
+    shouldSubmit?: boolean;
+    handleMarkToRemove?: (ids: string[]) => void;
 }) {
-    const [selectedRows, setSelectedRows] = useState<number[]>([]);
+    const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [sorter, setSorter] = useState(
         shouldSort ? attributes[1].key : undefined
     );
@@ -190,19 +205,22 @@ export default function Table({
     const allSelected = body.length === selectedRows.length;
 
     const handleAllSelected = () => {
-        setSelectedRows(allSelected ? [] : _.range(body.length));
+        setSelectedRows(
+            allSelected ? [] : body.map((row) => row[0].content as string)
+        );
     };
 
-    const handleSelect = (index: number) => {
+    const handleSelect = (id: string) => {
         setSelectedRows(
-            selectedRows.includes(index)
-                ? selectedRows.filter((rowIndex) => rowIndex !== index)
-                : [...selectedRows, index]
+            selectedRows.includes(id)
+                ? selectedRows.filter((rowId) => rowId !== id)
+                : [...selectedRows, id]
         );
     };
     useEffect(() => {
         setSelectedRows([]);
     }, [data]);
+
     return (
         <section>
             {slot}
@@ -210,6 +228,9 @@ export default function Table({
                 <Toolbar
                     isDisabled={selectedRows.length === 0}
                     buttons={buttons}
+                    shouldSubmit={shouldSubmit}
+                    handleMarkToRemove={handleMarkToRemove}
+                    selectedRows={selectedRows}
                 />
             )}
 
@@ -223,6 +244,7 @@ export default function Table({
                     sorter={sorter}
                     handleChangeSorter={handleChangeSorter}
                     isDescending={isDescending}
+                    shouldSubmit={shouldSubmit}
                 />
                 {data.length !== 0 && (
                     <Body
@@ -231,6 +253,7 @@ export default function Table({
                         renderCheckbox={renderCheckbox}
                         handleSelect={handleSelect}
                         selectedRows={selectedRows}
+                        shouldSubmit={shouldSubmit}
                     />
                 )}
             </T>

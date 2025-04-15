@@ -10,8 +10,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Label } from './ui/label';
 import { Checkbox } from './ui/checkbox';
+import { ToolbarButton } from '@/lib/definitions';
+import { IoRemoveCircleOutline } from 'react-icons/io5';
 
 const attributes = [
+    {
+        label: 'id',
+        key: 'id',
+        shouldRender: false,
+    },
     {
         label: 'name',
         key: 'name',
@@ -21,6 +28,16 @@ const attributes = [
         label: 'email',
         key: 'email',
         shouldRender: true,
+    },
+];
+
+const buttons: ToolbarButton[] = [
+    {
+        label: 'remove',
+        type: 'button',
+        description: 'Remove user',
+        variant: 'destructive',
+        icon: <IoRemoveCircleOutline />,
     },
 ];
 
@@ -35,9 +52,12 @@ export default function AccessSettings({
 }) {
     const [isPublic, setIsPublic] = useState(isPublicState ?? true);
     const [selectedIds, setSelectedIds] = useState<string[]>(allowedIds ?? []);
-    const handleAddId = (id: string) => {
+    const handleAddId = (id: string) =>
         setSelectedIds((prevIds) => [...prevIds, id]);
-    };
+    const handleMarkToRemove = (markedIds: string[]) =>
+        setSelectedIds((prevIds) =>
+            prevIds.filter((id) => !markedIds.includes(id))
+        );
     const handleIsPublic = () => setIsPublic(!isPublic);
     return (
         <div className="pb-20">
@@ -103,7 +123,11 @@ export default function AccessSettings({
                             selectedIds.includes(user.id)
                         )}
                         attributes={attributes}
+                        buttons={buttons}
+                        renderCheckbox={true}
                         shouldSort={true}
+                        shouldSubmit={false}
+                        handleMarkToRemove={handleMarkToRemove}
                     />
                 </>
             )}

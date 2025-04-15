@@ -12,9 +12,15 @@ import { Link } from 'react-router';
 const ToolbarBtn = ({
     button,
     isDisabled,
+    shouldSubmit,
+    handleMarkToRemove,
+    selectedRows,
 }: {
     button: ToolbarButton;
     isDisabled: boolean;
+    shouldSubmit: boolean;
+    handleMarkToRemove?: (ids: string[]) => void;
+    selectedRows: string[];
 }) => {
     return (
         <Button
@@ -24,6 +30,11 @@ const ToolbarBtn = ({
             value={button.label}
             variant={button.variant ?? 'outline'}
             disabled={isDisabled && (button.canBeDisabled ?? true)}
+            onClick={() => {
+                if (!shouldSubmit) {
+                    handleMarkToRemove!(selectedRows);
+                }
+            }}
         >
             <span>{button?.icon}</span>
             <span className="hidden md:inline">
@@ -36,9 +47,15 @@ const ToolbarBtn = ({
 export default function Toolbar({
     isDisabled,
     buttons,
+    shouldSubmit,
+    handleMarkToRemove,
+    selectedRows,
 }: {
     isDisabled: boolean;
     buttons?: ToolbarButton[];
+    shouldSubmit: boolean;
+    handleMarkToRemove?: (ids: string[]) => void;
+    selectedRows: string[];
 }) {
     return (
         <div className="sticky top-[53px] bg-background z-20 flex gap-2 py-2">
@@ -51,6 +68,9 @@ export default function Toolbar({
                                     <ToolbarBtn
                                         button={button}
                                         isDisabled={isDisabled}
+                                        shouldSubmit={shouldSubmit}
+                                        handleMarkToRemove={handleMarkToRemove}
+                                        selectedRows={selectedRows}
                                     />
                                 </Link>
                             ) : (
@@ -58,6 +78,9 @@ export default function Toolbar({
                                     <ToolbarBtn
                                         button={button}
                                         isDisabled={isDisabled}
+                                        shouldSubmit={shouldSubmit}
+                                        handleMarkToRemove={handleMarkToRemove}
+                                        selectedRows={selectedRows}
                                     />
                                 </span>
                             )}
