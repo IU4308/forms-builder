@@ -13,6 +13,7 @@ import {
 import { useState } from 'react';
 import { CurrentUser } from '@/lib/definitions';
 import { getMenu } from '@/lib/utils';
+import { useMediaQuery } from 'react-responsive';
 
 type NavItemProps = {
     title: string;
@@ -43,7 +44,13 @@ const NavItem = ({ title, url, name }: NavItemProps) => {
     );
 };
 
-const DesktopView = ({ name }: { name: string }) => {
+const DesktopView = ({
+    name,
+    isDesktop,
+}: {
+    name: string;
+    isDesktop: boolean;
+}) => {
     const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
     const menu = getMenu(currentUser);
     return (
@@ -59,11 +66,13 @@ const DesktopView = ({ name }: { name: string }) => {
                     >
                         <IoIosSearch />
                     </Button>
-                    <Input
-                        type="text"
-                        name="query"
-                        className="hidden lg:block"
-                    />
+                    {isDesktop && (
+                        <Input
+                            type="text"
+                            name="query"
+                            className="hidden lg:block"
+                        />
+                    )}
                 </div>
             </div>
             <div className="flex items-center">
@@ -79,23 +88,28 @@ const DesktopView = ({ name }: { name: string }) => {
     );
 };
 
-const MobileView = ({ name }: { name: string }) => {
+const MobileView = ({
+    name,
+    isDesktop,
+}: {
+    name: string;
+    isDesktop: boolean;
+}) => {
     return (
         <nav className="p-2 lg:hidden flex justify-between">
             <div className="flex gap-2 w-[75%]">
                 <DropDown name={name} />
                 <div className="relative w-[90%]">
-                    <Button
-                        className="absolute right-4 top-1/4"
-                        variant={'outline'}
-                    >
+                    <Button className="absolute right-0" variant={'secondary'}>
                         <IoIosSearch />
                     </Button>
-                    <Input
-                        type="text"
-                        name="query"
-                        className="block lg:hidden"
-                    />
+                    {!isDesktop && (
+                        <Input
+                            type="text"
+                            name="query"
+                            className="block lg:hidden"
+                        />
+                    )}
                 </div>
             </div>
             <div className="flex items-center">
@@ -141,10 +155,11 @@ const SideButtons = () => {
 
 export default function Header() {
     const { currentUser } = useLoaderData();
+    const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
     return (
         <Form method="get" className="sticky z-10 bg-background top-0 border-b">
-            <DesktopView name={currentUser?.name} />
-            <MobileView name={currentUser?.name} />
+            <DesktopView name={currentUser?.name} isDesktop={isDesktop} />
+            <MobileView name={currentUser?.name} isDesktop={isDesktop} />
         </Form>
     );
 }
