@@ -72,19 +72,16 @@ export default function CustomField({
                 className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 disabled={mode === 'form'}
             />
-            {questionType === 'singleLine' ||
-                (questionType === 'integerValue' && (
-                    <Input
-                        name={`${id}Answer`}
-                        type={
-                            questionType === 'integerValue' ? 'number' : 'text'
-                        }
-                        className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
-                        placeholder={`${changeCase.sentenceCase(questionType)} answer`}
-                        defaultValue={answer ?? ''}
-                        disabled={mode === 'template' || !canEdit}
-                    />
-                ))}
+            {questionType !== 'multipleLine' && questionType !== 'checkbox' && (
+                <Input
+                    name={`${id}Answer`}
+                    type={questionType === 'integerValue' ? 'number' : 'text'}
+                    className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
+                    placeholder={`${changeCase.sentenceCase(questionType)} answer`}
+                    defaultValue={answer ?? ''}
+                    disabled={mode === 'template' || !canEdit}
+                />
+            )}
             {questionType === 'multipleLine' && (
                 <Textarea
                     name={`${id}Answer`}

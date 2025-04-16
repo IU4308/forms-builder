@@ -1,5 +1,5 @@
 import { Button } from './ui/button';
-import { NavLink, useLoaderData } from 'react-router';
+import { Form, NavLink, useLoaderData } from 'react-router';
 import { Input } from './ui/input';
 import { IoIosSearch } from 'react-icons/io';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -53,8 +53,17 @@ const DesktopView = ({ name }: { name: string }) => {
                     <NavItem key={item.title} {...item} />
                 ))}
                 <div className=" relative w-full min-w-[400px] ">
-                    <IoIosSearch className="absolute right-4 top-1/4" />
-                    <Input type="text" className="" />
+                    <Button
+                        className="absolute right-4 top-1/4"
+                        variant={'outline'}
+                    >
+                        <IoIosSearch />
+                    </Button>
+                    <Input
+                        type="text"
+                        name="query"
+                        className="hidden lg:block"
+                    />
                 </div>
             </div>
             <div className="flex items-center">
@@ -76,8 +85,17 @@ const MobileView = ({ name }: { name: string }) => {
             <div className="flex gap-2 w-[75%]">
                 <DropDown name={name} />
                 <div className="relative w-[90%]">
-                    <IoIosSearch className="absolute right-4 top-1/4" />
-                    <Input type="text" className="" />
+                    <Button
+                        className="absolute right-4 top-1/4"
+                        variant={'outline'}
+                    >
+                        <IoIosSearch />
+                    </Button>
+                    <Input
+                        type="text"
+                        name="query"
+                        className="block lg:hidden"
+                    />
                 </div>
             </div>
             <div className="flex items-center">
@@ -124,9 +142,9 @@ const SideButtons = () => {
 export default function Header() {
     const { currentUser } = useLoaderData();
     return (
-        <div className="sticky z-10 bg-background top-0 border-b">
+        <Form method="get" className="sticky z-10 bg-background top-0 border-b">
             <DesktopView name={currentUser?.name} />
             <MobileView name={currentUser?.name} />
-        </div>
+        </Form>
     );
 }

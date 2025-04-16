@@ -98,7 +98,6 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
             )
                 return redirect('/');
         }
-        console.log(template);
         return {
             currentUser,
             mode,
