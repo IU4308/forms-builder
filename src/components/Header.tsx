@@ -61,8 +61,8 @@ const DesktopView = ({
                 ))}
                 <div className=" relative w-full min-w-[400px] ">
                     <Button
-                        className="absolute right-0 border-0"
-                        variant={'outline'}
+                        className="absolute right-0 border border-l-0 rounded-l-none !border-input/10"
+                        variant={'secondary'}
                     >
                         <IoIosSearch />
                     </Button>
@@ -70,7 +70,7 @@ const DesktopView = ({
                         <Input
                             type="text"
                             name="query"
-                            className="hidden lg:block"
+                            className="hidden lg:block !border-secondary"
                         />
                     )}
                 </div>
