@@ -61,7 +61,7 @@ const DesktopView = ({
                 ))}
                 <div className=" relative w-full min-w-[400px] ">
                     <Button
-                        className="absolute right-4 top-1/4"
+                        className="absolute right-0 border-0"
                         variant={'outline'}
                     >
                         <IoIosSearch />
@@ -100,7 +100,10 @@ const MobileView = ({
             <div className="flex gap-2 w-[75%]">
                 <DropDown name={name} />
                 <div className="relative w-[90%]">
-                    <Button className="absolute right-0" variant={'secondary'}>
+                    <Button
+                        className="absolute right-0 border-1 border-l-0 rounded-l-none"
+                        variant={'secondary'}
+                    >
                         <IoIosSearch />
                     </Button>
                     {!isDesktop && (
@@ -154,10 +157,14 @@ const SideButtons = () => {
 };
 
 export default function Header() {
-    const { currentUser } = useLoaderData();
+    const { currentUser, path } = useLoaderData();
     const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
     return (
-        <Form method="get" className="sticky z-10 bg-background top-0 border-b">
+        <Form
+            method="get"
+            action={path}
+            className="sticky z-10 bg-background top-0 border-b"
+        >
             <DesktopView name={currentUser?.name} isDesktop={isDesktop} />
             <MobileView name={currentUser?.name} isDesktop={isDesktop} />
         </Form>

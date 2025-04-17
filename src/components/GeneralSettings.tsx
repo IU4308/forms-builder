@@ -11,8 +11,7 @@ import { TemplateType, Topic } from '@/lib/definitions';
 import { useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from 'rehype-sanitize';
-import { Button } from './ui/button';
-import { IoTrash } from 'react-icons/io5';
+import TemplateImage from './TemplateImage';
 
 export default function GeneralSettings({
     template,
@@ -21,10 +20,10 @@ export default function GeneralSettings({
     template: TemplateType | undefined;
     topics: Topic[];
 }) {
+    // const { template } = useLoaderData();
     const [description, setDescription] = useState(
         template?.description ?? 'No description'
     );
-    const [isTrashed, setIsTrashed] = useState(false);
     return (
         <div className="flex flex-col gap-4 py-4">
             <h1>General settings</h1>
@@ -69,34 +68,10 @@ export default function GeneralSettings({
                     </SelectContent>
                 </Select>
             </div>
-            <div className="flex flex-col gap-2">
-                <Label htmlFor="image">Image</Label>
-                {isTrashed && (
-                    <input hidden readOnly name="imageUrl" value={''} />
-                )}
-                {(!template?.imageUrl || isTrashed) && (
-                    <Input
-                        type="file"
-                        id="image"
-                        className="!bg-background"
-                        name="image"
-                        accept="image/*"
-                    />
-                )}
-                {template?.imageUrl && !isTrashed && (
-                    <div className="relative">
-                        <img src={template.imageUrl} alt="template image" />
-                        <Button
-                            type="button"
-                            className="absolute top-2 right-2"
-                            variant={'destructive'}
-                            onClick={() => setIsTrashed(true)}
-                        >
-                            <IoTrash />
-                        </Button>
-                    </div>
-                )}
-            </div>
+            <TemplateImage
+                key={template?.imageUrl}
+                imageUrl={template?.imageUrl}
+            />
             <div className="flex flex-col gap-2">
                 <Label htmlFor="tags">Tags</Label>
                 <Input id="tags" className="!bg-background" />

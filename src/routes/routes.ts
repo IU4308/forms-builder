@@ -13,6 +13,7 @@ import {
     appLoader,
     homeLoader,
     logoutLoader,
+    searchLoader,
     templateLoader,
     workspaceLoader,
 } from '@/lib/loaders';
@@ -27,6 +28,7 @@ import {
     updateTemplate,
 } from '@/actions/template.actions';
 import { submitForm, updateForm } from '@/actions/forms.actions';
+import SearchPage from '@/components/SearchPage';
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +45,11 @@ export const router = createBrowserRouter([
                     {
                         index: true,
                         Component: Home,
+                    },
+                    {
+                        path: '/search/:query',
+                        Component: SearchPage,
+                        loader: searchLoader,
                     },
                     {
                         path: '/admin',

@@ -74,3 +74,15 @@ export const getUserForms = async (userId: string) => {
     });
     return forms;
 };
+
+export const getSearchResults = async (query: string | undefined) => {
+    if (!query) return null;
+    const searchResults = await queryClient.fetchQuery({
+        queryKey: ['searchResults'],
+        queryFn: () =>
+            api
+                .get(`templates/search?q=${encodeURIComponent(query)}`)
+                .then((res) => res.data),
+    });
+    return searchResults;
+};

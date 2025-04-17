@@ -3,6 +3,7 @@ import {
     getAllUsers,
     getCurrentUser,
     getForm,
+    getSearchResults,
     getTemplate,
     getTemplateForms,
     getTopics,
@@ -16,18 +17,27 @@ export const appLoader = async () => {
     return { flash: getFlash() };
 };
 
-export const homeLoader = async () => {
+export const homeLoader = async ({ request }: LoaderFunctionArgs) => {
+    const url = new URL(request.url);
+    const query = url.searchParams.get('query') ?? '';
+    if (query) return redirect(`/search/${query}`);
+    const currentUser = await getCurrentUser();
     try {
-        const currentUser = await getCurrentUser();
         if (currentUser.isBlocked) {
             setFlash('Your account has been blocked', 'error');
             return redirect('/login');
         }
-        return { currentUser };
+        return { currentUser, path: url.pathname };
     } catch (error: any) {
         console.log(error);
         throw new Error('Server error');
     }
+};
+
+export const searchLoader = async ({ params }: LoaderFunctionArgs) => {
+    const { query } = params;
+    const templates = await getSearchResults(query);
+    return { templates, query };
 };
 
 export const workspaceLoader = async () => {
