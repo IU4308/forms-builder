@@ -38,7 +38,6 @@
     "react-markdown": "^10.1.0",
     "react-responsive": "^10.0.1",
     "react-router": "^7.4.1",
-    "react-tag-input-component": "^2.0.2",
     "react-tagcloud": "^2.3.3",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
