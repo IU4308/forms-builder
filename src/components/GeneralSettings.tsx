@@ -1,10 +1,9 @@
-import { Label } from '@radix-ui/react-label';
-import { Input } from './ui/input';
 import { TemplateType, Topic } from '@/lib/definitions';
 import TemplateImage from './TemplateImage';
 import TemplateDescription from './TemplateDescription';
 import TemplateTopic from './TemplateTopic';
 import TemplateTitle from './TemplateTitle';
+import TemplateTags from './TemplateTags';
 
 export default function GeneralSettings({
     template,
@@ -23,10 +22,7 @@ export default function GeneralSettings({
                 key={template?.imageUrl}
                 imageUrl={template?.imageUrl}
             />
-            <div className="flex flex-col gap-2">
-                <Label htmlFor="tags">Tags</Label>
-                <Input id="tags" className="!bg-background" name="tags" />
-            </div>
+            <TemplateTags />
         </div>
     );
 }

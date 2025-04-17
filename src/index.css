@@ -145,5 +145,17 @@
     scrollbar-width: thin;
   }
 
+  .rti--container {
+    @apply w-full min-h-[40px] flex flex-wrap items-center gap-1 !rounded-md border !border-input !bg-background px-3 py-2 text-sm !shadow-sm !ring-offset-background focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-1;
+  }
+  
+  .rti--input {
+    @apply bg-transparent text-sm outline-none w-full;
+  }
+  
+  .rti--tag {
+    @apply !bg-muted text-foreground rounded px-2 py-1 text-sm mr-1 mb-1;
+  }
+
 }
 
