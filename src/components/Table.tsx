@@ -7,13 +7,13 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { cn, formatContent, getTableBody, setSentenceCase } from '@/lib/utils';
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
-    Cell,
     AdminTableLabel,
-    TableAttributes,
-    ToolbarButton,
+    HeaderProps,
+    BodyProps,
+    TableProps,
 } from '@/lib/definitions';
 import { Button } from './ui/button';
 import {
@@ -34,17 +34,7 @@ const Header = ({
     handleChangeSorter,
     isDescending,
     shouldSubmit,
-}: {
-    attributes: TableAttributes;
-    body: Cell[][];
-    renderCheckbox?: boolean;
-    allSelected?: boolean;
-    onClick?: () => void;
-    sorter?: string;
-    handleChangeSorter?: (label: string) => void;
-    isDescending?: boolean;
-    shouldSubmit?: boolean;
-}) => {
+}: HeaderProps) => {
     return (
         <TableHeader>
             <TableRow className="hover:bg-background">
@@ -110,14 +100,7 @@ const Body = ({
     selectedRows,
     handleSelect,
     shouldSubmit,
-}: {
-    url?: string | string[];
-    body: Cell[][];
-    renderCheckbox?: boolean;
-    selectedRows?: string[];
-    handleSelect?: (id: string) => void;
-    shouldSubmit?: boolean;
-}) => {
+}: BodyProps) => {
     return (
         <TableBody>
             {body.map((row) => (
@@ -174,23 +157,14 @@ export default function Table({
     url,
     data,
     attributes,
+    toolbarSlot,
     buttons,
     slot,
     renderCheckbox = false,
     shouldSort = false,
     shouldSubmit = true,
     handleMarkToRemove,
-}: {
-    url?: string | string[];
-    data: { [key: string]: any }[];
-    attributes: TableAttributes;
-    buttons?: ToolbarButton[];
-    slot?: ReactNode;
-    renderCheckbox?: boolean;
-    shouldSort?: boolean;
-    shouldSubmit?: boolean;
-    handleMarkToRemove?: (ids: string[]) => void;
-}) {
+}: TableProps) {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [sorter, setSorter] = useState(
         shouldSort ? attributes[1].key : undefined
@@ -231,6 +205,7 @@ export default function Table({
                     shouldSubmit={shouldSubmit}
                     handleMarkToRemove={handleMarkToRemove}
                     selectedRows={selectedRows}
+                    slot={toolbarSlot}
                 />
             )}
 

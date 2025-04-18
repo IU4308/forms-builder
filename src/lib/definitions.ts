@@ -1,3 +1,4 @@
+import { JSX, ReactNode } from 'react';
 import { z } from 'zod';
 
 export const registerSchema = z.object({
@@ -13,6 +14,40 @@ export const loginSchema = z.object({
 
 export type RegisterData = z.infer<typeof registerSchema>;
 export type LoginData = z.infer<typeof loginSchema>;
+
+export interface TableProps {
+    url?: string | string[];
+    data: { [key: string]: any }[];
+    attributes: TableAttributes;
+    buttons?: ToolbarButton[];
+    toolbarSlot?: JSX.Element;
+    slot?: ReactNode;
+    renderCheckbox?: boolean;
+    shouldSort?: boolean;
+    shouldSubmit?: boolean;
+    handleMarkToRemove?: (ids: string[]) => void;
+}
+
+export interface HeaderProps {
+    attributes: TableAttributes;
+    body: Cell[][];
+    renderCheckbox?: boolean;
+    allSelected?: boolean;
+    onClick?: () => void;
+    sorter?: string;
+    handleChangeSorter?: (label: string) => void;
+    isDescending?: boolean;
+    shouldSubmit?: boolean;
+}
+
+export interface BodyProps {
+    url?: string | string[];
+    body: Cell[][];
+    renderCheckbox?: boolean;
+    selectedRows?: string[];
+    handleSelect?: (id: string) => void;
+    shouldSubmit?: boolean;
+}
 
 export interface CurrentUser {
     userId: string;

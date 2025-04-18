@@ -98,8 +98,10 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                 formId === undefined &&
                 !template.isPublic &&
                 !template.allowedIds.includes(currentUser.userId)
-            )
+            ) {
+                setFlash('You has no access to this template', 'error');
                 return redirect('/');
+            }
         }
         console.log(template);
         return {

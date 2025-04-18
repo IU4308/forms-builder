@@ -12,6 +12,7 @@ import { Label } from './ui/label';
 import { Checkbox } from './ui/checkbox';
 import { ToolbarButton } from '@/lib/definitions';
 import { IoRemoveCircleOutline } from 'react-icons/io5';
+import AddUserButton from './AddUserButton';
 
 const attributes = [
     {
@@ -87,43 +88,21 @@ export default function AccessSettings({
                         name="selectedUsers"
                         value={selectedIds}
                     />
-                    <DropdownMenu key={Number(isPublic)}>
-                        <DropdownMenuTrigger
-                            type="button"
-                            className="my-4 w-[280px] border px-4 py-1 bg-accent rounded-sm cursor-pointer"
-                        >
-                            Add users
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                            side="bottom"
-                            align="start"
-                            className="w-[280px]"
-                        >
-                            <DropdownMenuLabel>Select user</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            {users.map(
-                                (user) =>
-                                    !selectedIds.includes(user.id) && (
-                                        <DropdownMenuItem
-                                            key={user.id}
-                                            className="border-b px-8 py-2"
-                                            onClick={() => handleAddId(user.id)}
-                                        >
-                                            <div className="flex flex-col gap-2">
-                                                <div>{user.name}</div>
-                                                <div>{user.email}</div>
-                                            </div>
-                                        </DropdownMenuItem>
-                                    )
-                            )}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+
                     <Table
                         data={users.filter((user) =>
                             selectedIds.includes(user.id)
                         )}
                         attributes={attributes}
                         buttons={buttons}
+                        toolbarSlot={
+                            <AddUserButton
+                                key={Number(isPublic)}
+                                users={users}
+                                selectedIds={selectedIds}
+                                onSelect={handleAddId}
+                            />
+                        }
                         renderCheckbox={true}
                         shouldSort={true}
                         shouldSubmit={false}

@@ -8,6 +8,7 @@ import {
 import { Button } from './ui/button';
 import { setSentenceCase } from '@/lib/utils';
 import { Link } from 'react-router';
+import { JSX } from 'react';
 
 const ToolbarBtn = ({
     button,
@@ -50,15 +51,18 @@ export default function Toolbar({
     shouldSubmit,
     handleMarkToRemove,
     selectedRows,
+    slot,
 }: {
     isDisabled: boolean;
     buttons?: ToolbarButton[];
     shouldSubmit: boolean;
     handleMarkToRemove?: (ids: string[]) => void;
     selectedRows: string[];
+    slot?: JSX.Element;
 }) {
     return (
-        <div className="sticky top-[53px] bg-background z-20 flex gap-2 py-2">
+        <div className="sticky top-[53px] bg-background z-20 flex items-center gap-2 py-2">
+            {slot}
             {buttons!.map((button) => (
                 <TooltipProvider key={button.label}>
                     <Tooltip>
