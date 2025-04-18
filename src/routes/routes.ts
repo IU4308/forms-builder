@@ -13,6 +13,7 @@ import {
     appLoader,
     homeLoader,
     logoutLoader,
+    mainLoader,
     searchLoader,
     templateLoader,
     workspaceLoader,
@@ -40,11 +41,12 @@ export const router = createBrowserRouter([
             {
                 Component: MainLayout,
                 HydrateFallback: Fallback,
-                loader: homeLoader,
+                loader: mainLoader,
                 children: [
                     {
                         index: true,
                         Component: Home,
+                        loader: homeLoader,
                     },
                     {
                         path: '/search/:query',

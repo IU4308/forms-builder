@@ -28,6 +28,8 @@ export const getTemplateData = async (templateId: string | undefined) => {
     ]);
 };
 
+export const getLatestTemplates = () => fetchData('templates', 'latest');
+
 export const getCurrentUser = (): Promise<CurrentUser> =>
     fetchData('auth', 'user');
 

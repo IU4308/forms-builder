@@ -1,13 +1,5 @@
 import { useState } from 'react';
 import Table from './Table';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Label } from './ui/label';
 import { Checkbox } from './ui/checkbox';
 import { ToolbarButton } from '@/lib/definitions';

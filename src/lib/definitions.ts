@@ -244,3 +244,12 @@ export type Tag = {
     id: number;
     name: string;
 };
+
+export type latestTemplateType = {
+    id: string;
+    author: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    createdAt: string;
+};

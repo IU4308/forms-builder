@@ -20,7 +20,7 @@ const TemplateTags = ({ tags }: { tags: Tag[] }) => {
     const { templateTagIds } = useLoaderData();
     const tagOptions = getOptions(tags);
     const [selectedTags, setSelectedTags] = useState<OptionType[]>(
-        getOptions(tags.filter((tag) => templateTagIds.includes(tag.id)))
+        getOptions(tags.filter((tag) => templateTagIds?.includes(tag.id)))
     );
 
     const handleChange = (
