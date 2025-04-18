@@ -5,8 +5,7 @@ import {
     getForm,
     getSearchResults,
     getTemplate,
-    getTemplateForms,
-    getTopics,
+    getTemplateData,
     getUserForms,
     getUserTemplates,
 } from './react-query';
@@ -75,6 +74,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
             topics,
             templateForms,
             users,
+            tags,
             canEdit = !!currentUser;
         if (formId) {
             mode = 'form';
@@ -91,15 +91,8 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                     : 'form';
         }
         if (mode === 'template') {
-            topics = await getTopics();
-            templateForms = await getTemplateForms(templateId);
-            users = (await getAllUsers()).map((user) => {
-                return {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                };
-            });
+            [templateForms, topics, tags, users] =
+                await getTemplateData(templateId);
         } else {
             if (
                 formId === undefined &&
@@ -108,13 +101,16 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
             )
                 return redirect('/');
         }
+        console.log(template);
         return {
             currentUser,
             mode,
             template,
             allowedIds: template?.allowedIds,
+            templateTagIds: template?.tagIds,
             templateForms,
             topics,
+            tags,
             users,
             canEdit,
         };

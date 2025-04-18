@@ -438,3 +438,67 @@ export const initialFields: Field[] = [
         description: 'No description',
     },
 ];
+
+export const reactSelectStyles = {
+    control: (base: any, state: any) => ({
+        ...base,
+        backgroundColor: 'var(--background)',
+        borderColor: state.isFocused ? 'var(--ring)' : 'var(--input)',
+        boxShadow: state.isFocused ? '0 0 0 2px var(--ring)' : 'none',
+        padding: '2px',
+        borderRadius: '0.375rem', // rounded-md
+        minHeight: '2.5rem',
+        '&:hover': {
+            borderColor: 'var(--ring)',
+        },
+    }),
+    menu: (base: any) => ({
+        ...base,
+        backgroundColor: 'var(--popover)',
+        zIndex: 50,
+        position: 'absolute',
+    }),
+    menuList: (base: any) => ({
+        ...base,
+        backgroundColor: 'var(--secondary)',
+        padding: 0,
+        zIndex: 50,
+    }),
+    option: (base: any, state: any) => ({
+        ...base,
+        backgroundColor: state.isFocused
+            ? 'var(--accent)'
+            : 'var(--background)',
+        color: 'var(--foreground)',
+        cursor: 'pointer',
+        fontSize: '0.875rem', // text-sm
+        padding: '0.5rem 0.75rem',
+        zIndex: 50,
+    }),
+    multiValue: (base: any) => ({
+        ...base,
+        backgroundColor: 'var(--muted)',
+        color: 'var(--foreground)',
+    }),
+    multiValueLabel: (base: any) => ({
+        ...base,
+        color: 'var(--foreground)',
+    }),
+    multiValueRemove: (base: any) => ({
+        ...base,
+        ':hover': {
+            backgroundColor: 'var(--ring)',
+            color: 'white',
+        },
+    }),
+    placeholder: (base: any) => ({
+        ...base,
+        color: 'var(--muted-foreground)',
+        fontSize: '0.875rem',
+    }),
+    input: (base: any) => ({
+        ...base,
+        color: 'var(--foreground)',
+        fontSize: '0.875rem',
+    }),
+};

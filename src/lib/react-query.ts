@@ -1,88 +1,59 @@
 import { api } from '@/api/api';
 import { QueryClient } from '@tanstack/react-query';
 import { CurrentUser, User } from './definitions';
+import { some, join } from 'lodash';
 
 export const queryClient = new QueryClient();
 
-export const getCurrentUser = async (): Promise<CurrentUser> => {
-    const currentUser = await queryClient.fetchQuery({
-        queryKey: ['currentUser'],
-        queryFn: () => api.get('/auth/user').then((res) => res.data),
+export const fetchData = async (...args: (string | undefined)[]) => {
+    if (some(args, (arg) => arg === undefined)) return null;
+    return await queryClient.fetchQuery({
+        queryKey: [join(args, '-')],
+        queryFn: () => api.get('/' + join(args, '/')).then((res) => res.data),
     });
-    return currentUser;
 };
 
-export const getAllUsers = async (): Promise<User[]> => {
-    const users = await queryClient.fetchQuery({
-        queryKey: ['users'],
-        queryFn: () => api.get('users').then((res) => res.data),
-    });
-    return users;
+export const getTemplateData = async (templateId: string | undefined) => {
+    return await Promise.all([
+        await getTemplateForms(templateId),
+        await getTopics(),
+        await getTags(),
+        (await getAllUsers()).map((user) => {
+            return {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+            };
+        }),
+    ]);
 };
 
-export const getTemplate = async (templateId: string | undefined) => {
-    if (templateId === undefined) return null;
-    const template = await queryClient.fetchQuery({
-        queryKey: ['template'],
-        queryFn: () =>
-            api.get(`/templates/${templateId}`).then((res) => res.data),
-    });
-    return template;
-};
+export const getCurrentUser = (): Promise<CurrentUser> =>
+    fetchData('auth', 'user');
 
-export const getTopics = async () => {
-    const template = await queryClient.fetchQuery({
-        queryKey: ['topics'],
-        queryFn: () => api.get(`/templates/topics`).then((res) => res.data),
-    });
-    return template;
-};
+export const getAllUsers = (): Promise<User[]> => fetchData('users');
 
-export const getTemplateForms = async (templateId: string | undefined) => {
-    if (templateId === undefined) return null;
-    const templateForms = await queryClient.fetchQuery({
-        queryKey: ['templateForms'],
-        queryFn: () =>
-            api.get(`/templates/${templateId}/forms`).then((res) => res.data),
-    });
-    return templateForms;
-};
+export const getTemplate = (templateId: string | undefined) =>
+    fetchData('templates', templateId);
 
-export const getForm = async (formId: string | undefined) => {
-    if (formId === undefined) return null;
-    const form = await queryClient.fetchQuery({
-        queryKey: ['form'],
-        queryFn: () => api.get(`/forms/${formId}`).then((res) => res.data),
-    });
-    return form;
-};
+export const getTopics = () => fetchData('templates', 'topics');
 
-export const getUserTemplates = async (userId: string) => {
-    const templates = await queryClient.fetchQuery({
-        queryKey: ['userTemplates'],
-        queryFn: () =>
-            api.get(`/templates/users/${userId}`).then((res) => res.data),
-    });
-    return templates;
-};
+export const getTags = () => fetchData('templates', 'tags');
 
-export const getUserForms = async (userId: string) => {
-    const forms = await queryClient.fetchQuery({
-        queryKey: ['userForms'],
-        queryFn: () =>
-            api.get(`/forms/users/${userId}`).then((res) => res.data),
-    });
-    return forms;
-};
+export const getTemplateForms = (templateId: string | undefined) =>
+    fetchData('templates', templateId, 'forms');
 
-export const getSearchResults = async (query: string | undefined) => {
-    if (!query) return null;
-    const searchResults = await queryClient.fetchQuery({
-        queryKey: ['searchResults'],
-        queryFn: () =>
-            api
-                .get(`templates/search?q=${encodeURIComponent(query)}`)
-                .then((res) => res.data),
-    });
-    return searchResults;
-};
+export const getTemplateTags = (templateId: string | undefined) =>
+    fetchData('templates', templateId, 'tags');
+
+export const getForm = (formId: string | undefined) =>
+    fetchData('forms', formId);
+
+export const getUserTemplates = (userId: string) =>
+    fetchData('templates', 'users', userId);
+
+export const getUserForms = (userId: string) =>
+    fetchData('forms', 'users', userId);
+
+export const getSearchResults = (query: string | undefined) =>
+    fetchData('templates', `search?q=${query}`);

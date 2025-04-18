@@ -204,3 +204,8 @@ export type Topic = {
     id: string;
     name: string;
 };
+
+export type Tag = {
+    id: number;
+    name: string;
+};

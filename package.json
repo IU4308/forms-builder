@@ -38,6 +38,7 @@
     "react-markdown": "^10.1.0",
     "react-responsive": "^10.0.1",
     "react-router": "^7.4.1",
+    "react-select": "^5.10.1",
     "react-tagcloud": "^2.3.3",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",

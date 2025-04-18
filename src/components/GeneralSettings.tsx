@@ -1,16 +1,18 @@
-import { TemplateType, Topic } from '@/lib/definitions';
+import { Tag, TemplateType, Topic } from '@/lib/definitions';
 import TemplateImage from './TemplateImage';
 import TemplateDescription from './TemplateDescription';
 import TemplateTopic from './TemplateTopic';
 import TemplateTitle from './TemplateTitle';
-// import TemplateTags from './TemplateTags';
+import TemplateTags from './TemplateTags';
 
 export default function GeneralSettings({
     template,
     topics,
+    tags,
 }: {
     template: TemplateType | undefined;
     topics: Topic[];
+    tags: Tag[];
 }) {
     return (
         <div className="flex flex-col gap-4 py-4">
@@ -22,7 +24,7 @@ export default function GeneralSettings({
                 key={template?.imageUrl}
                 imageUrl={template?.imageUrl}
             />
-            {/* <TemplateTags /> */}
+            <TemplateTags tags={tags} />
         </div>
     );
 }
