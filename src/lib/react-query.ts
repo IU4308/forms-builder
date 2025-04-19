@@ -28,7 +28,15 @@ export const getTemplateData = async (templateId: string | undefined) => {
     ]);
 };
 
+export const getHomeData = async () => {
+    return await Promise.all([
+        await getLatestTemplates(),
+        await getPopularTemplates(),
+    ]);
+};
+
 export const getLatestTemplates = () => fetchData('templates', 'latest');
+export const getPopularTemplates = () => fetchData('templates', 'popular');
 
 export const getCurrentUser = (): Promise<CurrentUser> =>
     fetchData('auth', 'user');

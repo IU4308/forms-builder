@@ -1,5 +1,6 @@
 import { latestTemplateType } from '@/lib/definitions';
 import { Link } from 'react-router';
+import removeMarkdown from 'remove-markdown';
 
 const Template = ({
     id,
@@ -13,21 +14,17 @@ const Template = ({
             to={`/templates/${id}`}
             className="bg-accent border hover:opacity-75 cursor-pointer flex flex-col justify-between gap-2 px-4 py-2"
         >
+            {
+                <img
+                    className="object-cover h-[150px]"
+                    src={imageUrl ? imageUrl : '/default-fallback-image.png'}
+                    alt={title}
+                />
+            }
             <div className="font-bold">{title}</div>
-            <div className="">
-                {imageUrl && (
-                    <div className="float-left w-1/3 pr-2">
-                        <img
-                            className="object-contain"
-                            src={imageUrl}
-                            alt={title}
-                        />
-                    </div>
-                )}
-                <div className="break-words">
-                    <span>{description.slice(0, 127)}</span>
-                    {description.length > 128 && <span>...</span>}
-                </div>
+            <div className="break-words">
+                <span>{removeMarkdown(description.slice(0, 127))}</span>
+                {description.length > 128 && <span>...</span>}
             </div>
             <div className="font-light">{author}</div>
         </Link>

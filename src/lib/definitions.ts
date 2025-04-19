@@ -253,3 +253,12 @@ export type latestTemplateType = {
     imageUrl: string;
     createdAt: string;
 };
+
+export type popularTemplateType = {
+    id: string;
+    author: string;
+    title: string;
+    topic: string;
+    createdAt: string;
+    submissions: number;
+};

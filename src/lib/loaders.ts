@@ -3,7 +3,7 @@ import {
     getAllUsers,
     getCurrentUser,
     getForm,
-    getLatestTemplates,
+    getHomeData,
     getSearchResults,
     getTemplate,
     getTemplateData,
@@ -36,8 +36,9 @@ export const mainLoader = async ({ request }: LoaderFunctionArgs) => {
 
 export const homeLoader = async () => {
     try {
-        const latestTemplates = await getLatestTemplates();
-        return { latestTemplates };
+        const [latestTemplates, popularTemplates] = await getHomeData();
+        console.log(popularTemplates);
+        return { latestTemplates, popularTemplates };
     } catch (error: any) {
         console.log(error);
         throw new Error('Server error');

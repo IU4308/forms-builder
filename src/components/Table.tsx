@@ -83,7 +83,9 @@ const Header = ({
                                         )}
                                     </Button>
                                 ) : (
-                                    <span>{setSentenceCase(cell.label)}</span>
+                                    <span className="px-3">
+                                        {setSentenceCase(cell.label)}
+                                    </span>
                                 )}
                             </TableHead>
                         )

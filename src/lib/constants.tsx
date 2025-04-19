@@ -107,10 +107,21 @@ export const formsTableAttributes = [
     },
 ];
 
-export const homeTableAttributes = [
+export const popularTemplatesAttributes = [
+    {
+        label: 'id',
+        key: 'id',
+        className: '',
+        shouldRender: false,
+    },
     {
         label: 'title',
         key: 'title',
+        className: '',
+    },
+    {
+        label: 'topic',
+        key: 'topic',
         className: '',
     },
     {
