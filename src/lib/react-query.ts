@@ -9,24 +9,18 @@ export const fetchData = async (...args: (string | undefined)[]) => {
     if (some(args, (arg) => arg === undefined)) return null;
     return await queryClient.fetchQuery({
         queryKey: [join(args, '-')],
-        queryFn: () => api.get('/' + join(args, '/')).then((res) => res.data),
+        queryFn: () => api.get(join(args, '/')).then((res) => res.data),
     });
 };
 
 export const getTemplateData = async (templateId: string | undefined) => {
     return await Promise.all([
         await getTemplateForms(templateId),
-        await getTopics(),
-        await getTags(),
-        (await getAllUsers()).map((user) => {
-            return {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-            };
-        }),
+        await getMetaData(),
     ]);
 };
+
+const getMetaData = () => fetchData('templates', 'meta');
 
 export const getHomeData = async () => {
     return await Promise.all([
@@ -35,6 +29,7 @@ export const getHomeData = async () => {
     ]);
 };
 
+export const getHomeTemplates = () => fetchData('');
 export const getLatestTemplates = () => fetchData('templates', 'latest');
 export const getPopularTemplates = () => fetchData('templates', 'popular');
 
@@ -66,4 +61,4 @@ export const getUserForms = (userId: string) =>
     fetchData('forms', 'users', userId);
 
 export const getSearchResults = (query: string | undefined) =>
-    fetchData('templates', `search?q=${query}`);
+    fetchData('', `search?q=${query}`);

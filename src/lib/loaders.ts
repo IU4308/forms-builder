@@ -3,7 +3,7 @@ import {
     getAllUsers,
     getCurrentUser,
     getForm,
-    getHomeData,
+    getHomeTemplates,
     getSearchResults,
     getTemplate,
     getTemplateData,
@@ -36,9 +36,7 @@ export const mainLoader = async ({ request }: LoaderFunctionArgs) => {
 
 export const homeLoader = async () => {
     try {
-        const [latestTemplates, popularTemplates] = await getHomeData();
-        console.log(popularTemplates);
-        return { latestTemplates, popularTemplates };
+        return await getHomeTemplates();
     } catch (error: any) {
         console.log(error);
         throw new Error('Server error');
@@ -103,7 +101,7 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                     : 'form';
         }
         if (mode === 'template') {
-            [templateForms, topics, tags, users] =
+            [templateForms, [topics, tags, users]] =
                 await getTemplateData(templateId);
         } else {
             if (

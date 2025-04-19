@@ -5,13 +5,13 @@ import { popularTemplatesAttributes } from '@/lib/constants.tsx';
 import { latestTemplateType, popularTemplateType } from '@/lib/definitions';
 import { useLoaderData } from 'react-router';
 
-type LoaderData = {
-    latestTemplates: latestTemplateType[];
-    popularTemplates: popularTemplateType[];
-};
+type LoaderData = [
+    latestTemplates: latestTemplateType[],
+    popularTemplates: popularTemplateType[],
+];
 
 export default function Home() {
-    const { latestTemplates, popularTemplates } = useLoaderData<LoaderData>();
+    const [latestTemplates, popularTemplates] = useLoaderData<LoaderData>();
     return (
         <div>
             <LatestsTemplates templates={latestTemplates} />

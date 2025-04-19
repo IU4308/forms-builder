@@ -61,6 +61,7 @@ const DesktopView = ({
                 ))}
                 <div className=" relative w-full min-w-[400px] ">
                     <Button
+                        type="submit"
                         className="absolute right-0 border border-l-0 rounded-l-none !border-input/10"
                         variant={'secondary'}
                     >
@@ -149,7 +150,7 @@ const SideButtons = () => {
     return (
         <>
             <ThemeSwitcher />
-            <Button variant={'ghost'}>
+            <Button type="button" variant={'ghost'}>
                 <IoLanguage />
             </Button>
         </>
