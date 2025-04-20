@@ -1,4 +1,3 @@
-import CustomField from './CustomField';
 import { useState } from 'react';
 import { QuestionType, Field, InterfaceMode } from '@/lib/definitions';
 import { initialFields } from '@/lib/constants';
@@ -7,6 +6,7 @@ import { getQuestionType } from '@/lib/utils';
 import { useLoaderData } from 'react-router';
 import FormHeader from './FormHeader';
 import { Button } from './ui/button';
+import FormFields from './FormFields';
 
 export default function CustomForm({
     mode,
@@ -66,17 +66,14 @@ export default function CustomForm({
             )}
             {mode === 'form' && <FormHeader />}
 
-            {fields.map((field) => (
-                <CustomField
-                    key={field.id}
-                    mode={mode}
-                    {...field}
-                    activeId={activeId}
-                    setActiveId={setActiveId}
-                    onDeleteField={handleDeleteField}
-                    canEdit={canEdit}
-                />
-            ))}
+            <FormFields
+                fields={fields}
+                mode={mode}
+                activeId={activeId}
+                setActiveId={setActiveId}
+                onDeleteField={handleDeleteField}
+                canEdit={canEdit}
+            />
 
             {mode === 'form' && canEdit && (
                 <div>
