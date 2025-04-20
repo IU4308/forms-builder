@@ -1,5 +1,6 @@
 import { latestTemplateType } from '@/lib/definitions';
-import { Link } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
+import { format } from 'date-fns';
 import removeMarkdown from 'remove-markdown';
 
 const Template = ({
@@ -8,6 +9,7 @@ const Template = ({
     author,
     description,
     imageUrl,
+    createdAt,
 }: latestTemplateType) => {
     return (
         <Link
@@ -26,21 +28,25 @@ const Template = ({
                 <span>{removeMarkdown(description.slice(0, 127))}</span>
                 {description.length > 128 && <span>...</span>}
             </div>
-            <div className="font-light">{author}</div>
+            <div className="flex justify-between">
+                <div className="font-light">{author}</div>
+                <div>{format(new Date(createdAt), 'MMM dd, yyyy')}</div>
+            </div>
         </Link>
     );
 };
 
-export default function LatestsTemplates({
-    templates,
-}: {
-    templates: latestTemplateType[];
-}) {
+type LoaderData = {
+    latestTemplates: latestTemplateType[];
+};
+
+export default function LatestsTemplates() {
+    const { latestTemplates } = useLoaderData<LoaderData>();
     return (
         <section className="mb-4">
             <h1>Latests Templates</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 py-2">
-                {templates.map((template) => (
+                {latestTemplates.map((template) => (
                     <Template key={template.id} {...template} />
                 ))}
             </div>

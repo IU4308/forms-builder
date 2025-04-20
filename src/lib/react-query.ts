@@ -22,12 +22,8 @@ export const getTemplateData = async (templateId: string | undefined) => {
 
 const getMetaData = () => fetchData('templates', 'meta');
 
-export const getHomeData = async () => {
-    return await Promise.all([
-        await getLatestTemplates(),
-        await getPopularTemplates(),
-    ]);
-};
+export const getWorkspaceData = (userId: string) =>
+    fetchData('templates', 'users', userId);
 
 export const getHomeTemplates = () => fetchData('');
 export const getLatestTemplates = () => fetchData('templates', 'latest');

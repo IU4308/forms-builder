@@ -113,35 +113,18 @@ export const getAnswersAttributes = (form: any) => {
     return attributes;
 };
 
-// type FildKey = 'State' | 'Question' | 'Description';
+type TemplatesTags = {
+    templateId: string;
+    tagId: string;
+}[];
 
-// export const getFields = (
-//     template: TemplateType | null,
-//     form: FormType | null
-// ) => {
-//     if (template === null) return null;
-//     let body: Field[] = [];
-
-//     const getTemplateValue = (id: string, key: FildKey) =>
-//         template[`${id}${key}` as keyof TemplateType];
-
-//     const getFormValue = (id: string) =>
-//         form?.[`${id}Answer` as keyof FormType] ?? '';
-
-//     questionTypes.forEach((type) => {
-//         for (let i = 1; i <= 4; i++) {
-//             let id = type + i;
-//             body.push({
-//                 id,
-//                 isPresent: getTemplateValue(id, 'State') as boolean,
-//                 question: getTemplateValue(id, 'Question') as string | null,
-//                 description: getTemplateValue(id, 'Description') as
-//                     | string
-//                     | null,
-//                 answer: getFormValue(id) as string | null,
-//             });
-//         }
-//     });
-
-//     return body;
-// };
+export const mapTagToTemplates = (collection: TemplatesTags) => {
+    const tagToTemplates = new Map();
+    for (const { templateId, tagId } of collection) {
+        if (!tagToTemplates.has(tagId)) {
+            tagToTemplates.set(tagId, []);
+        }
+        tagToTemplates.get(tagId).push(templateId);
+    }
+    return tagToTemplates;
+};

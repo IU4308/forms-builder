@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { Form, useLoaderData } from 'react-router';
 
 export default function Workspace() {
-    const { templates, forms } = useLoaderData();
+    const [templates, forms] = useLoaderData();
     const [tabId, setTabId] = useState(0);
     return (
         <Form

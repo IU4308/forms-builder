@@ -7,11 +7,10 @@ import {
     getSearchResults,
     getTemplate,
     getTemplateData,
-    getUserForms,
-    getUserTemplates,
+    getWorkspaceData,
 } from './react-query';
 import { api } from '@/api/api';
-import { getFlash, setFlash } from './utils';
+import { getFlash, mapTagToTemplates, setFlash } from './utils';
 
 export const appLoader = async () => {
     return { flash: getFlash() };
@@ -36,7 +35,20 @@ export const mainLoader = async ({ request }: LoaderFunctionArgs) => {
 
 export const homeLoader = async () => {
     try {
-        return await getHomeTemplates();
+        const [
+            latestTemplates,
+            popularTemplates,
+            templates,
+            tags,
+            templatesTags,
+        ] = await getHomeTemplates();
+        return {
+            latestTemplates,
+            popularTemplates,
+            templates,
+            tags,
+            tagToTemplates: mapTagToTemplates(templatesTags),
+        };
     } catch (error: any) {
         console.log(error);
         throw new Error('Server error');
@@ -46,6 +58,7 @@ export const homeLoader = async () => {
 export const searchLoader = async ({ params }: LoaderFunctionArgs) => {
     const { query } = params;
     const templates = await getSearchResults(query);
+    console.log(templates);
     return { templates, query };
 };
 
@@ -53,9 +66,7 @@ export const workspaceLoader = async () => {
     try {
         const currentUser = await getCurrentUser();
         if (!currentUser) return redirect('/');
-        const templates = await getUserTemplates(currentUser.userId);
-        const forms = await getUserForms(currentUser.userId);
-        return { templates, forms };
+        return await getWorkspaceData(currentUser.userId);
     } catch (error) {
         console.log(error);
         throw new Error('Server error');
@@ -113,7 +124,6 @@ export const templateLoader = async ({ params }: LoaderFunctionArgs) => {
                 return redirect('/');
             }
         }
-        console.log(template);
         return {
             currentUser,
             mode,

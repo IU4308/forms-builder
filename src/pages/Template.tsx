@@ -18,9 +18,8 @@ export default function Template() {
     const [activeId, setActiveId] = useState('');
 
     let action = '/templates';
-    if (templateId !== undefined) {
+    if (templateId !== undefined)
         action += `/${templateId}` + (mode === 'form' ? '/forms' : '');
-    }
 
     if (formId !== undefined) action += `/${formId}`;
 
@@ -64,7 +63,11 @@ export default function Template() {
                                     </span>
                                 </Button>
                                 <TabPanel
-                                    buttons={templateTabButtons}
+                                    buttons={
+                                        templateId
+                                            ? templateTabButtons
+                                            : templateTabButtons.slice(0, 2)
+                                    }
                                     tabId={tabId}
                                     setTabId={setTabId}
                                 />

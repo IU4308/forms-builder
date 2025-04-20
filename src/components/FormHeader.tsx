@@ -15,7 +15,11 @@ export default function FormHeader() {
                     {template.description}
                 </Markdown>
                 {template.imageUrl && (
-                    <img src={template.imageUrl} alt="template image" />
+                    <img
+                        src={template.imageUrl}
+                        alt="template image"
+                        className="max-h-[400px] object-cover"
+                    />
                 )}
             </div>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
