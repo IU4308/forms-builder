@@ -8,16 +8,13 @@ import Workspace from '../pages/Workspace';
 import Admin from '../pages/Admin';
 import { login, register } from '@/actions/auth.actions';
 import Fallback from '@/components/Fallback';
-import {
-    adminLoader,
-    appLoader,
-    homeLoader,
-    logoutLoader,
-    mainLoader,
-    searchLoader,
-    templateLoader,
-    workspaceLoader,
-} from '@/lib/loaders';
+// import {
+//     adminLoader,
+//     appLoader,
+//     logoutLoader,
+//     templateLoader,
+//     workspaceLoader,
+// } from '@/lib/loaders';
 import { adminAction } from '@/actions/admin.actions';
 import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
@@ -30,6 +27,14 @@ import {
 } from '@/actions/template.actions';
 import { submitForm, updateForm } from '@/actions/forms.actions';
 import SearchPage from '@/components/SearchPage';
+import { mainLoader } from '@/loaders/main';
+import { homeLoader } from '@/loaders/home';
+import { searchLoader } from '@/loaders/search';
+import { workspaceLoader } from '@/loaders/workspace';
+import { adminLoader } from '@/loaders/admin';
+import { templateLoader } from '@/loaders/templates';
+import { appLoader } from '@/loaders/app';
+import { logoutLoader } from '@/loaders/logout';
 
 export const router = createBrowserRouter([
     {
