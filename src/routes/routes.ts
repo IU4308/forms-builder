@@ -8,13 +8,6 @@ import Workspace from '../pages/Workspace';
 import Admin from '../pages/Admin';
 import { login, register } from '@/actions/auth.actions';
 import Fallback from '@/components/Fallback';
-// import {
-//     adminLoader,
-//     appLoader,
-//     logoutLoader,
-//     templateLoader,
-//     workspaceLoader,
-// } from '@/lib/loaders';
 import { adminAction } from '@/actions/admin.actions';
 import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
@@ -32,7 +25,12 @@ import { homeLoader } from '@/loaders/home';
 import { searchLoader } from '@/loaders/search';
 import { workspaceLoader } from '@/loaders/workspace';
 import { adminLoader } from '@/loaders/admin';
-import { templateLoader } from '@/loaders/templates';
+import {
+    formLoader,
+    createTemplateLoader,
+    editTemplateLoader,
+    filledFormLoader,
+} from '@/loaders/templates';
 import { appLoader } from '@/loaders/app';
 import { logoutLoader } from '@/loaders/logout';
 
@@ -75,23 +73,29 @@ export const router = createBrowserRouter([
                         path: '/templates',
                         Component: Template,
                         action: publish,
-                        loader: templateLoader,
+                        loader: createTemplateLoader,
+                        handle: { id: 'createTemplate' },
                         children: [
                             {
                                 path: ':templateId',
                                 Component: Template,
                                 action: updateTemplate,
-                                loader: templateLoader,
+                                loader: editTemplateLoader,
+                                handle: { id: 'editTemplate' },
                                 children: [
                                     {
                                         path: 'forms',
+                                        Component: Template,
+                                        loader: formLoader,
                                         action: submitForm,
+                                        handle: { id: 'form' },
                                         children: [
                                             {
                                                 path: ':formId',
                                                 Component: Template,
-                                                loader: templateLoader,
+                                                loader: filledFormLoader,
                                                 action: updateForm,
+                                                handle: { id: 'filledForm' },
                                             },
                                         ],
                                     },

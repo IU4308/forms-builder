@@ -6,15 +6,16 @@ import TabPanel from '@/components/TabPanel';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { templateTabButtons } from '@/lib/constants';
+import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
 import { cn, getAnswersAttributes } from '@/lib/utils';
 import { useState } from 'react';
-import { useFetcher, useLoaderData, useParams } from 'react-router';
+import { useFetcher, useParams } from 'react-router';
 
 export default function Template() {
     const fetcher = useFetcher();
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
-    const { currentUser, mode, templateForms } = useLoaderData();
+    const { currentUser, mode, templateForms } = useMergedLoadersData();
     const [activeId, setActiveId] = useState('');
 
     let action = '/templates';
@@ -87,7 +88,7 @@ export default function Template() {
                                         tabId !== 3 && 'hidden'
                                     )}
                                 >
-                                    {templateForms.length > 0 ? (
+                                    {templateForms?.length > 0 ? (
                                         <Table
                                             data={templateForms}
                                             attributes={getAnswersAttributes(

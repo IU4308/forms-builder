@@ -3,10 +3,10 @@ import { QuestionType, Field, InterfaceMode } from '@/lib/definitions';
 import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
 import { getQuestionType } from '@/lib/utils';
-import { useLoaderData } from 'react-router';
 import FormHeader from './FormHeader';
 import { Button } from './ui/button';
-import FormFields from './FormFields';
+import CustomField from './CustomField';
+import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
 
 export default function CustomForm({
     mode,
@@ -17,7 +17,7 @@ export default function CustomForm({
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { template, canEdit } = useLoaderData();
+    const { template, canEdit } = useMergedLoadersData();
     const [fields, setFields] = useState<Field[]>(
         template?.fields ?? initialFields
     );
@@ -66,14 +66,17 @@ export default function CustomForm({
             )}
             {mode === 'form' && <FormHeader />}
 
-            <FormFields
-                fields={fields}
-                mode={mode}
-                activeId={activeId}
-                setActiveId={setActiveId}
-                onDeleteField={handleDeleteField}
-                canEdit={canEdit}
-            />
+            {fields.map((field) => (
+                <CustomField
+                    key={field.id}
+                    mode={mode}
+                    {...field}
+                    activeId={activeId}
+                    setActiveId={setActiveId}
+                    onDeleteField={handleDeleteField}
+                    canEdit={canEdit}
+                />
+            ))}
 
             {mode === 'form' && canEdit && (
                 <div>

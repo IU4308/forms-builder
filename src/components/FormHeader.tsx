@@ -1,12 +1,12 @@
-import { useLoaderData } from 'react-router';
 import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { format } from 'date-fns';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
 
 export default function FormHeader() {
-    const { template, currentUser } = useLoaderData();
+    const { template, currentUser } = useMergedLoadersData();
     return (
         <>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">

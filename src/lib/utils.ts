@@ -4,6 +4,21 @@ import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants.tsx';
 import { Cell, CurrentUser, TableAttributes } from './definitions';
+import { LoaderFunctionArgs } from 'react-router';
+
+export const getLoader = <T>(
+    load: (args: LoaderFunctionArgs) => Promise<T>
+) => {
+    return async (args: LoaderFunctionArgs) => {
+        try {
+            return await load(args);
+        } catch (error: any) {
+            console.log(error);
+            if (error instanceof Response) throw error;
+            throw new Error('Server error');
+        }
+    };
+};
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));

@@ -1,14 +1,10 @@
-import { getAllUsers, getCurrentUser } from '@/lib/react-query';
-import { redirect } from 'react-router';
+import { requireAdminUser } from '@/lib/auth-helpers';
+import { getAllUsers } from '@/lib/react-query';
+import { getLoader } from '@/lib/utils';
 
-export const adminLoader = async () => {
-    try {
-        const currentUser = await getCurrentUser();
-        if (!currentUser.isAdmin) return redirect('/');
-        const users = await getAllUsers();
-        return { currentUser, users };
-    } catch (error: any) {
-        console.log(error);
-        throw new Error('Server error');
-    }
-};
+export const adminLoader = getLoader(async () => {
+    return {
+        currentUser: await requireAdminUser(),
+        users: await getAllUsers(),
+    };
+});

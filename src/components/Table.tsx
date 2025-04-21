@@ -24,6 +24,8 @@ import {
 import _ from 'lodash';
 import Toolbar from './Toolbar';
 
+const ID_KEY = 0;
+
 const Header = ({
     attributes,
     body,
@@ -44,7 +46,7 @@ const Header = ({
                             className="w-5 h-5"
                             name={shouldSubmit ? 'allIds' : ''}
                             value={body.map(
-                                (item) => item[0].content as string
+                                (item) => item[ID_KEY].content as string
                             )}
                             checked={allSelected}
                             onClick={onClick}
@@ -106,18 +108,18 @@ const Body = ({
     return (
         <TableBody>
             {body.map((row) => (
-                <TableRow key={row[0].content as string}>
+                <TableRow key={row[ID_KEY].content as string}>
                     {renderCheckbox && (
                         <TableCell>
                             <Checkbox
                                 name={shouldSubmit ? 'id' : ''}
                                 className="w-5 h-5"
-                                value={row[0].content as string}
+                                value={row[ID_KEY].content as string}
                                 checked={selectedRows?.includes(
-                                    row[0].content as string
+                                    row[ID_KEY].content as string
                                 )}
                                 onClick={() =>
-                                    handleSelect!(row[0].content as string)
+                                    handleSelect!(row[ID_KEY].content as string)
                                 }
                             />
                         </TableCell>
@@ -182,7 +184,7 @@ export default function Table({
 
     const handleAllSelected = () => {
         setSelectedRows(
-            allSelected ? [] : body.map((row) => row[0].content as string)
+            allSelected ? [] : body.map((row) => row[ID_KEY].content as string)
         );
     };
 

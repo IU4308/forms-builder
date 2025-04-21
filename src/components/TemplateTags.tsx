@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import CreatableSelect from 'react-select/creatable';
 import { MultiValue, ActionMeta } from 'react-select';
+import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
 
 type OptionType = {
     label: string;
@@ -17,10 +18,10 @@ const getOptions = (tags: Tag[]) =>
     }));
 
 const TemplateTags = ({ tags }: { tags: Tag[] }) => {
-    const { templateTagIds } = useLoaderData();
+    const { template } = useMergedLoadersData();
     const tagOptions = getOptions(tags);
     const [selectedTags, setSelectedTags] = useState<OptionType[]>(
-        getOptions(tags.filter((tag) => templateTagIds?.includes(tag.id)))
+        getOptions(tags.filter((tag) => template?.tagIds?.includes(tag.id)))
     );
 
     const handleChange = (

@@ -13,19 +13,19 @@ export const fetchData = async (...args: (string | undefined)[]) => {
     });
 };
 
-export const getTemplateData = async (templateId: string | undefined) => {
+export const getTemplateData = async (templateId?: string | undefined) => {
     return await Promise.all([
         await getTemplateForms(templateId),
         await getMetaData(),
     ]);
 };
 
-const getMetaData = () => fetchData('templates', 'meta');
+export const getMetaData = () => fetchData('templates', 'meta');
 
 export const getWorkspaceData = (userId: string) =>
     fetchData('templates', 'users', userId);
 
-export const getHomeTemplates = () => fetchData('');
+export const getHomeData = () => fetchData('');
 export const getLatestTemplates = () => fetchData('templates', 'latest');
 export const getPopularTemplates = () => fetchData('templates', 'popular');
 
