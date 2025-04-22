@@ -164,7 +164,7 @@ export default function Header() {
         <Form
             method="get"
             action={path}
-            className="sticky z-10 bg-background top-0 border-b"
+            className="sticky z-50 bg-background top-0 border-b"
         >
             <DesktopView name={currentUser?.name} isDesktop={isDesktop} />
             <MobileView name={currentUser?.name} isDesktop={isDesktop} />

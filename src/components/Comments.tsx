@@ -14,33 +14,6 @@ export default function Comments() {
                     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                 </div>
             </div>
-            <div className="border-b py-4">
-                <div className="flex gap-2">
-                    <div>Jane Doe</div>
-                    <div className="text-muted-foreground">20 Apr 2025</div>
-                </div>
-                <div className="break-words">
-                    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                </div>
-            </div>
-            <div className="border-b py-4">
-                <div className="flex gap-2">
-                    <div>Jane Doe</div>
-                    <div className="text-muted-foreground">20 Apr 2025</div>
-                </div>
-                <div className="break-words">
-                    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                </div>
-            </div>
-            <div className="border-b py-4">
-                <div className="flex gap-2">
-                    <div>Jane Doe</div>
-                    <div className="text-muted-foreground">20 Apr 2025</div>
-                </div>
-                <div className="break-words">
-                    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                </div>
-            </div>
         </div>
     );
 }

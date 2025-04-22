@@ -28,7 +28,7 @@ export default function Template() {
                 {fetcher?.data?.formResponse ? (
                     <FormResponse {...fetcher.data.formResponse} />
                 ) : (
-                    <div className=" gap-4">
+                    <div>
                         <HiddenInputs />
                         {mode === 'template' && (
                             <>
