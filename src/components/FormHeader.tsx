@@ -10,13 +10,13 @@ export default function FormHeader() {
     return (
         <>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
-                <h1 className="">{template.title}</h1>
+                <h1 className="">{template!.title}</h1>
                 <Markdown remarkPlugins={[remarkGfm]}>
-                    {template.description}
+                    {template!.description}
                 </Markdown>
-                {template.imageUrl && (
+                {template!.imageUrl && (
                     <img
-                        src={template.imageUrl}
+                        src={template!.imageUrl}
                         alt="template image"
                         className="max-h-[400px] object-cover"
                     />

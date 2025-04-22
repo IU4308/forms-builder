@@ -13,7 +13,6 @@ import { adminAction } from '@/actions/admin.actions';
 import AppLayout from '@/layouts/AppLayout';
 import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
-import Template from '@/pages/Template';
 import {
     publish,
     deleteTemplates,
@@ -33,6 +32,7 @@ import {
 } from '@/loaders/templates.loader';
 import { appLoader } from '@/loaders/app.loader';
 import { logoutLoader } from '@/loaders/logout.loader';
+import TemplatePage from '@/pages/TemplatePage';
 
 export const router = createBrowserRouter([
     {
@@ -71,28 +71,28 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/templates',
-                        Component: Template,
+                        Component: TemplatePage,
                         action: publish,
                         loader: createTemplateLoader,
                         handle: { id: 'createTemplate' },
                         children: [
                             {
                                 path: ':templateId',
-                                Component: Template,
+                                Component: TemplatePage,
                                 action: updateTemplate,
                                 loader: editTemplateLoader,
                                 handle: { id: 'editTemplate' },
                                 children: [
                                     {
                                         path: 'forms',
-                                        Component: Template,
+                                        Component: TemplatePage,
                                         loader: formLoader,
                                         action: submitForm,
                                         handle: { id: 'form' },
                                         children: [
                                             {
                                                 path: ':formId',
-                                                Component: Template,
+                                                Component: TemplatePage,
                                                 loader: filledFormLoader,
                                                 action: updateForm,
                                                 handle: { id: 'filledForm' },

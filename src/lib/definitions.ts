@@ -136,6 +136,10 @@ export type BaseTemplate = {
     imageUrl: string;
     createdAt: Date;
     fields: Field[];
+    credentials?: {
+        name?: string;
+        email?: string;
+    };
 };
 
 export type TemplateType = BaseTemplate & {
