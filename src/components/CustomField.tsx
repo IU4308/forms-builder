@@ -12,7 +12,7 @@ type CustomFieldProps = Field & {
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
     onDeleteField: (id: string) => void;
-    canEdit: boolean;
+    canEdit: boolean | undefined;
 };
 
 export default function CustomField({
@@ -28,7 +28,7 @@ export default function CustomField({
     canEdit,
 }: CustomFieldProps) {
     const questionType = getQuestionType(id);
-    return (
+    return isPresent ? (
         <div
             onClick={(e) => {
                 e.stopPropagation();
@@ -52,24 +52,19 @@ export default function CustomField({
                     </Button>
                 </div>
             )}
-            <Input
-                hidden
-                name={mode === 'template' ? `${id}State` : ''}
-                value={Number(isPresent)}
-                readOnly
-            />
+            <Input hidden name={`${id}State`} value={'true'} readOnly />
             <Input
                 key={`${id}-question-${question}`}
-                name={mode === 'template' ? `${id}Question` : ''}
+                name={`${id}Question`}
                 defaultValue={question ?? 'No title'}
-                className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
+                className="font-bold px-0 !bg-accent shadow-none disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 disabled={mode === 'form'}
             />
             <Input
                 key={`${id}-description-${description}`}
-                name={mode === 'template' ? `${id}Description` : ''}
+                name={`${id}Description`}
                 defaultValue={description ?? 'No description'}
-                className="px-0 !bg-accent disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
+                className="px-0 !bg-accent shadow-none disabled:opacity-90 focus-visible:ring-0 rounded-none border-0 focus-visible:border-b"
                 disabled={mode === 'form'}
             />
             {questionType !== 'multipleLine' && questionType !== 'checkbox' && (
@@ -103,5 +98,11 @@ export default function CustomField({
                 </>
             )}
         </div>
+    ) : (
+        <>
+            <Input hidden readOnly name={`${id}State`} value={'false'} />
+            <Input hidden readOnly name={`${id}Question`} value="" />
+            <Input hidden readOnly name={`${id}Description`} value="" />
+        </>
     );
 }

@@ -7,26 +7,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { templateTabButtons } from '@/lib/constants';
 import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
-import { cn, getAnswersAttributes } from '@/lib/utils';
+import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useParams } from 'react-router';
 
 export default function Template() {
-    const fetcher = useFetcher();
+    const { currentUser, mode, templateForms } = useMergedLoadersData();
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
-    const { currentUser, mode, templateForms } = useMergedLoadersData();
     const [activeId, setActiveId] = useState('');
 
-    let action = '/templates';
-    if (templateId !== undefined)
-        action += `/${templateId}` + (mode === 'form' ? '/forms' : '');
-
-    if (formId !== undefined) action += `/${formId}`;
-
+    const fetcher = useFetcher();
     return (
         <fetcher.Form
-            action={action}
+            action={getTemplateActionUrl(templateId, formId, mode)}
             method="post"
             encType="multipart/form-data"
             onClick={() => setActiveId('')}
@@ -81,7 +75,7 @@ export default function Template() {
                             >
                                 <FormSettings />
                             </div>
-                            {templateId !== undefined && (
+                            {templateForms !== undefined && (
                                 <div
                                     className={cn(
                                         'visible',

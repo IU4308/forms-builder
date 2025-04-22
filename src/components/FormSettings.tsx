@@ -15,7 +15,6 @@ type LoaderData = {
 export default function FormSettings() {
     const { template, topics, tags, users } =
         useMergedLoadersData<LoaderData>();
-    console.log(template);
     return (
         <div className="max-w-[768px] mx-auto md:px-16">
             <GeneralSettings template={template} topics={topics} tags={tags} />

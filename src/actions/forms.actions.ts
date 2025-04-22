@@ -3,10 +3,10 @@ import { setFlash } from '@/lib/utils';
 import { ActionFunctionArgs } from 'react-router';
 
 export const submitForm = async ({ request, params }: ActionFunctionArgs) => {
-    console.log('submti form action');
     try {
         const formData = await request.formData();
         const { templateId } = params;
+        console.log(Object.fromEntries(formData));
         const response = await api.post(`/forms`, Object.fromEntries(formData));
         setFlash(response.data.message);
         return {

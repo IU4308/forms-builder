@@ -143,3 +143,18 @@ export const mapTagToTemplates = (collection: TemplatesTags) => {
     }
     return tagToTemplates;
 };
+
+export const getTemplateActionUrl = (
+    templateId?: string,
+    formId?: string,
+    mode?: string
+): string => {
+    let action = '/templates';
+    if (templateId) {
+        action += `/${templateId}${mode === 'form' ? '/forms' : ''}`;
+    }
+    if (formId) {
+        action += `/${formId}`;
+    }
+    return action;
+};

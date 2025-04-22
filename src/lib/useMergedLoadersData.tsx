@@ -1,28 +1,50 @@
 import { useMatches } from 'react-router';
+import {
+    CurrentUser,
+    FormType,
+    Tag,
+    TemplateFormsType,
+    TemplateType,
+    Topic,
+} from './definitions';
+
+type User = {
+    id: string;
+    name: string;
+    email: string;
+};
 
 type CreateTemplateData = {
-    currentUser: any;
-    mode: string;
-    topics: any[];
-    tags: any[];
-    users: any[];
+    currentUser: CurrentUser;
+    mode: 'template' | 'form';
+    topics: Topic[];
+    tags: Tag[];
+    users: User[];
 };
 
 type EditTemplateData = {
-    templateForms?: any[];
-    template?: any;
+    templateForms?: TemplateFormsType[];
+    template?: TemplateType;
 };
 
-type FormData = {
-    template?: any;
-    mode: string;
-    canEdit: boolean;
+type SubmitFormData = {
+    template?: TemplateType;
+    mode: 'template' | 'form';
+    canEdit?: boolean;
 };
+
+type EditFormData = TemplateType & FormType & User;
 
 type CombinedData = CreateTemplateData &
     EditTemplateData &
     EditTemplateData &
-    FormData;
+    SubmitFormData;
+
+type DataType =
+    | CreateTemplateData
+    | EditTemplateData
+    | EditTemplateData
+    | SubmitFormData;
 
 type Handle = {
     id?: string;
@@ -30,27 +52,27 @@ type Handle = {
 
 export const useMergedLoadersData = () => {
     const matches = useMatches() as Array<{
-        data: unknown;
+        data: DataType;
         handle?: Handle;
     }>;
 
     const createTemplateData = matches.find(
         (m) => m.handle?.id === 'createTemplate'
-    )?.data as CreateTemplateData | undefined;
+    )?.data as CreateTemplateData;
 
     const editTemplateData = matches.find(
         (m) => m.handle?.id === 'editTemplate'
     )?.data as EditTemplateData | undefined;
 
     const formData = matches.find((m) => m.handle?.id === 'form')?.data as
-        | FormData
+        | SubmitFormData
         | undefined;
 
     const filledFormData = matches.find((m) => m.handle?.id === 'filledForm')
-        ?.data as FormData | undefined;
+        ?.data as EditFormData | undefined;
 
     const data: CombinedData = {
-        ...(createTemplateData ?? {}),
+        ...createTemplateData,
         ...(editTemplateData ?? {}),
         ...(formData ?? {}),
         ...(filledFormData ?? {}),

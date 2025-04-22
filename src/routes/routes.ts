@@ -20,19 +20,19 @@ import {
 } from '@/actions/template.actions';
 import { submitForm, updateForm } from '@/actions/forms.actions';
 import SearchPage from '@/components/SearchPage';
-import { mainLoader } from '@/loaders/main';
-import { homeLoader } from '@/loaders/home';
-import { searchLoader } from '@/loaders/search';
-import { workspaceLoader } from '@/loaders/workspace';
-import { adminLoader } from '@/loaders/admin';
+import { mainLoader } from '@/loaders/main.loader';
+import { homeLoader } from '@/loaders/home.loader';
+import { searchLoader } from '@/loaders/search.loader';
+import { workspaceLoader } from '@/loaders/workspace.loader';
+import { adminLoader } from '@/loaders/admin.loader';
 import {
     formLoader,
     createTemplateLoader,
     editTemplateLoader,
     filledFormLoader,
-} from '@/loaders/templates';
-import { appLoader } from '@/loaders/app';
-import { logoutLoader } from '@/loaders/logout';
+} from '@/loaders/templates.loader';
+import { appLoader } from '@/loaders/app.loader';
+import { logoutLoader } from '@/loaders/logout.loader';
 
 export const router = createBrowserRouter([
     {

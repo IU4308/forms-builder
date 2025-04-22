@@ -62,7 +62,19 @@ export default function CustomForm({
     return (
         <div className="max-w-[768px] mx-auto flex flex-col gap-4 ">
             {mode === 'template' && (
-                <TemplateToolbar onAddField={handleAddField} />
+                <TemplateToolbar
+                    // key={fields
+                    //     .map((field) => Number(field.isPresent))
+                    //     .reduce(
+                    //         (accumulator, currentValue) =>
+                    //             accumulator ^ currentValue,
+                    //         0
+                    //     )}
+                    states={fields.map((field) => ({
+                        [field.id]: field.isPresent,
+                    }))}
+                    onAddField={handleAddField}
+                />
             )}
             {mode === 'form' && <FormHeader />}
 

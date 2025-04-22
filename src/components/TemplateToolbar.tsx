@@ -13,6 +13,9 @@ const types = ['singleLine', 'multipleLine', 'integerValue', 'checkbox'];
 export default function TemplateToolbar({
     onAddField,
 }: {
+    states: {
+        [x: string]: boolean;
+    }[];
     onAddField: (type: QuestionType) => void;
 }) {
     return (
@@ -26,6 +29,8 @@ export default function TemplateToolbar({
                     <DropdownMenuSeparator />
                     {types.map((type) => (
                         <DropdownMenuItem
+                            key={type}
+                            // disabled={true}
                             onClick={() => onAddField(type as QuestionType)}
                         >
                             {type}
