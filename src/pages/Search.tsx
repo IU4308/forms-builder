@@ -1,7 +1,7 @@
+import SearchResult from '@/components/SearchResult';
 import { useLoaderData } from 'react-router';
-import SearchResult from './SearchResult';
 
-export default function SearchPage() {
+export default function Search() {
     const { templates, query } = useLoaderData();
     return (
         <div className="max-w-[768px] mx-auto bg-accent flex flex-col gap-2">

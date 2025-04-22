@@ -1,18 +1,16 @@
 import CustomForm from '@/components/CustomForm';
 import FormResponse from '@/components/FormResponse';
 import FormSettings from '@/components/FormSettings';
+import HiddenInputs from '@/components/HiddenInputs';
 import Table from '@/components/Table';
-import TabPanel from '@/components/TabPanel';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { templateTabButtons } from '@/lib/constants';
+import TemplateHeader from '@/components/TemplateHeader';
 import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
 import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useParams } from 'react-router';
 
 export default function Template() {
-    const { currentUser, mode, templateForms } = useMergedLoadersData();
+    const { mode, templateForms } = useMergedLoadersData();
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');
@@ -29,44 +27,10 @@ export default function Template() {
                 <FormResponse {...fetcher.data.formResponse} />
             ) : (
                 <div className=" gap-4">
-                    {formId === undefined && (
-                        <Input
-                            hidden
-                            readOnly
-                            name={
-                                mode === 'template' ? 'creatorId' : 'authorId'
-                            }
-                            value={currentUser.userId}
-                        />
-                    )}
-                    {mode === 'form' && (
-                        <Input
-                            hidden
-                            readOnly
-                            name="templateId"
-                            value={templateId}
-                        />
-                    )}
+                    <HiddenInputs />
                     {mode === 'template' && (
                         <>
-                            <div className="sticky z-30 top-[53px] bg-background py-2 flex flex-col gap-4 items-center">
-                                <Button type="submit" variant={'outline'}>
-                                    <span>
-                                        {templateId === undefined
-                                            ? 'Publish Template'
-                                            : 'Save changes'}
-                                    </span>
-                                </Button>
-                                <TabPanel
-                                    buttons={
-                                        templateId
-                                            ? templateTabButtons
-                                            : templateTabButtons.slice(0, 2)
-                                    }
-                                    tabId={tabId}
-                                    setTabId={setTabId}
-                                />
-                            </div>
+                            <TemplateHeader tabId={tabId} setTabId={setTabId} />
                             <div
                                 className={cn(
                                     'visible',

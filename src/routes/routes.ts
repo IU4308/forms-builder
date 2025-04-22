@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Workspace from '../pages/Workspace';
 import Admin from '../pages/Admin';
+import Search from '../pages/Search';
 import { login, register } from '@/actions/auth.actions';
 import Fallback from '@/components/Fallback';
 import { adminAction } from '@/actions/admin.actions';
@@ -19,7 +20,6 @@ import {
     updateTemplate,
 } from '@/actions/template.actions';
 import { submitForm, updateForm } from '@/actions/forms.actions';
-import SearchPage from '@/components/SearchPage';
 import { mainLoader } from '@/loaders/main.loader';
 import { homeLoader } from '@/loaders/home.loader';
 import { searchLoader } from '@/loaders/search.loader';
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/search/:query',
-                        Component: SearchPage,
+                        Component: Search,
                         loader: searchLoader,
                     },
                     {

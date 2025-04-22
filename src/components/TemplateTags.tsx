@@ -1,7 +1,6 @@
 import { reactSelectStyles } from '@/lib/constants';
 import { Tag } from '@/lib/definitions';
 import { useState } from 'react';
-import { useLoaderData } from 'react-router';
 import CreatableSelect from 'react-select/creatable';
 import { MultiValue, ActionMeta } from 'react-select';
 import { useMergedLoadersData } from '@/lib/useMergedLoadersData';

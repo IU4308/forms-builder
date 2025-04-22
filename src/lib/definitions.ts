@@ -140,7 +140,7 @@ export type BaseTemplate = {
 
 export type TemplateType = BaseTemplate & {
     isPublic: boolean;
-    allowedUsers: string[];
+    allowedIds: string[];
     tagIds: number[];
     topicId: number;
 };

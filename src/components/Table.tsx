@@ -171,7 +171,7 @@ export default function Table({
 }: TableProps) {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [sorter, setSorter] = useState(
-        shouldSort ? attributes[1].key : undefined
+        shouldSort ? attributes[2].key : undefined
     );
     const [isDescending, setIsDescending] = useState(true);
     const handleChangeSorter = (label: string) => {
