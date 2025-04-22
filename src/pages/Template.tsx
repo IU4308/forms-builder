@@ -9,7 +9,12 @@ import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
 import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useParams } from 'react-router';
+import { io } from 'socket.io-client';
 
+const socket = io(import.meta.env.VITE_SOCKET_URL);
+socket.on('connect', () => {
+    console.log('connected to socket server');
+});
 export default function Template() {
     const { mode, templateForms } = useMergedLoadersData();
     const { templateId, formId } = useParams();
