@@ -24,15 +24,13 @@ import { homeLoader } from '@/loaders/home.loader';
 import { searchLoader } from '@/loaders/search.loader';
 import { workspaceLoader } from '@/loaders/workspace.loader';
 import { adminLoader } from '@/loaders/admin.loader';
-import {
-    formLoader,
-    createTemplateLoader,
-    editTemplateLoader,
-    filledFormLoader,
-} from '@/loaders/templates.loader';
 import { appLoader } from '@/loaders/app.loader';
 import { logoutLoader } from '@/loaders/logout.loader';
-import TemplatePage from '@/pages/TemplatePage';
+import { createTemplateLoader } from '@/loaders/createTemplate.loader';
+import { editTemplateLoader } from '@/loaders/editTemplate.loader';
+import { formLoader } from '@/loaders/form.loader';
+import { filledFormLoader } from '@/loaders/filledForm.loader';
+import Template from '@/pages/Template';
 
 export const router = createBrowserRouter([
     {
@@ -71,28 +69,28 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/templates',
-                        Component: TemplatePage,
+                        Component: Template,
                         action: publish,
                         loader: createTemplateLoader,
                         handle: { id: 'createTemplate' },
                         children: [
                             {
                                 path: ':templateId',
-                                Component: TemplatePage,
+                                Component: Template,
                                 action: updateTemplate,
                                 loader: editTemplateLoader,
                                 handle: { id: 'editTemplate' },
                                 children: [
                                     {
                                         path: 'forms',
-                                        Component: TemplatePage,
+                                        Component: Template,
                                         loader: formLoader,
                                         action: submitForm,
                                         handle: { id: 'form' },
                                         children: [
                                             {
                                                 path: ':formId',
-                                                Component: TemplatePage,
+                                                Component: Template,
                                                 loader: filledFormLoader,
                                                 action: updateForm,
                                                 handle: { id: 'filledForm' },

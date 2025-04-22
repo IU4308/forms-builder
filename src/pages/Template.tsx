@@ -1,3 +1,4 @@
+import Comments from '@/components/Comments';
 import CustomForm from '@/components/CustomForm';
 import FormResponse from '@/components/FormResponse';
 import FormSettings from '@/components/FormSettings';
@@ -17,63 +18,69 @@ export default function Template() {
 
     const fetcher = useFetcher();
     return (
-        <fetcher.Form
-            action={getTemplateActionUrl(templateId, formId, mode)}
-            method="post"
-            encType="multipart/form-data"
-            onClick={() => setActiveId('')}
-        >
-            {fetcher?.data?.formResponse ? (
-                <FormResponse {...fetcher.data.formResponse} />
-            ) : (
-                <div className=" gap-4">
-                    <HiddenInputs />
-                    {mode === 'template' && (
-                        <>
-                            <TemplateHeader tabId={tabId} setTabId={setTabId} />
-                            <div
-                                className={cn(
-                                    'visible',
-                                    tabId !== 1 && 'hidden'
-                                )}
-                            >
-                                <FormSettings />
-                            </div>
-                            {templateForms !== undefined && (
+        <div>
+            <fetcher.Form
+                action={getTemplateActionUrl(templateId, formId, mode)}
+                method="post"
+                encType="multipart/form-data"
+                onClick={() => setActiveId('')}
+            >
+                {fetcher?.data?.formResponse ? (
+                    <FormResponse {...fetcher.data.formResponse} />
+                ) : (
+                    <div className=" gap-4">
+                        <HiddenInputs />
+                        {mode === 'template' && (
+                            <>
+                                <TemplateHeader
+                                    tabId={tabId}
+                                    setTabId={setTabId}
+                                />
                                 <div
                                     className={cn(
                                         'visible',
-                                        tabId !== 3 && 'hidden'
+                                        tabId !== 1 && 'hidden'
                                     )}
                                 >
-                                    {templateForms?.length > 0 ? (
-                                        <Table
-                                            data={templateForms}
-                                            attributes={getAnswersAttributes(
-                                                templateForms[0]
-                                            )}
-                                            shouldSort={true}
-                                            url={`templates/${templateId}/forms`}
-                                        />
-                                    ) : (
-                                        <h1 className="flex justify-center">
-                                            No answers
-                                        </h1>
-                                    )}
+                                    <FormSettings />
                                 </div>
-                            )}
-                        </>
-                    )}
+                                {templateForms !== undefined && (
+                                    <div
+                                        className={cn(
+                                            'visible',
+                                            tabId !== 3 && 'hidden'
+                                        )}
+                                    >
+                                        {templateForms?.length > 0 ? (
+                                            <Table
+                                                data={templateForms}
+                                                attributes={getAnswersAttributes(
+                                                    templateForms[0]
+                                                )}
+                                                shouldSort={true}
+                                                url={`templates/${templateId}/forms`}
+                                            />
+                                        ) : (
+                                            <h1 className="flex justify-center">
+                                                No answers
+                                            </h1>
+                                        )}
+                                    </div>
+                                )}
+                            </>
+                        )}
 
-                    <div className={cn('visible', tabId !== 2 && 'hidden')}>
-                        <CustomForm
-                            mode={mode}
-                            activeId={activeId}
-                            setActiveId={setActiveId}
-                        />
+                        <div className={cn('visible', tabId !== 2 && 'hidden')}>
+                            <CustomForm
+                                mode={mode}
+                                activeId={activeId}
+                                setActiveId={setActiveId}
+                            />
+                        </div>
                     </div>
-                </div>
-            )}
-        </fetcher.Form>
+                )}
+            </fetcher.Form>
+            {!formId && templateId && tabId === 2 && <Comments />}
+        </div>
     );
 }
