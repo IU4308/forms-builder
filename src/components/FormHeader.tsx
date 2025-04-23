@@ -3,10 +3,13 @@ import { Input } from './ui/input';
 import { format } from 'date-fns';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
+import { useLoaderData } from 'react-router';
+import { FilledFormData, FormData } from '@/lib/definitions';
 
 export default function FormHeader() {
-    const { template, currentUser } = useMergedLoadersData();
+    const { template, currentUser } = useLoaderData() as
+        | FormData
+        | FilledFormData;
     return (
         <>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">

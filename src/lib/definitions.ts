@@ -49,6 +49,14 @@ export interface BodyProps {
     shouldSubmit?: boolean;
 }
 
+export type CustomFieldProps = Field & {
+    mode: InterfaceMode;
+    activeId: string;
+    setActiveId: React.Dispatch<React.SetStateAction<string>>;
+    onDeleteField: (id: string) => void;
+    canEdit: boolean | undefined;
+};
+
 export interface CurrentUser {
     userId: string;
     name: string;
@@ -129,32 +137,67 @@ export type Field = {
 
 export type InterfaceMode = 'template' | 'form';
 
-export type BaseTemplate = {
+// export type BaseTemplate = {
+//     creatorId: string;
+//     title: string;
+//     description: string;
+//     imageUrl: string;
+//     createdAt: Date;
+//     fields: Field[];
+//     credentials?: {
+//         name?: string;
+//         email?: string;
+//     };
+// };
+
+// export type TemplateType = BaseTemplate & {
+//     isPublic: boolean;
+//     allowedIds: string[];
+//     tagIds: number[];
+//     topicId: number;
+//     comments: CommentType[];
+// };
+
+// export type FormType = BaseTemplate & {
+//     authorId: string;
+//     credentials: {
+//         name: string;
+//         email: string;
+//     };
+// };
+
+export type TemplateType = {
+    id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    createdAt: Date;
+    fields: Field[];
+    creatorId: string;
+    isPublic: boolean;
+    allowedIds: string[];
+    tagIds: number[];
+    comments: CommentType[];
+    topicId: number;
+    credentials: undefined;
+};
+
+export type FormType = {
+    id: string;
+    authorId: string;
+    credentials: {
+        name: string;
+        email: string;
+    };
     creatorId: string;
     title: string;
     description: string;
     imageUrl: string;
     createdAt: Date;
     fields: Field[];
-    credentials?: {
-        name?: string;
-        email?: string;
-    };
-};
-
-export type TemplateType = BaseTemplate & {
-    isPublic: boolean;
-    allowedIds: string[];
-    tagIds: number[];
-    topicId: number;
-};
-
-export type FormType = BaseTemplate & {
-    authorId: string;
-    credentials: {
-        name: string;
-        email: string;
-    };
+    topicId: undefined;
+    isPublic: undefined;
+    allowedIds: undefined;
 };
 
 export type TemplateFormsType = {
@@ -223,3 +266,69 @@ export type popularTemplateType = {
     createdAt: string;
     submissions: number;
 };
+
+export type CommentType = {
+    id: number;
+    authorId: string;
+    templateId: string;
+    body: string;
+    author: {
+        name: string;
+        email: string;
+    };
+    createdAt: Date;
+};
+
+export type CreateTemplateData = {
+    currentUser: CurrentUser;
+    mode: 'template';
+    topics: Topic[];
+    tags: Tag[];
+    users: User[];
+    templateForms: undefined;
+    comments: undefined;
+    template: undefined;
+    canEdit: undefined;
+};
+
+export type TemplateData = {
+    currentUser: CurrentUser;
+    topics: Topic[];
+    tags: Tag[];
+    users: User[];
+    mode: 'template';
+    templateForms: TemplateFormsType[];
+    template: TemplateType;
+    comments: CommentType[];
+    canEdit: undefined;
+};
+
+export type FormData = {
+    currentUser: CurrentUser;
+    template: TemplateType;
+    mode: 'form';
+    canEdit: boolean;
+    topics: undefined;
+    tags: undefined;
+    users: undefined;
+    templateForms: undefined;
+    comments: undefined;
+};
+
+export type FilledFormData = {
+    currentUser: CurrentUser;
+    template: FormType;
+    mode: 'form';
+    canEdit: boolean;
+    topics: undefined;
+    tags: undefined;
+    users: undefined;
+    templateForms: undefined;
+    comments: undefined;
+};
+
+export type TemplateLoaderData =
+    | CreateTemplateData
+    | TemplateData
+    | FormData
+    | FilledFormData;

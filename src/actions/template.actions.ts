@@ -1,4 +1,5 @@
 import { api } from '@/api/api';
+import socket from '@/lib/socket';
 import { setFlash } from '@/lib/utils';
 import { ActionFunctionArgs, redirect } from 'react-router';
 
@@ -24,7 +25,6 @@ export const updateTemplate = async ({
 }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
-        console.log(Object.fromEntries(formData));
         const { templateId } = params;
         const response = await api.put(`/templates/${templateId}`, formData, {
             headers: {
@@ -50,6 +50,22 @@ export const deleteTemplates = async ({ request }: { request: Request }) => {
         );
         setFlash(response.data.message);
     } catch (error: any) {
+        console.log(error);
+        throw new Error('Server error');
+    }
+};
+
+export const publishComment = async ({
+    request,
+    params,
+}: ActionFunctionArgs) => {
+    try {
+        const formData = await request.formData();
+        const response = await api.post(`/templates/comments`, formData);
+        socket.emit('publishComment', response.data.comment);
+        setFlash(response.data.message);
+        return redirect(`/templates/${params.templateId}`);
+    } catch (error) {
         console.log(error);
         throw new Error('Server error');
     }

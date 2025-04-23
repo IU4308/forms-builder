@@ -1,9 +1,9 @@
-import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
-import { useParams } from 'react-router';
+import { TemplateLoaderData } from '@/lib/definitions';
+import { useLoaderData, useParams } from 'react-router';
 
 export default function HiddenInputs() {
     const { templateId, formId } = useParams();
-    const { currentUser, mode } = useMergedLoadersData();
+    const { currentUser, mode } = useLoaderData() as TemplateLoaderData;
     return (
         <>
             {formId === undefined && (

@@ -87,20 +87,15 @@ export const getMenu = (currentUser: CurrentUser) => {
     });
 };
 
-export const setFlash = (
-    message: string,
-    type: 'success' | 'error' = 'success'
-) => {
-    sessionStorage.setItem('flash', `${type.toUpperCase() + '|' + message}`);
+export const setFlash = (message: string) => {
+    sessionStorage.setItem('flash', message);
     window.dispatchEvent(new Event('flashMessageChange'));
 };
 
 export const getFlash = () => {
-    const [type, message] = (sessionStorage
-        .getItem('flash')
-        ?.split('|', 2) as string[]) ?? ['', ''];
+    const message = sessionStorage.getItem('flash') ?? '';
     sessionStorage.removeItem('flash');
-    return { message, type };
+    return { message };
 };
 
 export const getQuestionType = (id: string) => {

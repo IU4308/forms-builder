@@ -1,4 +1,4 @@
-import { InterfaceMode, Field } from '@/lib/definitions';
+import { CustomFieldProps } from '@/lib/definitions';
 import { Checkbox } from './ui/checkbox';
 import { Input } from './ui/input';
 import * as changeCase from 'change-case';
@@ -6,14 +6,6 @@ import { cn, getQuestionType } from '@/lib/utils';
 import { Button } from './ui/button';
 import { IoTrash } from 'react-icons/io5';
 import { Textarea } from './ui/textarea';
-
-type CustomFieldProps = Field & {
-    mode: InterfaceMode;
-    activeId: string;
-    setActiveId: React.Dispatch<React.SetStateAction<string>>;
-    onDeleteField: (id: string) => void;
-    canEdit: boolean | undefined;
-};
 
 export default function CustomField({
     mode,

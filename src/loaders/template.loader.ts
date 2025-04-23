@@ -1,26 +1,29 @@
 import {
     getCurrentUser,
     getTemplate,
-    getTemplateForms,
+    getTemplateData,
 } from '@/lib/react-query';
 import { getLoader } from '@/lib/utils';
 import { LoaderFunctionArgs, redirect } from 'react-router';
 
-export const editTemplateLoader = getLoader(
-    async ({ request, params }: LoaderFunctionArgs) => {
+export const templateLoader = getLoader(
+    async ({ params }: LoaderFunctionArgs) => {
         const { templateId } = params;
         const currentUser = await getCurrentUser();
         const template = await getTemplate(templateId);
-        if (
-            !new URL(request.url).pathname.includes('forms') &&
-            template.creatorId !== currentUser.userId &&
-            !currentUser.isAdmin
-        )
+        if (template.creatorId !== currentUser.userId && !currentUser.isAdmin)
             return redirect(`/templates/${templateId}/forms`);
-        const templateForms = await getTemplateForms(templateId);
+
+        const [templateForms, [topics, tags, users]] =
+            await getTemplateData(templateId);
         return {
+            currentUser,
             template,
             templateForms,
+            topics,
+            tags,
+            users,
+            mode: 'template',
         };
     }
 );

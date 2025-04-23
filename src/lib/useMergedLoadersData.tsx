@@ -1,5 +1,6 @@
 import { useMatches } from 'react-router';
 import {
+    CommentType,
     CurrentUser,
     FormType,
     Tag,
@@ -16,35 +17,43 @@ type User = {
 
 type CreateTemplateData = {
     currentUser: CurrentUser;
-    mode: 'template' | 'form';
+    mode: 'template';
     topics: Topic[];
     tags: Tag[];
     users: User[];
 };
 
-type EditTemplateData = {
-    templateForms?: TemplateFormsType[];
-    template?: TemplateType;
+type TemplateData = {
+    currentUser: CurrentUser;
+    topics: Topic[];
+    tags: Tag[];
+    users: User[];
+    mode: 'template';
+    templateForms: TemplateFormsType[];
+    template: TemplateType;
+    comments: CommentType[];
 };
 
-type SubmitFormData = {
-    template?: TemplateType;
-    mode: 'template' | 'form';
-    canEdit?: boolean;
+type FormData = {
+    currentUser: CurrentUser;
+    template: TemplateType;
+    mode: 'form';
+    canEdit: boolean;
 };
 
-type EditFormData = TemplateType & FormType & User;
+type FilledFormData = {
+    template: FormType;
+    mode: 'form';
+    canEdit: boolean;
+};
 
-type CombinedData = CreateTemplateData &
-    EditTemplateData &
-    EditTemplateData &
-    SubmitFormData;
-
-type DataType =
+type CombinedData =
     | CreateTemplateData
-    | EditTemplateData
-    | EditTemplateData
-    | SubmitFormData;
+    | TemplateData
+    | FormData
+    | FilledFormData;
+
+type DataType = CreateTemplateData | TemplateData | FormData | FilledFormData;
 
 type Handle = {
     id?: string;
@@ -58,25 +67,27 @@ export const useMergedLoadersData = () => {
 
     const createTemplateData = matches.find(
         (m) => m.handle?.id === 'createTemplate'
-    )?.data as CreateTemplateData;
+    )?.data as CreateTemplateData | undefined;
 
-    const editTemplateData = matches.find(
-        (m) => m.handle?.id === 'editTemplate'
-    )?.data as EditTemplateData | undefined;
+    const templateData = matches.find((m) => m.handle?.id === 'editTemplate')
+        ?.data as TemplateData | undefined;
 
     const formData = matches.find((m) => m.handle?.id === 'form')?.data as
-        | SubmitFormData
+        | FormData
         | undefined;
 
     const filledFormData = matches.find((m) => m.handle?.id === 'filledForm')
-        ?.data as EditFormData | undefined;
+        ?.data as FilledFormData | undefined;
 
-    const data: CombinedData = {
-        ...createTemplateData,
-        ...(editTemplateData ?? {}),
-        ...(formData ?? {}),
-        ...(filledFormData ?? {}),
-    };
+    const data: CombinedData =
+        filledFormData ?? formData ?? templateData ?? createTemplateData;
+
+    // const data: CombinedData = {
+    //     ...createTemplateData,
+    //     ...(templateData ?? {}),
+    //     ...(formData ?? {}),
+    //     ...(filledFormData ?? {}),
+    // };
 
     return data;
 };

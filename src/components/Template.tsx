@@ -4,13 +4,12 @@ import FormSettings from '@/components/FormSettings';
 import HiddenInputs from '@/components/HiddenInputs';
 import Table from '@/components/Table';
 import TemplateHeader from '@/components/TemplateHeader';
-import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
 import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
-import { useFetcher, useParams } from 'react-router';
+import { useFetcher, useLoaderData, useParams } from 'react-router';
 
 export default function Template() {
-    const { mode, templateForms } = useMergedLoadersData();
+    const { mode, templateForms } = useLoaderData();
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');

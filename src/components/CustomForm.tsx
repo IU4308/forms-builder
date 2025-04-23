@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { QuestionType, Field, InterfaceMode } from '@/lib/definitions';
+import {
+    QuestionType,
+    Field,
+    InterfaceMode,
+    TemplateLoaderData,
+} from '@/lib/definitions';
 import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
 import { getQuestionType } from '@/lib/utils';
 import FormHeader from './FormHeader';
 import { Button } from './ui/button';
 import CustomField from './CustomField';
-import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
+import { useLoaderData } from 'react-router';
 
 export default function CustomForm({
     mode,
@@ -17,7 +22,7 @@ export default function CustomForm({
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { template, canEdit } = useMergedLoadersData();
+    const { template, canEdit } = useLoaderData() as TemplateLoaderData;
     const [fields, setFields] = useState<Field[]>(
         template?.fields ?? initialFields
     );

@@ -1,9 +1,12 @@
 import GeneralSettings from './GeneralSettings';
 import AccessSettings from './AccessSettings';
-import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
+import { useLoaderData } from 'react-router';
+import { CreateTemplateData, TemplateData } from '@/lib/definitions';
 
 export default function FormSettings() {
-    const { template, topics, tags, users } = useMergedLoadersData();
+    const { template, topics, tags, users } = useLoaderData() as
+        | CreateTemplateData
+        | TemplateData;
     return (
         <div className="max-w-[768px] mx-auto md:px-16">
             <GeneralSettings

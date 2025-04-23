@@ -17,6 +17,7 @@ import {
     publish,
     deleteTemplates,
     updateTemplate,
+    publishComment,
 } from '@/actions/template.actions';
 import { submitForm, updateForm } from '@/actions/forms.actions';
 import { mainLoader } from '@/loaders/main.loader';
@@ -27,10 +28,11 @@ import { adminLoader } from '@/loaders/admin.loader';
 import { appLoader } from '@/loaders/app.loader';
 import { logoutLoader } from '@/loaders/logout.loader';
 import { createTemplateLoader } from '@/loaders/createTemplate.loader';
-import { editTemplateLoader } from '@/loaders/editTemplate.loader';
+import { templateLoader } from '@/loaders/template.loader';
 import { formLoader } from '@/loaders/form.loader';
 import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
+import { commentsLoader } from '@/loaders/comments.loader';
 
 export const router = createBrowserRouter([
     {
@@ -73,33 +75,51 @@ export const router = createBrowserRouter([
                         action: publish,
                         loader: createTemplateLoader,
                         handle: { id: 'createTemplate' },
-                        children: [
-                            {
-                                path: ':templateId',
-                                Component: Template,
-                                action: updateTemplate,
-                                loader: editTemplateLoader,
-                                handle: { id: 'editTemplate' },
-                                children: [
-                                    {
-                                        path: 'forms',
-                                        Component: Template,
-                                        loader: formLoader,
-                                        action: submitForm,
-                                        handle: { id: 'form' },
-                                        children: [
-                                            {
-                                                path: ':formId',
-                                                Component: Template,
-                                                loader: filledFormLoader,
-                                                action: updateForm,
-                                                handle: { id: 'filledForm' },
-                                            },
-                                        ],
-                                    },
-                                ],
-                            },
-                        ],
+                        // children: [
+                        //     {
+                        //         path: ':templateId',
+                        //         Component: Template,
+                        //         action: updateTemplate,
+                        //         loader: templateLoader,
+                        //         handle: { id: 'editTemplate' },
+                        //     },
+                        // ],
+                    },
+                    {
+                        path: '/templates/:templateId',
+                        Component: Template,
+                        action: updateTemplate,
+                        loader: templateLoader,
+                        handle: { id: 'editTemplate' },
+                    },
+                    {
+                        path: '/templates/:templateId/forms',
+                        Component: Template,
+                        loader: formLoader,
+                        action: submitForm,
+                        handle: { id: 'form' },
+                        // children: [
+                        //     {
+                        //         path: ':formId',
+                        //         Component: Template,
+                        //         loader: filledFormLoader,
+                        //         action: updateForm,
+                        //         handle: { id: 'filledForm' },
+                        //     },
+                        // ],
+                    },
+                    {
+                        path: '/templates/:templateId/forms/:formId',
+                        Component: Template,
+                        loader: filledFormLoader,
+                        action: updateForm,
+                        handle: { id: 'filledForm' },
+                    },
+                    {
+                        path: '/templates/:templateId/comments',
+                        // loader: commentsLoader,
+                        action: publishComment,
+                        Component: Fallback,
                     },
                 ],
             },

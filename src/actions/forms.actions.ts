@@ -6,7 +6,6 @@ export const submitForm = async ({ request, params }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
         const { templateId } = params;
-        console.log(Object.fromEntries(formData));
         const response = await api.post(`/forms`, Object.fromEntries(formData));
         setFlash(response.data.message);
         return {

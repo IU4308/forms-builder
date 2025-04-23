@@ -14,6 +14,8 @@ export const formLoader = getLoader(async ({ params }: LoaderFunctionArgs) => {
         return redirect('/');
     }
     return {
+        currentUser,
+        template,
         mode: 'form',
         canEdit: !!currentUser,
     };

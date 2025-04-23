@@ -5,18 +5,13 @@ import FormSettings from '@/components/FormSettings';
 import HiddenInputs from '@/components/HiddenInputs';
 import Table from '@/components/Table';
 import TemplateHeader from '@/components/TemplateHeader';
-import { useMergedLoadersData } from '@/lib/useMergedLoadersData';
+import { TemplateLoaderData } from '@/lib/definitions';
 import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
-import { useFetcher, useParams } from 'react-router';
-import { io } from 'socket.io-client';
+import { useFetcher, useLoaderData, useParams } from 'react-router';
 
-const socket = io(import.meta.env.VITE_SOCKET_URL);
-socket.on('connect', () => {
-    console.log('connected to socket server');
-});
 export default function Template() {
-    const { mode, templateForms } = useMergedLoadersData();
+    const { mode, templateForms } = useLoaderData() as TemplateLoaderData;
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');
@@ -49,7 +44,7 @@ export default function Template() {
                                 >
                                     <FormSettings />
                                 </div>
-                                {templateForms !== undefined && (
+                                {templateForms && (
                                     <div
                                         className={cn(
                                             'visible',

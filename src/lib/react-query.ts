@@ -22,6 +22,9 @@ export const getTemplateData = async (templateId?: string | undefined) => {
 
 export const getMetaData = () => fetchData('templates', 'meta');
 
+export const getComments = (templateId: string | undefined) =>
+    fetchData('templates', templateId, 'comments');
+
 export const getWorkspaceData = (userId: string) =>
     fetchData('templates', 'users', userId);
 
