@@ -32,7 +32,6 @@ import { templateLoader } from '@/loaders/template.loader';
 import { formLoader } from '@/loaders/form.loader';
 import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
-import { commentsLoader } from '@/loaders/comments.loader';
 
 export const router = createBrowserRouter([
     {
@@ -75,15 +74,6 @@ export const router = createBrowserRouter([
                         action: publish,
                         loader: createTemplateLoader,
                         handle: { id: 'createTemplate' },
-                        // children: [
-                        //     {
-                        //         path: ':templateId',
-                        //         Component: Template,
-                        //         action: updateTemplate,
-                        //         loader: templateLoader,
-                        //         handle: { id: 'editTemplate' },
-                        //     },
-                        // ],
                     },
                     {
                         path: '/templates/:templateId',
@@ -98,15 +88,6 @@ export const router = createBrowserRouter([
                         loader: formLoader,
                         action: submitForm,
                         handle: { id: 'form' },
-                        // children: [
-                        //     {
-                        //         path: ':formId',
-                        //         Component: Template,
-                        //         loader: filledFormLoader,
-                        //         action: updateForm,
-                        //         handle: { id: 'filledForm' },
-                        //     },
-                        // ],
                     },
                     {
                         path: '/templates/:templateId/forms/:formId',
@@ -117,7 +98,6 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/templates/:templateId/comments',
-                        // loader: commentsLoader,
                         action: publishComment,
                         Component: Fallback,
                     },
