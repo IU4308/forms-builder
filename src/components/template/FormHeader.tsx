@@ -1,5 +1,5 @@
-import { Label } from './ui/label';
-import { Input } from './ui/input';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
 import { format } from 'date-fns';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';

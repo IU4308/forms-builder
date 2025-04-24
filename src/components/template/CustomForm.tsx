@@ -8,10 +8,10 @@ import {
 import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
 import { getQuestionType } from '@/lib/utils';
-import FormHeader from './FormHeader';
-import { Button } from './ui/button';
-import CustomField from './CustomField';
+import { Button } from '../ui/button';
 import { useLoaderData } from 'react-router';
+import FormHeader from './FormHeader';
+import CustomField from './CustomField';
 
 export default function CustomForm({
     mode,

@@ -1,14 +1,14 @@
-import Comments from '@/components/Comments';
-import CustomForm from '@/components/CustomForm';
-import FormResponse from '@/components/FormResponse';
-import FormSettings from '@/components/FormSettings';
-import HiddenInputs from '@/components/HiddenInputs';
+import Comments from '@/components/template/Comments';
+import CustomForm from '@/components/template/CustomForm';
+import FormResponse from '@/components/template/FormResponse';
+import HiddenInputs from '@/components/template/HiddenInputs';
 import Table from '@/components/Table';
-import TemplateHeader from '@/components/TemplateHeader';
+import TemplateHeader from '@/components/template/TemplateHeader';
 import { TemplateLoaderData } from '@/lib/definitions';
 import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
+import TemplateSettings from '@/components/template/settings/TemplateSettings';
 
 export default function Template() {
     const { mode, templateForms } = useLoaderData() as TemplateLoaderData;
@@ -42,7 +42,7 @@ export default function Template() {
                                         tabId !== 1 && 'hidden'
                                     )}
                                 >
-                                    <FormSettings />
+                                    <TemplateSettings />
                                 </div>
                                 {templateForms && (
                                     <div

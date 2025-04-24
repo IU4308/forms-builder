@@ -1,9 +1,9 @@
 import { Tag, Topic } from '@/lib/definitions';
-import TemplateImage from './TemplateImage';
-import TemplateDescription from './TemplateDescription';
-import TemplateTopic from './TemplateTopic';
-import TemplateTitle from './TemplateTitle';
-import TemplateTags from './TemplateTags';
+import TemplateImage from './image';
+import TemplateTopic from './topic';
+import TemplateTitle from './title';
+import TemplateTags from './tags';
+import TemplateDescription from './description';
 
 export default function GeneralSettings({
     title,

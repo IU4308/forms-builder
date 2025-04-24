@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import Table from './Table';
-import { Label } from './ui/label';
-import { Checkbox } from './ui/checkbox';
 import { ToolbarButton } from '@/lib/definitions';
 import { IoRemoveCircleOutline } from 'react-icons/io5';
-import AddUserButton from './AddUserButton';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import Table from '@/components/Table';
+import AddUserButton from '@/components/template/AddUserButton';
 
 const attributes = [
     {

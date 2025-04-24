@@ -1,11 +1,11 @@
 import { CustomFieldProps } from '@/lib/definitions';
-import { Checkbox } from './ui/checkbox';
-import { Input } from './ui/input';
+import { Checkbox } from '../ui/checkbox';
+import { Input } from '../ui/input';
 import * as changeCase from 'change-case';
 import { cn, getQuestionType } from '@/lib/utils';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { IoTrash } from 'react-icons/io5';
-import { Textarea } from './ui/textarea';
+import { Textarea } from '../ui/textarea';
 
 export default function CustomField({
     mode,

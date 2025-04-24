@@ -32,6 +32,7 @@ import { templateLoader } from '@/loaders/template.loader';
 import { formLoader } from '@/loaders/form.loader';
 import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
+import { commentsLoader } from '@/loaders/comments.loader';
 
 export const router = createBrowserRouter([
     {
@@ -99,6 +100,7 @@ export const router = createBrowserRouter([
                     {
                         path: '/templates/:templateId/comments',
                         action: publishComment,
+                        loader: commentsLoader,
                         Component: Fallback,
                     },
                 ],

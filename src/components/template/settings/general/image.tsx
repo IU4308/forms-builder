@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Label } from './ui/label';
-import { Button } from './ui/button';
+import { Label } from '../../../ui/label';
+import { Button } from '../../../ui/button';
 import { IoTrash } from 'react-icons/io5';
-import { Input } from './ui/input';
+import { Input } from '../../../ui/input';
 
 export default function TemplateImage({
     imageUrl,

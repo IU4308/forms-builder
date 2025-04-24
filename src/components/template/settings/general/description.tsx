@@ -1,4 +1,4 @@
-import { Label } from './ui/label';
+import { Label } from '@/components/ui/label';
 import MDEditor from '@uiw/react-md-editor';
 import { useState } from 'react';
 import rehypeSanitize from 'rehype-sanitize';

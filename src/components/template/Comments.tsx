@@ -1,8 +1,8 @@
-import { Form, useLoaderData, useParams } from 'react-router';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
+import { Form, useLoaderData, useNavigation, useParams } from 'react-router';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 import { format } from 'date-fns';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import socket from '@/lib/socket';
 import { FormData, TemplateData } from '@/lib/definitions';
 
@@ -12,9 +12,13 @@ export default function Comments() {
         | TemplateData
         | FormData;
     const [comments, setComments] = useState(template.comments);
+
+    const inputRef = useRef<HTMLInputElement>(null);
+    const navigation = useNavigation();
+    const isSubmitting = navigation.state === 'submitting';
+
     useEffect(() => {
         socket.on('newComment', (newComment) => {
-            console.log('New comment received:', newComment);
             setComments((prevComments) => [...prevComments, newComment]);
         });
 
@@ -22,6 +26,12 @@ export default function Comments() {
             socket.off('newComment');
         };
     }, [template]);
+
+    useEffect(() => {
+        if (!isSubmitting && inputRef.current) {
+            inputRef.current.value = '';
+        }
+    }, [isSubmitting]);
 
     return (
         <Form
@@ -58,15 +68,19 @@ export default function Comments() {
                     />
                     <div className="flex gap-2">
                         <Input
+                            ref={inputRef}
                             placeholder="Enter a comment"
                             name="body"
                             defaultValue={''}
+                            required
                         />
-                        <Button type="submit">Publish</Button>
+                        <Button type="submit" disabled={isSubmitting}>
+                            Publish
+                        </Button>
                     </div>
                 </>
             )}
-            <div>
+            <div className="px-1">
                 {comments?.map((comment) => (
                     <div
                         key={comment.id}

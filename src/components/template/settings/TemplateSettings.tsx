@@ -1,9 +1,9 @@
-import GeneralSettings from './GeneralSettings';
-import AccessSettings from './AccessSettings';
+import GeneralSettings from './general/GeneralSettings';
 import { useLoaderData } from 'react-router';
 import { CreateTemplateData, TemplateData } from '@/lib/definitions';
+import AccessSettings from './AccessSettings';
 
-export default function FormSettings() {
+export default function TemplateSettings() {
     const { template, topics, tags, users } = useLoaderData() as
         | CreateTemplateData
         | TemplateData;

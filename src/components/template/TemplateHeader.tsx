@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { useParams } from 'react-router';
 import { templateTabButtons } from '@/lib/constants';
-import TabPanel from './TabPanel';
+import TabPanel from '../TabPanel';
 
 export default function TemplateHeader({
     tabId,
