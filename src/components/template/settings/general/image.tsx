@@ -1,8 +1,8 @@
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useState } from 'react';
-import { Label } from '../../../ui/label';
-import { Button } from '../../../ui/button';
 import { IoTrash } from 'react-icons/io5';
-import { Input } from '../../../ui/input';
 
 export default function TemplateImage({
     imageUrl,
@@ -25,7 +25,11 @@ export default function TemplateImage({
             )}
             {imageUrl && !isTrashed && (
                 <div className="relative">
-                    <img src={imageUrl} alt="template image" />
+                    <img
+                        src={imageUrl}
+                        alt="template image"
+                        className="max-h-[400px] object-cover w-full"
+                    />
                     <Button
                         type="button"
                         className="absolute top-2 right-2"

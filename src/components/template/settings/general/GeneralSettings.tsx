@@ -12,6 +12,7 @@ export default function GeneralSettings({
     topicId,
     topics,
     tags,
+    templateTagIds,
 }: {
     title: string | undefined;
     description: string | undefined;
@@ -19,6 +20,7 @@ export default function GeneralSettings({
     topicId: number | undefined;
     topics: Topic[];
     tags: Tag[];
+    templateTagIds?: number[] | undefined;
 }) {
     return (
         <div className="flex flex-col gap-4 py-4">
@@ -27,7 +29,11 @@ export default function GeneralSettings({
             <TemplateDescription description={description} />
             <TemplateTopic topics={topics} topicId={topicId} />
             <TemplateImage key={imageUrl} imageUrl={imageUrl} />
-            <TemplateTags tags={tags} />
+            <TemplateTags
+                key={templateTagIds?.reduce((acc, curr) => acc + curr)}
+                tags={tags}
+                templateTagIds={templateTagIds}
+            />
         </div>
     );
 }

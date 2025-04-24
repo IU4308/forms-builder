@@ -16,6 +16,7 @@ export default function TemplateSettings() {
                 topicId={template?.topicId}
                 topics={topics}
                 tags={tags}
+                templateTagIds={template?.tagIds}
             />
             <AccessSettings
                 users={users}

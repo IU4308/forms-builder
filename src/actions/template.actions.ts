@@ -55,16 +55,13 @@ export const deleteTemplates = async ({ request }: { request: Request }) => {
     }
 };
 
-export const publishComment = async ({
-    request,
-    params,
-}: ActionFunctionArgs) => {
+export const publishComment = async ({ request }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
         const response = await api.post(`/templates/comments`, formData);
         socket.emit('publishComment', response.data.comment);
         setFlash(response.data.message);
-        return redirect(`/templates/${params.templateId}`);
+        return redirect(formData.get('redirectTo') as string);
     } catch (error) {
         console.log(error);
         throw new Error('Server error');

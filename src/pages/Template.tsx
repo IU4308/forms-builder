@@ -1,4 +1,4 @@
-import Comments from '@/components/template/Comments';
+import Comments from '@/components/template/comments/Comments';
 import CustomForm from '@/components/template/CustomForm';
 import FormResponse from '@/components/template/FormResponse';
 import HiddenInputs from '@/components/template/HiddenInputs';

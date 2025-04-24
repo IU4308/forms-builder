@@ -3,25 +3,37 @@ import { Tag } from '@/lib/definitions';
 import { useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { MultiValue, ActionMeta } from 'react-select';
-import { useLoaderData } from 'react-router';
 
 type OptionType = {
+    id: number;
     label: string;
     value: string;
+    __isNew__?: boolean;
 };
 
 const getOptions = (tags: Tag[]) =>
     tags.map((tag) => ({
+        id: tag.id,
         label: tag.name,
         value: tag.name,
     }));
 
-const TemplateTags = ({ tags }: { tags: Tag[] }) => {
-    const { template } = useLoaderData();
+const TemplateTags = ({
+    tags,
+    templateTagIds,
+}: {
+    tags: Tag[];
+    templateTagIds: number[] | undefined;
+}) => {
     const tagOptions = getOptions(tags);
     const [selectedTags, setSelectedTags] = useState<OptionType[]>(
-        getOptions(tags.filter((tag) => template?.tagIds?.includes(tag.id)))
+        getOptions(tags.filter((tag) => templateTagIds?.includes(tag.id)))
     );
+    const newTags = selectedTags.filter((tag) => tag.__isNew__);
+
+    const selectedIds = selectedTags
+        .map((tag) => tag.id)
+        .filter((tag) => tag !== undefined);
 
     const handleChange = (
         newValue: MultiValue<OptionType>,
@@ -36,9 +48,17 @@ const TemplateTags = ({ tags }: { tags: Tag[] }) => {
             <input
                 hidden
                 readOnly
-                name="tags"
-                value={selectedTags.map((tag) => tag.value)}
+                name="tagIds"
+                value={selectedIds.join(',')}
             />
+            {newTags?.length > 0 && (
+                <input
+                    hidden
+                    readOnly
+                    name="newTags"
+                    value={newTags.map((tag) => tag.value)}
+                />
+            )}
             <CreatableSelect
                 isMulti
                 onChange={handleChange}

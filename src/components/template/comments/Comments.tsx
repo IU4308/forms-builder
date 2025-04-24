@@ -1,10 +1,11 @@
 import { Form, useLoaderData, useNavigation, useParams } from 'react-router';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
+import { Input } from '../../ui/input';
+import { Button } from '../../ui/button';
 import { format } from 'date-fns';
 import { useEffect, useRef, useState } from 'react';
 import socket from '@/lib/socket';
 import { FormData, TemplateData } from '@/lib/definitions';
+import CommentHiddenInputs from './hidden-inputs';
 
 export default function Comments() {
     const { templateId } = useParams();
@@ -12,7 +13,6 @@ export default function Comments() {
         | TemplateData
         | FormData;
     const [comments, setComments] = useState(template.comments);
-
     const inputRef = useRef<HTMLInputElement>(null);
     const navigation = useNavigation();
     const isSubmitting = navigation.state === 'submitting';
@@ -39,33 +39,10 @@ export default function Comments() {
             method="post"
             className="max-w-[768px] mx-auto my-4 flex flex-col gap-4"
         >
-            <h1>Comments</h1>
+            <h1>{comments.length} Comments</h1>
             {currentUser && (
                 <>
-                    <input
-                        hidden
-                        readOnly
-                        name="authorId"
-                        value={currentUser.userId}
-                    />
-                    <input
-                        hidden
-                        readOnly
-                        name="templateId"
-                        value={templateId}
-                    />
-                    <input
-                        hidden
-                        readOnly
-                        name="name"
-                        value={currentUser.name}
-                    />
-                    <input
-                        hidden
-                        readOnly
-                        name="email"
-                        value={currentUser.email}
-                    />
+                    <CommentHiddenInputs />
                     <div className="flex gap-2">
                         <Input
                             ref={inputRef}
@@ -89,7 +66,10 @@ export default function Comments() {
                         <div className="flex gap-2">
                             <div>{comment.author.name}</div>
                             <div className="text-muted-foreground">
-                                {format(comment.createdAt, 'dd MMM yyyy')}
+                                {format(
+                                    comment.createdAt,
+                                    'dd MMM yyyy HH:mm:ss'
+                                )}
                             </div>
                         </div>
                         <div className="break-words">{comment.body}</div>

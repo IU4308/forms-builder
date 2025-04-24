@@ -137,35 +137,6 @@ export type Field = {
 
 export type InterfaceMode = 'template' | 'form';
 
-// export type BaseTemplate = {
-//     creatorId: string;
-//     title: string;
-//     description: string;
-//     imageUrl: string;
-//     createdAt: Date;
-//     fields: Field[];
-//     credentials?: {
-//         name?: string;
-//         email?: string;
-//     };
-// };
-
-// export type TemplateType = BaseTemplate & {
-//     isPublic: boolean;
-//     allowedIds: string[];
-//     tagIds: number[];
-//     topicId: number;
-//     comments: CommentType[];
-// };
-
-// export type FormType = BaseTemplate & {
-//     authorId: string;
-//     credentials: {
-//         name: string;
-//         email: string;
-//     };
-// };
-
 export type TemplateType = {
     id: string;
     title: string;
