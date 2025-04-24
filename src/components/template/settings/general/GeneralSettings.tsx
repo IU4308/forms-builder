@@ -30,7 +30,7 @@ export default function GeneralSettings({
             <TemplateTopic topics={topics} topicId={topicId} />
             <TemplateImage key={imageUrl} imageUrl={imageUrl} />
             <TemplateTags
-                key={templateTagIds?.reduce((acc, curr) => acc + curr)}
+                key={templateTagIds?.reduce((acc, curr) => acc + curr, 0)}
                 tags={tags}
                 templateTagIds={templateTagIds}
             />

@@ -9,6 +9,7 @@ import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
 import TemplateSettings from '@/components/template/settings/TemplateSettings';
+import Likes from '@/components/template/Likes';
 
 export default function Template() {
     const { mode, templateForms } = useLoaderData() as TemplateLoaderData;
@@ -80,7 +81,12 @@ export default function Template() {
                     </div>
                 )}
             </fetcher.Form>
-            {!formId && templateId && tabId === 2 && <Comments />}
+            {!formId && templateId && tabId === 2 && (
+                <div className="py-8">
+                    <Likes />
+                    <Comments />
+                </div>
+            )}
         </div>
     );
 }

@@ -51,9 +51,7 @@ export default function Comments() {
                             defaultValue={''}
                             required
                         />
-                        <Button type="submit" disabled={isSubmitting}>
-                            Publish
-                        </Button>
+                        <Button type="submit">Publish</Button>
                     </div>
                 </>
             )}

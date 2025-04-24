@@ -18,6 +18,7 @@ import {
     deleteTemplates,
     updateTemplate,
     publishComment,
+    likeTemplate,
 } from '@/actions/template.actions';
 import { submitForm, updateForm } from '@/actions/forms.actions';
 import { mainLoader } from '@/loaders/main.loader';
@@ -32,7 +33,7 @@ import { templateLoader } from '@/loaders/template.loader';
 import { formLoader } from '@/loaders/form.loader';
 import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
-import { commentsLoader } from '@/loaders/comments.loader';
+import { templateRedirector } from '@/loaders/comments.loader';
 
 export const router = createBrowserRouter([
     {
@@ -100,7 +101,13 @@ export const router = createBrowserRouter([
                     {
                         path: '/templates/:templateId/comments',
                         action: publishComment,
-                        loader: commentsLoader,
+                        loader: templateRedirector,
+                        Component: Fallback,
+                    },
+                    {
+                        path: '/templates/:templateId/likes',
+                        action: likeTemplate,
+                        loader: templateRedirector,
                         Component: Fallback,
                     },
                 ],

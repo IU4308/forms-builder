@@ -149,6 +149,7 @@ export type TemplateType = {
     allowedIds: string[];
     tagIds: number[];
     comments: CommentType[];
+    likes: string[];
     topicId: number;
     credentials: undefined;
 };
