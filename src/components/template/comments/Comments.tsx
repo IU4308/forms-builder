@@ -39,7 +39,7 @@ export default function Comments() {
             method="post"
             className="max-w-[768px] mx-auto my-4 flex flex-col gap-4"
         >
-            <h1>{comments.length} Comments</h1>
+            <h1>Comments ({comments.length})</h1>
             {currentUser && (
                 <>
                     <CommentHiddenInputs />

@@ -82,7 +82,7 @@ export default function Template() {
                 )}
             </fetcher.Form>
             {!formId && templateId && tabId === 2 && (
-                <div className="py-8">
+                <div className="relative my-16 max-w-[768px] mx-auto">
                     <Likes />
                     <Comments />
                 </div>

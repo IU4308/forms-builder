@@ -1,7 +1,7 @@
-import { AiFillLike } from 'react-icons/ai';
 import { Button } from '../ui/button';
 import { Form, useLoaderData, useLocation, useParams } from 'react-router';
 import { FormData, TemplateData } from '@/lib/definitions';
+import { BiLike, BiSolidLike } from 'react-icons/bi';
 
 export default function Likes() {
     const { templateId } = useParams();
@@ -15,7 +15,7 @@ export default function Likes() {
         <Form
             action={`/templates/${templateId}/likes`}
             method="post"
-            className="max-w-[768px] mx-auto my-4 flex items-center gap-4"
+            className=" my-4 flex items-center gap-2"
         >
             <input
                 hidden
@@ -31,10 +31,14 @@ export default function Likes() {
             />
             <input hidden readOnly name="userId" value={currentUser.userId} />
             <input hidden readOnly name="templateId" value={templateId} />
-            <div>{template.likes.length} Likes</div>
-            <Button type="submit" variant={isLiked ? 'default' : 'ghost'}>
-                <AiFillLike />
-            </Button>
+            <div className="flex items-center gap-2">
+                {currentUser && (
+                    <Button type="submit" variant="ghost">
+                        {isLiked ? <BiSolidLike /> : <BiLike />}
+                    </Button>
+                )}
+                <span className="text-2xl">{template.likes.length}</span>
+            </div>
         </Form>
     );
 }
