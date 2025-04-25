@@ -6,7 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { cn, formatContent, getTableBody, setSentenceCase } from '@/lib/utils';
+import { cn, formatContent, getTableBody } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -72,7 +72,7 @@ const Header = ({
                                         }
                                     >
                                         <span>
-                                            {setSentenceCase(cell.label)}
+                                            {formatContent(cell.label, 15)}
                                         </span>
                                         {sorter === cell.key ? (
                                             isDescending ? (
@@ -86,7 +86,7 @@ const Header = ({
                                     </Button>
                                 ) : (
                                     <span className="px-3">
-                                        {setSentenceCase(cell.label)}
+                                        {formatContent(cell.label, 15)}
                                     </span>
                                 )}
                             </TableHead>

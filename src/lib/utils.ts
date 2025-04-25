@@ -5,6 +5,7 @@ import * as changeCase from 'change-case';
 import { navMenu } from './constants.tsx';
 import { Cell, CurrentUser, TableAttributes } from './definitions';
 import { LoaderFunctionArgs } from 'react-router';
+import _ from 'lodash';
 
 export const getLoader = <T>(
     load: (args: LoaderFunctionArgs) => Promise<T>
@@ -52,7 +53,7 @@ export const getTableBody = (
     return body;
 };
 
-export const formatContent = (content: any) => {
+export const formatContent = (content: any, maxLength = 25) => {
     if (content === null) return 'NULL';
     if (typeof content === 'boolean') return content ? 'TRUE' : 'FALSE';
     if (
@@ -61,7 +62,9 @@ export const formatContent = (content: any) => {
     ) {
         return format(new Date(content), 'MMM dd, yyyy HH:mm:ss');
     }
-    return content.length > 26 ? content.slice(0, 25) + '...' : content;
+    return content.length > maxLength
+        ? content.slice(0, maxLength - 1) + '...'
+        : content;
 };
 
 export const sortData = (
@@ -105,16 +108,20 @@ export const getQuestionType = (id: string) => {
 export const getAnswersAttributes = (form: any) => {
     let attributes = [];
     for (const key of Object.keys(form)) {
-        if (!key.includes('Answer') && !key.includes('State')) {
+        if (
+            !key.includes('Answer') &&
+            !key.includes('State') &&
+            !key.includes('Question')
+        ) {
             attributes.push({
-                label: key,
+                label: setSentenceCase(key),
                 key: key,
                 shouldRender: key !== 'id',
             });
         }
         if (key.includes('Answer')) {
             attributes.push({
-                label: key.replace('Answer', ''),
+                label: form[key.replace('Answer', 'Question')],
                 key: key,
                 shouldRender: form[key.replace('Answer', 'State')],
             });
@@ -152,4 +159,28 @@ export const getTemplateActionUrl = (
         action += `/${formId}`;
     }
     return action;
+};
+
+type AggregatedResults = {
+    question: string;
+    answer: string;
+    count: string;
+    type: string;
+}[];
+
+export const groupResults = (data: AggregatedResults) => {
+    return _.chain(data)
+        .groupBy((item) => `${item.question}|${item.type}`)
+        .map((answers, compositeKey) => {
+            const [question, type] = compositeKey.split('|');
+            return {
+                question,
+                type,
+                answers: answers.map(({ answer, count }) => [
+                    answer || '(empty)',
+                    Number(count),
+                ]),
+            };
+        })
+        .value();
 };

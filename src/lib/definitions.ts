@@ -172,6 +172,61 @@ export type FormType = {
     allowedIds: undefined;
 };
 
+export type CreateTemplateData = {
+    currentUser: CurrentUser;
+    mode: 'template';
+    topics: Topic[];
+    tags: Tag[];
+    users: User[];
+    templateForms: undefined;
+    comments: undefined;
+    template: undefined;
+    canEdit: undefined;
+};
+
+export type TemplateData = {
+    currentUser: CurrentUser;
+    topics: Topic[];
+    tags: Tag[];
+    users: User[];
+    mode: 'template';
+    templateForms: TemplateFormsType[];
+    results: AggregatedResult[];
+    template: TemplateType;
+    comments: CommentType[];
+    canEdit: undefined;
+};
+
+export type FormData = {
+    currentUser: CurrentUser;
+    template: TemplateType;
+    mode: 'form';
+    canEdit: boolean;
+    topics: undefined;
+    tags: undefined;
+    users: undefined;
+    templateForms: undefined;
+    comments: undefined;
+};
+
+export type FilledFormData = {
+    currentUser: CurrentUser;
+    template: FormType;
+    mode: 'form';
+    canEdit: boolean;
+    topics: undefined;
+    tags: undefined;
+    users: undefined;
+    templateForms: undefined;
+    comments: undefined;
+};
+
+export type TemplateLoaderData =
+    | CreateTemplateData
+    | TemplateData
+    | FormData
+    | FilledFormData;
+
 export type TemplateFormsType = {
     id: string;
     name: string;
@@ -251,56 +306,8 @@ export type CommentType = {
     createdAt: Date;
 };
 
-export type CreateTemplateData = {
-    currentUser: CurrentUser;
-    mode: 'template';
-    topics: Topic[];
-    tags: Tag[];
-    users: User[];
-    templateForms: undefined;
-    comments: undefined;
-    template: undefined;
-    canEdit: undefined;
+export type AggregatedResult = {
+    question: string;
+    type: 'single_line' | 'multiple_line' | 'integer_value' | 'checkbox';
+    answers: [string, number][];
 };
-
-export type TemplateData = {
-    currentUser: CurrentUser;
-    topics: Topic[];
-    tags: Tag[];
-    users: User[];
-    mode: 'template';
-    templateForms: TemplateFormsType[];
-    template: TemplateType;
-    comments: CommentType[];
-    canEdit: undefined;
-};
-
-export type FormData = {
-    currentUser: CurrentUser;
-    template: TemplateType;
-    mode: 'form';
-    canEdit: boolean;
-    topics: undefined;
-    tags: undefined;
-    users: undefined;
-    templateForms: undefined;
-    comments: undefined;
-};
-
-export type FilledFormData = {
-    currentUser: CurrentUser;
-    template: FormType;
-    mode: 'form';
-    canEdit: boolean;
-    topics: undefined;
-    tags: undefined;
-    users: undefined;
-    templateForms: undefined;
-    comments: undefined;
-};
-
-export type TemplateLoaderData =
-    | CreateTemplateData
-    | TemplateData
-    | FormData
-    | FilledFormData;

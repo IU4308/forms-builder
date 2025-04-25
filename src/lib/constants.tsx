@@ -204,6 +204,10 @@ export const templateTabButtons = [
         id: 3,
         label: 'Answers',
     },
+    {
+        id: 4,
+        label: 'Aggregated Results',
+    },
 ];
 
 export const questionTypes: QuestionType[] = [

@@ -3,7 +3,7 @@ import {
     getTemplate,
     getTemplateData,
 } from '@/lib/react-query';
-import { getLoader } from '@/lib/utils';
+import { getLoader, groupResults } from '@/lib/utils';
 import { LoaderFunctionArgs, redirect } from 'react-router';
 
 export const templateLoader = getLoader(
@@ -14,12 +14,13 @@ export const templateLoader = getLoader(
         if (template.creatorId !== currentUser.userId && !currentUser.isAdmin)
             return redirect(`/templates/${templateId}/forms`);
 
-        const [templateForms, [topics, tags, users]] =
+        const [[templateForms, aggregatedResults], [topics, tags, users]] =
             await getTemplateData(templateId);
         return {
             currentUser,
             template,
             templateForms,
+            results: groupResults(aggregatedResults),
             topics,
             tags,
             users,

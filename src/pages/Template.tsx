@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
 import TemplateSettings from '@/components/template/settings/TemplateSettings';
 import Likes from '@/components/template/Likes';
+import AggregatedResults from '@/components/template/AggregatedResults';
 
 export default function Template() {
     const { mode, templateForms } = useLoaderData() as TemplateLoaderData;
@@ -68,6 +69,15 @@ export default function Template() {
                                         )}
                                     </div>
                                 )}
+
+                                <div
+                                    className={cn(
+                                        'visible',
+                                        tabId !== 4 && 'hidden'
+                                    )}
+                                >
+                                    <AggregatedResults />
+                                </div>
                             </>
                         )}
 
@@ -81,12 +91,15 @@ export default function Template() {
                     </div>
                 )}
             </fetcher.Form>
-            {!formId && templateId && tabId === 2 && (
-                <div className="relative my-16 max-w-[768px] mx-auto">
-                    <Likes />
-                    <Comments />
-                </div>
-            )}
+            {!fetcher?.data?.formResponse &&
+                !formId &&
+                templateId &&
+                tabId === 2 && (
+                    <div className="relative my-16 max-w-[768px] mx-auto">
+                        <Likes />
+                        <Comments />
+                    </div>
+                )}
         </div>
     );
 }
