@@ -54,12 +54,9 @@ const Header = ({
                     </TableHead>
                 )}
                 {attributes.map(
-                    (cell) =>
+                    (cell, index) =>
                         (cell.shouldRender ?? true) && (
-                            <TableHead
-                                key={cell.label}
-                                className={cell.className}
-                            >
+                            <TableHead key={index} className={cell.className}>
                                 {sorter ? (
                                     <Button
                                         type="button"
@@ -125,10 +122,10 @@ const Body = ({
                         </TableCell>
                     )}
                     {row.map(
-                        (cell) =>
+                        (cell, index) =>
                             cell.shouldRender && (
                                 <TableCell
-                                    key={cell.label}
+                                    key={index}
                                     className={cn(
                                         cell.className,
                                         url ? 'p-0 px-3' : 'py-4 px-5'

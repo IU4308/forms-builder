@@ -26,6 +26,7 @@ export const updateTemplate = async ({
     try {
         const formData = await request.formData();
         const { templateId } = params;
+        console.log(Object.fromEntries(formData));
         const response = await api.put(`/templates/${templateId}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',

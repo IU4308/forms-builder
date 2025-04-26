@@ -7,11 +7,19 @@ import {
 } from '@/lib/definitions';
 import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
-import { getQuestionType } from '@/lib/utils';
+import { findNextPosition, getQuestionType } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { useLoaderData } from 'react-router';
 import FormHeader from './FormHeader';
 import CustomField from './CustomField';
+
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+    SortableContext,
+    arrayMove,
+    verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import _ from 'lodash';
 
 export default function CustomForm({
     mode,
@@ -26,7 +34,7 @@ export default function CustomForm({
     const [fields, setFields] = useState<Field[]>(
         template?.fields ?? initialFields
     );
-
+    console.log(fields);
     const handleAddField = (type: QuestionType) => {
         const newField = fields.find(
             (fields) => getQuestionType(fields.id) === type && !fields.isPresent
@@ -39,6 +47,7 @@ export default function CustomForm({
                         isPresent: true,
                         question: 'No Title',
                         description: 'No description',
+                        position: findNextPosition(prevFields),
                     };
                 } else {
                     return field;
@@ -54,6 +63,7 @@ export default function CustomForm({
                     return {
                         ...question,
                         isPresent: false,
+                        position: 100,
                         question: '',
                         description: '',
                     };
@@ -64,14 +74,63 @@ export default function CustomForm({
         );
     };
 
+    const handleDragEnd = (event: any) => {
+        const { active, over } = event;
+
+        if (active.id !== over.id) {
+            setFields((fields) => {
+                const oldIndex = fields.findIndex(
+                    (field) => field.id === active.id
+                );
+                const newIndex = fields.findIndex(
+                    (field) => field.id === over.id
+                );
+
+                return arrayMove(fields, oldIndex, newIndex);
+            });
+        }
+    };
+
     return (
-        <div className="max-w-[768px] mx-auto flex flex-col gap-4 ">
+        <div
+            // key={fields.reduce(
+            //     (accumulator, currentField) =>
+            //         currentField.isPresent
+            //             ? accumulator + currentField.position
+            //             : accumulator,
+            //     0
+            // )}
+            className="max-w-[768px] mx-auto flex flex-col gap-4 "
+        >
             {mode === 'template' && (
                 <TemplateToolbar onAddField={handleAddField} />
             )}
             {mode === 'form' && <FormHeader />}
 
-            {fields.map((field) => (
+            <DndContext
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+            >
+                <SortableContext
+                    items={fields}
+                    strategy={verticalListSortingStrategy}
+                >
+                    {fields.map((field, index) => (
+                        <CustomField
+                            key={field.id}
+                            index={index}
+                            mode={mode}
+                            {...field}
+                            activeId={activeId}
+                            setActiveId={setActiveId}
+                            onDeleteField={handleDeleteField}
+                            canEdit={canEdit}
+                        />
+                    ))}
+                </SortableContext>
+            </DndContext>
+
+            {/* {fields.map((field) => (
                 <CustomField
                     key={field.id}
                     mode={mode}
@@ -81,7 +140,7 @@ export default function CustomForm({
                     onDeleteField={handleDeleteField}
                     canEdit={canEdit}
                 />
-            ))}
+            ))} */}
 
             {mode === 'form' && canEdit && (
                 <div>

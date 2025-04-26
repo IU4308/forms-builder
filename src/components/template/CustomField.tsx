@@ -6,10 +6,14 @@ import { cn, getQuestionType } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { IoTrash } from 'react-icons/io5';
 import { Textarea } from '../ui/textarea';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { BiGridHorizontal } from 'react-icons/bi';
 
 export default function CustomField({
     mode,
     id,
+    index,
     isPresent,
     question,
     answer,
@@ -19,9 +23,21 @@ export default function CustomField({
     onDeleteField,
     canEdit,
 }: CustomFieldProps) {
+    const { attributes, listeners, setNodeRef, transform, transition } =
+        useSortable({ id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+    };
+
     const questionType = getQuestionType(id);
     return isPresent ? (
         <div
+            ref={setNodeRef}
+            style={style}
+            // {...attributes}
+            // {...listeners}
             onClick={(e) => {
                 e.stopPropagation();
                 setActiveId(id);
@@ -33,6 +49,13 @@ export default function CustomField({
         >
             {mode === 'template' && activeId === id && (
                 <div>
+                    <div
+                        className="absolute top-2 left-1/2 cursor-grab active:cursor-grabbing"
+                        {...attributes}
+                        {...listeners}
+                    >
+                        <BiGridHorizontal size={20} />
+                    </div>
                     <Button
                         type="button"
                         className="absolute top-2 right-2"
@@ -44,7 +67,8 @@ export default function CustomField({
                     </Button>
                 </div>
             )}
-            <Input hidden name={`${id}State`} value={'true'} readOnly />
+            <input hidden readOnly name={`${id}State`} value={'true'} />
+            <input hidden readOnly name={`${id}Position`} value={index + 1} />
             <Input
                 key={`${id}-question-${question}`}
                 name={`${id}Question`}
@@ -96,6 +120,7 @@ export default function CustomField({
             <Input hidden readOnly name={`${id}State`} value={'false'} />
             <Input hidden readOnly name={`${id}Question`} value="" />
             <Input hidden readOnly name={`${id}Description`} value="" />
+            <input hidden readOnly name={`${id}Position`} value={100} />
         </>
     );
 }

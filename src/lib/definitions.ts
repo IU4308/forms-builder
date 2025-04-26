@@ -50,6 +50,7 @@ export interface BodyProps {
 }
 
 export type CustomFieldProps = Field & {
+    index: number;
     mode: InterfaceMode;
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
@@ -111,7 +112,7 @@ export type ButtonVariant =
 
 export interface Cell {
     content: string | boolean | null;
-    label: string;
+    label: string | undefined;
     className: string;
     shouldRender: boolean;
 }
@@ -130,6 +131,7 @@ export type QuestionType =
 export type Field = {
     id: string;
     isPresent: boolean;
+    position: number;
     question: string | null;
     description: string | null;
     answer?: string | null;

@@ -3,7 +3,12 @@ import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants.tsx';
-import { CurrentUser, TableAttributes, TemplateFormsType } from './definitions';
+import {
+    CurrentUser,
+    Field,
+    TableAttributes,
+    TemplateFormsType,
+} from './definitions';
 import { LoaderFunctionArgs } from 'react-router';
 import _ from 'lodash';
 
@@ -173,4 +178,16 @@ export const groupResults = (data: AggregatedResults) => {
             };
         })
         .value();
+};
+
+export const findNextPosition = (fields: Field[]) => {
+    return (
+        fields.reduce(
+            (maxPosition, field) =>
+                field.isPresent && field.position > maxPosition
+                    ? field.position
+                    : maxPosition,
+            0
+        ) + 1
+    );
 };
