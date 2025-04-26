@@ -1,6 +1,7 @@
 import { Cell, TableAttributes } from './definitions';
 import { formatContent } from './utils';
 
+// @ts-ignore
 const getTableBody = (
     attributes: TableAttributes,
     data: { [key: string]: any }[],
