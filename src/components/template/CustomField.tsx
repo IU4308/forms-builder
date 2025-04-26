@@ -63,6 +63,7 @@ export default function CustomField({
                 <Input
                     name={`${id}Answer`}
                     type={questionType === 'integerValue' ? 'number' : 'text'}
+                    step={0.01}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
                     placeholder={`${changeCase.sentenceCase(questionType)} answer`}
                     defaultValue={answer ?? ''}

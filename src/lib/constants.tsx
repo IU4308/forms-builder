@@ -28,109 +28,104 @@ export const navMenu = [
 
 export const adminTableAttributes = [
     {
-        label: 'id',
         key: 'id',
         shouldRender: false,
     },
     {
-        label: 'name',
+        label: 'Name',
         key: 'name',
     },
     {
-        label: 'email',
+        label: 'Email',
         key: 'email',
     },
     {
-        label: 'createdAt',
+        label: 'Registered at',
         key: 'createdAt',
     },
     {
-        label: 'lastLogin',
+        label: 'Last Login',
         key: 'lastLogin',
     },
     {
-        label: 'isBlocked',
+        label: 'is blocked',
         key: 'isBlocked',
     },
     {
-        label: 'isAdmin',
+        label: 'is admin',
         key: 'isAdmin',
     },
 ];
 
 export const templatesTableAttributes = [
     {
-        label: 'id',
         key: 'id',
         shouldRender: false,
     },
     {
-        label: 'title',
+        label: 'Title',
         key: 'title',
     },
     {
-        label: 'topic',
+        label: 'Topic',
         key: 'topic',
     },
     {
-        label: 'createdAt',
+        label: 'Created at',
         key: 'createdAt',
     },
 ];
 
 export const formsTableAttributes = [
     {
-        label: 'id',
         key: 'id',
         shouldRender: false,
     },
     {
-        label: 'templateId',
         key: 'templateId',
         shouldRender: false,
     },
     {
-        label: 'title',
+        label: 'Title',
         key: 'title',
     },
     {
-        label: 'author',
+        label: 'Author',
         key: 'author',
     },
     {
-        label: 'topic',
+        label: 'Topic',
         key: 'topic',
     },
     {
-        label: 'submittedAt',
+        label: 'Submitted at',
         key: 'submittedAt',
     },
 ];
 
 export const popularTemplatesAttributes = [
     {
-        label: 'id',
         key: 'id',
         className: '',
         shouldRender: false,
     },
     {
-        label: 'title',
+        label: 'Title',
         key: 'title',
         className: '',
     },
     {
-        label: 'topic',
+        label: 'Topic',
         key: 'topic',
         className: '',
     },
     {
-        label: 'author',
+        label: 'Author',
         key: 'author',
         className: '',
     },
     {
-        label: 'submissions',
+        label: 'Submissions',
         key: 'submissions',
         className: 'text-right',
     },

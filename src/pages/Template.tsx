@@ -4,7 +4,7 @@ import FormResponse from '@/components/template/FormResponse';
 import HiddenInputs from '@/components/template/HiddenInputs';
 import Table from '@/components/Table';
 import TemplateHeader from '@/components/template/TemplateHeader';
-import { TemplateLoaderData } from '@/lib/definitions';
+import { TemplateFormsType, TemplateLoaderData } from '@/lib/definitions';
 import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
@@ -57,7 +57,7 @@ export default function Template() {
                                             <Table
                                                 data={templateForms}
                                                 attributes={getAnswersAttributes(
-                                                    templateForms[0]
+                                                    templateForms[0] as TemplateFormsType
                                                 )}
                                                 shouldSort={true}
                                                 url={`templates/${templateId}/forms`}

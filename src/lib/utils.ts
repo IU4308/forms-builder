@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
 import { navMenu } from './constants.tsx';
-import { Cell, CurrentUser, TableAttributes } from './definitions';
+import { CurrentUser, TableAttributes, TemplateFormsType } from './definitions';
 import { LoaderFunctionArgs } from 'react-router';
 import _ from 'lodash';
 
@@ -35,22 +35,17 @@ export const getTableBody = (
     sorter?: string,
     isDescending?: boolean
 ) => {
-    const tableData =
-        sorter !== undefined ? sortData(data, sorter!, isDescending!) : data;
-    let body: Cell[][] = [];
-    tableData.forEach((element) => {
-        body.push(
-            attributes.map((item) => {
-                return {
-                    content: element[item.key],
-                    label: item.label,
-                    className: item.className ?? '',
-                    shouldRender: item.shouldRender ?? true,
-                };
-            })
-        );
-    });
-    return body;
+    const tableData = sorter
+        ? _.orderBy(data, [sorter], [isDescending ? 'desc' : 'asc'])
+        : data;
+    return _.map(tableData, (element) =>
+        _.map(attributes, (item) => ({
+            content: _.get(element, item.key, ''),
+            label: item.label,
+            className: item.className ?? '',
+            shouldRender: item.shouldRender ?? true,
+        }))
+    );
 };
 
 export const formatContent = (content: any, maxLength = 25) => {
@@ -65,19 +60,6 @@ export const formatContent = (content: any, maxLength = 25) => {
     return content.length > maxLength
         ? content.slice(0, maxLength - 1) + '...'
         : content;
-};
-
-export const sortData = (
-    data: { [key: string]: any }[],
-    field: string,
-    isDescending: boolean
-) => {
-    const sortedData = data.sort((a, b) => {
-        return field === 'createdAt' || field === 'lastLogin'
-            ? Date.parse(a[field] as string) - Date.parse(b[field] as string)
-            : formatContent(a[field]).localeCompare(formatContent(b[field]));
-    });
-    return isDescending ? sortedData : sortedData.reverse();
 };
 
 export const getMenu = (currentUser: CurrentUser) => {
@@ -105,7 +87,7 @@ export const getQuestionType = (id: string) => {
     return id.slice(0, id.length - 1);
 };
 
-export const getAnswersAttributes = (form: any) => {
+export const getAnswersAttributes = (form: TemplateFormsType) => {
     let attributes = [];
     for (const key of Object.keys(form)) {
         if (
@@ -120,10 +102,18 @@ export const getAnswersAttributes = (form: any) => {
             });
         }
         if (key.includes('Answer')) {
+            const questionKey = key.replace(
+                'Answer',
+                'Question'
+            ) as keyof TemplateFormsType;
+            const stateKey = key.replace(
+                'Answer',
+                'State'
+            ) as keyof TemplateFormsType;
             attributes.push({
-                label: form[key.replace('Answer', 'Question')],
+                label: form[questionKey] as string,
                 key: key,
-                shouldRender: form[key.replace('Answer', 'State')],
+                shouldRender: !!form[stateKey],
             });
         }
     }

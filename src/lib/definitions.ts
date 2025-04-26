@@ -76,7 +76,7 @@ export interface User {
 }
 
 export type TableAttributes = {
-    label: string;
+    label?: string;
     key: string;
     className?: string;
     shouldRender?: boolean;
@@ -231,7 +231,7 @@ export type TemplateFormsType = {
     id: string;
     name: string;
     email: string;
-    submittedAt: Date;
+    submittedAt: string;
     singleLine1State: boolean;
     singleLine2State: boolean;
     singleLine3State: boolean;
