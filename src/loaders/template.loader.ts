@@ -16,6 +16,7 @@ export const templateLoader = getLoader(
 
         const [[templateForms, aggregatedResults], [topics, tags, users]] =
             await getTemplateData(templateId);
+        console.log(aggregatedResults);
         return {
             currentUser,
             template,

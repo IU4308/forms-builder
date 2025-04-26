@@ -379,3 +379,34 @@ export const reactSelectStyles = {
         fontSize: '0.875rem',
     }),
 };
+
+export const chartsOptionsDarkMode = {
+    backgroundColor: '#0a0a0a',
+    hAxis: {
+        title: 'Answer',
+        textStyle: { color: '#ffffff' },
+        titleTextStyle: { color: '#ffffff' },
+    },
+    vAxis: {
+        title: 'Count',
+        textStyle: { color: '#ffffff' },
+        titleTextStyle: { color: '#ffffff' },
+    },
+    titleTextStyle: {
+        color: '#ffffff',
+    },
+    legend: 'none',
+    pieSliceText: 'label',
+};
+
+export const chartsOptionsLightMode = {
+    backgroundColor: '#ffffff',
+    hAxis: {
+        title: 'Answer',
+    },
+    vAxis: {
+        title: 'Count',
+    },
+    legend: 'none',
+    pieSliceText: 'label',
+};
