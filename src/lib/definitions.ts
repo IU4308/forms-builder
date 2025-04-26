@@ -181,6 +181,7 @@ export type CreateTemplateData = {
     tags: Tag[];
     users: User[];
     templateForms: undefined;
+    results: undefined;
     comments: undefined;
     template: undefined;
     canEdit: undefined;
@@ -202,13 +203,14 @@ export type TemplateData = {
 export type FormData = {
     currentUser: CurrentUser;
     template: TemplateType;
+    comments: CommentType[];
     mode: 'form';
     canEdit: boolean;
     topics: undefined;
     tags: undefined;
     users: undefined;
     templateForms: undefined;
-    comments: undefined;
+    results: undefined;
 };
 
 export type FilledFormData = {
@@ -221,6 +223,7 @@ export type FilledFormData = {
     users: undefined;
     templateForms: undefined;
     comments: undefined;
+    results: undefined;
 };
 
 export type TemplateLoaderData =

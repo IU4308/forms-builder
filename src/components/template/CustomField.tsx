@@ -15,6 +15,7 @@ export default function CustomField({
     id,
     index,
     isPresent,
+    position,
     question,
     answer,
     description,
@@ -32,12 +33,12 @@ export default function CustomField({
     };
 
     const questionType = getQuestionType(id);
-    return isPresent ? (
+
+    console.log(id, position, index + 1);
+    return (
         <div
             ref={setNodeRef}
             style={style}
-            // {...attributes}
-            // {...listeners}
             onClick={(e) => {
                 e.stopPropagation();
                 setActiveId(id);
@@ -68,7 +69,13 @@ export default function CustomField({
                 </div>
             )}
             <input hidden readOnly name={`${id}State`} value={'true'} />
-            <input hidden readOnly name={`${id}Position`} value={index + 1} />
+            <input
+                // key={`${id}-position-${position}`}
+                hidden
+                readOnly
+                name={`${id}Position`}
+                value={index + 1}
+            />
             <Input
                 key={`${id}-question-${question}`}
                 name={`${id}Question`}
@@ -115,12 +122,5 @@ export default function CustomField({
                 </>
             )}
         </div>
-    ) : (
-        <>
-            <Input hidden readOnly name={`${id}State`} value={'false'} />
-            <Input hidden readOnly name={`${id}Question`} value="" />
-            <Input hidden readOnly name={`${id}Description`} value="" />
-            <input hidden readOnly name={`${id}Position`} value={100} />
-        </>
     );
 }

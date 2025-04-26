@@ -13,7 +13,8 @@ import Likes from '@/components/template/Likes';
 import AggregatedResults from '@/components/template/AggregatedResults';
 
 export default function Template() {
-    const { mode, templateForms } = useLoaderData() as TemplateLoaderData;
+    const { mode, templateForms, results } =
+        useLoaderData() as TemplateLoaderData;
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');
@@ -70,14 +71,16 @@ export default function Template() {
                                     </div>
                                 )}
 
-                                <div
-                                    className={cn(
-                                        'visible',
-                                        tabId !== 4 && 'hidden'
-                                    )}
-                                >
-                                    <AggregatedResults />
-                                </div>
+                                {results && (
+                                    <div
+                                        className={cn(
+                                            'visible',
+                                            tabId !== 4 && 'hidden'
+                                        )}
+                                    >
+                                        <AggregatedResults />
+                                    </div>
+                                )}
                             </>
                         )}
 

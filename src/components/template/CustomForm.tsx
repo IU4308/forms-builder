@@ -34,13 +34,17 @@ export default function CustomForm({
     const [fields, setFields] = useState<Field[]>(
         template?.fields ?? initialFields
     );
-    console.log(fields);
+    const [presentFields, absentFields] = _.partition(
+        fields,
+        (field) => field.isPresent
+    );
+
     const handleAddField = (type: QuestionType) => {
         const newField = fields.find(
             (fields) => getQuestionType(fields.id) === type && !fields.isPresent
         );
-        setFields((prevFields) =>
-            prevFields.map((field) => {
+        setFields((prevFields) => {
+            const updatedFields = prevFields.map((field) => {
                 if (field.id === newField?.id) {
                     return {
                         ...field,
@@ -52,26 +56,37 @@ export default function CustomForm({
                 } else {
                     return field;
                 }
-            })
-        );
+            });
+
+            return _.sortBy(updatedFields, 'position');
+        });
     };
 
     const handleDeleteField = (id: string) => {
-        setFields((prevFields) =>
-            prevFields.map((question) => {
-                if (question.id === id) {
+        setFields((prevFields) => {
+            const updatedFields = prevFields.map((field) =>
+                field.id === id
+                    ? {
+                          ...field,
+                          isPresent: false,
+                          position: -1,
+                          question: '',
+                          description: '',
+                      }
+                    : field
+            );
+
+            let position = 1;
+            return updatedFields.map((field) => {
+                if (field.isPresent) {
                     return {
-                        ...question,
-                        isPresent: false,
-                        position: 100,
-                        question: '',
-                        description: '',
+                        ...field,
+                        position: position++,
                     };
-                } else {
-                    return question;
                 }
-            })
-        );
+                return field;
+            });
+        });
     };
 
     const handleDragEnd = (event: any) => {
@@ -93,13 +108,13 @@ export default function CustomForm({
 
     return (
         <div
-            // key={fields.reduce(
-            //     (accumulator, currentField) =>
-            //         currentField.isPresent
-            //             ? accumulator + currentField.position
-            //             : accumulator,
-            //     0
-            // )}
+            key={fields.reduce(
+                (accumulator, currentField) =>
+                    currentField.isPresent
+                        ? accumulator + currentField.position
+                        : accumulator,
+                0
+            )}
             className="max-w-[768px] mx-auto flex flex-col gap-4 "
         >
             {mode === 'template' && (
@@ -115,7 +130,7 @@ export default function CustomForm({
                     items={fields}
                     strategy={verticalListSortingStrategy}
                 >
-                    {fields.map((field, index) => (
+                    {presentFields.map((field, index) => (
                         <CustomField
                             key={field.id}
                             index={index}
@@ -130,17 +145,34 @@ export default function CustomForm({
                 </SortableContext>
             </DndContext>
 
-            {/* {fields.map((field) => (
-                <CustomField
-                    key={field.id}
-                    mode={mode}
-                    {...field}
-                    activeId={activeId}
-                    setActiveId={setActiveId}
-                    onDeleteField={handleDeleteField}
-                    canEdit={canEdit}
-                />
-            ))} */}
+            {absentFields.map((field) => (
+                <div key={field.id} className="hidden">
+                    <input
+                        hidden
+                        readOnly
+                        name={`${field.id}State`}
+                        value={'false'}
+                    />
+                    <input
+                        hidden
+                        readOnly
+                        name={`${field.id}Question`}
+                        value=""
+                    />
+                    <input
+                        hidden
+                        readOnly
+                        name={`${field.id}Description`}
+                        value=""
+                    />
+                    <input
+                        hidden
+                        readOnly
+                        name={`${field.id}Position`}
+                        value={100}
+                    />
+                </div>
+            ))}
 
             {mode === 'form' && canEdit && (
                 <div>

@@ -10,7 +10,6 @@ export default function AggregatedResults() {
         localStorage.getItem('theme') === 'dark'
             ? chartsOptionsDarkMode
             : chartsOptionsLightMode;
-    console.log('results', results);
     return (
         <div className="max-w-[768px] mx-auto flex flex-col gap-4">
             {results.map((result) => (
