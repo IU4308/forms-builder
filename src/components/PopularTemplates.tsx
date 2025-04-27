@@ -1,7 +1,7 @@
 import { popularTemplatesAttributes } from '@/lib/constants';
 import { popularTemplateType } from '@/lib/definitions';
 import { useLoaderData } from 'react-router';
-import Table from './Table';
+import AppTable from './app-table/AppTable';
 
 type LoaderData = {
     popularTemplates: popularTemplateType[];
@@ -10,7 +10,7 @@ type LoaderData = {
 export default function PopularTemplates() {
     const { popularTemplates } = useLoaderData<LoaderData>();
     return (
-        <Table
+        <AppTable
             slot={<h1 className="mb-2">Popular Templates</h1>}
             data={popularTemplates}
             attributes={popularTemplatesAttributes}

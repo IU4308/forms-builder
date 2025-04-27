@@ -3,8 +3,8 @@ import { ToolbarButton } from '@/lib/definitions';
 import { IoRemoveCircleOutline } from 'react-icons/io5';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import Table from '@/components/Table';
 import AddUserButton from '@/components/template/AddUserButton';
+import AppTable from '@/components/app-table/AppTable';
 
 const attributes = [
     {
@@ -81,7 +81,7 @@ export default function AccessSettings({
                         value={selectedIds}
                     />
 
-                    <Table
+                    <AppTable
                         data={users.filter((user) =>
                             selectedIds.includes(user.id)
                         )}

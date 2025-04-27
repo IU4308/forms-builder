@@ -5,7 +5,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { setSentenceCase } from '@/lib/utils';
 import { Link } from 'react-router';
 import { JSX } from 'react';

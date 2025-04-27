@@ -1,16 +1,19 @@
+import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 
 export default function TabPanel({
     buttons,
     tabId,
     setTabId,
+    className,
 }: {
     buttons: { id: number; label: string }[];
     tabId: number;
     setTabId: React.Dispatch<React.SetStateAction<number>>;
+    className?: string;
 }) {
     return (
-        <div className="flex gap-2 justify-center">
+        <div className={cn('flex gap-2 justify-center', className)}>
             {buttons.map((button) => (
                 <Button
                     key={button.label}

@@ -1,19 +1,19 @@
-import Table from '@/components/Table';
-import { Button } from '@/components/ui/button';
+import AppTable from '@/components/app-table/AppTable';
+import TabPanel from '@/components/TabPanel';
 import { Input } from '@/components/ui/input';
 import {
     formsTableAttributes,
     templatesTableAttributes,
     workspaceButtons,
     workspaceFormsButtons,
+    workspaceTabButtons,
 } from '@/lib/constants.tsx';
-import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { Form, useLoaderData } from 'react-router';
 
 export default function Workspace() {
     const [templates, forms] = useLoaderData();
-    const [tabId, setTabId] = useState(0);
+    const [tabId, setTabId] = useState(1);
     return (
         <Form
             action="/workspace"
@@ -26,24 +26,14 @@ export default function Workspace() {
                 name="action"
                 value={tabId === 0 ? 'templates' : 'forms'}
             />
-            <div className="mb-4 flex gap-2 justify-center">
-                <Button
-                    type="button"
-                    variant={!tabId ? 'default' : 'ghost'}
-                    onClick={() => setTabId(0)}
-                >
-                    Templates
-                </Button>
-                <Button
-                    type="button"
-                    variant={tabId ? 'default' : 'ghost'}
-                    onClick={() => setTabId(1)}
-                >
-                    Forms
-                </Button>
-            </div>
-            <div className={cn('visible', tabId !== 0 && 'hidden')}>
-                <Table
+            <TabPanel
+                buttons={workspaceTabButtons}
+                tabId={tabId}
+                setTabId={setTabId}
+                className="mb-4"
+            />
+            {tabId === 1 && (
+                <AppTable
                     data={templates}
                     attributes={templatesTableAttributes}
                     buttons={workspaceButtons}
@@ -51,9 +41,9 @@ export default function Workspace() {
                     shouldSort={true}
                     url="templates"
                 />
-            </div>
-            <div className={cn('visible', tabId !== 1 && 'hidden')}>
-                <Table
+            )}
+            {tabId === 2 && (
+                <AppTable
                     data={forms}
                     attributes={formsTableAttributes}
                     buttons={workspaceFormsButtons}
@@ -61,7 +51,7 @@ export default function Workspace() {
                     shouldSort={true}
                     url={['forms', 'templates']}
                 />
-            </div>
+            )}
         </Form>
     );
 }

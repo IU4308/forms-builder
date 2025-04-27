@@ -1,4 +1,4 @@
-import Table from '@/components/Table';
+import AppTable from '@/components/app-table/AppTable';
 import { TemplateFormsType, TemplateLoaderData } from '@/lib/definitions';
 import { getAnswersAttributes } from '@/lib/utils';
 import { useLoaderData, useParams } from 'react-router';
@@ -10,7 +10,7 @@ export default function TemplateForms() {
         templateForms && (
             <div>
                 {templateForms?.length > 0 ? (
-                    <Table
+                    <AppTable
                         data={templateForms}
                         attributes={getAnswersAttributes(
                             templateForms[0] as TemplateFormsType

@@ -186,6 +186,17 @@ export const adminButtons: ToolbarButton[] = [
     },
 ];
 
+export const workspaceTabButtons = [
+    {
+        id: 1,
+        label: 'Templates',
+    },
+    {
+        id: 2,
+        label: 'Forms',
+    },
+];
+
 export const templateTabButtons = [
     {
         id: 1,
@@ -411,7 +422,7 @@ export const chartsOptionsDarkMode = {
 };
 
 export const chartsOptionsLightMode = {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f2f2f2',
     hAxis: {
         title: 'Answer',
     },
