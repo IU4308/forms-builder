@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 export default function FormResponse({
     templateId,
     formId,
@@ -8,18 +10,20 @@ export default function FormResponse({
     return (
         <div className="max-w-[768px] mx-auto bg-accent flex flex-col gap-4 p-8">
             <h1>Answer is saved</h1>
-            <a
-                href={`/templates/${templateId}`}
+            <Link
+                to={`/templates/${templateId}/forms`}
+                reloadDocument
                 className="underline underline-offset-2"
             >
                 Submit again
-            </a>
-            <a
-                href={`/templates/${templateId}/forms/${formId}`}
+            </Link>
+            <Link
+                to={`/templates/${templateId}/forms/${formId}`}
+                reloadDocument
                 className="underline underline-offset-2"
             >
                 Edit answers
-            </a>
+            </Link>
         </div>
     );
 }

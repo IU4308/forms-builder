@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import _ from 'lodash';
 import Toolbar from './Toolbar';
+import { Link } from 'react-router';
 
 const ID_KEY = 0;
 
@@ -132,16 +133,17 @@ const Body = ({
                                     )}
                                 >
                                     {url ? (
-                                        <a
-                                            href={
+                                        <Link
+                                            to={
                                                 Array.isArray(url)
                                                     ? `/${url[1]}/${row[1].content}/${url[0]}/${row[0].content}`
                                                     : `/${url}/${row[0].content}`
                                             }
+                                            reloadDocument
                                             className=" block px-2 py-4"
                                         >
                                             {formatContent(cell.content)}
-                                        </a>
+                                        </Link>
                                     ) : (
                                         formatContent(cell.content)
                                     )}

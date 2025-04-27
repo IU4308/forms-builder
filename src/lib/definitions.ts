@@ -314,5 +314,6 @@ export type CommentType = {
 export type AggregatedResult = {
     question: string;
     type: 'single_line' | 'multiple_line' | 'integer_value' | 'checkbox';
+    position: number;
     answers: [string, number][];
 };

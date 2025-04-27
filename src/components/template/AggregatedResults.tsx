@@ -12,13 +12,22 @@ export default function AggregatedResults() {
             : chartsOptionsLightMode;
     return (
         <div className="max-w-[768px] mx-auto flex flex-col gap-4">
-            {results.map((result) => (
-                <Result
-                    key={result.question}
-                    result={result}
-                    options={options}
-                />
-            ))}
+            {results.map((result) =>
+                result.answers.length > 0 ? (
+                    <Result
+                        key={result.position}
+                        result={result}
+                        options={options}
+                    />
+                ) : (
+                    <div
+                        key={result.position}
+                        className="bg-accent flex items-center p-4"
+                    >
+                        <div>{result.question}</div>
+                    </div>
+                )
+            )}
         </div>
     );
 }

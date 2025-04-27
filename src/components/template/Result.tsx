@@ -24,11 +24,11 @@ export default function Result({
             }}
         />
     ) : (
-        <div>
+        <div className="bg-accent p-4">
             <h2 className="text-lg font-semibold mb-2">{result.question}</h2>
             <div className="flex flex-col gap-2">
                 {result.answers.map(([answer, count]) => (
-                    <div className="flex gap-2 items-center">
+                    <div key={answer} className="flex gap-2 items-center">
                         <div>{count}</div>
                         <div
                             key={answer}

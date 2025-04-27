@@ -392,7 +392,7 @@ export const reactSelectStyles = {
 };
 
 export const chartsOptionsDarkMode = {
-    backgroundColor: '#0a0a0a',
+    backgroundColor: '#121212',
     hAxis: {
         title: 'Answer',
         textStyle: { color: '#ffffff' },

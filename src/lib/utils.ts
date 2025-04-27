@@ -88,9 +88,7 @@ export const getFlash = () => {
     return { message };
 };
 
-export const getQuestionType = (id: string) => {
-    return id.slice(0, id.length - 1);
-};
+export const getQuestionType = (id: string) => id.slice(0, id.length - 1);
 
 export const getAnswersAttributes = (form: TemplateFormsType) => {
     let attributes = [];
@@ -158,23 +156,26 @@ export const getTemplateActionUrl = (
 
 type AggregatedResults = {
     question: string;
-    answer: string;
+    answer: string | null;
     count: string;
     type: string;
+    position: number;
 }[];
 
 export const groupResults = (data: AggregatedResults) => {
     return _.chain(data)
-        .groupBy((item) => `${item.question}|${item.type}`)
+        .groupBy((item) => `${item.question}|${item.type}|${item.position}`)
         .map((answers, compositeKey) => {
-            const [question, type] = compositeKey.split('|');
+            const [question, type, position] = compositeKey.split('|');
             return {
                 question,
                 type,
-                answers: answers.map(({ answer, count }) => [
-                    answer || '(empty)',
-                    Number(count),
-                ]),
+                position,
+                answers: answers
+                    .filter(
+                        ({ answer }) => answer !== null && answer.trim() !== ''
+                    )
+                    .map(({ answer, count }) => [answer, Number(count)]),
             };
         })
         .value();

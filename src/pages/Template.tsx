@@ -2,19 +2,18 @@ import Comments from '@/components/template/comments/Comments';
 import CustomForm from '@/components/template/CustomForm';
 import FormResponse from '@/components/template/FormResponse';
 import HiddenInputs from '@/components/template/HiddenInputs';
-import Table from '@/components/Table';
 import TemplateHeader from '@/components/template/TemplateHeader';
-import { TemplateFormsType, TemplateLoaderData } from '@/lib/definitions';
-import { cn, getAnswersAttributes, getTemplateActionUrl } from '@/lib/utils';
+import { TemplateLoaderData } from '@/lib/definitions';
+import { getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
 import TemplateSettings from '@/components/template/settings/TemplateSettings';
 import Likes from '@/components/template/Likes';
-import AggregatedResults from '@/components/template/AggregatedResults';
+import TemplateForms from '@/components/template/tabs/forms/TemplateForms';
+import TemplateResults from '@/components/template/tabs/results/results';
 
 export default function Template() {
-    const { mode, templateForms, results } =
-        useLoaderData() as TemplateLoaderData;
+    const { mode } = useLoaderData() as TemplateLoaderData;
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');
@@ -39,58 +38,19 @@ export default function Template() {
                                     tabId={tabId}
                                     setTabId={setTabId}
                                 />
-                                <div
-                                    className={cn(
-                                        'visible',
-                                        tabId !== 1 && 'hidden'
-                                    )}
-                                >
-                                    <TemplateSettings />
-                                </div>
-                                {templateForms && (
-                                    <div
-                                        className={cn(
-                                            'visible',
-                                            tabId !== 3 && 'hidden'
-                                        )}
-                                    >
-                                        {templateForms?.length > 0 ? (
-                                            <Table
-                                                data={templateForms}
-                                                attributes={getAnswersAttributes(
-                                                    templateForms[0] as TemplateFormsType
-                                                )}
-                                                shouldSort={true}
-                                                url={`templates/${templateId}/forms`}
-                                            />
-                                        ) : (
-                                            <h1 className="flex justify-center">
-                                                No answers
-                                            </h1>
-                                        )}
-                                    </div>
-                                )}
+                                <TemplateSettings tabId={tabId} />
+                                {tabId === 3 && <TemplateForms />}
 
-                                {results && (
-                                    <div
-                                        className={cn(
-                                            'visible',
-                                            tabId !== 4 && 'hidden'
-                                        )}
-                                    >
-                                        <AggregatedResults />
-                                    </div>
-                                )}
+                                {tabId === 4 && <TemplateResults />}
                             </>
                         )}
 
-                        <div className={cn('visible', tabId !== 2 && 'hidden')}>
-                            <CustomForm
-                                mode={mode}
-                                activeId={activeId}
-                                setActiveId={setActiveId}
-                            />
-                        </div>
+                        <CustomForm
+                            tabId={tabId}
+                            mode={mode}
+                            activeId={activeId}
+                            setActiveId={setActiveId}
+                        />
                     </div>
                 )}
             </fetcher.Form>

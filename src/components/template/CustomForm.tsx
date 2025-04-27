@@ -7,7 +7,7 @@ import {
 } from '@/lib/definitions';
 import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
-import { findNextPosition, getQuestionType } from '@/lib/utils';
+import { cn, getQuestionType } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { useLoaderData } from 'react-router';
 import FormHeader from './FormHeader';
@@ -22,10 +22,12 @@ import {
 import _ from 'lodash';
 
 export default function CustomForm({
+    tabId,
     mode,
     activeId,
     setActiveId,
 }: {
+    tabId: number;
     mode: InterfaceMode;
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
@@ -40,25 +42,37 @@ export default function CustomForm({
     );
 
     const handleAddField = (type: QuestionType) => {
-        const newField = fields.find(
-            (fields) => getQuestionType(fields.id) === type && !fields.isPresent
+        const newField = absentFields.find(
+            (field) => getQuestionType(field.id) === type
         );
+        if (!newField) return;
+
         setFields((prevFields) => {
-            const updatedFields = prevFields.map((field) => {
-                if (field.id === newField?.id) {
+            const newFields = prevFields.filter(
+                (field) => field.id !== newField.id
+            );
+
+            const updatedFields = [
+                ...newFields,
+                {
+                    id: newField.id,
+                    isPresent: true,
+                    question: 'No Title',
+                    description: 'No description',
+                    position: 100,
+                },
+            ];
+
+            let position = 1;
+            return updatedFields.map((field) => {
+                if (field.isPresent) {
                     return {
                         ...field,
-                        isPresent: true,
-                        question: 'No Title',
-                        description: 'No description',
-                        position: findNextPosition(prevFields),
+                        position: position++,
                     };
-                } else {
-                    return field;
                 }
+                return field;
             });
-
-            return _.sortBy(updatedFields, 'position');
         });
     };
 
@@ -108,14 +122,10 @@ export default function CustomForm({
 
     return (
         <div
-            key={fields.reduce(
-                (accumulator, currentField) =>
-                    currentField.isPresent
-                        ? accumulator + currentField.position
-                        : accumulator,
-                0
+            className={cn(
+                'max-w-[768px] mx-auto flex flex-col gap-4 visible',
+                tabId !== 2 && 'hidden'
             )}
-            className="max-w-[768px] mx-auto flex flex-col gap-4 "
         >
             {mode === 'template' && (
                 <TemplateToolbar onAddField={handleAddField} />
@@ -169,7 +179,7 @@ export default function CustomForm({
                         hidden
                         readOnly
                         name={`${field.id}Position`}
-                        value={100}
+                        value={-1}
                     />
                 </div>
             ))}
