@@ -1,5 +1,5 @@
 import Comments from '@/components/template/comments/Comments';
-import CustomForm from '@/components/template/CustomForm';
+import CustomForm from '@/components/template/tabs/questions/CustomForm';
 import FormResponse from '@/components/template/FormResponse';
 import HiddenInputs from '@/components/template/HiddenInputs';
 import TemplateHeader from '@/components/template/TemplateHeader';

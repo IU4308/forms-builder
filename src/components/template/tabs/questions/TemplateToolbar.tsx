@@ -6,15 +6,22 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { QuestionType } from '@/lib/definitions';
+import { Field, QuestionType } from '@/lib/definitions';
+import { getQuestionType } from '@/lib/utils';
+import _ from 'lodash';
 
 const types = ['singleLine', 'multipleLine', 'integerValue', 'checkbox'];
 
 export default function TemplateToolbar({
     onAddField,
+    absentFields,
 }: {
     onAddField: (type: QuestionType) => void;
+    absentFields: Field[];
 }) {
+    const groupedFields = _.groupBy(absentFields, (field) =>
+        getQuestionType(field.id)
+    );
     return (
         <div className="sticky top-[157px] bg-background z-20 flex gap-2 pb-2">
             <DropdownMenu>
@@ -28,6 +35,7 @@ export default function TemplateToolbar({
                         <DropdownMenuItem
                             key={type}
                             onClick={() => onAddField(type as QuestionType)}
+                            disabled={!_.get(groupedFields, type)}
                         >
                             {type}
                         </DropdownMenuItem>

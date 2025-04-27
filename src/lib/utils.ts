@@ -192,3 +192,13 @@ export const findNextPosition = (fields: Field[]) => {
         ) + 1
     );
 };
+
+export const enumerateFields = (fields: Field[]): Field[] => {
+    let position = 1;
+    return fields.map((field) => {
+        if (field.isPresent) {
+            return { ...field, position: position++ };
+        }
+        return field;
+    });
+};

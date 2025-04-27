@@ -1,6 +1,6 @@
 import { TemplateLoaderData } from '@/lib/definitions';
 import { useLoaderData } from 'react-router';
-import AggregatedResults from '../../AggregatedResults';
+import AggregatedResults from './AggregatedResults';
 
 export default function TemplateResults() {
     const { results } = useLoaderData() as TemplateLoaderData;

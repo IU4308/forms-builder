@@ -7,10 +7,9 @@ import {
 } from '@/lib/definitions';
 import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
-import { cn, getQuestionType } from '@/lib/utils';
-import { Button } from '../ui/button';
+import { cn, enumerateFields, getQuestionType } from '@/lib/utils';
+import { Button } from '../../../ui/button';
 import { useLoaderData } from 'react-router';
-import FormHeader from './FormHeader';
 import CustomField from './CustomField';
 
 import { DndContext, closestCenter } from '@dnd-kit/core';
@@ -20,6 +19,8 @@ import {
     verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import _ from 'lodash';
+import FormHeader from './FormHeader';
+import FieldHiddenInputs from './hidden-inputs';
 
 export default function CustomForm({
     tabId,
@@ -63,16 +64,7 @@ export default function CustomForm({
                 },
             ];
 
-            let position = 1;
-            return updatedFields.map((field) => {
-                if (field.isPresent) {
-                    return {
-                        ...field,
-                        position: position++,
-                    };
-                }
-                return field;
-            });
+            return enumerateFields(updatedFields);
         });
     };
 
@@ -90,16 +82,7 @@ export default function CustomForm({
                     : field
             );
 
-            let position = 1;
-            return updatedFields.map((field) => {
-                if (field.isPresent) {
-                    return {
-                        ...field,
-                        position: position++,
-                    };
-                }
-                return field;
-            });
+            return enumerateFields(updatedFields);
         });
     };
 
@@ -128,7 +111,10 @@ export default function CustomForm({
             )}
         >
             {mode === 'template' && (
-                <TemplateToolbar onAddField={handleAddField} />
+                <TemplateToolbar
+                    onAddField={handleAddField}
+                    absentFields={absentFields}
+                />
             )}
             {mode === 'form' && <FormHeader />}
 
@@ -155,34 +141,7 @@ export default function CustomForm({
                 </SortableContext>
             </DndContext>
 
-            {absentFields.map((field) => (
-                <div key={field.id} className="hidden">
-                    <input
-                        hidden
-                        readOnly
-                        name={`${field.id}State`}
-                        value={'false'}
-                    />
-                    <input
-                        hidden
-                        readOnly
-                        name={`${field.id}Question`}
-                        value=""
-                    />
-                    <input
-                        hidden
-                        readOnly
-                        name={`${field.id}Description`}
-                        value=""
-                    />
-                    <input
-                        hidden
-                        readOnly
-                        name={`${field.id}Position`}
-                        value={-1}
-                    />
-                </div>
-            ))}
+            <FieldHiddenInputs absentFields={absentFields} />
 
             {mode === 'form' && canEdit && (
                 <div>

@@ -1,11 +1,11 @@
 import { CustomFieldProps } from '@/lib/definitions';
-import { Checkbox } from '../ui/checkbox';
-import { Input } from '../ui/input';
+import { Checkbox } from '../../../ui/checkbox';
+import { Input } from '../../../ui/input';
 import * as changeCase from 'change-case';
 import { cn, getQuestionType } from '@/lib/utils';
-import { Button } from '../ui/button';
+import { Button } from '../../../ui/button';
 import { IoTrash } from 'react-icons/io5';
-import { Textarea } from '../ui/textarea';
+import { Textarea } from '../../../ui/textarea';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { BiGridHorizontal } from 'react-icons/bi';
@@ -15,7 +15,6 @@ export default function CustomField({
     id,
     index,
     isPresent,
-    position,
     question,
     answer,
     description,
@@ -34,7 +33,6 @@ export default function CustomField({
 
     const questionType = getQuestionType(id);
 
-    console.log(id, position, index + 1);
     return (
         <div
             ref={setNodeRef}
