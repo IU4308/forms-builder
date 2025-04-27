@@ -6,7 +6,6 @@ export const searchLoader = getLoader(
     async ({ params }: LoaderFunctionArgs) => {
         const { query } = params;
         const templates = await getSearchResults(query);
-        console.log(templates);
         return { templates, query };
     }
 );

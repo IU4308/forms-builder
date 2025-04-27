@@ -34,6 +34,7 @@ import { formLoader } from '@/loaders/form.loader';
 import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
 import { templateRedirector } from '@/loaders/comments.loader';
+import NotFoundPage from '@/components/NotFoundPage';
 
 export const router = createBrowserRouter([
     {
@@ -46,16 +47,19 @@ export const router = createBrowserRouter([
                 Component: MainLayout,
                 HydrateFallback: Fallback,
                 loader: mainLoader,
+
                 children: [
                     {
                         index: true,
                         Component: Home,
                         loader: homeLoader,
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/search/:query',
                         Component: Search,
                         loader: searchLoader,
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/admin',
@@ -63,12 +67,14 @@ export const router = createBrowserRouter([
                         loader: adminLoader,
                         action: adminAction,
                         HydrateFallback: Fallback,
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/workspace',
                         Component: Workspace,
                         action: deleteTemplates,
                         loader: workspaceLoader,
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/templates',
@@ -76,6 +82,7 @@ export const router = createBrowserRouter([
                         action: publish,
                         loader: createTemplateLoader,
                         handle: { id: 'createTemplate' },
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/templates/:templateId',
@@ -83,6 +90,7 @@ export const router = createBrowserRouter([
                         action: updateTemplate,
                         loader: templateLoader,
                         handle: { id: 'editTemplate' },
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/templates/:templateId/forms',
@@ -90,6 +98,7 @@ export const router = createBrowserRouter([
                         loader: formLoader,
                         action: submitForm,
                         handle: { id: 'form' },
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/templates/:templateId/forms/:formId',
@@ -97,18 +106,25 @@ export const router = createBrowserRouter([
                         loader: filledFormLoader,
                         action: updateForm,
                         handle: { id: 'filledForm' },
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/templates/:templateId/comments',
                         action: publishComment,
                         loader: templateRedirector,
                         Component: Fallback,
+                        errorElement: createElement(ErrorPage),
                     },
                     {
                         path: '/templates/:templateId/likes',
                         action: likeTemplate,
                         loader: templateRedirector,
                         Component: Fallback,
+                        errorElement: createElement(ErrorPage),
+                    },
+                    {
+                        path: '*',
+                        Component: NotFoundPage, // or you can make a special NotFound page
                     },
                 ],
             },

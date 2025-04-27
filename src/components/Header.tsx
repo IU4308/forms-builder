@@ -51,7 +51,10 @@ const DesktopView = ({
     name: string;
     isDesktop: boolean;
 }) => {
-    const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
+    const { currentUser, path } = useLoaderData() as {
+        currentUser: CurrentUser;
+        path: string;
+    };
     const menu = getMenu(currentUser);
     return (
         <nav className="hidden lg:flex max-w-[1400px] mx-auto w-full relative  py-2 gap-2 items-center justify-between">
@@ -59,7 +62,11 @@ const DesktopView = ({
                 {menu.slice(0, 2).map((item) => (
                     <NavItem key={item.title} {...item} />
                 ))}
-                <div className=" relative w-full min-w-[400px] ">
+                <Form
+                    method="get"
+                    action={path}
+                    className=" relative w-full min-w-[400px] "
+                >
                     <Button
                         type="submit"
                         className="absolute right-0 border border-l-0 rounded-l-none !border-input/10"
@@ -74,7 +81,7 @@ const DesktopView = ({
                             className="hidden lg:block !border-secondary"
                         />
                     )}
-                </div>
+                </Form>
             </div>
             <div className="flex items-center">
                 {menu
@@ -96,11 +103,12 @@ const MobileView = ({
     name: string;
     isDesktop: boolean;
 }) => {
+    const { path } = useLoaderData();
     return (
-        <nav className="p-2 lg:hidden flex justify-between">
+        <div className="p-2 lg:hidden flex justify-between">
             <div className="flex gap-2 w-[75%]">
                 <DropDown name={name} />
-                <div className="relative w-[90%]">
+                <Form method="get" action={path} className="relative w-[90%]">
                     <Button
                         className="absolute right-0 border-1 border-l-0 rounded-l-none"
                         variant={'secondary'}
@@ -114,12 +122,12 @@ const MobileView = ({
                             className="block lg:hidden"
                         />
                     )}
-                </div>
+                </Form>
             </div>
             <div className="flex items-center">
                 <SideButtons />
             </div>
-        </nav>
+        </div>
     );
 };
 
@@ -158,16 +166,12 @@ const SideButtons = () => {
 };
 
 export default function Header() {
-    const { currentUser, path } = useLoaderData();
+    const { currentUser } = useLoaderData();
     const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
     return (
-        <Form
-            method="get"
-            action={path}
-            className="sticky z-50 bg-background top-0 border-b"
-        >
+        <div className="sticky z-50 bg-background top-0 border-b">
             <DesktopView name={currentUser?.name} isDesktop={isDesktop} />
             <MobileView name={currentUser?.name} isDesktop={isDesktop} />
-        </Form>
+        </div>
     );
 }

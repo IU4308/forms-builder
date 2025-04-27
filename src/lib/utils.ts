@@ -9,7 +9,7 @@ import {
     TableAttributes,
     TemplateFormsType,
 } from './definitions';
-import { LoaderFunctionArgs } from 'react-router';
+import { LoaderFunctionArgs, redirect } from 'react-router';
 import _ from 'lodash';
 
 export const getLoader = <T>(
@@ -21,6 +21,9 @@ export const getLoader = <T>(
         } catch (error: any) {
             console.log(error);
             if (error instanceof Response) throw error;
+            if (error.status === 404) {
+                return redirect('/not-found');
+            }
             throw new Error('Server error');
         }
     };
