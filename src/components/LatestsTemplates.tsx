@@ -2,6 +2,7 @@ import { latestTemplateType } from '@/lib/definitions';
 import { Link, useLoaderData } from 'react-router';
 import { format } from 'date-fns';
 import removeMarkdown from 'remove-markdown';
+import { useTranslation } from 'react-i18next';
 
 const Template = ({
     id,
@@ -42,9 +43,10 @@ type LoaderData = {
 
 export default function LatestsTemplates() {
     const { latestTemplates } = useLoaderData<LoaderData>();
+    const { t } = useTranslation();
     return (
         <section className="mb-4">
-            <h1>Latests Templates</h1>
+            <h1>{t('Latest Templates')}</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 py-2">
                 {latestTemplates.map((template) => (
                     <Template key={template.id} {...template} />

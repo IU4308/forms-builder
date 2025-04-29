@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import _ from 'lodash';
 import { Button } from '../ui/button';
+import * as changeCase from 'change-case';
 
 const ID_KEY = 0;
 
@@ -55,7 +56,12 @@ export default function AppTableHeader({
                                         }
                                     >
                                         <span>
-                                            {formatContent(cell.label, 15)}
+                                            {formatContent(
+                                                changeCase.sentenceCase(
+                                                    cell?.label ?? ''
+                                                ),
+                                                20
+                                            )}
                                         </span>
                                         {sorter === cell.key ? (
                                             isDescending ? (

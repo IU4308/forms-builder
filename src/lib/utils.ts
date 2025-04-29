@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
-import { navMenu } from './constants.tsx';
+// import { navMenu } from './constants.tsx';
 import {
     CurrentUser,
     Field,
@@ -11,6 +11,24 @@ import {
 } from './definitions';
 import { LoaderFunctionArgs, redirect } from 'react-router';
 import _ from 'lodash';
+import { getNavMenu } from './constants';
+
+export function translateArray<T extends Record<string, any>>(
+    data: T[],
+    keysToTranslate: (keyof T)[],
+    t: (key: string) => string
+): T[] {
+    return data.map((item) => {
+        const translated = { ...item };
+        keysToTranslate.forEach((key) => {
+            const value = item[key];
+            if (typeof value === 'string') {
+                translated[key] = t(value) as T[keyof T];
+            }
+        });
+        return translated;
+    });
+}
 
 export const getLoader = <T>(
     load: (args: LoaderFunctionArgs) => Promise<T>
@@ -71,7 +89,7 @@ export const formatContent = (content: any, maxLength = 25) => {
 };
 
 export const getMenu = (currentUser: CurrentUser) => {
-    return navMenu.filter((item) => {
+    return getNavMenu().filter((item) => {
         if (!currentUser)
             return !['Logout', 'Admin', 'My Workspace'].includes(item.title);
         return currentUser.isAdmin

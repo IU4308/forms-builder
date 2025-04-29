@@ -3,7 +3,7 @@ import TabPanel from '@/components/TabPanel';
 import { Input } from '@/components/ui/input';
 import {
     formsTableAttributes,
-    templatesTableAttributes,
+    getTemplatesTableAttributes,
     workspaceButtons,
     workspaceFormsButtons,
     workspaceTabButtons,
@@ -35,7 +35,7 @@ export default function Workspace() {
             {tabId === 1 && (
                 <AppTable
                     data={templates}
-                    attributes={templatesTableAttributes}
+                    attributes={getTemplatesTableAttributes()}
                     buttons={workspaceButtons}
                     renderCheckbox={true}
                     shouldSort={true}

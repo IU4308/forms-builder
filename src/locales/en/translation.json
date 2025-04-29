@@ -1,0 +1,10 @@
+{
+    "nav": {
+        "home": "Home",
+        "workspace": "My Workspace",
+        "login": "Login",
+        "logout": "Logout",
+        "admin": "Admin"
+    }
+    
+  }

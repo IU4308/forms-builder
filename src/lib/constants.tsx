@@ -2,26 +2,27 @@ import { Field, QuestionType, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
+import i18n from 'i18next';
 
-export const navMenu = [
+export const getNavMenu = () => [
     {
-        title: 'Home',
+        title: i18n.t('nav.home'),
         url: '/',
     },
     {
-        title: 'My Workspace',
+        title: i18n.t('nav.workspace'),
         url: '/workspace',
     },
     {
-        title: 'Login',
+        title: i18n.t('nav.login'),
         url: '/login',
     },
     {
-        title: 'Logout',
+        title: i18n.t('nav.logout'),
         url: '/logout',
     },
     {
-        title: 'Admin',
+        title: i18n.t('nav.admin'),
         url: '/admin',
     },
 ];
@@ -44,7 +45,7 @@ export const adminTableAttributes = [
         key: 'createdAt',
     },
     {
-        label: 'Last Login',
+        label: 'Last login',
         key: 'lastLogin',
     },
     {
@@ -57,13 +58,13 @@ export const adminTableAttributes = [
     },
 ];
 
-export const templatesTableAttributes = [
+export const getTemplatesTableAttributes = () => [
     {
         key: 'id',
         shouldRender: false,
     },
     {
-        label: 'Title',
+        label: i18n.t('test.title'),
         key: 'title',
     },
     {
@@ -159,12 +160,12 @@ export const workspaceFormsButtons: ToolbarButton[] = [
 
 export const adminButtons: ToolbarButton[] = [
     {
-        label: 'block',
+        label: 'Block',
         description: 'Block user',
         icon: <IoLockClosedOutline />,
     },
     {
-        label: 'unblock',
+        label: 'Unblock',
         description: 'Unblock user',
         icon: <IoLockOpenOutline />,
     },

@@ -3,7 +3,7 @@ import { Form, NavLink, useLoaderData } from 'react-router';
 import { Input } from './ui/input';
 import { IoIosSearch } from 'react-icons/io';
 import ThemeSwitcher from './ThemeSwitcher';
-import { IoLanguage, IoMenuOutline } from 'react-icons/io5';
+import { IoMenuOutline } from 'react-icons/io5';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { CurrentUser } from '@/lib/definitions';
 import { getMenu } from '@/lib/utils';
 import { useMediaQuery } from 'react-responsive';
+import LanguageSwitcher from './LanguageSwitcher';
 
 type NavItemProps = {
     title: string;
@@ -156,12 +157,10 @@ const DropDown = ({ name }: { name: string }) => {
 
 const SideButtons = () => {
     return (
-        <>
+        <div className="flex gap-2">
             <ThemeSwitcher />
-            <Button type="button" variant={'ghost'}>
-                <IoLanguage />
-            </Button>
-        </>
+            <LanguageSwitcher />
+        </div>
     );
 };
 

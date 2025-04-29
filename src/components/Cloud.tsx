@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Tag } from '@/lib/definitions';
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type LoaderData = {
     tags: Tag[];
@@ -15,6 +16,7 @@ export default function Cloud({
 }: {
     handleSelect: (templatesIds: string[]) => void;
 }) {
+    const { t } = useTranslation();
     const { tags, tagToTemplates } = useLoaderData<LoaderData>();
     const [activeId, setActiveId] = useState<number | null>(null);
     const customRenderer = (tag: Tag) => (
@@ -28,7 +30,7 @@ export default function Cloud({
 
     return (
         <div className="py-4">
-            <h1 className="mb-2">Search by tag</h1>
+            <h1 className="mb-2">{t('Tag Search')}</h1>
             <TagCloud
                 minSize={12}
                 maxSize={35}
