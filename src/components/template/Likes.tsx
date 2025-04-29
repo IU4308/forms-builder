@@ -32,11 +32,9 @@ export default function Likes() {
             <input hidden readOnly name="userId" value={currentUser.userId} />
             <input hidden readOnly name="templateId" value={templateId} />
             <div className="flex items-center gap-2">
-                {currentUser && (
-                    <Button type="submit" variant="ghost">
-                        {isLiked ? <BiSolidLike /> : <BiLike />}
-                    </Button>
-                )}
+                <Button type="submit" variant="ghost" disabled={!currentUser}>
+                    {isLiked ? <BiSolidLike /> : <BiLike />}
+                </Button>
                 <span className="text-2xl">{template.likes.length}</span>
             </div>
         </Form>

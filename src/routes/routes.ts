@@ -124,7 +124,7 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '*',
-                        Component: NotFoundPage, // or you can make a special NotFound page
+                        Component: NotFoundPage,
                     },
                 ],
             },
