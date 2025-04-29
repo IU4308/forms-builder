@@ -3,15 +3,18 @@ import TabPanel from '@/components/TabPanel';
 import { Input } from '@/components/ui/input';
 import {
     formsTableAttributes,
-    getTemplatesTableAttributes,
-    workspaceButtons,
+    templatesTableAttributes,
+    workspaceTemplateButtons,
     workspaceFormsButtons,
     workspaceTabButtons,
 } from '@/lib/constants.tsx';
+import { translateData } from '@/lib/utils';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Form, useLoaderData } from 'react-router';
 
 export default function Workspace() {
+    const { t: translator } = useTranslation();
     const [templates, forms] = useLoaderData();
     const [tabId, setTabId] = useState(1);
     return (
@@ -27,7 +30,11 @@ export default function Workspace() {
                 value={tabId === 0 ? 'templates' : 'forms'}
             />
             <TabPanel
-                buttons={workspaceTabButtons}
+                buttons={translateData(
+                    workspaceTabButtons,
+                    ['label'],
+                    translator
+                )}
                 tabId={tabId}
                 setTabId={setTabId}
                 className="mb-4"
@@ -35,8 +42,16 @@ export default function Workspace() {
             {tabId === 1 && (
                 <AppTable
                     data={templates}
-                    attributes={getTemplatesTableAttributes()}
-                    buttons={workspaceButtons}
+                    attributes={translateData(
+                        templatesTableAttributes,
+                        ['label'],
+                        translator
+                    )}
+                    buttons={translateData(
+                        workspaceTemplateButtons,
+                        ['label', 'description'],
+                        translator
+                    )}
                     renderCheckbox={true}
                     shouldSort={true}
                     url="templates"
@@ -45,8 +60,16 @@ export default function Workspace() {
             {tabId === 2 && (
                 <AppTable
                     data={forms}
-                    attributes={formsTableAttributes}
-                    buttons={workspaceFormsButtons}
+                    attributes={translateData(
+                        formsTableAttributes,
+                        ['label'],
+                        translator
+                    )}
+                    buttons={translateData(
+                        workspaceFormsButtons,
+                        ['label', 'description'],
+                        translator
+                    )}
                     renderCheckbox={true}
                     shouldSort={true}
                     url={['forms', 'templates']}

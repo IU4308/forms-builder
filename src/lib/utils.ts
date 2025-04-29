@@ -2,28 +2,21 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
-// import { navMenu } from './constants.tsx';
-import {
-    CurrentUser,
-    Field,
-    TableAttributes,
-    TemplateFormsType,
-} from './definitions';
+import { Field, TableAttributes, TemplateFormsType } from './definitions';
 import { LoaderFunctionArgs, redirect } from 'react-router';
 import _ from 'lodash';
-import { getNavMenu } from './constants';
 
-export function translateArray<T extends Record<string, any>>(
+export function translateData<T extends Record<string, any>>(
     data: T[],
     keysToTranslate: (keyof T)[],
-    t: (key: string) => string
+    translate: (key: string) => string
 ): T[] {
     return data.map((item) => {
         const translated = { ...item };
         keysToTranslate.forEach((key) => {
             const value = item[key];
             if (typeof value === 'string') {
-                translated[key] = t(value) as T[keyof T];
+                translated[key] = translate(value) as T[keyof T];
             }
         });
         return translated;
@@ -86,16 +79,6 @@ export const formatContent = (content: any, maxLength = 25) => {
     return content.length > maxLength
         ? content.slice(0, maxLength - 1) + '...'
         : content;
-};
-
-export const getMenu = (currentUser: CurrentUser) => {
-    return getNavMenu().filter((item) => {
-        if (!currentUser)
-            return !['Logout', 'Admin', 'My Workspace'].includes(item.title);
-        return currentUser.isAdmin
-            ? item.title !== 'Login'
-            : !['Login', 'Admin'].includes(item.title);
-    });
 };
 
 export const setFlash = (message: string) => {

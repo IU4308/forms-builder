@@ -12,6 +12,7 @@ import {
     LoginData,
     loginSchema,
 } from '@/lib/definitions';
+import { useTranslation } from 'react-i18next';
 
 interface AuthFormProps {
     type: 'login' | 'register';
@@ -19,6 +20,7 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ type, className }: AuthFormProps) {
+    const { t: translate } = useTranslation();
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === 'submitting';
     const isRegister = type === 'register';
@@ -39,6 +41,7 @@ export function AuthForm({ type, className }: AuthFormProps) {
         });
     };
 
+    const mode = isRegister ? 'register' : 'login';
     return (
         <div className={cn('flex flex-col gap-6', className)}>
             <fetcher.Form onSubmit={handleSubmit(onSubmit)}>
@@ -53,41 +56,28 @@ export function AuthForm({ type, className }: AuthFormProps) {
                             </div>
                         </Link>
                         <h1 className="text-xl font-bold">
-                            {isRegister ? 'Register' : 'Login'}
+                            {translate(`auth.${mode}.title`)}
                         </h1>
                         <div className="text-center text-sm">
-                            {isRegister ? (
-                                <>
-                                    Already have an account?{' '}
-                                    <Link
-                                        to="/login"
-                                        className="underline underline-offset-4"
-                                    >
-                                        Sign in
-                                    </Link>
-                                </>
-                            ) : (
-                                <>
-                                    Don't have an account?{' '}
-                                    <Link
-                                        to="/register"
-                                        className="underline underline-offset-4"
-                                    >
-                                        Sign up
-                                    </Link>
-                                </>
-                            )}
+                            {translate(`auth.${mode}.message`)}{' '}
+                            <Link
+                                to={`/${isRegister ? 'login' : 'register'}`}
+                                className="underline underline-offset-4"
+                            >
+                                {translate(`auth.${mode}.link`)}
+                            </Link>
                         </div>
                     </div>
                     <div className="flex flex-col gap-6">
                         {isRegister && (
                             <div className="grid gap-3">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">
+                                    {translate('user.name')}
+                                </Label>
                                 <Input
                                     id="name"
                                     type="text"
                                     {...register('name')}
-                                    placeholder="John Doe"
                                     required
                                 />
                                 {(registerErrors.name ||
@@ -100,12 +90,13 @@ export function AuthForm({ type, className }: AuthFormProps) {
                             </div>
                         )}
                         <div className="grid gap-3">
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="email">
+                                {translate('user.email')}
+                            </Label>
                             <Input
                                 id="email"
                                 type="email"
                                 {...register('email')}
-                                placeholder="m@example.com"
                                 required
                             />
                             {(errors.email || fetcher.data?.error?.email) && (
@@ -116,7 +107,9 @@ export function AuthForm({ type, className }: AuthFormProps) {
                             )}
                         </div>
                         <div className="grid gap-3">
-                            <Label htmlFor="password">Password</Label>
+                            <Label htmlFor="password">
+                                {translate('user.password')}
+                            </Label>
                             <Input
                                 id="password"
                                 type="password"
@@ -141,11 +134,7 @@ export function AuthForm({ type, className }: AuthFormProps) {
                             className="w-full"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting
-                                ? 'Loading...'
-                                : isRegister
-                                  ? 'Register'
-                                  : 'Login'}
+                            {translate(`auth.${mode}.button`)}
                         </Button>
                     </div>
                 </div>

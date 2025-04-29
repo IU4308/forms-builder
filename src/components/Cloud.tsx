@@ -30,7 +30,7 @@ export default function Cloud({
 
     return (
         <div className="py-4">
-            <h1 className="mb-2">{t('Tag Search')}</h1>
+            <h1 className="mb-2">{t('home.tags')}</h1>
             <TagCloud
                 minSize={12}
                 maxSize={35}

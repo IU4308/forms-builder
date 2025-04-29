@@ -10,7 +10,7 @@ export async function requireUser(redirectTo: string = '/login') {
 
 export async function requireUnblockedUser(redirectTo: string = '/login') {
     const user = await getCurrentUser();
-    if (user.isBlocked) {
+    if (user?.isBlocked) {
         setFlash('Your account has been blocked');
         throw redirect(redirectTo);
     }

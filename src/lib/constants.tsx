@@ -1,28 +1,32 @@
-import { Field, QuestionType, ToolbarButton } from './definitions';
+import { CurrentUser, Field, QuestionType, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
-import i18n from 'i18next';
 
-export const getNavMenu = () => [
+export const getNavMenu = (currentUser: CurrentUser | null) => [
     {
-        title: i18n.t('nav.home'),
+        title: 'nav.home',
+        shouldRender: true,
         url: '/',
     },
     {
-        title: i18n.t('nav.workspace'),
+        title: 'nav.workspace',
+        shouldRender: !!currentUser,
         url: '/workspace',
     },
     {
-        title: i18n.t('nav.login'),
+        title: 'nav.login',
+        shouldRender: !currentUser,
         url: '/login',
     },
     {
-        title: i18n.t('nav.logout'),
+        title: 'nav.logout',
+        shouldRender: !!currentUser,
         url: '/logout',
     },
     {
-        title: i18n.t('nav.admin'),
+        title: 'nav.admin',
+        shouldRender: currentUser?.isAdmin ?? false,
         url: '/admin',
     },
 ];
@@ -33,46 +37,46 @@ export const adminTableAttributes = [
         shouldRender: false,
     },
     {
-        label: 'Name',
+        label: 'user.name',
         key: 'name',
     },
     {
-        label: 'Email',
+        label: 'user.email',
         key: 'email',
     },
     {
-        label: 'Registered at',
+        label: 'user.created_at',
         key: 'createdAt',
     },
     {
-        label: 'Last login',
+        label: 'user.last_login',
         key: 'lastLogin',
     },
     {
-        label: 'is blocked',
+        label: 'user.is_blocked',
         key: 'isBlocked',
     },
     {
-        label: 'is admin',
+        label: 'user.is_admin',
         key: 'isAdmin',
     },
 ];
 
-export const getTemplatesTableAttributes = () => [
+export const templatesTableAttributes = [
     {
         key: 'id',
         shouldRender: false,
     },
     {
-        label: i18n.t('test.title'),
+        label: 'template.title',
         key: 'title',
     },
     {
-        label: 'Topic',
+        label: 'template.topic',
         key: 'topic',
     },
     {
-        label: 'Created at',
+        label: 'template.created_at',
         key: 'createdAt',
     },
 ];
@@ -87,19 +91,19 @@ export const formsTableAttributes = [
         shouldRender: false,
     },
     {
-        label: 'Title',
+        label: 'template.title',
         key: 'title',
     },
     {
-        label: 'Author',
+        label: 'template.author',
         key: 'author',
     },
     {
-        label: 'Topic',
+        label: 'template.topic',
         key: 'topic',
     },
     {
-        label: 'Submitted at',
+        label: 'form.created_at',
         key: 'submittedAt',
     },
 ];
@@ -111,39 +115,39 @@ export const popularTemplatesAttributes = [
         shouldRender: false,
     },
     {
-        label: 'Title',
+        label: 'template.title',
         key: 'title',
         className: '',
     },
     {
-        label: 'Topic',
+        label: 'template.topic',
         key: 'topic',
         className: '',
     },
     {
-        label: 'Author',
+        label: 'template.author',
         key: 'author',
         className: '',
     },
     {
-        label: 'Submissions',
+        label: 'template.submissions',
         key: 'submissions',
         className: 'text-right',
     },
 ];
 
-export const workspaceButtons: ToolbarButton[] = [
+export const workspaceTemplateButtons: ToolbarButton[] = [
     {
-        label: 'create',
-        description: 'Create a template',
+        label: 'buttons.create',
+        description: 'tooltips.create_template',
         canBeDisabled: false,
         type: 'button',
         url: '/templates',
         icon: <IoIosAddCircleOutline />,
     },
     {
-        label: 'delete',
-        description: 'Delete template',
+        label: 'buttons.delete',
+        description: 'tooltips.delete_template',
         variant: 'destructive',
         icon: <FiTrash />,
     },
@@ -151,8 +155,8 @@ export const workspaceButtons: ToolbarButton[] = [
 
 export const workspaceFormsButtons: ToolbarButton[] = [
     {
-        label: 'delete',
-        description: 'Delete form',
+        label: 'buttons.delete',
+        description: 'tooltips.delete_form',
         variant: 'destructive',
         icon: <FiTrash />,
     },
@@ -160,28 +164,28 @@ export const workspaceFormsButtons: ToolbarButton[] = [
 
 export const adminButtons: ToolbarButton[] = [
     {
-        label: 'Block',
-        description: 'Block user',
+        label: 'buttons.block',
+        description: 'tooltips.block',
         icon: <IoLockClosedOutline />,
     },
     {
-        label: 'Unblock',
-        description: 'Unblock user',
+        label: 'buttons.unblock',
+        description: 'tooltips.unblock',
         icon: <IoLockOpenOutline />,
     },
     {
-        label: 'add-to-admins',
-        description: 'Add user to admins',
+        label: 'buttons.add_admin',
+        description: 'tooltips.add_admin',
         icon: <FiShield />,
     },
     {
-        label: 'remove-from-admins',
-        description: 'Remove user from admins',
+        label: 'buttons.remove_admin',
+        description: 'tooltips.remove_admin',
         icon: <FiShieldOff />,
     },
     {
-        label: 'delete',
-        description: 'Delete user',
+        label: 'buttons.delete',
+        description: 'tooltips.delete_user',
         icon: <FiTrash />,
         variant: 'destructive',
     },
@@ -190,30 +194,30 @@ export const adminButtons: ToolbarButton[] = [
 export const workspaceTabButtons = [
     {
         id: 1,
-        label: 'Templates',
+        label: 'templates',
     },
     {
         id: 2,
-        label: 'Forms',
+        label: 'forms',
     },
 ];
 
 export const templateTabButtons = [
     {
         id: 1,
-        label: 'Settings',
+        label: 'settings',
     },
     {
         id: 2,
-        label: 'Questions',
+        label: 'questions',
     },
     {
         id: 3,
-        label: 'Answers',
+        label: 'answers',
     },
     {
         id: 4,
-        label: 'Aggregated Results',
+        label: 'aggregation',
     },
 ];
 
@@ -228,114 +232,114 @@ export const initialFields: Field[] = [
     {
         id: 'singleLine1',
         isPresent: true,
-        question: 'No title',
-        description: 'No description',
+        question: 'question.default_title',
+        description: 'question.default_description',
         position: 1,
     },
     {
         id: 'singleLine2',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'singleLine3',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'singleLine4',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'multipleLine1',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'multipleLine2',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'multipleLine3',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'multipleLine4',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'integerValue1',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'integerValue2',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'integerValue3',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'integerValue4',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'checkbox1',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'checkbox2',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'checkbox3',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
     {
         id: 'checkbox4',
         isPresent: false,
-        question: 'No title',
+        question: 'question.default_title',
         position: -1,
-        description: 'No description',
+        description: 'question.default_description',
     },
 ];
 

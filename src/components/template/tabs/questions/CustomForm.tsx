@@ -7,7 +7,12 @@ import {
 } from '@/lib/definitions';
 import { initialFields } from '@/lib/constants';
 import TemplateToolbar from './TemplateToolbar';
-import { cn, enumerateFields, getQuestionType } from '@/lib/utils';
+import {
+    cn,
+    enumerateFields,
+    getQuestionType,
+    translateData,
+} from '@/lib/utils';
 import { Button } from '../../../ui/button';
 import { useLoaderData } from 'react-router';
 import CustomField from './CustomField';
@@ -21,6 +26,7 @@ import {
 import _ from 'lodash';
 import FormHeader from './FormHeader';
 import FieldHiddenInputs from './hidden-inputs';
+import { useTranslation } from 'react-i18next';
 
 export default function CustomForm({
     tabId,
@@ -33,9 +39,15 @@ export default function CustomForm({
     activeId: string;
     setActiveId: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    const { t: translator } = useTranslation();
     const { template, canEdit } = useLoaderData() as TemplateLoaderData;
     const [fields, setFields] = useState<Field[]>(
-        template?.fields ?? initialFields
+        template?.fields ??
+            translateData(
+                initialFields,
+                ['question', 'description'],
+                translator
+            )
     );
     const [presentFields, absentFields] = _.partition(
         fields,

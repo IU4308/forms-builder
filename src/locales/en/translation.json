@@ -1,10 +1,82 @@
 {
     "nav": {
         "home": "Home",
-        "workspace": "My Workspace",
+        "workspace": "Workspace",
         "login": "Login",
         "logout": "Logout",
         "admin": "Admin"
-    }
-    
+    },
+    "auth": {
+        "login": {
+            "title": "Login",
+            "message": "Don't have an account?",
+            "link": "Sign up",
+            "button": "Login"
+        },
+        "register": {
+            "title": "Register",
+            "message": "Already have an account?",
+            "link": "Sign in",
+            "button": "Create"
+        }
+    },
+    "home": {
+        "latest": "Latest Templates",
+        "popular": "Popular Templates",
+        "tags": "Tag Search"
+    },
+    "user": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "created_at": "Registered at",
+        "last_login": "Last Login",
+        "is_blocked": "is blocked",
+        "is_admin": "is admin"
+    },
+    "template": {
+        "title": "Title",
+        "topic": "Topic",
+        "created_at": "Created at",
+        "author": "Author",
+        "submissions": "Submissions"
+    },
+    "form": {
+        "created_at": "Submitted at"
+    },
+    "response": {
+        "message": "Answer is saved",
+        "new": "Submit new one",
+        "edit": "Edit answers"
+    },
+    "buttons" : {
+        "create": "Create",
+        "block": "Block",
+        "unblock": "Unblock",
+        "delete": "Delete",
+        "add_admin": "Add to Admins",
+        "remove_admin": "Remove from Admins",
+        "publish": "Publish",
+        "save": "Save changes"
+    },
+    "tooltips": {
+        "add_admin": "Add user to admins",
+        "remove_admin": "Remove user from Admins",
+        "block": "Block user",
+        "unblock": "Unblock user",
+        "delete_user": "Delete user",
+        "create_template": "Create template",
+        "delete_template": "Delete template",
+        "delete_form": "Delete form"
+    },
+    "question": {
+        "default_title": "No title",
+        "default_description": "No description"
+    },
+    "templates": "Templates",
+    "forms": "Forms",
+    "settings": "Settings",
+    "questions": "Questions",
+    "answers": "Answers",
+    "aggregation": "Aggregation"
   }

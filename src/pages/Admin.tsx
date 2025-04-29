@@ -4,35 +4,23 @@ import _ from 'lodash';
 import { User } from '@/lib/definitions';
 import AppTable from '@/components/app-table/AppTable';
 import { useTranslation } from 'react-i18next';
-import { translateArray } from '@/lib/utils';
+import { translateData } from '@/lib/utils';
 
 export default function Admin() {
     const { users } = useLoaderData() as { users: User[] };
     const { t: translator } = useTranslation();
-
-    // const adminTableAttributes = translateArray(
-    //     rawAdminTableAttributes,
-    //     ['label'],
-    //     t
-    // );
-
-    // const adminButtons = translateArray(
-    //     rawAdminButtons,
-    //     ['label', 'description'],
-    //     t
-    // );
 
     return (
         <Form action={'/admin'} method="post">
             <h1>Users</h1>
             <AppTable
                 data={users}
-                attributes={translateArray(
+                attributes={translateData(
                     adminTableAttributes,
                     ['label'],
                     translator
                 )}
-                buttons={translateArray(
+                buttons={translateData(
                     adminButtons,
                     ['label', 'description'],
                     translator

@@ -12,9 +12,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useState } from 'react';
 import { CurrentUser } from '@/lib/definitions';
-import { getMenu } from '@/lib/utils';
 import { useMediaQuery } from 'react-responsive';
 import LanguageSwitcher from './LanguageSwitcher';
+import { getNavMenu } from '@/lib/constants';
+import { translateData } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 type NavItemProps = {
     title: string;
@@ -52,17 +54,23 @@ const DesktopView = ({
     name: string;
     isDesktop: boolean;
 }) => {
+    const { t: translator } = useTranslation();
     const { currentUser, path } = useLoaderData() as {
         currentUser: CurrentUser;
         path: string;
     };
-    const menu = getMenu(currentUser);
+    const menu = translateData(getNavMenu(currentUser), ['title'], translator);
     return (
         <nav className="hidden lg:flex max-w-[1400px] mx-auto w-full relative  py-2 gap-2 items-center justify-between">
             <div className="flex shrink-0">
-                {menu.slice(0, 2).map((item) => (
-                    <NavItem key={item.title} {...item} />
-                ))}
+                {menu
+                    .slice(0, 2)
+                    .map(
+                        (item) =>
+                            item.shouldRender && (
+                                <NavItem key={item.title} {...item} />
+                            )
+                    )}
                 <Form
                     method="get"
                     action={path}
@@ -88,9 +96,16 @@ const DesktopView = ({
                 {menu
                     .slice(2)
                     .reverse()
-                    .map((item) => (
-                        <NavItem key={item.title} name={name} {...item} />
-                    ))}
+                    .map(
+                        (item) =>
+                            item.shouldRender && (
+                                <NavItem
+                                    key={item.title}
+                                    name={name}
+                                    {...item}
+                                />
+                            )
+                    )}
                 <SideButtons />
             </div>
         </nav>
@@ -133,6 +148,7 @@ const MobileView = ({
 };
 
 const DropDown = ({ name }: { name: string }) => {
+    const { t: translator } = useTranslation();
     const [open, setOpen] = useState(false);
     const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
     return (
@@ -141,15 +157,22 @@ const DropDown = ({ name }: { name: string }) => {
                 <IoMenuOutline className="text-2xl" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-screen">
-                {getMenu(currentUser).map((item) => (
-                    <DropdownMenuItem
-                        key={item.title}
-                        className="flex justify-center cursor-pointer py-0"
-                        onClick={() => setOpen(false)}
-                    >
-                        <NavItem name={name} {...item} />
-                    </DropdownMenuItem>
-                ))}
+                {translateData(
+                    getNavMenu(currentUser),
+                    ['title'],
+                    translator
+                ).map(
+                    (item) =>
+                        item.shouldRender && (
+                            <DropdownMenuItem
+                                key={item.title}
+                                className="flex justify-center cursor-pointer py-0"
+                                onClick={() => setOpen(false)}
+                            >
+                                <NavItem name={name} {...item} />
+                            </DropdownMenuItem>
+                        )
+                )}
             </DropdownMenuContent>
         </DropdownMenu>
     );
