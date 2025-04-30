@@ -70,8 +70,8 @@ export default function CustomForm({
                 {
                     id: newField.id,
                     isPresent: true,
-                    question: 'No Title',
-                    description: 'No description',
+                    question: translator('question.default_title'),
+                    description: translator('question.default_description'),
                     position: 100,
                 },
             ];

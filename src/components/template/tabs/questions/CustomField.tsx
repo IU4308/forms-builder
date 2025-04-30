@@ -1,14 +1,14 @@
 import { CustomFieldProps } from '@/lib/definitions';
-import { Checkbox } from '../../../ui/checkbox';
-import { Input } from '../../../ui/input';
-import * as changeCase from 'change-case';
 import { cn, getQuestionType } from '@/lib/utils';
-import { Button } from '../../../ui/button';
 import { IoTrash } from 'react-icons/io5';
-import { Textarea } from '../../../ui/textarea';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { BiGridHorizontal } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export default function CustomField({
     mode,
@@ -23,6 +23,7 @@ export default function CustomField({
     onDeleteField,
     canEdit,
 }: CustomFieldProps) {
+    const { t: translator } = useTranslation();
     const { attributes, listeners, setNodeRef, transform, transition } =
         useSortable({ id });
 
@@ -67,13 +68,7 @@ export default function CustomField({
                 </div>
             )}
             <input hidden readOnly name={`${id}State`} value={'true'} />
-            <input
-                // key={`${id}-position-${position}`}
-                hidden
-                readOnly
-                name={`${id}Position`}
-                value={index + 1}
-            />
+            <input hidden readOnly name={`${id}Position`} value={index + 1} />
             <Input
                 key={`${id}-question-${question}`}
                 name={`${id}Question`}
@@ -94,7 +89,7 @@ export default function CustomField({
                     type={questionType === 'integerValue' ? 'number' : 'text'}
                     step={0.01}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
-                    placeholder={`${changeCase.sentenceCase(questionType)} answer`}
+                    placeholder={translator(questionType)}
                     defaultValue={answer ?? ''}
                     disabled={mode === 'template' || !canEdit}
                 />
@@ -103,7 +98,7 @@ export default function CustomField({
                 <Textarea
                     name={`${id}Answer`}
                     className="!bg-accent"
-                    placeholder={`${changeCase.sentenceCase(questionType)} answer`}
+                    placeholder={translator(questionType)}
                     defaultValue={answer ?? ''}
                     disabled={mode === 'template' || !canEdit}
                 />

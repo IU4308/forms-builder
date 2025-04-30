@@ -87,6 +87,13 @@
         "search_template": "Найти шаблоны",
         "comments": "Введите комментарий"
     },
+    "Credentials": "Персональные данные",
+    "Name": "Имя",
+    "Email": "Почта",
+    "Date": "Дата",
+    "singleLine": "Короткий ответ",
+    "multipleLine": "Развёрнутый ответ",
+    "integerValue": "Численный ответ",
     "Templates": "Шаблоны",
     "Forms": "Формы",
     "Settings": "Настройки",

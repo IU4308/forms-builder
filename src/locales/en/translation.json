@@ -87,5 +87,8 @@
     "placeholders": {
         "search_template": "Search for templates",
         "comments": "Enter a comment"
-    }
+    },
+    "singleLine": "Single-line answer",
+    "multipleLine": "Multiple-line answer",
+    "integerValue": "Integer-value answer"
   }

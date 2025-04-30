@@ -1,12 +1,14 @@
-import { Label } from '../../../ui/label';
-import { Input } from '../../../ui/input';
 import { format } from 'date-fns';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useLoaderData } from 'react-router';
 import { FilledFormData, FormData } from '@/lib/definitions';
+import { useTranslation } from 'react-i18next';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 export default function FormHeader() {
+    const { t: translate } = useTranslation();
     const { template, currentUser } = useLoaderData() as
         | FormData
         | FilledFormData;
@@ -26,10 +28,10 @@ export default function FormHeader() {
                 )}
             </div>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
-                <h2>Credentials</h2>
+                <h2>{translate('Credentials')}</h2>
                 <div className="grid grid-cols sm:grid-cols-3 gap-6 py-2">
                     <div>
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">{translate('Name')}</Label>
                         <Input
                             id="name"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
@@ -42,7 +44,7 @@ export default function FormHeader() {
                         />
                     </div>
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{translate('Email')}</Label>
                         <Input
                             id="email"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
@@ -55,7 +57,7 @@ export default function FormHeader() {
                         />
                     </div>
                     <div>
-                        <Label htmlFor="date">Date</Label>
+                        <Label htmlFor="date">{translate('Date')}</Label>
                         <Input
                             id="date"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
