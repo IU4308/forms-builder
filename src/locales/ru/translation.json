@@ -67,16 +67,38 @@
         "delete_user": "Удалить пользователя",
         "create_template": "Создать шаблон",
         "delete_template": "Удалить шаблон",
-        "delete_form": "Удалить форму"
+        "delete_form": "Удалить форму",
+        "remove_user": "Забрать доступ у пользователя"
     },
     "question": {
         "default_title": "Без названия",
-        "default_description": "Без описания"
+        "default_description": "Без описания",
+        "add": "Добавить вопрос",
+        "select": "Выбрать тип"
     },
-    "templates": "Шаблоны",
-    "forms": "Формы",
-    "settings": "Настройки",
-    "questions": "Вопросы",
-    "answers": "Ответы",
-    "aggregation": "Сводка"
+    "settings": {
+        "general": "Общие настройки",
+        "access": "Настройки доступа",
+        "public": "Публичная форма (может быть заполнена любым пользователем)"
+    },
+    "placeholders": {
+        "search_template": "Найти шаблоны",
+        "comments": "Введите комментарий"
+    },
+    "Templates": "Шаблоны",
+    "Forms": "Формы",
+    "Settings": "Настройки",
+    "Questions": "Вопросы",
+    "Answers": "Ответы",
+    "Aggregation": "Сводка",
+    "Title": "Название",
+    "Description": "Описание",
+    "Topic": "Тема",
+    "Image": "Изображение",
+    "Select Tags": "Выбрать Теги",
+    "Add users": "Добавить пользователей",
+    "Select user": "Выбрать пользователя",
+    "Remove": "Убрать",
+    "Comments": "Комментарии",
+    "Search Results for": "Результаты поиска для"
 }

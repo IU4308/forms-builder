@@ -56,6 +56,7 @@
         "delete": "Delete",
         "add_admin": "Add to Admins",
         "remove_admin": "Remove from Admins",
+        "remove_user": "Remove user",
         "publish": "Publish",
         "save": "Save changes"
     },
@@ -67,16 +68,22 @@
         "delete_user": "Delete user",
         "create_template": "Create template",
         "delete_template": "Delete template",
-        "delete_form": "Delete form"
+        "delete_form": "Delete form",
+        "remove_user": "Remove access for user"
     },
     "question": {
         "default_title": "No title",
-        "default_description": "No description"
+        "default_description": "No description",
+        "add": "Add question",
+        "select": "Select type"
     },
-    "templates": "Templates",
-    "forms": "Forms",
-    "settings": "Settings",
-    "questions": "Questions",
-    "answers": "Answers",
-    "aggregation": "Aggregation"
+    "settings": {
+        "general": "General Settings",
+        "access": "Access Settings",
+        "public": "Public (can be filled out by any user"
+    },
+    "placeholders": {
+        "search_template": "Search for templates",
+        "comments": "Enter a comment"
+    }
   }

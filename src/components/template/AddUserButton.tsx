@@ -6,6 +6,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useTranslation } from 'react-i18next';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 
 export default function AddUserButton({
@@ -17,6 +18,7 @@ export default function AddUserButton({
     selectedIds: string[];
     onSelect: (id: string) => void;
 }) {
+    const { t } = useTranslation();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger
@@ -26,14 +28,14 @@ export default function AddUserButton({
                 <span>
                     <IoIosAddCircleOutline className="text-xl" />
                 </span>
-                <span className="hidden md:block">Add users</span>
+                <span className="hidden md:block">{t('Add users')}</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 side="bottom"
                 align="start"
                 className="w-[280px]"
             >
-                <DropdownMenuLabel>Select user</DropdownMenuLabel>
+                <DropdownMenuLabel>{t('Select user')}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {users.map(
                     (user) =>

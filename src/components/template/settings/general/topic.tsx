@@ -7,6 +7,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { Topic } from '@/lib/definitions';
+import { useTranslation } from 'react-i18next';
 
 export default function TemplateTopic({
     topics,
@@ -15,9 +16,10 @@ export default function TemplateTopic({
     topics: Topic[];
     topicId: number | undefined;
 }) {
+    const { t } = useTranslation();
     return (
         <div className="flex flex-col gap-4">
-            <Label>Topic</Label>
+            <Label>{t('Topic')}</Label>
             <Select name="topicId" defaultValue={`${topicId ?? topics[0].id}`}>
                 <SelectTrigger className="w-[180px] !bg-background">
                     <SelectValue placeholder="Select topic" />

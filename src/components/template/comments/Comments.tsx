@@ -6,8 +6,10 @@ import { useEffect, useRef, useState } from 'react';
 import socket from '@/lib/socket';
 import { FormData, TemplateData } from '@/lib/definitions';
 import CommentHiddenInputs from './hidden-inputs';
+import { useTranslation } from 'react-i18next';
 
 export default function Comments() {
+    const { t } = useTranslation();
     const { templateId } = useParams();
     const { currentUser, template } = useLoaderData() as
         | TemplateData
@@ -39,19 +41,21 @@ export default function Comments() {
             method="post"
             className="max-w-[768px] mx-auto my-4 flex flex-col gap-4"
         >
-            <h1>Comments ({comments.length})</h1>
+            <h1>
+                {t('Comments')} ({comments.length})
+            </h1>
             {currentUser && (
                 <>
                     <CommentHiddenInputs />
                     <div className="flex gap-2">
                         <Input
                             ref={inputRef}
-                            placeholder="Enter a comment"
+                            placeholder={t('placeholders.comments')}
                             name="body"
                             defaultValue={''}
                             required
                         />
-                        <Button type="submit">Publish</Button>
+                        <Button type="submit">{t('buttons.publish')}</Button>
                     </div>
                 </>
             )}

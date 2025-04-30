@@ -3,6 +3,7 @@ import { Tag } from '@/lib/definitions';
 import { useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { MultiValue, ActionMeta } from 'react-select';
+import { useTranslation } from 'react-i18next';
 
 type OptionType = {
     id: number;
@@ -25,6 +26,7 @@ const TemplateTags = ({
     tags: Tag[];
     templateTagIds: number[] | undefined;
 }) => {
+    const { t } = useTranslation();
     const tagOptions = getOptions(tags);
     const [selectedTags, setSelectedTags] = useState<OptionType[]>(
         getOptions(tags.filter((tag) => templateTagIds?.includes(tag.id)))
@@ -44,7 +46,7 @@ const TemplateTags = ({
 
     return (
         <div className="w-full space-y-2">
-            <div>Select Tags</div>
+            <div>{t('Select Tags')}</div>
             <input
                 hidden
                 readOnly

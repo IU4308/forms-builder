@@ -1,38 +1,14 @@
 import { useState } from 'react';
-import { ToolbarButton } from '@/lib/definitions';
-import { IoRemoveCircleOutline } from 'react-icons/io5';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import AddUserButton from '@/components/template/AddUserButton';
 import AppTable from '@/components/app-table/AppTable';
-
-const attributes = [
-    {
-        label: 'id',
-        key: 'id',
-        shouldRender: false,
-    },
-    {
-        label: 'name',
-        key: 'name',
-        shouldRender: true,
-    },
-    {
-        label: 'email',
-        key: 'email',
-        shouldRender: true,
-    },
-];
-
-const buttons: ToolbarButton[] = [
-    {
-        label: 'remove',
-        type: 'button',
-        description: 'Remove user',
-        variant: 'destructive',
-        icon: <IoRemoveCircleOutline />,
-    },
-];
+import { useTranslation } from 'react-i18next';
+import { translateData } from '@/lib/utils';
+import {
+    templateUsersButtons,
+    templateUsersTableAttributes,
+} from '@/lib/constants';
 
 export default function AccessSettings({
     users,
@@ -43,6 +19,7 @@ export default function AccessSettings({
     isPublicState: boolean | undefined;
     allowedIds: string[] | undefined;
 }) {
+    const { t } = useTranslation();
     const [isPublic, setIsPublic] = useState(isPublicState ?? true);
     const [selectedIds, setSelectedIds] = useState<string[]>(allowedIds ?? []);
     const handleAddId = (id: string) =>
@@ -54,7 +31,7 @@ export default function AccessSettings({
     const handleIsPublic = () => setIsPublic(!isPublic);
     return (
         <div className="pb-20">
-            <h1>Access settings</h1>
+            <h1>{t('settings.access')}</h1>
             <div className="flex gap-4 py-4 items-center">
                 <input
                     hidden
@@ -69,7 +46,7 @@ export default function AccessSettings({
                     onClick={handleIsPublic}
                 />
                 <Label htmlFor="public" className="text-xl">
-                    Public (can be filled out by any user)
+                    {t('settings.public')}
                 </Label>
             </div>
             {!isPublic && (
@@ -85,8 +62,16 @@ export default function AccessSettings({
                         data={users.filter((user) =>
                             selectedIds.includes(user.id)
                         )}
-                        attributes={attributes}
-                        buttons={buttons}
+                        attributes={translateData(
+                            templateUsersTableAttributes,
+                            ['label'],
+                            t
+                        )}
+                        buttons={translateData(
+                            templateUsersButtons,
+                            ['label', 'description'],
+                            t
+                        )}
                         toolbarSlot={
                             <AddUserButton
                                 key={Number(isPublic)}

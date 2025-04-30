@@ -1,7 +1,11 @@
 import { CurrentUser, Field, QuestionType, ToolbarButton } from './definitions';
 import { FiShield, FiShieldOff, FiTrash } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io';
-import { IoLockClosedOutline, IoLockOpenOutline } from 'react-icons/io5';
+import {
+    IoLockClosedOutline,
+    IoLockOpenOutline,
+    IoRemoveCircleOutline,
+} from 'react-icons/io5';
 
 export const getNavMenu = (currentUser: CurrentUser | null) => [
     {
@@ -21,6 +25,7 @@ export const getNavMenu = (currentUser: CurrentUser | null) => [
     },
     {
         title: 'nav.logout',
+        prefix: currentUser?.name,
         shouldRender: !!currentUser,
         url: '/logout',
     },
@@ -194,30 +199,56 @@ export const adminButtons: ToolbarButton[] = [
 export const workspaceTabButtons = [
     {
         id: 1,
-        label: 'templates',
+        label: 'Templates',
     },
     {
         id: 2,
-        label: 'forms',
+        label: 'Forms',
     },
 ];
 
 export const templateTabButtons = [
     {
         id: 1,
-        label: 'settings',
+        label: 'Settings',
     },
     {
         id: 2,
-        label: 'questions',
+        label: 'Questions',
     },
     {
         id: 3,
-        label: 'answers',
+        label: 'Answers',
     },
     {
         id: 4,
-        label: 'aggregation',
+        label: 'Aggregation',
+    },
+];
+
+export const templateUsersTableAttributes = [
+    {
+        key: 'id',
+        shouldRender: false,
+    },
+    {
+        label: 'user.name',
+        key: 'name',
+        shouldRender: true,
+    },
+    {
+        label: 'user.email',
+        key: 'email',
+        shouldRender: true,
+    },
+];
+export const templateUsersButtons: ToolbarButton[] = [
+    {
+        label: 'Remove',
+        type: 'button',
+        description: 'tooltips.remove_user',
+        variant: 'destructive',
+        icon: <IoRemoveCircleOutline />,
     },
 ];
 

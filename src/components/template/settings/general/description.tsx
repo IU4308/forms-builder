@@ -1,6 +1,7 @@
 import { Label } from '@/components/ui/label';
 import MDEditor from '@uiw/react-md-editor';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import rehypeSanitize from 'rehype-sanitize';
 
 export default function TemplateDescription({
@@ -8,12 +9,13 @@ export default function TemplateDescription({
 }: {
     description: string | undefined;
 }) {
+    const { t } = useTranslation();
     const [description, setDescription] = useState(
         templateDescription ?? 'No description'
     );
     return (
         <div className="flex flex-col gap-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">{t('Description')}</Label>
             <div className="container">
                 <MDEditor
                     id="description"

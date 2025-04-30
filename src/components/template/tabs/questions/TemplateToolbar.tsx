@@ -9,6 +9,7 @@ import {
 import { Field, QuestionType } from '@/lib/definitions';
 import { getQuestionType } from '@/lib/utils';
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 const types = ['singleLine', 'multipleLine', 'integerValue', 'checkbox'];
 
@@ -19,6 +20,7 @@ export default function TemplateToolbar({
     onAddField: (type: QuestionType) => void;
     absentFields: Field[];
 }) {
+    const { t } = useTranslation();
     const groupedFields = _.groupBy(absentFields, (field) =>
         getQuestionType(field.id)
     );
@@ -26,10 +28,12 @@ export default function TemplateToolbar({
         <div className="sticky top-[157px] bg-background z-20 flex gap-2 pb-2">
             <DropdownMenu>
                 <DropdownMenuTrigger className="border px-4 py-1 bg-accent rounded-sm cursor-pointer">
-                    Add question
+                    {t('question.add')}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuLabel>Select type</DropdownMenuLabel>
+                    <DropdownMenuLabel>
+                        {t('question.select')}
+                    </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     {types.map((type) => (
                         <DropdownMenuItem

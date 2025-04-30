@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoTrash } from 'react-icons/io5';
 
 export default function TemplateImage({
@@ -9,10 +10,11 @@ export default function TemplateImage({
 }: {
     imageUrl: string | null | undefined;
 }) {
+    const { t } = useTranslation();
     const [isTrashed, setIsTrashed] = useState(false);
     return (
         <div className="flex flex-col gap-2">
-            <Label htmlFor="image">Image</Label>
+            <Label htmlFor="image">{t('Image')}</Label>
             {isTrashed && <input hidden readOnly name="imageUrl" value={''} />}
             {(!imageUrl || isTrashed) && (
                 <Input

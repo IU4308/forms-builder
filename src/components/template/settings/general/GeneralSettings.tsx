@@ -4,6 +4,7 @@ import TemplateTopic from './topic';
 import TemplateTitle from './title';
 import TemplateTags from './tags';
 import TemplateDescription from './description';
+import { useTranslation } from 'react-i18next';
 
 export default function GeneralSettings({
     title,
@@ -22,9 +23,10 @@ export default function GeneralSettings({
     tags: Tag[];
     templateTagIds?: number[] | undefined;
 }) {
+    const { t } = useTranslation();
     return (
         <div className="flex flex-col gap-4 py-4">
-            <h1>General settings</h1>
+            <h1>{t('settings.general')}</h1>
             <TemplateTitle title={title} />
             <TemplateDescription description={description} />
             <TemplateTopic topics={topics} topicId={topicId} />

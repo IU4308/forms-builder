@@ -22,10 +22,10 @@ type NavItemProps = {
     title: string;
     url: string;
     variant?: string;
-    name?: string;
+    prefix?: string;
 };
 
-const NavItem = ({ title, url, name }: NavItemProps) => {
+const NavItem = ({ title, url, prefix }: NavItemProps) => {
     return (
         <NavLink
             to={url}
@@ -35,9 +35,9 @@ const NavItem = ({ title, url, name }: NavItemProps) => {
                 className="cursor-pointer max-lg:w-full max-lg:py-6"
                 variant={'ghost'}
             >
-                {title === 'Logout' ? (
+                {prefix ? (
                     <span>
-                        {name} ({title})
+                        {prefix} ({title})
                     </span>
                 ) : (
                     <span>{title}</span>
@@ -47,13 +47,7 @@ const NavItem = ({ title, url, name }: NavItemProps) => {
     );
 };
 
-const DesktopView = ({
-    name,
-    isDesktop,
-}: {
-    name: string;
-    isDesktop: boolean;
-}) => {
+const DesktopView = ({ isDesktop }: { isDesktop: boolean }) => {
     const { t: translator } = useTranslation();
     const { currentUser, path } = useLoaderData() as {
         currentUser: CurrentUser;
@@ -87,6 +81,9 @@ const DesktopView = ({
                         <Input
                             type="text"
                             name="query"
+                            placeholder={translator(
+                                'placeholders.search_template'
+                            )}
                             className="hidden lg:block !border-secondary"
                         />
                     )}
@@ -99,11 +96,7 @@ const DesktopView = ({
                     .map(
                         (item) =>
                             item.shouldRender && (
-                                <NavItem
-                                    key={item.title}
-                                    name={name}
-                                    {...item}
-                                />
+                                <NavItem key={item.title} {...item} />
                             )
                     )}
                 <SideButtons />
@@ -112,18 +105,13 @@ const DesktopView = ({
     );
 };
 
-const MobileView = ({
-    name,
-    isDesktop,
-}: {
-    name: string;
-    isDesktop: boolean;
-}) => {
+const MobileView = ({ isDesktop }: { isDesktop: boolean }) => {
+    const { t: translator } = useTranslation();
     const { path } = useLoaderData();
     return (
         <div className="p-2 lg:hidden flex justify-between">
             <div className="flex gap-2 w-[75%]">
-                <DropDown name={name} />
+                <DropDown />
                 <Form method="get" action={path} className="relative w-[90%]">
                     <Button
                         className="absolute right-0 border-1 border-l-0 rounded-l-none"
@@ -136,6 +124,9 @@ const MobileView = ({
                             type="text"
                             name="query"
                             className="block lg:hidden"
+                            placeholder={translator(
+                                'placeholders.search_template'
+                            )}
                         />
                     )}
                 </Form>
@@ -147,7 +138,7 @@ const MobileView = ({
     );
 };
 
-const DropDown = ({ name }: { name: string }) => {
+const DropDown = () => {
     const { t: translator } = useTranslation();
     const [open, setOpen] = useState(false);
     const { currentUser } = useLoaderData() as { currentUser: CurrentUser };
@@ -169,7 +160,7 @@ const DropDown = ({ name }: { name: string }) => {
                                 className="flex justify-center cursor-pointer py-0"
                                 onClick={() => setOpen(false)}
                             >
-                                <NavItem name={name} {...item} />
+                                <NavItem {...item} />
                             </DropdownMenuItem>
                         )
                 )}
@@ -188,12 +179,11 @@ const SideButtons = () => {
 };
 
 export default function Header() {
-    const { currentUser } = useLoaderData();
     const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
     return (
         <div className="sticky z-50 bg-background top-0 border-b">
-            <DesktopView name={currentUser?.name} isDesktop={isDesktop} />
-            <MobileView name={currentUser?.name} isDesktop={isDesktop} />
+            <DesktopView isDesktop={isDesktop} />
+            <MobileView isDesktop={isDesktop} />
         </div>
     );
 }
