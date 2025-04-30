@@ -11,7 +11,7 @@ export const templateLoader = getLoader(
         const { templateId } = params;
         const currentUser = await getCurrentUser();
         const template = await getTemplate(templateId);
-        if (template.creatorId !== currentUser.userId && !currentUser.isAdmin)
+        if (template.creatorId !== currentUser?.userId && !currentUser?.isAdmin)
             return redirect(`/templates/${templateId}/forms`);
 
         const [[templateForms, aggregatedResults], [topics, tags, users]] =

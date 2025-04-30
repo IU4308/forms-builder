@@ -1,5 +1,5 @@
 import { getCurrentUser, getForm } from '@/lib/react-query';
-import { getLoader } from '@/lib/utils';
+import { getLoader, setFlash } from '@/lib/utils';
 import { LoaderFunctionArgs, redirect } from 'react-router';
 
 export const filledFormLoader = getLoader(
@@ -8,11 +8,13 @@ export const filledFormLoader = getLoader(
         const form = await getForm(formId);
         const currentUser = await getCurrentUser();
         if (
-            form.authorId !== currentUser.userId &&
-            form.creatorId !== currentUser.userId &&
-            !currentUser.isAdmin
-        )
+            form.authorId !== currentUser?.userId &&
+            form.creatorId !== currentUser?.userId &&
+            !currentUser?.isAdmin
+        ) {
+            setFlash('You has no access to this page');
             return redirect('/');
+        }
         const canEdit =
             form.authorId === currentUser.userId || currentUser.isAdmin;
         return {

@@ -8,9 +8,9 @@ export const formLoader = getLoader(async ({ params }: LoaderFunctionArgs) => {
     const currentUser = await getCurrentUser();
     if (
         !template.isPublic &&
-        !template.allowedIds.includes(currentUser.userId)
+        !template.allowedIds.includes(currentUser?.userId)
     ) {
-        setFlash('You has no access to this template');
+        setFlash('You has no access to this form');
         return redirect('/');
     }
     return {

@@ -34,7 +34,9 @@ export default function FormHeader() {
                             id="name"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
                             value={
-                                template?.credentials?.name ?? currentUser.name
+                                template?.credentials?.name ??
+                                currentUser?.name ??
+                                ''
                             }
                             disabled={true}
                         />
@@ -46,7 +48,8 @@ export default function FormHeader() {
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
                             value={
                                 template?.credentials?.email ??
-                                currentUser.email
+                                currentUser?.email ??
+                                ''
                             }
                             disabled
                         />

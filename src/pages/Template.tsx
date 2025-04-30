@@ -13,7 +13,7 @@ import TemplateForms from '@/components/template/tabs/forms/TemplateForms';
 import TemplateResults from '@/components/template/tabs/results/results';
 
 export default function Template() {
-    const { mode } = useLoaderData() as TemplateLoaderData;
+    const { mode, currentUser } = useLoaderData() as TemplateLoaderData;
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');
@@ -31,7 +31,7 @@ export default function Template() {
                     <FormResponse {...fetcher.data.formResponse} />
                 ) : (
                     <div>
-                        <HiddenInputs />
+                        {currentUser && <HiddenInputs />}
                         {mode === 'template' && (
                             <>
                                 <TemplateHeader

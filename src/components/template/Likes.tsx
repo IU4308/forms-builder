@@ -10,7 +10,7 @@ export default function Likes() {
         | TemplateData
         | FormData;
 
-    const isLiked = template.likes.includes(currentUser.userId);
+    const isLiked = template.likes.includes(currentUser?.userId);
     return (
         <Form
             action={`/templates/${templateId}/likes`}
@@ -29,7 +29,7 @@ export default function Likes() {
                 name="action"
                 value={isLiked ? 'remove' : 'add'}
             />
-            <input hidden readOnly name="userId" value={currentUser.userId} />
+            <input hidden readOnly name="userId" value={currentUser?.userId} />
             <input hidden readOnly name="templateId" value={templateId} />
             <div className="flex items-center gap-2">
                 <Button type="submit" variant="ghost" disabled={!currentUser}>
