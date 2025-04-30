@@ -11,7 +11,7 @@ export default function TemplateDescription({
 }) {
     const { t } = useTranslation();
     const [description, setDescription] = useState(
-        templateDescription ?? 'No description'
+        templateDescription ?? t('template.default_description')
     );
     return (
         <div className="flex flex-col gap-2">

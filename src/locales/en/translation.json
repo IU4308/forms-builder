@@ -39,7 +39,9 @@
         "topic": "Topic",
         "created_at": "Created at",
         "author": "Author",
-        "submissions": "Submissions"
+        "submissions": "Submissions",
+        "default_title": "New Form",
+        "default_description": "No description"
     },
     "form": {
         "created_at": "Submitted at"

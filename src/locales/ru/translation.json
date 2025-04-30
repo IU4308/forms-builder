@@ -39,7 +39,9 @@
         "topic": "Тема",
         "created_at": "Создан",
         "author": "Автор",
-        "submissions": "Заполненно форм"
+        "submissions": "Заполненно форм",
+        "default_title": "Новая форма",
+        "default_description": "Без описания"
     },
     "form": {
         "created_at": "Отправленно"

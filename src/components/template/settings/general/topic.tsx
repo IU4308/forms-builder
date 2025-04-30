@@ -19,10 +19,10 @@ export default function TemplateTopic({
     const { t } = useTranslation();
     return (
         <div className="flex flex-col gap-4">
-            <Label>{t('Topic')}</Label>
+            <Label htmlFor="topic">{t('Topic')}</Label>
             <Select name="topicId" defaultValue={`${topicId ?? topics[0].id}`}>
-                <SelectTrigger className="w-[180px] !bg-background">
-                    <SelectValue placeholder="Select topic" />
+                <SelectTrigger id="topic" className="w-[180px] !bg-background">
+                    <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="!bg-background" side="right">
                     {topics.map((topic) => (

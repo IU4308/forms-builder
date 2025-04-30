@@ -1,7 +1,5 @@
 import { Button } from './ui/button';
-import { Form, NavLink, useLoaderData } from 'react-router';
-import { Input } from './ui/input';
-import { IoIosSearch } from 'react-icons/io';
+import { NavLink, useLoaderData } from 'react-router';
 import ThemeSwitcher from './ThemeSwitcher';
 import { IoMenuOutline } from 'react-icons/io5';
 import {
@@ -17,6 +15,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { getNavMenu } from '@/lib/constants';
 import { translateData } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
+import SearchInput from './SearchInput';
 
 type NavItemProps = {
     title: string;
@@ -49,7 +48,7 @@ const NavItem = ({ title, url, prefix }: NavItemProps) => {
 
 const DesktopView = ({ isDesktop }: { isDesktop: boolean }) => {
     const { t: translator } = useTranslation();
-    const { currentUser, path } = useLoaderData() as {
+    const { currentUser } = useLoaderData() as {
         currentUser: CurrentUser;
         path: string;
     };
@@ -65,29 +64,11 @@ const DesktopView = ({ isDesktop }: { isDesktop: boolean }) => {
                                 <NavItem key={item.title} {...item} />
                             )
                     )}
-                <Form
-                    method="get"
-                    action={path}
-                    className=" relative w-full min-w-[400px] "
-                >
-                    <Button
-                        type="submit"
-                        className="absolute right-0 border border-l-0 rounded-l-none !border-input/10"
-                        variant={'secondary'}
-                    >
-                        <IoIosSearch />
-                    </Button>
-                    {isDesktop && (
-                        <Input
-                            type="text"
-                            name="query"
-                            placeholder={translator(
-                                'placeholders.search_template'
-                            )}
-                            className="hidden lg:block !border-secondary"
-                        />
-                    )}
-                </Form>
+
+                <SearchInput
+                    shouldRender={isDesktop}
+                    className="relative w-full min-w-[400px]"
+                />
             </div>
             <div className="flex items-center">
                 {menu
@@ -106,30 +87,14 @@ const DesktopView = ({ isDesktop }: { isDesktop: boolean }) => {
 };
 
 const MobileView = ({ isDesktop }: { isDesktop: boolean }) => {
-    const { t: translator } = useTranslation();
-    const { path } = useLoaderData();
     return (
         <div className="p-2 lg:hidden flex justify-between">
             <div className="flex gap-2 w-[75%]">
                 <DropDown />
-                <Form method="get" action={path} className="relative w-[90%]">
-                    <Button
-                        className="absolute right-0 border-1 border-l-0 rounded-l-none"
-                        variant={'secondary'}
-                    >
-                        <IoIosSearch />
-                    </Button>
-                    {!isDesktop && (
-                        <Input
-                            type="text"
-                            name="query"
-                            className="block lg:hidden"
-                            placeholder={translator(
-                                'placeholders.search_template'
-                            )}
-                        />
-                    )}
-                </Form>
+                <SearchInput
+                    shouldRender={!isDesktop}
+                    className="relative w-[90%] mr-2"
+                />
             </div>
             <div className="flex items-center">
                 <SideButtons />
@@ -172,8 +137,8 @@ const DropDown = () => {
 const SideButtons = () => {
     return (
         <div className="flex gap-2">
-            <ThemeSwitcher />
             <LanguageSwitcher />
+            <ThemeSwitcher />
         </div>
     );
 };

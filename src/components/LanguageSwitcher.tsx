@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { IoLanguage } from 'react-icons/io5';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 export default function LanguageSwitcher() {
     const { i18n } = useTranslation();
@@ -15,18 +15,17 @@ export default function LanguageSwitcher() {
         localStorage.setItem('language', lng);
     };
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger className="cursor-pointer">
-                <IoLanguage />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="my-4 mx-2">
-                <DropdownMenuItem onClick={() => changeLanguage('en')}>
-                    English
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => changeLanguage('ru')}>
-                    Русский
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+        <Select
+            defaultValue={localStorage.getItem('language') || 'en'}
+            onValueChange={(value: 'en' | 'ru') => changeLanguage(value)}
+        >
+            <SelectTrigger className="w-[100px] !bg-background">
+                <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="!bg-background">
+                <SelectItem value={`en`}>English</SelectItem>
+                <SelectItem value={`ru`}>Русский</SelectItem>
+            </SelectContent>
+        </Select>
     );
 }

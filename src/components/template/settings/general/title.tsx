@@ -13,7 +13,7 @@ export default function TemplateTitle({
             <Label htmlFor="title">{t('Title')}</Label>
             <Input
                 id="title"
-                defaultValue={title ?? 'New Form'}
+                defaultValue={title ?? t('template.default_title')}
                 name="title"
                 className="!bg-background"
             />
