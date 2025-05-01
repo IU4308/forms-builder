@@ -6,11 +6,19 @@ export default function HiddenInputs() {
     const { currentUser, mode } = useLoaderData() as TemplateLoaderData;
     return (
         <>
-            {formId === undefined && (
+            {mode === 'template' && templateId === undefined && (
                 <input
                     hidden
                     readOnly
-                    name={mode === 'template' ? 'creatorId' : 'authorId'}
+                    name={'creatorId'}
+                    value={currentUser.userId}
+                />
+            )}
+            {mode === 'form' && formId === undefined && (
+                <input
+                    hidden
+                    readOnly
+                    name={'authorId'}
                     value={currentUser.userId}
                 />
             )}
