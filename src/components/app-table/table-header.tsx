@@ -1,15 +1,9 @@
 import { TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { formatContent } from '@/lib/utils';
-import { Checkbox } from '@/components/ui/checkbox';
-import { AdminTableLabel, HeaderProps } from '@/lib/definitions';
-import {
-    ChevronDownIcon,
-    ChevronsUpDownIcon,
-    ChevronUpIcon,
-} from 'lucide-react';
+import { HeaderProps } from '@/lib/definitions';
 import _ from 'lodash';
-import { Button } from '../ui/button';
-import * as changeCase from 'change-case';
+import SorterHead from './SorterHead';
+import TableCheckbox from './table-checkbox';
 
 const ID_KEY = 0;
 
@@ -18,7 +12,7 @@ export default function AppTableHeader({
     body,
     renderCheckbox,
     allSelected,
-    onClick,
+    onSelectAll,
     sorter,
     handleChangeSorter,
     isDescending,
@@ -28,51 +22,28 @@ export default function AppTableHeader({
         <TableHeader>
             <TableRow className="hover:bg-background">
                 {renderCheckbox && body.length !== 0 && (
-                    <TableHead>
-                        <Checkbox
-                            className="w-5 h-5"
-                            name={shouldSubmit ? 'allIds' : ''}
-                            value={body.map(
-                                (item) => item[ID_KEY].content as string
-                            )}
-                            checked={allSelected}
-                            onClick={onClick}
-                        />
-                    </TableHead>
+                    <TableCheckbox
+                        name={shouldSubmit ? 'allIds' : ''}
+                        value={body.map(
+                            (item) => item[ID_KEY].content as string
+                        )}
+                        onSelect={onSelectAll!}
+                        isChecked={allSelected}
+                    />
                 )}
                 {attributes.map(
                     (cell, index) =>
                         (cell.shouldRender ?? true) && (
                             <TableHead key={index} className={cell.className}>
                                 {sorter ? (
-                                    <Button
-                                        type="button"
-                                        className="cursor-pointer"
-                                        variant={'ghost'}
-                                        onClick={() =>
-                                            handleChangeSorter!(
-                                                cell.key as AdminTableLabel
-                                            )
+                                    <SorterHead
+                                        label={cell.label as string}
+                                        onChangeSorter={() =>
+                                            handleChangeSorter!(cell.key)
                                         }
-                                    >
-                                        <span>
-                                            {formatContent(
-                                                changeCase.sentenceCase(
-                                                    cell?.label ?? ''
-                                                ),
-                                                20
-                                            )}
-                                        </span>
-                                        {sorter === cell.key ? (
-                                            isDescending ? (
-                                                <ChevronDownIcon className="icon-2" />
-                                            ) : (
-                                                <ChevronUpIcon className="icon-2" />
-                                            )
-                                        ) : (
-                                            <ChevronsUpDownIcon className="icon-2" />
-                                        )}
-                                    </Button>
+                                        isSorter={sorter === cell.key}
+                                        isDescending={isDescending!}
+                                    />
                                 ) : (
                                     <span className="px-3">
                                         {formatContent(cell.label, 15)}

@@ -33,7 +33,7 @@ export interface HeaderProps {
     body: Cell[][];
     renderCheckbox?: boolean;
     allSelected?: boolean;
-    onClick?: () => void;
+    onSelectAll?: () => void;
     sorter?: string;
     handleChangeSorter?: (label: string) => void;
     isDescending?: boolean;

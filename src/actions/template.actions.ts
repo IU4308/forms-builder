@@ -39,23 +39,6 @@ export const updateTemplate = async ({
     }
 };
 
-export const deleteTemplates = async ({ request }: { request: Request }) => {
-    try {
-        const formData = await request.formData();
-        const selectedIds =
-            (formData.get('allIds') as string)?.split(',') ??
-            formData.getAll('id');
-        const response = await api.post(
-            `/${formData.get('action')}/delete`,
-            selectedIds
-        );
-        setFlash(response.data.message);
-    } catch (error: any) {
-        console.log(error);
-        throw new Error('Server error');
-    }
-};
-
 export const publishComment = async ({ request }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();

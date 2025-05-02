@@ -26,8 +26,8 @@ export default function Workspace() {
             <Input
                 hidden
                 readOnly
-                name="action"
-                value={tabId === 0 ? 'templates' : 'forms'}
+                name="route"
+                value={tabId === 1 ? 'templates' : 'forms'}
             />
             <TabPanel
                 buttons={translateData(

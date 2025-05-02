@@ -3,9 +3,9 @@ import { getTableBody } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { TableProps } from '@/lib/definitions';
 import _ from 'lodash';
-import Toolbar from './Toolbar';
 import AppTableHeader from './table-header';
 import AppTableBody from './table-body';
+import Toolbar from './toolbar/Toolbar';
 
 const ID_KEY = 0;
 
@@ -32,6 +32,7 @@ export default function AppTable({
     };
 
     const body = getTableBody(attributes, data, sorter, isDescending);
+    console.log(body);
     const allSelected = body.length === selectedRows.length;
 
     const handleAllSelected = () => {
@@ -71,7 +72,7 @@ export default function AppTable({
                     body={body}
                     renderCheckbox={renderCheckbox}
                     allSelected={allSelected}
-                    onClick={handleAllSelected}
+                    onSelectAll={handleAllSelected}
                     sorter={sorter}
                     handleChangeSorter={handleChangeSorter}
                     isDescending={isDescending}

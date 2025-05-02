@@ -1,15 +1,14 @@
 import { api } from '@/api/api';
 import { setFlash } from '@/lib/utils';
 
-export const adminAction = async ({ request }: { request: Request }) => {
+export const deleteData = async ({ request }: { request: Request }) => {
     try {
         const formData = await request.formData();
-        console.log(Object.fromEntries(formData));
         const selectedIds =
             (formData.get('allIds') as string)?.split(',') ??
             formData.getAll('id');
         const response = await api.post(
-            `/admin/${formData.get('action')}`,
+            `/${formData.get('route')}/delete`,
             selectedIds
         );
         setFlash(response.data.message);

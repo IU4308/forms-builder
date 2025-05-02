@@ -15,7 +15,6 @@ import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import {
     publish,
-    deleteTemplates,
     updateTemplate,
     publishComment,
     likeTemplate,
@@ -35,6 +34,7 @@ import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
 import { templateRedirector } from '@/loaders/comments.loader';
 import NotFoundPage from '@/components/NotFoundPage';
+import { deleteData } from '@/actions/workspace.actions';
 
 export const router = createBrowserRouter([
     {
@@ -72,7 +72,7 @@ export const router = createBrowserRouter([
                     {
                         path: '/workspace',
                         Component: Workspace,
-                        action: deleteTemplates,
+                        action: deleteData,
                         loader: workspaceLoader,
                         errorElement: createElement(ErrorPage),
                     },
