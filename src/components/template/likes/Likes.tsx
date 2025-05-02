@@ -1,4 +1,4 @@
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import {
     Form,
     useLoaderData,
@@ -8,6 +8,7 @@ import {
 } from 'react-router';
 import { FormData, TemplateData } from '@/lib/definitions';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
+import LikesHiddenInputs from './hidden-inputs';
 
 export default function Likes() {
     const { templateId } = useParams();
@@ -26,20 +27,14 @@ export default function Likes() {
             method="post"
             className=" my-4 flex items-center gap-2"
         >
-            <input
-                hidden
-                readOnly
-                name="redirectTo"
-                value={location.pathname}
-            />
-            <input
-                hidden
-                readOnly
-                name="action"
-                value={isLiked ? 'remove' : 'add'}
-            />
-            <input hidden readOnly name="userId" value={currentUser?.userId} />
-            <input hidden readOnly name="templateId" value={templateId} />
+            {currentUser && (
+                <LikesHiddenInputs
+                    action={isLiked ? 'remove' : 'add'}
+                    userId={currentUser.userId}
+                    templateId={templateId!}
+                    path={location.pathname}
+                />
+            )}
             <div className="flex items-center gap-2">
                 <Button
                     type="submit"

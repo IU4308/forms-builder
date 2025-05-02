@@ -9,7 +9,7 @@ const ID_KEY = 0;
 export default function AppTableBody({
     body,
     renderCheckbox,
-    url,
+    routes,
     selectedRows,
     handleSelect,
     shouldSubmit,
@@ -33,7 +33,7 @@ export default function AppTableBody({
                                 key={index}
                                 cell={cell}
                                 index={index}
-                                url={url}
+                                routes={routes}
                                 row={row}
                             />
                         ))}

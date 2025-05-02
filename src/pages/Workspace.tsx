@@ -54,7 +54,7 @@ export default function Workspace() {
                     )}
                     renderCheckbox={true}
                     shouldSort={true}
-                    url="templates"
+                    routes="templates"
                 />
             )}
             {tabId === 2 && (
@@ -72,7 +72,7 @@ export default function Workspace() {
                     )}
                     renderCheckbox={true}
                     shouldSort={true}
-                    url={['forms', 'templates']}
+                    routes={['forms', 'templates']}
                 />
             )}
         </Form>

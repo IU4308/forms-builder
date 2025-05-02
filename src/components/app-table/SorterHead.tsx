@@ -22,7 +22,7 @@ export default function SorterHead({
             onClick={onChangeSorter}
         >
             <span>{formatContent(changeCase.sentenceCase(label), 20)}</span>
-            <SorterIcon isSorted={isSorter} isDescending={isDescending!} />
+            <SorterIcon isSorter={isSorter} isDescending={isDescending!} />
         </Button>
     );
 }

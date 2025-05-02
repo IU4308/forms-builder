@@ -22,7 +22,7 @@ export default function PopularTemplates() {
                 ['label'],
                 translator
             )}
-            url="templates"
+            routes="templates"
         />
     );
 }

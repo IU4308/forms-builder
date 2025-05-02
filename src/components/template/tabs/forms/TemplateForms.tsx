@@ -16,7 +16,7 @@ export default function TemplateForms() {
                             templateForms[0] as TemplateFormsType
                         )}
                         shouldSort={true}
-                        url={`templates/${templateId}/forms`}
+                        routes={`templates/${templateId}/forms`}
                     />
                 ) : (
                     <h1 className="flex justify-center p-4">No answers</h1>

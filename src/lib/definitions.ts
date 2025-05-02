@@ -16,7 +16,7 @@ export type RegisterData = z.infer<typeof registerSchema>;
 export type LoginData = z.infer<typeof loginSchema>;
 
 export interface TableProps {
-    url?: string | string[];
+    routes?: string | string[];
     data: { [key: string]: any }[];
     attributes: TableAttributes;
     buttons?: ToolbarButton[];
@@ -41,7 +41,7 @@ export interface HeaderProps {
 }
 
 export interface BodyProps {
-    url?: string | string[];
+    routes?: string | string[];
     body: Cell[][];
     renderCheckbox?: boolean;
     selectedRows?: string[];

@@ -5,13 +5,13 @@ import {
 } from 'lucide-react';
 
 export default function SorterIcon({
-    isSorted,
+    isSorter,
     isDescending,
 }: {
-    isSorted: boolean;
+    isSorter: boolean;
     isDescending: boolean;
 }) {
-    return isSorted ? (
+    return isSorter ? (
         isDescending ? (
             <ChevronDownIcon className="icon-2" />
         ) : (

@@ -8,7 +8,7 @@ import { getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
 import TemplateSettings from '@/components/template/settings/TemplateSettings';
-import Likes from '@/components/template/Likes';
+import Likes from '@/components/template/likes/Likes';
 import TemplateForms from '@/components/template/tabs/forms/TemplateForms';
 import TemplateResults from '@/components/template/tabs/results/results';
 

@@ -10,7 +10,7 @@ import Toolbar from './toolbar/Toolbar';
 const ID_KEY = 0;
 
 export default function AppTable({
-    url,
+    routes,
     data,
     attributes,
     toolbarSlot,
@@ -81,7 +81,7 @@ export default function AppTable({
                 {data.length !== 0 && (
                     <AppTableBody
                         body={body}
-                        url={url}
+                        routes={routes}
                         renderCheckbox={renderCheckbox}
                         handleSelect={handleSelect}
                         selectedRows={selectedRows}

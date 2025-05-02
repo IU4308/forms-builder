@@ -5,22 +5,22 @@ import { TableCell } from '../ui/table';
 export default function TableCellWrapper({
     cell,
     index,
-    url,
+    routes,
     row,
 }: {
     cell: any;
     index: number;
-    url?: string | string[];
+    routes?: string | string[];
     row: any[];
 }) {
     if (!cell.shouldRender) return null;
 
-    const cellContent = url ? (
+    const cellContent = routes ? (
         <Link
             to={
-                Array.isArray(url)
-                    ? `/${url[1]}/${row[1].content}/${url[0]}/${row[0].content}`
-                    : `/${url}/${row[0].content}`
+                Array.isArray(routes)
+                    ? `/${routes[1]}/${row[1].content}/${routes[0]}/${row[0].content}`
+                    : `/${routes}/${row[0].content}`
             }
             reloadDocument
             className="block px-2 py-4"
@@ -34,7 +34,7 @@ export default function TableCellWrapper({
     return (
         <TableCell
             key={index}
-            className={cn(cell.className, url ? 'p-0 px-3' : 'py-4 px-5')}
+            className={cn(cell.className, routes ? 'p-0 px-3' : 'py-4 px-5')}
         >
             {cellContent}
         </TableCell>
