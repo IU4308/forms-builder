@@ -24,12 +24,20 @@ export default function CustomField({
     canEdit,
 }: CustomFieldProps) {
     const { t: translator } = useTranslation();
-    const { attributes, listeners, setNodeRef, transform, transition } =
-        useSortable({ id });
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging,
+    } = useSortable({ id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
+        opacity: isDragging ? 0.5 : 1,
+        zIndex: isDragging ? 100 : 'auto',
     };
 
     const questionType = getQuestionType(id);
@@ -87,6 +95,7 @@ export default function CustomField({
                 <Input
                     name={`${id}Answer`}
                     type={questionType === 'integerValue' ? 'number' : 'text'}
+                    min={0}
                     step={0.01}
                     className="px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b"
                     placeholder={translator(questionType)}

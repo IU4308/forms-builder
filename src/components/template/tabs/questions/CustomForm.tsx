@@ -13,7 +13,6 @@ import {
     getQuestionType,
     translateData,
 } from '@/lib/utils';
-import { Button } from '../../../ui/button';
 import { useLoaderData } from 'react-router';
 import CustomField from './CustomField';
 
@@ -27,6 +26,8 @@ import _ from 'lodash';
 import FormHeader from './FormHeader';
 import FieldHiddenInputs from './hidden-inputs';
 import { useTranslation } from 'react-i18next';
+import { restrictToParentElement } from '@dnd-kit/modifiers';
+import { Button } from '@/components/ui/button';
 
 export default function CustomForm({
     tabId,
@@ -133,6 +134,7 @@ export default function CustomForm({
             <DndContext
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
+                modifiers={[restrictToParentElement]}
             >
                 <SortableContext
                     items={fields}
