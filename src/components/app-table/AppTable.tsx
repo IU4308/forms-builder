@@ -32,7 +32,6 @@ export default function AppTable({
     };
 
     const body = getTableBody(attributes, data, sorter, isDescending);
-    console.log(body);
     const allSelected = body.length === selectedRows.length;
 
     const handleAllSelected = () => {

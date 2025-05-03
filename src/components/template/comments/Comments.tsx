@@ -1,12 +1,12 @@
 import { Form, useLoaderData, useNavigation, useParams } from 'react-router';
-import { Input } from '../../ui/input';
-import { Button } from '../../ui/button';
 import { format } from 'date-fns';
 import { useEffect, useRef, useState } from 'react';
 import socket from '@/lib/socket';
 import { FormData, TemplateData } from '@/lib/definitions';
 import CommentHiddenInputs from './hidden-inputs';
 import { useTranslation } from 'react-i18next';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function Comments() {
     const { t } = useTranslation();

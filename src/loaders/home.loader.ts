@@ -1,14 +1,14 @@
 import { getHomeData } from '@/lib/react-query';
-import { getLoader, mapTagToTemplates } from '@/lib/utils';
+import { getLoader } from '@/lib/utils';
 
 export const homeLoader = getLoader(async () => {
-    const [latestTemplates, popularTemplates, templates, tags, templatesTags] =
+    const [latestTemplates, popularTemplates, templates, tags] =
         await getHomeData();
+    console.log(tags);
     return {
         latestTemplates,
         popularTemplates,
         templates,
         tags,
-        tagToTemplates: mapTagToTemplates(templatesTags),
     };
 });
