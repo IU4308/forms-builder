@@ -23,7 +23,7 @@
     "home": {
         "latest": "Latest Templates",
         "popular": "Popular Templates",
-        "tags": "Tag Search"
+        "tags": "Search by Tag"
     },
     "user": {
         "name": "Name",

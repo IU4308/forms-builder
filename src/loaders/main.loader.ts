@@ -5,7 +5,8 @@ import { LoaderFunctionArgs, redirect } from 'react-router';
 export const mainLoader = getLoader(async ({ request }: LoaderFunctionArgs) => {
     const url = new URL(request.url);
     const query = url.searchParams.get('query') ?? '';
-    if (query && query.trim() !== '') return redirect(`/search/${query}`);
+    if (query && query.trim() !== '')
+        return redirect(`/search/${encodeURIComponent(query)}`);
     const currentUser = await requireUnblockedUser();
     return { currentUser, path: url.pathname };
 });

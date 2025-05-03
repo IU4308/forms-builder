@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { useLoaderData } from 'react-router';
 import { FilledFormData, FormData } from '@/lib/definitions';
 import { useTranslation } from 'react-i18next';
@@ -15,11 +16,14 @@ export default function FormHeader() {
     return (
         <>
             <div className="bg-accent py-4 px-6 flex flex-col gap-2 rounded-sm">
-                <h1 className="">{template!.title}</h1>
-                <Markdown remarkPlugins={[remarkGfm]}>
-                    {template!.description}
+                <h1 className="">{template.title}</h1>
+                <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                >
+                    {template.description}
                 </Markdown>
-                {template!.imageUrl && (
+                {template.imageUrl && (
                     <img
                         src={template!.imageUrl}
                         alt="template image"
@@ -36,7 +40,7 @@ export default function FormHeader() {
                             id="name"
                             className="!opacity-80 placeholder:text-foreground px-0 !bg-accent focus-visible:ring-0 rounded-none border-0 border-b-2"
                             value={
-                                template?.credentials?.name ??
+                                template.credentials?.name ??
                                 currentUser?.name ??
                                 ''
                             }
