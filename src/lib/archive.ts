@@ -1,5 +1,5 @@
-import { Cell, TableAttributes } from './definitions';
-import { formatContent } from './utils';
+import { Cell, TableAttributes, TemplateFormsType } from './definitions';
+import { formatContent, setSentenceCase } from './utils';
 
 // @ts-ignore
 const getTableBody = (
@@ -37,4 +37,37 @@ const sortData = (
             : formatContent(a[field]).localeCompare(formatContent(b[field]));
     });
     return isDescending ? sortedData : sortedData.reverse();
+};
+
+export const getAnswersAttributes = (form: TemplateFormsType) => {
+    let attributes = [];
+    for (const key of Object.keys(form)) {
+        if (
+            !key.includes('Answer') &&
+            !key.includes('State') &&
+            !key.includes('Question')
+        ) {
+            attributes.push({
+                label: setSentenceCase(key),
+                key: key,
+                shouldRender: key !== 'id',
+            });
+        }
+        if (key.includes('Answer')) {
+            const questionKey = key.replace(
+                'Answer',
+                'Question'
+            ) as keyof TemplateFormsType;
+            const stateKey = key.replace(
+                'Answer',
+                'State'
+            ) as keyof TemplateFormsType;
+            attributes.push({
+                label: form[questionKey] as string,
+                key: key,
+                shouldRender: !!form[stateKey],
+            });
+        }
+    }
+    return attributes;
 };

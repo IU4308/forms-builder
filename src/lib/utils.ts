@@ -2,7 +2,11 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format } from 'date-fns';
 import * as changeCase from 'change-case';
-import { Field, TableAttributes, TemplateFormsType } from './definitions';
+import {
+    Field,
+    TableAttributes,
+    TemplateFormsType as Form,
+} from './definitions';
 import { LoaderFunctionArgs, redirect } from 'react-router';
 import _ from 'lodash';
 
@@ -93,38 +97,43 @@ export const getFlash = () => {
 };
 
 export const getQuestionType = (id: string) => id.slice(0, id.length - 1);
+const isMetadataKey = (key: string) =>
+    !key.includes('Answer') &&
+    !key.includes('State') &&
+    !key.includes('Question') &&
+    !key.includes('Position');
 
-export const getAnswersAttributes = (form: TemplateFormsType) => {
-    let attributes = [];
-    for (const key of Object.keys(form)) {
-        if (
-            !key.includes('Answer') &&
-            !key.includes('State') &&
-            !key.includes('Question')
-        ) {
-            attributes.push({
-                label: setSentenceCase(key),
-                key: key,
-                shouldRender: key !== 'id',
-            });
-        }
-        if (key.includes('Answer')) {
-            const questionKey = key.replace(
-                'Answer',
-                'Question'
-            ) as keyof TemplateFormsType;
-            const stateKey = key.replace(
-                'Answer',
-                'State'
-            ) as keyof TemplateFormsType;
-            attributes.push({
-                label: form[questionKey] as string,
-                key: key,
-                shouldRender: !!form[stateKey],
-            });
-        }
-    }
-    return attributes;
+const buildMetadataAttribute = (key: string) => ({
+    label: setSentenceCase(key),
+    key,
+    shouldRender: key !== 'id',
+    position: -2,
+});
+
+const buildAnswerAttribute = (form: Form, key: string) => {
+    const questionKey = key.replace('Answer', 'Question') as keyof Form;
+    const stateKey = key.replace('Answer', 'State') as keyof Form;
+    const positionKey = key.replace('Answer', 'Position') as keyof Form;
+
+    return {
+        label: form[questionKey] as string,
+        key,
+        shouldRender: !!form[stateKey],
+        position: Number(form[positionKey]),
+    };
+};
+
+export const getAnswersAttributes = (form: Form) => {
+    return _.chain(_.keys(form))
+        .flatMap((key) => {
+            if (isMetadataKey(key)) return buildMetadataAttribute(key);
+
+            if (key.includes('Answer')) return buildAnswerAttribute(form, key);
+
+            return [];
+        })
+        .sortBy('position')
+        .value();
 };
 
 type TemplatesTags = {
