@@ -19,15 +19,34 @@ export default function TemplateHeader({
     const isSubmitting = navigation.state === 'submitting';
     return (
         <div className="sticky z-30 top-[53px] bg-background py-2 flex flex-col gap-4 items-center">
-            <Button type="submit" variant={'outline'} disabled={isSubmitting}>
-                <span>
-                    {translator(
-                        templateId === undefined
-                            ? 'buttons.publish'
-                            : 'buttons.save'
-                    )}
-                </span>
-            </Button>
+            <div className="flex gap-2">
+                <Button
+                    name="action"
+                    value="save"
+                    type="submit"
+                    variant={'outline'}
+                    disabled={isSubmitting}
+                >
+                    <span>
+                        {translator(
+                            templateId === undefined
+                                ? 'buttons.publish'
+                                : 'buttons.save'
+                        )}
+                    </span>
+                </Button>
+                {templateId !== undefined && (
+                    <Button
+                        name="action"
+                        value="delete"
+                        type="submit"
+                        variant={'destructive'}
+                        disabled={isSubmitting}
+                    >
+                        <span>{translator('buttons.delete')}</span>
+                    </Button>
+                )}
+            </div>
             <TabPanel
                 buttons={translateData(
                     templateId

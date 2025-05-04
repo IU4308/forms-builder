@@ -15,7 +15,7 @@ import ErrorPage from '@/components/ErrorPage';
 import { createElement } from 'react';
 import {
     publish,
-    updateTemplate,
+    editTemplate,
     publishComment,
     likeTemplate,
 } from '@/actions/template.actions';
@@ -87,7 +87,7 @@ export const router = createBrowserRouter([
                     {
                         path: '/templates/:templateId',
                         Component: Template,
-                        action: updateTemplate,
+                        action: editTemplate,
                         loader: templateLoader,
                         handle: { id: 'editTemplate' },
                         errorElement: createElement(ErrorPage),

@@ -82,7 +82,7 @@
     "settings": {
         "general": "General Settings",
         "access": "Access Settings",
-        "public": "Public (can be filled out by any user"
+        "public": "Public (can be filled out by any user)"
     },
     "placeholders": {
         "search_template": "Search for templates",

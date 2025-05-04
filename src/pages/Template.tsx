@@ -17,6 +17,7 @@ export default function Template() {
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');
+    console.log(currentUser);
 
     const fetcher = useFetcher();
     return (

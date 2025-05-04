@@ -19,24 +19,32 @@ export const publish = async ({ request }: { request: Request }) => {
     }
 };
 
-export const updateTemplate = async ({
-    request,
-    params,
-}: ActionFunctionArgs) => {
+export const editTemplate = async ({ request, params }: ActionFunctionArgs) => {
     try {
         const formData = await request.formData();
         const { templateId } = params;
-        console.log(Object.fromEntries(formData));
-        const response = await api.put(`/templates/${templateId}`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-        setFlash(response.data.message);
+        if (formData.get('action') === 'delete')
+            return await deleteTemplate(templateId!);
+        await updateTemplate(formData, templateId!);
     } catch (error) {
         console.log(error);
         throw new Error('Server error');
     }
+};
+
+const updateTemplate = async (formData: FormData, templateId: string) => {
+    const response = await api.put(`/templates/${templateId}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    setFlash(response.data.message);
+};
+
+const deleteTemplate = async (templateId: string) => {
+    await api.post('/templates/delete', [templateId]);
+    setFlash('Template has been deleted');
+    return redirect('/workspace');
 };
 
 export const publishComment = async ({ request }: ActionFunctionArgs) => {
