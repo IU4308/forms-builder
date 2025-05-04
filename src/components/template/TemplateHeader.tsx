@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../ui/button';
-import { useParams } from 'react-router';
+import { useNavigation, useParams } from 'react-router';
 import { templateTabButtons } from '@/lib/constants';
 import TabPanel from '../TabPanel';
 import { translateData } from '@/lib/utils';
@@ -15,9 +15,11 @@ export default function TemplateHeader({
 }) {
     const { t: translator } = useTranslation();
     const { templateId } = useParams();
+    const navigation = useNavigation();
+    const isSubmitting = navigation.state === 'submitting';
     return (
         <div className="sticky z-30 top-[53px] bg-background py-2 flex flex-col gap-4 items-center">
-            <Button type="submit" variant={'outline'}>
+            <Button type="submit" variant={'outline'} disabled={isSubmitting}>
                 <span>
                     {translator(
                         templateId === undefined
