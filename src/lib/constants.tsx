@@ -135,6 +135,11 @@ export const popularTemplatesAttributes = [
         className: '',
     },
     {
+        label: 'template.created_at',
+        key: 'createdAt',
+        className: '',
+    },
+    {
         label: 'template.submissions',
         key: 'submissions',
         className: 'text-right',

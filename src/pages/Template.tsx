@@ -17,9 +17,9 @@ export default function Template() {
     const { templateId, formId } = useParams();
     const [tabId, setTabId] = useState(2);
     const [activeId, setActiveId] = useState('');
-    console.log(currentUser);
 
     const fetcher = useFetcher();
+    const isIdle = fetcher.state === 'idle';
     return (
         <div>
             <fetcher.Form
@@ -38,6 +38,7 @@ export default function Template() {
                                 <TemplateHeader
                                     tabId={tabId}
                                     setTabId={setTabId}
+                                    isIdle={isIdle}
                                 />
                                 <TemplateSettings tabId={tabId} />
                                 {tabId === 3 && <TemplateForms />}

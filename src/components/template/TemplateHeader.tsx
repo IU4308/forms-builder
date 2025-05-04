@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../ui/button';
-import { useNavigation, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { templateTabButtons } from '@/lib/constants';
 import TabPanel from '../TabPanel';
 import { translateData } from '@/lib/utils';
@@ -9,14 +9,15 @@ import { useTranslation } from 'react-i18next';
 export default function TemplateHeader({
     tabId,
     setTabId,
+    isIdle,
 }: {
     tabId: number;
     setTabId: React.Dispatch<React.SetStateAction<number>>;
+    isIdle: boolean;
 }) {
     const { t: translator } = useTranslation();
     const { templateId } = useParams();
-    const navigation = useNavigation();
-    const isSubmitting = navigation.state === 'submitting';
+
     return (
         <div className="sticky z-30 top-[53px] bg-background py-2 flex flex-col gap-4 items-center">
             <div className="flex gap-2">
@@ -25,7 +26,7 @@ export default function TemplateHeader({
                     value="save"
                     type="submit"
                     variant={'outline'}
-                    disabled={isSubmitting}
+                    disabled={!isIdle}
                 >
                     <span>
                         {translator(
@@ -41,7 +42,7 @@ export default function TemplateHeader({
                         value="delete"
                         type="submit"
                         variant={'destructive'}
-                        disabled={isSubmitting}
+                        disabled={!isIdle}
                     >
                         <span>{translator('buttons.delete')}</span>
                     </Button>

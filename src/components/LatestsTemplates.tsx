@@ -1,14 +1,12 @@
 import { latestTemplateType } from '@/lib/definitions';
 import { Link, useLoaderData } from 'react-router';
 import { format } from 'date-fns';
-import removeMarkdown from 'remove-markdown';
 import { useTranslation } from 'react-i18next';
 
 const Template = ({
     id,
     title,
     author,
-    description,
     imageUrl,
     createdAt,
 }: latestTemplateType) => {
@@ -25,10 +23,6 @@ const Template = ({
                 />
             }
             <div className="font-bold">{title}</div>
-            <div className="break-words">
-                <span>{removeMarkdown(description.slice(0, 127))}</span>
-                {description.length > 128 && <span>...</span>}
-            </div>
             <div className="flex justify-between">
                 <div className="font-light">{author}</div>
                 <div>{format(new Date(createdAt), 'MMM dd, yyyy')}</div>
