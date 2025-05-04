@@ -4,7 +4,7 @@ import FormResponse from '@/components/template/FormResponse';
 import HiddenInputs from '@/components/template/HiddenInputs';
 import TemplateHeader from '@/components/template/TemplateHeader';
 import { TemplateLoaderData } from '@/lib/definitions';
-import { getTemplateActionUrl } from '@/lib/utils';
+import { cn, getTemplateActionUrl } from '@/lib/utils';
 import { useState } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
 import TemplateSettings from '@/components/template/settings/TemplateSettings';
@@ -56,15 +56,17 @@ export default function Template() {
                     </div>
                 )}
             </fetcher.Form>
-            {!fetcher?.data?.formResponse &&
-                !formId &&
-                templateId &&
-                tabId === 2 && (
-                    <div className="relative my-16 max-w-[768px] mx-auto">
-                        <Likes />
-                        <Comments />
-                    </div>
-                )}
+            {!fetcher?.data?.formResponse && !formId && templateId && (
+                <div
+                    className={cn(
+                        'relative my-16 max-w-[768px] mx-auto hidden',
+                        tabId === 2 && 'block'
+                    )}
+                >
+                    <Likes />
+                    <Comments />
+                </div>
+            )}
         </div>
     );
 }
