@@ -34,7 +34,7 @@ import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
 import { templateRedirector } from '@/loaders/comments.loader';
 import NotFoundPage from '@/components/NotFoundPage';
-import { deleteData } from '@/actions/workspace.actions';
+import { deleteData, sendUserInfo } from '@/actions/workspace.actions';
 
 export const router = createBrowserRouter([
     {
@@ -70,11 +70,17 @@ export const router = createBrowserRouter([
                         errorElement: createElement(ErrorPage),
                     },
                     {
-                        path: '/workspace',
+                        path: '/workspace/:userId',
                         Component: Workspace,
                         action: deleteData,
                         loader: workspaceLoader,
                         errorElement: createElement(ErrorPage),
+                        children: [
+                            {
+                                path: 'about',
+                                action: sendUserInfo,
+                            },
+                        ],
                     },
                     {
                         path: '/templates',

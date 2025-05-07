@@ -25,6 +25,7 @@ export default function Admin() {
                     ['label', 'description'],
                     translator
                 )}
+                routes="workspace"
                 renderCheckbox={true}
                 shouldSort={true}
             />

@@ -16,7 +16,7 @@ export const getNavMenu = (currentUser: CurrentUser | null) => [
     {
         title: 'nav.workspace',
         shouldRender: !!currentUser,
-        url: '/workspace',
+        url: `/workspace/${currentUser?.userId}`,
     },
     {
         title: 'nav.login',
@@ -209,6 +209,10 @@ export const workspaceTabButtons = [
     {
         id: 2,
         label: 'Forms',
+    },
+    {
+        id: 3,
+        label: 'About',
     },
 ];
 

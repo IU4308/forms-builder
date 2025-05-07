@@ -36,6 +36,8 @@ export const getCurrentUser = (): Promise<CurrentUser> =>
     fetchData('auth', 'user');
 
 export const getAllUsers = (): Promise<User[]> => fetchData('users');
+export const getUser = (userId: string): Promise<User[]> =>
+    fetchData('users', userId);
 
 export const getTemplate = (templateId: string | undefined) =>
     fetchData('templates', templateId);

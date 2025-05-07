@@ -1,5 +1,6 @@
 import { api } from '@/api/api';
 import { setFlash } from '@/lib/utils';
+import { ActionFunctionArgs, redirect } from 'react-router';
 
 export const deleteData = async ({ request }: { request: Request }) => {
     try {
@@ -12,6 +13,19 @@ export const deleteData = async ({ request }: { request: Request }) => {
             selectedIds
         );
         setFlash(response.data.message);
+    } catch (error: any) {
+        console.log(error);
+        throw new Error('Server error');
+    }
+};
+
+export const sendUserInfo = async ({ request, params }: ActionFunctionArgs) => {
+    try {
+        const formData = Object.fromEntries(await request.formData());
+        const response = await api.post(`/users/${params.userId}`, formData);
+        console.log(response.data);
+        return redirect(`/workspace/${params.userId}`);
+        // setFlash(response.data.message);
     } catch (error: any) {
         console.log(error);
         throw new Error('Server error');
