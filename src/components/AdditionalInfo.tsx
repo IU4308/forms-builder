@@ -3,13 +3,16 @@ import { Input } from './ui/input';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
 import { Checkbox } from './ui/checkbox';
-import { Form, useLoaderData } from 'react-router';
+import { useFetcher, useLoaderData, useParams } from 'react-router';
 
 export default function AdditionalInfo() {
+    const { userId } = useParams();
     const { currentUser } = useLoaderData();
     const { t } = useTranslation();
+
+    const fetcher = useFetcher();
     return (
-        <Form action={`/workspace/${currentUser.userId}/about`} method="post">
+        <fetcher.Form action={`/workspace/${userId}/about`} method="post">
             <h1 className="text-center my-4">Tell us about yourself</h1>
             <div className="flex flex-col gap-4">
                 <input hidden readOnly name="name" value={currentUser.name} />
@@ -34,8 +37,8 @@ export default function AdditionalInfo() {
                     </Label>
                     <Checkbox id="consent" name="consent" />
                 </div>
-                <Button>Submit</Button>
+                <Button disabled={fetcher.state !== 'idle'}>Save</Button>
             </div>
-        </Form>
+        </fetcher.Form>
     );
 }
