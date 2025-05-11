@@ -1,6 +1,8 @@
 import AdditionalInfo from '@/components/AdditionalInfo';
 import AppTable from '@/components/app-table/AppTable';
+import ExportResults from '@/components/ExportResults';
 import TabPanel from '@/components/TabPanel';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
     formsTableAttributes,
@@ -24,6 +26,7 @@ export default function Workspace() {
             {currentUser.isAdmin && (
                 <h1 className="text-center mb-4">{owner.name}'s Workspace</h1>
             )}
+            <ExportResults />
             <Form action={`/workspace/${userId}`} method="post">
                 <Input
                     hidden

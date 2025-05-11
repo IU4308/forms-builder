@@ -28,6 +28,9 @@ export const getComments = (templateId: string | undefined) =>
 export const getWorkspaceData = (userId: string) =>
     fetchData('templates', 'users', userId);
 
+export const fetchToken = (userId: string) =>
+    fetchData('users', userId, 'token');
+
 export const getHomeData = () => fetchData('');
 export const getLatestTemplates = () => fetchData('templates', 'latest');
 export const getPopularTemplates = () => fetchData('templates', 'popular');

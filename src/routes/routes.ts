@@ -34,7 +34,11 @@ import { filledFormLoader } from '@/loaders/filledForm.loader';
 import Template from '@/pages/Template';
 import { templateRedirector } from '@/loaders/comments.loader';
 import NotFoundPage from '@/components/NotFoundPage';
-import { deleteData, sendUserInfo } from '@/actions/workspace.actions';
+import {
+    deleteData,
+    getToken,
+    sendUserInfo,
+} from '@/actions/workspace.actions';
 
 export const router = createBrowserRouter([
     {
@@ -79,6 +83,10 @@ export const router = createBrowserRouter([
                             {
                                 path: 'about',
                                 action: sendUserInfo,
+                            },
+                            {
+                                path: 'token',
+                                action: getToken,
                             },
                         ],
                     },
