@@ -109,5 +109,22 @@
     "Select user": "Выбрать пользователя",
     "Remove": "Убрать",
     "Comments": "Комментарии",
-    "Search Results for": "Результаты поиска для"
+    "Search Results for": "Результаты поиска для",
+    "Additional Info": "Дополнительная информация",
+    "Tell us about yourself": "Расскажите о себе",
+    "Phone Number": "Номер Телефона",
+    "How did you hear about us": "Как вы узнали о нас",
+    "I want to receive newsletters on my email": "Я хочу получать рассылку новостей на мою почту",
+    "Save": "Сохранить",
+    "Get Token": "Получить токен",
+    "Copy": "Скопировать",
+    "Copied": "Скопированно",
+    "Create a support ticket": "Создать заявку в поддержку",
+    "Report an Issue": "Сообщить о проблеме",
+    "Please, specify a priority of an issue.": "Пожалуйста, укажите приоритетность проблемы",
+    "Select Priority": "Выбрать приоритетность",
+    "High": "Высокая",
+    "Average": "Средняя",
+    "Low": "Низкая",
+    "Submit": "Отправить"
 }

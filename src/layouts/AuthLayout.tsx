@@ -1,4 +1,5 @@
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import ReportDialog from '@/components/ReportDialog';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import { Outlet } from 'react-router';
 
@@ -12,6 +13,7 @@ export default function AuthLayout() {
                 </div>
                 <Outlet />
             </div>
+            <ReportDialog />
         </div>
     );
 }

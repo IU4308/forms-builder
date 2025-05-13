@@ -3,8 +3,10 @@ import { Button } from './ui/button';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function ExportResults() {
+    const { t } = useTranslation();
     const { userId } = useParams();
     const fetcher = useFetcher();
     const [copied, setCopied] = useState(false);
@@ -32,19 +34,19 @@ export default function ExportResults() {
                             {copied ? (
                                 <>
                                     <Check className="h-4 w-4 mr-1" />
-                                    Copied!
+                                    {t('Copied')}
                                 </>
                             ) : (
                                 <>
                                     <Copy className="h-4 w-4 mr-1" />
-                                    Copy
+                                    {t('Copy')}
                                 </>
                             )}
                         </Button>
                     </CopyToClipboard>
                 </div>
             ) : (
-                <Button>Get Token</Button>
+                <Button>{t('Get Token')}</Button>
             )}
         </fetcher.Form>
     );

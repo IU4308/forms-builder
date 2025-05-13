@@ -13,7 +13,7 @@ export default function AdditionalInfo() {
     const fetcher = useFetcher();
     return (
         <fetcher.Form action={`/workspace/${userId}/about`} method="post">
-            <h1 className="text-center my-4">Tell us about yourself</h1>
+            <h1 className="text-center my-4">{t('Tell us about yourself')}</h1>
             <div className="flex flex-col gap-4">
                 <input hidden readOnly name="name" value={currentUser.name} />
                 <input hidden readOnly name="email" value={currentUser.email} />
@@ -37,7 +37,7 @@ export default function AdditionalInfo() {
                     </Label>
                     <Checkbox id="consent" name="consent" />
                 </div>
-                <Button disabled={fetcher.state !== 'idle'}>Save</Button>
+                <Button disabled={fetcher.state !== 'idle'}>{t('Save')}</Button>
             </div>
         </fetcher.Form>
     );

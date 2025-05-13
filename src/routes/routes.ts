@@ -39,17 +39,21 @@ import {
     getToken,
     sendUserInfo,
 } from '@/actions/workspace.actions';
+import { report } from '@/actions/app.actions';
+import { authLoader } from '@/loaders/auth.loader';
 
 export const router = createBrowserRouter([
     {
         Component: AppLayout,
         HydrateFallback: Fallback,
         loader: appLoader,
+        action: report,
         errorElement: createElement(ErrorPage),
         children: [
             {
                 Component: MainLayout,
                 HydrateFallback: Fallback,
+                action: report,
                 loader: mainLoader,
 
                 children: [
@@ -149,6 +153,7 @@ export const router = createBrowserRouter([
                         path: 'login',
                         Component: Login,
                         action: login,
+                        loader: authLoader,
                     },
                     {
                         path: 'logout',
@@ -158,6 +163,7 @@ export const router = createBrowserRouter([
                         path: 'register',
                         Component: Register,
                         action: register,
+                        loader: authLoader,
                     },
                 ],
             },

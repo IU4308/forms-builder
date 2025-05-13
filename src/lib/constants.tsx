@@ -212,7 +212,7 @@ export const workspaceTabButtons = [
     },
     {
         id: 3,
-        label: 'About',
+        label: 'Additional Info',
     },
 ];
 
