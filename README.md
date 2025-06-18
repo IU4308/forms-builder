@@ -5,6 +5,7 @@ A collaborative, full-featured form-building platform that enables users to crea
 ## 🔗 Links
 
 - 🌐 [Live Website](https://forms-builder-chi.vercel.app)
+- _Note: The hosting service may delay the first request by up to 1 minute after inactivity._
 - 🗂 [Backend Repository](https://github.com/IU4308/forms-builder-backend)
 
 ## ✨ Features
