@@ -1,54 +1,51 @@
-# React + TypeScript + Vite
+# 🧩 Form Builder App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A collaborative, full-featured form-building platform that enables users to create, manage, and share interactive templates. Built with modern web technologies, it offers real-time collaboration, drag-and-drop question editing, image uploads, role-based access control, and powerful integrations with Salesforce, Odoo, Power Automate, and more.
 
-Currently, two official plugins are available:
+## 🔗 Links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🌐 [Live Website](https://forms-builder-chi.vercel.app)
+- 🗂 [Backend Repository](https://github.com/IU4308/forms-builder-backend)
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔧 **Drag-and-Drop Form Builder** – Easily create and reorder questions in templates.
+- 🧑‍💻 **Role-Based Access Control** – Distinct roles for users and admins, with permission-based content access and editing.
+- 🌐 **Internationalization (i18n)** – Support for multiple languages via `i18next`.
+- 📁 **Image Uploads** – Upload and embed images using Cloudinary.
+- 👥 **User Dashboard** – Personal workspace for managing created templates and received submissions.
+- 🧩 **Template Sharing and Submission** – Users can create their own templates or fill out forms shared by others.
+- ⚙️ **Template Configuration** – Template creators can configure image, tags, and set allowed users.
+- 📊 **Results & Analytics** – Template creators can view all submissions and see aggregated results displayed as charts.
+- 🔎 **Admin Visibility** – Admin users have full visibility and can access every page as its author.
+- 📊 **Admin Panel** – Manage users, templates, and submissions at a global level.
+- 🔄 **Real-Time Collaboration** – Sync changes live using WebSockets (`socket.io`).
+- 🔌 **External Integrations**:
+  - **Salesforce** – Automatically create contacts and accounts from form data.
+  - **Odoo** – Import aggregated results into a custom-built Odoo app (deployed via Docker).
+  - **Power Automate** – Generate and upload help tickets as JSON files to Dropbox via REST API, with automatic notification triggers.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🛠️ Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Frontend**
+- TypeScript
+- React
+- Tailwind CSS
+- Shadcn UI
+- React Router
+- React Query
+- Axios
+- i18next
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Backend**
+- Node.js
+- Express.js
+- PostgreSQL
+- Socket.io
+- Cloudinary SDK
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+**Integrations**
+- Salesforce API
+- Odoo (Dockerized custom module)
+- Power Automate + Dropbox (REST API)
+
